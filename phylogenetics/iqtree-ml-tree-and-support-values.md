@@ -1,4 +1,6 @@
-How IQ-TREE turns an alignment into a phylogenetic tree
+> Type: explanation
+
+# How IQ-TREE turns an alignment into a phylogenetic tree
 
 You start with your alignment: 109 sequences, 498 aligned nucleotide sites. These are the observations from which the evolutionary relationships will be inferred.
 
@@ -20,7 +22,7 @@ The likelihood search is where the actual phylogenetic inference happens.
 
 Take one candidate tree. IQ-TREE now asks a very specific question:
 
-If this were the evolutionary tree, and the selected substitution model described how DNA changed along it, how likely would we be to observe the alignment that we actually have?
+> If this were the evolutionary tree, and the selected substitution model described how DNA changed along it, how likely would we be to observe the alignment that we actually have?
 
 That probability is the likelihood of the tree given the data and model.
 
@@ -28,7 +30,7 @@ IQ-TREE calculates this likelihood while optimizing the lengths of the branches 
 
 Eventually, the search reaches a tree for which its search procedures cannot find a better solution. This is the maximum-likelihood tree found by IQ-TREE.
 
-There is a subtle distinction here. IQ-TREE does not exhaustively examine every possible tree topology — there are far too many. So “maximum likelihood tree” does not mean that IQ-TREE has mathematically proved that no better tree exists anywhere in tree space. It means that the heuristic search found this tree to have the highest likelihood among the solutions it explored.
+There is a subtle distinction here. IQ-TREE does not exhaustively examine every possible tree topology — there are far too many. So "maximum likelihood tree" does not mean that IQ-TREE has mathematically proved that no better tree exists anywhere in tree space. It means that the heuristic search found this tree to have the highest likelihood among the solutions it explored.
 
 At this point we have a tree. But there is another question:
 
@@ -36,7 +38,7 @@ How much confidence should we have in each branch of it?
 
 This is where SH-aLRT and UFBoot come in.
 
-SH-aLRT
+## SH-aLRT
 
 SH-aLRT is a likelihood-based test of branch support.
 
@@ -44,13 +46,13 @@ For a particular branch, IQ-TREE compares the likelihood evidence associated wit
 
 So, conceptually, SH-aLRT asks:
 
-Does the observed sequence data provide strong likelihood-based evidence for this branch rather than alternative arrangements?
+> Does the observed sequence data provide strong likelihood-based evidence for this branch rather than alternative arrangements?
 
-UFBoot
+## UFBoot
 
 UFBoot asks the question in a different way:
 
-If we repeatedly resample the information contained in our alignment, do we keep recovering this branch?
+> If we repeatedly resample the information contained in our alignment, do we keep recovering this branch?
 
 Suppose the original alignment has 498 columns.
 
@@ -66,11 +68,11 @@ Another branch might appear in only 540 replicates, giving it approximately 54% 
 
 So UFBoot is asking:
 
-How consistently does this relationship survive when the sites in our alignment are resampled?
+> How consistently does this relationship survive when the sites in our alignment are resampled?
 
-The “ultrafast” part of UFBoot refers to the computational strategy used to perform this bootstrap analysis efficiently. It is not simply 1,000 completely independent full ML searches from scratch.
+The "ultrafast" part of UFBoot refers to the computational strategy used to perform this bootstrap analysis efficiently. It is not simply 1,000 completely independent full ML searches from scratch.
 
-Putting the two support values together
+## Putting the two support values together
 
 SH-aLRT and UFBoot are therefore different, complementary ways of assessing support for the branches of the ML tree.
 
@@ -84,63 +86,57 @@ They are two support measures calculated from the same sequence alignment and at
 
 If a branch is labelled:
 
+```
 95/99
+```
 
 and the convention is SH-aLRT/UFBoot, that means:
 
-95 = SH-aLRT support
-99 = UFBoot support
+- 95 = SH-aLRT support
+- 99 = UFBoot support
 
 The tree topology itself is still the ML topology.
 
-And what about .contree?
+## And what about `.contree`?
 
-IQ-TREE can also produce a .contree consensus tree from the bootstrap trees.
+IQ-TREE can also produce a `.contree` consensus tree from the bootstrap trees.
 
 This is a different object from the ML tree.
 
-The ML tree comes from the likelihood search on your original alignment.
-
-The bootstrap trees come from resampled versions of that alignment.
-
-The consensus tree summarizes the relationships found across those bootstrap trees.
+- The ML tree comes from the likelihood search on your original alignment.
+- The bootstrap trees come from resampled versions of that alignment.
+- The consensus tree summarizes the relationships found across those bootstrap trees.
 
 So you can think of the analysis as producing three conceptually different things:
 
-Your alignment
+**Your alignment** → the actual sequence data you supplied.
 
-→ the actual sequence data you supplied.
+**The ML tree** → the evolutionary tree that gives the highest likelihood among the trees found during the search.
 
-The ML tree
-
-→ the evolutionary tree that gives the highest likelihood among the trees found during the search.
-
-Bootstrap replicates
-
-→ resampled versions of the alignment used to evaluate how consistently the inferred relationships are recovered.
+**Bootstrap replicates** → resampled versions of the alignment used to evaluate how consistently the inferred relationships are recovered.
 
 And the support values connect the last two:
 
-ML tree + SH-aLRT/UFBoot values
-
-→ the tree you normally show when you want to present the inferred topology together with its branch support.
+**ML tree + SH-aLRT/UFBoot values** → the tree you normally show when you want to present the inferred topology together with its branch support.
 
 The whole process can therefore be pictured as:
 
+```
 109 sequences × 498 sites
-↓
+        ↓
 Which evolutionary model best describes these data?
-↓
+        ↓
 BIC judges the models 🐔
-↓
+        ↓
 Search tree space using the selected model
-↓
+        ↓
 Maximum-likelihood tree
-↓
+        ↓
 Resample the alignment 1,000 times
-↓
+        ↓
 How consistently are the branches recovered?
-↓
+        ↓
 SH-aLRT + UFBoot support values
-↓
+        ↓
 ML tree with support values on its branches
+```
