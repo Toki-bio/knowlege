@@ -1,3 +1,8 @@
+---
+title: IQ-TREE ML trees and support values
+type: explanation
+---
+
 > Type: explanation
 
 # How IQ-TREE turns an alignment into a phylogenetic tree

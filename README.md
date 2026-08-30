@@ -1,20 +1,29 @@
 # Knowledge base
 
+**Browse the site:** [https://toki-bio.github.io/knowlege/](https://toki-bio.github.io/knowlege/)
+
 Personal knowledge base — durable, readable write-ups worth keeping, mostly distilled from AI chat discussions.
 
 ## Structure
 
-Content lives under topic folders (`phylogenetics/`, etc.), one Markdown file per piece. New topic folders get added as they're needed — no fixed taxonomy up front.
+Content lives under topic folders (`phylogenetics/`, `sequencing/`, etc.), one Markdown file per piece. New topic folders get added as they're needed — no fixed taxonomy up front.
 
-Every file starts with a one-line type tag:
+Every file starts with YAML front matter (for the site) and a one-line type tag:
 
-```
+```markdown
+---
+title: Short title for navigation
+type: explanation
+---
+
 > Type: reference | explanation | notes
 ```
 
 - **reference** — short, factual, textbook-level: "what is X."
 - **explanation** — longer write-ups that connect several concepts into a narrative (e.g. how a whole pipeline works end to end).
 - **notes** — personal research notes, hypotheses, or interpretations. Not established fact — clearly the author's own thinking, kept separate so it's never mistaken for the other two categories.
+
+The GitHub Pages site builds a sidebar from topic folders automatically. Notes in a new folder appear under that topic once they have a `title` in front matter.
 
 ## Why this structure
 

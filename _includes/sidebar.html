@@ -1,0 +1,55 @@
+{% assign articles = site.pages | where_exp: "p", "p.dir != '/'" | sort: "title" %}
+{% assign topic_groups = articles | group_by: "dir" | sort: "name" %}
+
+<aside class="sidebar" id="sidebar" aria-label="Site">
+  <div class="sidebar-inner">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      <span class="brand-mark" aria-hidden="true">k</span>
+      <span class="brand-text">{{ site.title }}</span>
+    </a>
+    <p class="tagline">{{ site.description }}</p>
+
+    <label class="nav-filter-label" for="nav-filter">Filter notes</label>
+    <input
+      class="nav-filter"
+      id="nav-filter"
+      type="search"
+      placeholder="Filter notes…"
+      autocomplete="off"
+      spellcheck="false"
+    >
+
+    <nav class="nav" aria-label="Topics">
+      {% for group in topic_groups %}
+        {% assign topic_slug = group.name | remove: "/" %}
+        {% assign topic_label = topic_slug | capitalize %}
+        {% assign topic_id = topic_slug | slugify %}
+        <section class="nav-group" data-topic="{{ topic_label | escape }}">
+          <h2 class="nav-topic" id="nav-{{ topic_id }}">{{ topic_label }}</h2>
+          <ul class="nav-list" aria-labelledby="nav-{{ topic_id }}">
+            {% for article in group.items %}
+              <li>
+                <a
+                  class="nav-link{% if page.url == article.url %} is-active{% endif %}"
+                  href="{{ article.url | relative_url }}"
+                  {% if page.url == article.url %}aria-current="page"{% endif %}
+                  data-title="{{ article.title | escape }}"
+                  data-type="{{ article.type | default: '' | escape }}"
+                >
+                  <span class="nav-link-title">{{ article.title }}</span>
+                  {% if article.type %}
+                    <span class="nav-link-type">{{ article.type }}</span>
+                  {% endif %}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </section>
+      {% endfor %}
+    </nav>
+
+    <div class="sidebar-footer">
+      <a class="sidebar-github" href="https://github.com/Toki-bio/knowlege">Source on GitHub</a>
+    </div>
+  </div>
+</aside>

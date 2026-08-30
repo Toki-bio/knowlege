@@ -1,0 +1,28 @@
+title: knowlege
+description: Personal knowledge base — durable write-ups worth keeping
+url: https://toki-bio.github.io
+baseurl: /knowlege
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  hard_wrap: false
+
+permalink: pretty
+
+plugins:
+  - jekyll-seo-tag
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .gitignore
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default

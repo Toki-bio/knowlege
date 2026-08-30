@@ -1,3 +1,8 @@
+---
+title: Twin-strand duplex sequencing
+type: explanation
+---
+
 > Type: explanation
 
 # Twin-Strand Duplex Sequencing Explained
