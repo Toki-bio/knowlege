@@ -50,3 +50,7 @@ defaults:
       path: "genomics"
     values:
       topic: Genomics
+  - scope:
+      path: "population-genetics"
+    values:
+      topic: Population genetics
