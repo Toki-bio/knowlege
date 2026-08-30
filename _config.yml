@@ -42,3 +42,7 @@ defaults:
       path: "sines"
     values:
       topic: SINEs
+  - scope:
+      path: "projects"
+    values:
+      topic: Projects
