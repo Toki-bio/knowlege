@@ -1,5 +1,5 @@
-{% assign articles = site.pages | where_exp: "p", "p.dir != '/'" | sort: "title" %}
-{% assign topic_groups = articles | group_by: "dir" | sort: "name" %}
+{% assign articles = site.pages | where_exp: "p", "p.topic" | sort: "title" %}
+{% assign topic_groups = articles | group_by: "topic" | sort: "name" %}
 
 <aside class="sidebar" id="sidebar" aria-label="Site">
   <div class="sidebar-inner">
@@ -21,11 +21,9 @@
 
     <nav class="nav" aria-label="Topics">
       {% for group in topic_groups %}
-        {% assign topic_slug = group.name | remove: "/" %}
-        {% assign topic_label = topic_slug | capitalize %}
-        {% assign topic_id = topic_slug | slugify %}
-        <section class="nav-group" data-topic="{{ topic_label | escape }}">
-          <h2 class="nav-topic" id="nav-{{ topic_id }}">{{ topic_label }}</h2>
+        {% assign topic_id = group.name | slugify %}
+        <section class="nav-group" data-topic="{{ group.name | escape }}">
+          <h2 class="nav-topic" id="nav-{{ topic_id }}">{{ group.name }}</h2>
           <ul class="nav-list" aria-labelledby="nav-{{ topic_id }}">
             {% for article in group.items %}
               <li>

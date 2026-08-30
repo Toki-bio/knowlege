@@ -26,3 +26,11 @@ defaults:
       path: ""
     values:
       layout: default
+  - scope:
+      path: "phylogenetics"
+    values:
+      topic: Phylogenetics
+  - scope:
+      path: "sequencing"
+    values:
+      topic: Sequencing

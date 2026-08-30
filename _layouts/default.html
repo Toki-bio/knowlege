@@ -25,16 +25,14 @@
           <div class="hero-lead prose">{{ content }}</div>
         </header>
 
-        {% assign articles = site.pages | where_exp: "p", "p.dir != '/'" | sort: "title" %}
-        {% assign topic_groups = articles | group_by: "dir" | sort: "name" %}
+        {% assign articles = site.pages | where_exp: "p", "p.topic" | sort: "title" %}
+        {% assign topic_groups = articles | group_by: "topic" | sort: "name" %}
 
         <section class="topic-grid" aria-label="Topics">
           {% for group in topic_groups %}
-            {% assign topic_slug = group.name | remove: "/" %}
-            {% assign topic_label = topic_slug | capitalize %}
             {% assign note_count = group.items | size %}
             <section class="topic-card">
-              <h2>{{ topic_label }}</h2>
+              <h2>{{ group.name }}</h2>
               <p class="topic-count">{{ note_count }} {% if note_count == 1 %}note{% else %}notes{% endif %}</p>
               <ul>
                 {% for article in group.items %}
@@ -50,14 +48,14 @@
           {% endfor %}
         </section>
       {% else %}
-        {% assign topic_slug = page.dir | remove: "/" %}
-        {% assign topic_label = topic_slug | capitalize %}
         <article class="article">
           <header class="article-header">
             <p class="crumbs">
               <a href="{{ '/' | relative_url }}">Home</a>
-              <span aria-hidden="true">/</span>
-              <span>{{ topic_label }}</span>
+              {% if page.topic %}
+                <span aria-hidden="true">/</span>
+                <span>{{ page.topic }}</span>
+              {% endif %}
             </p>
             {% if page.type %}
               <p class="type-badge">Type: {{ page.type }}</p>

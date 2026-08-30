@@ -23,7 +23,7 @@ type: explanation
 - **explanation** — longer write-ups that connect several concepts into a narrative (e.g. how a whole pipeline works end to end).
 - **notes** — personal research notes, hypotheses, or interpretations. Not established fact — clearly the author's own thinking, kept separate so it's never mistaken for the other two categories.
 
-The GitHub Pages site builds a sidebar from topic folders automatically. Notes in a new folder appear under that topic once they have a `title` in front matter.
+The GitHub Pages site builds a sidebar from topic folders automatically. New topic folders need a matching entry under `defaults` in `_config.yml` (see the `phylogenetics` / `sequencing` examples) so notes get a `topic` and appear in the nav.
 
 ## Why this structure
 
