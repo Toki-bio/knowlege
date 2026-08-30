@@ -34,3 +34,7 @@ defaults:
       path: "sequencing"
     values:
       topic: Sequencing
+  - scope:
+      path: "methods"
+    values:
+      topic: Methods
