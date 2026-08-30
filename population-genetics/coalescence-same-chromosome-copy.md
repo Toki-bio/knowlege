@@ -5,230 +5,202 @@ type: explanation
 
 > Type: explanation
 
-# Coalescence is about DNA molecules, not people
+# Coalescence is two DNA lineages becoming one copy, not two people becoming one ancestor
 
-This is exactly where almost everyone gets stuck: we naturally think about **people**, while coalescent theory thinks about **DNA molecules**.
+Pedigree thinking and coalescent thinking use the word “ancestor” for different objects.
 
-## One sentence that often makes it click
+A pedigree ancestor is a **person**.  
+A coalescent ancestor is a **chromosome copy**: a physical DNA molecule that was replicated and passed on.
 
-Do **not** think of coalescence as:
-
-> Two ancestors becoming one.
-
-Think of it as:
-
-> Two photocopies eventually tracing back to the same original document.
-
-Today you have two photocopies (maternal and paternal chromosome copies). Trace their copying history backward and eventually both were copied from the same original page. From that point farther back, there is only one page to follow.
-
-That “same original page” is what geneticists mean by the **same ancestral chromosome copy**: a lineage of DNA, not merely the same ancestral person.
+Until that distinction is sharp, “time to the most recent common ancestor,” heterozygosity, incomplete lineage sorting, and PSMC all feel like word games.
 
 ---
 
-## Forget people for a moment — follow one DNA molecule
+## A chromosome copy is a lineage of molecules
 
-Suppose 100,000 years ago there was a woman.
+Ignore recombination for a few sections. Follow one autosome, say chromosome 5.
 
-She had two copies of chromosome 5:
+A woman living 100,000 years ago had two chromosome-5 molecules:
 
 ```text
-copy A  ← chromosome 5 from her mother
-copy B  ← chromosome 5 from her father
+copy A  ←  the chromosome 5 she got from her mother
+copy B  ←  the chromosome 5 she got from her father
 ```
 
-These are two different physical DNA molecules.
+Those are two different pieces of DNA, even though they sit in one nucleus.
 
-She has a child. Ignoring recombination for the moment, the child inherits **only one** of these copies.
+When she has a child, that child inherits **one** of them (still ignoring recombination). Suppose the child gets copy A. A grandchild can inherit that same A lineage, then a great-grandchild, and so on. Each generation the molecule is replicated; the lineage is still “copy A.”
 
-Suppose the child gets copy A. Then a grandchild may inherit that same A lineage. Generation after generation, this can be the **same chromosome copy lineage**, simply being replicated.
+So “the same chromosome copy” does not mean the same physical atoms surviving for millennia. It means an unbroken **copying lineage**.
 
 ---
 
-## Now follow your two chromosomes backward
+## Walk your two copies backward
 
-Today you have:
+You have two chromosome-5 molecules today:
 
 ```text
-🔴 maternal chromosome 5
-🔵 paternal chromosome 5
+🔴  maternal copy
+🔵  paternal copy
 ```
 
-Trace them backward. Every generation, each lineage chooses exactly one parental chromosome copy to follow:
+Each generation, looking backward, each lineage has to pick **exactly one** parental molecule to continue through. The history looks like two threads:
 
 ```text
-Today
-
-🔴          🔵
-│           │
-│           │
-│           │
+today
+🔴                🔵
+ │                │
+ │                │
+ │                │
 ```
 
-Eventually something like this happens:
+Sooner or later those threads occupy the **same** ancestral molecule:
 
 ```text
-Today
-
-🔴          🔵
-│           │
-│           │
-└──────┐ ┌──┘
-       │ │
-       🔴
+today
+🔴                🔵
+ │                │
+ └───┐        ┌───┘
+     │        │
+     ─── 🔴 ───     ← one ancestral copy
 ```
 
-Suddenly both lineages are following the **very same ancestral chromosome copy**.
+From that generation farther back there is only one thread left. **That merger is coalescence.** The person who carried that molecule is incidental. What merged is the DNA lineage.
 
-Not just the same person.  
-Not just the same ancestor.  
-The **same physical lineage of DNA**.
-
-From that point backward there is only one lineage left.
-
-**That is coalescence.**
+The most recent such molecule is the **most recent common ancestral copy** of the two sequences. Its age is the local TMRCA.
 
 ---
 
-## Why “same person” is not enough
+## Same person is not coalescence
 
-Suppose 200,000 years ago both of your lineages reach the same woman.
+Suppose both of your threads, walking backward, enter the same woman 200,000 years ago. Have they coalesced?
 
-Did they coalesce?
+Not yet, if they still sit on her two different chromosome-5 copies: maternal lineage on copy A, paternal lineage on copy B. She is a shared **pedigree** ancestor. The DNA lineages are still two molecules, and they can still pick up different mutations.
 
-**Not necessarily.**
+Coalescence happens only when both threads enter **the same copy**.
 
-That woman has two chromosome-5 copies.
-
-* your maternal lineage might enter one copy,
-* your paternal lineage might enter the other.
-
-They are still different DNA molecules.
-
-Only when both lineages enter the **same chromosome copy** has coalescence occurred.
-
-This is why coalescent theory tracks **gene copies / chromosome copies**, not individuals.
+This is why coalescent models are written as if the population were haploid. A diploid population of *N* people is treated as **2*N* gene copies**. Rosenberg & Nordborg (2002, Fig. 4) draw exactly that: a genealogy of copies, then note that diploids are handled by doubling the haploid pool. The “parent” a lineage picks in that figure is a parental **gene copy**, not a person with two chromosomes.
 
 ---
 
-## Why this matters for mutations
+## Why the definition is about copies: mutations
 
-Mutations occur on chromosome copies.
+Mutations happen on molecules.
 
-**Before coalescence:**
+While 🔴 and 🔵 are separate lineages, each can mutate. Those mutations become differences between the two sequences you hold today (heterozygous sites, if you are looking inside one person).
 
-* one lineage accumulates mutations,
-* the other lineage accumulates mutations,
-* independently.
+Once the two threads have coalesced, there is only one ancestral molecule left. Mutations on that shared lineage are inherited by **both** descendants. They do not distinguish 🔴 from 🔵.
 
-**After coalescence (looking backward):**
+Looking forward from the common copy: the split creates two lineages; differences between today’s sequences must have arisen on those two branches. Looking backward: after coalescence you cannot generate further differences between the pair, because there is only one molecule to mutate.
 
-* there is only one ancestral lineage left,
-* no further differences can arise between the two present-day copies *before* that point, because there is only one DNA lineage to mutate.
-
-Looking forward from the common ancestral copy: every mutation on that shared lineage is inherited by both descendant copies, so it does not create a difference between them. Differences between today’s 🔴 and 🔵 must have arisen on the separate branches after they split.
-
-That is the bridge from mutations → coalescence → genetic diversity.
-
----
-
-## Recombination makes many local histories
-
-The story above ignored recombination.
-
-With recombination, different segments of a chromosome can have **different genealogies**:
+That is the whole bridge:
 
 ```text
-left segment coalesces long ago
-right segment coalesces more recently
+mutations happen on copies
+        ↓
+differences exist only while copies have separate histories
+        ↓
+the age of the shared copy (TMRCA) sets how much difference you expect
+        ↓
+the distribution of those ages across the genome is a record of population history
 ```
 
-So a diploid genome is a mosaic of local TMRCAs (times to most recent common ancestral copy). Methods like **PSMC** exploit that mosaic: local heterozygosity patterns reflect local coalescence times, which in turn inform historical effective population size.
-
-Coalescence is still “same ancestral DNA copy” — just applied locus by locus along the chromosome.
+A large population has many parental copies to pick from, so two sampled lineages wait longer to hit the same one. Coalescence is slow; TMRCAs are old; more mutations accumulate; diversity is high. A small population does the opposite. Effective population size *N*e is, in this picture, “how many copies were there to miss each other.”
 
 ---
 
-## Good graphical sources
+## Recombination: one chromosome, many coalescences
 
-These figures are especially useful:
+The story above is for one non-recombining piece of DNA. Real autosomes recombine.
 
-### 1. Best for PSMC specifically
+A recombination event in an ancestor splices two different parental molecules into one descendant chromosome. Walking backward, that is a **split** of the ancestral thread: the left part of the sequence continues through one parental copy, the right part through another.
 
-**Mather et al. (2020)** — *A practical introduction to sequentially Markovian coalescent methods*  
-[PMC article](https://pmc.ncbi.nlm.nih.gov/articles/PMC7045566/)
-
-Look at **Figure 1a**.
-
-It shows what PSMC-style models use:
-
-* two present-day chromosome copies,
-* local genealogies,
-* recombination breakpoints,
-* different TMRCA for neighboring regions.
-
-Almost a graphical explanation of the PSMC hidden states.
-
-### 2. Best for “same ancestral chromosome copy”
-
-**Nature Reviews Genetics** review on genealogical trees / coalescent theory / polymorphisms  
-(search: *Genealogical trees, coalescent theory and the analysis of genetic polymorphisms*)
-
-Especially useful:
-
-* Figure 2 — random genealogical trees
-* Figure 4 — basic principle of coalescence
-
-These make it easier to see lineages merging backward in time as **gene copies**, not people.
-
-### 3. Best for recombination changing genealogy
-
-**Genome-Wide Inference of Ancestral Recombination Graphs** (*PLOS Genetics*)
-
-**Figure 1** is outstanding: chromosomes at the bottom, lineages traced backward, recombination events, coalescence events, and different trees for different segments.
-
-Even with more than two chromosomes, it is one of the clearest pictures of why neighboring loci can have different ancestral histories.
-
-### 4. Surprisingly good intuitive overview
-
-**The Watchmaker’s Guide to Population Genetics** — PSMC overview pages
-
-Not primary literature, but often has very readable diagrams of two chromosome copies, MRCA, heterozygous sites, recombination, and PSMC inference.
-
----
-
-## A useful custom schematic to keep in mind
-
-One continuous mental diagram that connects the pieces:
+So neighboring segments of the same chromosome can have **different** copying histories and different TMRCAs:
 
 ```text
-1. A mutation arises on one chromosome copy
-        ↓
-2. That copy is inherited through generations
-        ↓
-3. Today: two chromosome copies (🔴 / 🔵)
-        ↓
-4. Trace both backward until they occupy
-   the same ancestral chromosome copy
-   = coalescence
-        ↓
-5. Recombination splits the chromosome into
-   segments with different coalescence times
-        ↓
-6. Today you observe a mosaic of
-   heterozygous / homozygous stretches
-        ↓
-7. PSMC-like methods infer historical Ne
-   from that mosaic of local TMRCAs
+          recombination in some ancestor
+                    │
+     left segment   │   right segment
+     coalesces      │   coalesces
+     deep           │   recently
+     (old TMRCA)    │   (young TMRCA)
 ```
 
-If a figure does only “people merging into ancestors,” it has skipped the essential step.
+A diploid genome is therefore a mosaic of local genealogies. Heterozygous stretches tend to sit on segments whose two copies have been separate for a long time (old local TMRCA, more chance to mutate). Long homozygous stretches tend to sit on segments that coalesced recently.
+
+The full object that records every coalescence and every recombination in a sample is an **ancestral recombination graph** (ARG). PSMC is a stripped-down reading of the two-copy slice of that object.
 
 ---
 
-## Key takeaways
+## What PSMC is doing with that mosaic
 
-* Coalescence merges **gene / chromosome copy lineages**, not merely people.
-* Meeting the same ancestral person is not enough if the lineages still sit on different chromosome copies.
-* Mutations create differences only while lineages are separate; after coalescence (backward), there is one ancestral DNA lineage.
-* Recombination creates a mosaic of local coalescence times along a chromosome.
-* PSMC uses that mosaic; good intuition figures are Mather et al. Fig. 1a, classic coalescent review figures, and ARG Figure 1.
+[PSMC](https://github.com/lh3/psmc) (Li & Durbin 2011) takes **one diploid genome**. It does not need a pedigree. It needs a map of which sites are heterozygous.
+
+It treats the genome as a hidden Markov path along the chromosome. The hidden state at each window is the local coalescence time of the two copies. The observations are “this 100 bp bin had a heterozygote” vs “it did not.” Mutation rate turns expected heterozygosity into a guess at TMRCA; recombination rate turns neighboring windows’ TMRCAs into a guess at where the genealogy switched.
+
+Then it uses the **density of those TMRCAs through time** to infer *N*e(*t*): epochs with few coalescences look like large populations; epochs with many coalescences look like small ones.
+
+Mather, Traves & Ho (2020) Fig. 1a is the picture of this: two present-day copies, local trees that are just a single internal branch (two leaves have only one topology), recombination breakpoints, and a different TMRCA in each segment. Those TMRCAs *are* PSMC’s hidden states.
+
+PSMC is weak very recently (too few recombination breakpoints to time young coalescences well) and assumes a single panmictic population. Structure, inbreeding, and bad heterozygote calls all masquerade as size change. The conceptual point still stands: the method is reading a mosaic of **copy coalescences**, not a family tree of people.
+
+---
+
+## One continuous picture
+
+```text
+a mutation arises on one chromosome copy
+        │
+that copy is replicated down some descendants
+        │
+today you hold two copies (🔴 / 🔵)
+        │
+walk both backward; each generation each thread
+picks one parental molecule
+        │
+they enter the SAME molecule  =  coalescence
+(same person with two still-separate copies is not enough)
+        │
+mutations after that split  →  differences between 🔴 and 🔵
+mutations on the shared stem →  shared by both, not differences
+        │
+recombination cuts the chromosome into segments
+with different coalescence times
+        │
+today: mosaic of heterozygous / homozygous stretches
+        │
+PSMC (and ARG methods) infer local TMRCAs from that mosaic,
+then Ne(t) from how often coalescences fell in each epoch
+```
+
+If a diagram only shows people merging into ancestors, it has skipped the molecule.
+
+---
+
+## Figures that actually show this
+
+These are the pictures that match the argument above, not a leftover reading list.
+
+1. **Rosenberg & Nordborg (2002).** *Genealogical trees, coalescent theory and the analysis of genetic polymorphisms.* *Nature Reviews Genetics* 3: 380–390. [doi:10.1038/nrg795](https://doi.org/10.1038/nrg795)  
+   Fig. 1: polymorphism as mutations on a genealogy of copies. Fig. 2: random coalescent trees (same model, different chance outcomes). Fig. 4: sampled copy lineages walking back through a population of copies; diploids = 2*N* copies.
+
+2. **Mather, Traves & Ho (2020).** *A practical introduction to sequentially Markovian coalescent methods.* *Ecology and Evolution* 10: 579–589. [PMC7045566](https://pmc.ncbi.nlm.nih.gov/articles/PMC7045566/)  
+   Fig. 1a: the two-copy, along-the-genome view that PSMC uses.
+
+3. **Rasmussen, Hubisz, Gronau & Siepel (2014).** *Genome-wide inference of ancestral recombination graphs.* *PLOS Genetics* 10: e1004342. [doi:10.1371/journal.pgen.1004342](https://doi.org/10.1371/journal.pgen.1004342)  
+   Fig. 1: chromosomes at the bottom, lineages up through time, recombination and coalescence marked, different local trees for different segments. More than two copies, but the clearest ARG cartoon.
+
+4. **Li & Durbin (2011).** *Inference of human population history from individual whole-genome sequences.* *Nature* 475: 493–496. [doi:10.1038/nature10231](https://doi.org/10.1038/nature10231)  
+   The original PSMC: one diploid genome → local TMRCAs → *N*e through time.
+
+Informal diagrams of the same two-copy story also appear in various “watchmaker / practical pop-gen” notes; they are teaching aids, not the source of the model.
+
+---
+
+## Takeaways
+
+* Coalescence merges **gene-copy lineages**. Meeting the same ancestral person is not enough if the copies are still two molecules.
+* Differences between sequences are mutations that happened **while the copies were separate**. The shared stem cannot create those differences.
+* Recombination makes a chromosome a mosaic of local TMRCAs. Heterozygosity is a noisy map of that mosaic.
+* PSMC reads the mosaic in one diploid genome. It is coalescent inference on copies, not pedigree reconstruction.
+* Standard theory already treats diploids as a pool of 2*N* copies. The “people vs DNA” confusion is what that modeling choice is there to avoid.
