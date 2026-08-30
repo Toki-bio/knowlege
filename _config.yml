@@ -46,3 +46,7 @@ defaults:
       path: "projects"
     values:
       topic: Projects
+  - scope:
+      path: "genomics"
+    values:
+      topic: Genomics
