@@ -11,7 +11,10 @@ This is a critical evaluation of a proposal to treat Alu loci as **fiducial mark
 
 Status: **interesting research / translational concept**, not a validated assay. Strengths and landmines are separated on purpose.
 
-Related idea in this knowledge base: [Alu ddPCR somatic burden screen](https://toki-bio.github.io/knowlege/projects/alu-ddpcr-somatic-burden-screen/) (bulk young-Alu activity). This proposal is different: it uses Alus as a **coordinate system for SV**, not as a retrotransposition counter.
+Related in this knowledge base:
+
+* [Alu-anchor graph topological profiling](https://toki-bio.github.io/knowlege/projects/alu-anchor-graph-topological-profiling/) — the working **concept spec** (graph, \(W_u\), \(H_\text{norm}\), COLO829 PoC). This page is the **evaluation**.
+* [Alu ddPCR somatic burden screen](https://toki-bio.github.io/knowlege/projects/alu-ddpcr-somatic-burden-screen/) — bulk young-Alu **activity**, not topology.
 
 ---
 
