@@ -6,7 +6,7 @@ Personal knowledge base — durable, readable write-ups worth keeping, mostly di
 
 ## Structure
 
-Content lives under topic folders (`phylogenetics/`, `sequencing/`, `methods/`, etc.), one Markdown file per piece. New topic folders get added as they're needed — no fixed taxonomy up front.
+Content lives under topic folders (`phylogenetics/`, `sequencing/`, `methods/`, `sines/`, etc.), one Markdown file per piece. New topic folders get added as they're needed — no fixed taxonomy up front.
 
 Every file starts with YAML front matter (for the site) and a one-line type tag:
 

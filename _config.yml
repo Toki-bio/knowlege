@@ -38,3 +38,7 @@ defaults:
       path: "methods"
     values:
       topic: Methods
+  - scope:
+      path: "sines"
+    values:
+      topic: SINEs
