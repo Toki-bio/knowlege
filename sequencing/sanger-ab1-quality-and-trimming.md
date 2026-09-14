@@ -94,6 +94,18 @@ A third instance of the same root mistake, found immediately after fixing the pr
 
 **Fix:** independently probe the flanking reference sequence past each HSP edge before accepting it as a boundary. Fetch ~20-30bp of the matched reference immediately outside the HSP (NCBI `efetch`, same strand as the HSP), and walk outward from the query's edge one base at a time, comparing to the reference with IUPAC compatibility, extending through isolated compatible or matching bases and stopping only at a real run of consecutive disagreements (two in a row is a reasonable bar) or when the reference runs out. An isolated single mismatch inside an otherwise-extending run is a candidate real SNP or miscall, not grounds to wall off everything past it — mark it low-confidence, don't let it block the extension.
 
+## v0.1: a real, cross-file-validated quality classifier (2026-09-14)
+
+After extensive calibration against manual chromatogram review across three structurally different reads (a clean read with localized disasters, a globally weak-signal read, and a read with genuine gradual 3' decay), a small, fixed rule beat every fitted ML model tried:
+
+1. **Periodicity < 0.3** — local FFT of the 4-channel envelope, fraction of power concentrated near the read's own expected base-spacing frequency (directly adapted from Phred's actual published algorithm, Ewing & Green 1998, which uses Fourier methods to predict idealized evenly-spaced peak locations). This one feature alone outperformed a 10-feature ML ensemble on held-out files (63-93% single-feature vs a same-ensemble's 38-67%).
+2. **Amplitude spike, |z-score of log(peak height)| > 1.5** — catches genuine oversaturation artifacts (10-40x a file's normal amplitude), which periodicity is blind to since it only measures timing.
+3. **Valley depth > 0.5, excluding homopolymer transitions** — does the signal actually dip to baseline between two adjacent calls? Catches "shared-hump" artifacts (one broad, badly-shaped-but-not-mistimed peak the basecaller slices into several fake individual calls), which periodicity also misses since it measures timing, not shape. Must exempt same-base transitions (AA, GG, TTT...) — a real repeated base legitimately doesn't dip, and flagging it is a false positive, not a finding.
+
+Leave-one-file-out validation across the three calibration files: **C1 98.7%, G4 96.4%, B3 86.1%**, mean 93.7%, using zero per-file training (a fixed rule, not a fitted model).
+
+**What was tried and explicitly rejected** after measuring worse on the same honest benchmark — don't re-attempt without new evidence: a 10-feature Random Forest/logistic ensemble (overfit badly, 99% in-sample vs 38-67% cross-file); FFT detrending + Hann tapering + DC-band exclusion for periodicity (fixed one specific false-positive zone, broke the general signal, mean accuracy dropped from 0.92 to 0.77-0.87 depending on which pieces were combined); edge-of-read threshold "wobble" tolerance for truncated FFT windows (measured zero effect — the truncated positions were already independently confirmed bad for other reasons); peak-width/FWHM as a standalone feature (could not discriminate at all — the shape anomaly it targeted turned out to be a shared-apex/no-valley phenomenon, not a single-peak-width one).
+
 ## What to watch for, by artifact type
 
 * **Primer dimer / injection artifact** — noisy, low-amplitude region at the very start, before the polymerase is reading real template. Falls outside the BLAST alignment.
