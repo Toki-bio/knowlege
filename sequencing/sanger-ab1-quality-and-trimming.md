@@ -80,6 +80,10 @@ Run one of these for a coarse first pass, then verify the result against the num
 6. Report contiguous flagged runs with the actual numbers (ratio, own-apex yes/no, BLAST match/mismatch), and state a real opinion on which stretches are gene signal vs. artifact — backed by the evidence, not hedged into "you decide" when the evidence already supports a conclusion.
 7. Only then write the final FASTA — lowercase or IUPAC-coded for low-confidence-but-called bases, discarding what neither method supports.
 
+## The ratio test can itself be wrong on a globally weak read
+
+The ratio test assumes background noise is small relative to a real peak. On a **globally low-amplitude read** — weak template or dilute reaction, where the whole trace sits at low absolute RFU throughout (real peaks of 40-150 RFU against ~20-50 RFU background), rather than a read that is dying partway through — that assumption breaks. Ordinary baseline wobble becomes a large fraction of every peak height, and the ratio test flagged roughly half of two ITS reads in this project as unreliable, flatly contradicted by BLAST: those same reads were ~95-97% identical to the matched reference across nearly their full length (only ~24 real mismatches across ~800 aligned bases). **Before converting a flagged run to N, check the actual local BLAST mismatch/gap density in that run.** If the reference disagrees at only a handful of positions in a "flagged" stretch, the numeric test was picking up this file's noise floor, not a real failure — downgrade to lowercase instead of N. Reserve N for runs where BLAST-confirmed disagreement density is genuinely high, or where the run has no BLAST coverage at all. The BLAST cross-check is load-bearing for the N-fill decision itself, not just for locating the read's overall start and end.
+
 ## What to watch for, by artifact type
 
 * **Primer dimer / injection artifact** — noisy, low-amplitude region at the very start, before the polymerase is reading real template. Falls outside the BLAST alignment.
