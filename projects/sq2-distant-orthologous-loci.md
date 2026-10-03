@@ -9,6 +9,8 @@ type: notes
 
 Repo / tool context: [Toki-bio/SINE_orth_loc](https://github.com/Toki-bio/SINE_orth_loc)
 
+Related: [TE-insertion anchor graph](https://toki-bio.github.io/knowlege/projects/te-anchor-graph-pansineome/) (pan-SINEome groups + adjacency edges; synteny between survivor loci comes for free from `edges.tsv`).
+
 This is a **project plan**, not a result. The goal is to test whether any sq2 insertion loci survive deep squamate divergence as recoverable orthologous sites, and only then ask whether they can be found in tuatara.
 
 ---

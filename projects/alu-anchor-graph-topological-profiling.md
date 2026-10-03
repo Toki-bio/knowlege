@@ -11,6 +11,8 @@ This is a **working concept spec**, not a result. It is the same family of idea 
 
 Related, different question: [Alu ddPCR somatic burden screen](https://toki-bio.github.io/knowlege/projects/alu-ddpcr-somatic-burden-screen/) counts young-Alu retrotransposition. This spec measures **whether the map between Alu landmarks has been scrambled**.
 
+Shared data model with the SINE work: [TE-insertion anchor graph — pan-SINEome and Alu topology](https://toki-bio.github.io/knowlege/projects/te-anchor-graph-pansineome/) (junction-based anchor uniqueness, read-validated node calls, edge layer implemented on Darevskia).
+
 Status: pre-validation. Numbers below (anchor fractions, *H*_norm fold-changes, COLO829 4–8×) are **design targets**, not measurements.
 
 ---

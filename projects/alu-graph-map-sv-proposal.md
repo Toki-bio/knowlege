@@ -15,6 +15,7 @@ Related in this knowledge base:
 
 * [Alu-anchor graph topological profiling](https://toki-bio.github.io/knowlege/projects/alu-anchor-graph-topological-profiling/) — the working **concept spec** (graph, \(W_u\), \(H_\text{norm}\), COLO829 PoC). This page is the **evaluation**.
 * [Alu ddPCR somatic burden screen](https://toki-bio.github.io/knowlege/projects/alu-ddpcr-somatic-burden-screen/) — bulk young-Alu **activity**, not topology.
+* [TE-insertion anchor graph — pan-SINEome and Alu topology](https://toki-bio.github.io/knowlege/projects/te-anchor-graph-pansineome/) — the same graph as a general extension of the pan-SINEome; further critique (copy number, low-pass CNV baseline, matched normal).
 
 ---
 
