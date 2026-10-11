@@ -25,6 +25,22 @@ type: explanation
 
 The GitHub Pages site builds a sidebar from topic folders automatically. New topic folders need a matching entry under `defaults` in `_config.yml` (see the `phylogenetics` / `sequencing` examples) so notes get a `topic` and appear in the nav.
 
+## Program digests (Claude Code skills)
+
+Besides topic notes, the repo holds a second kind of knowledge: **digests of
+program source code**, organized by program rather than by scientific topic.
+Each lives in `.claude/skills/<program>/` as a Claude Code skill: a short
+`SKILL.md` (pinned upstream commit, what the program does, where to look) plus
+`references/*.md` with architecture, data structures, control flow, I/O formats,
+pitfalls, and build/test notes.
+
+- The repo is also a Claude Code plugin marketplace (`.claude-plugin/`), so the
+  skills can be installed once and reused in every session, in any repo:
+  `/plugin install knowledge --marketplace Toki-bio/knowlege`
+- `/digest-program-source <repo>` writes a new digest in the standard format.
+- See [`setup/README.md`](setup/README.md) for installing the skills in the
+  VS Code extension, the CLI, and claude.ai cloud environments.
+
 ## Why this structure
 
 Git history already tracks how an explanation improved over time, so there's no need to version files manually. Folder structure is kept shallow and is expected to be reorganized (`git mv`) as real topics emerge, rather than designed upfront for content that doesn't exist yet.

@@ -1,0 +1,15 @@
+{
+  "name": "toki-knowledge",
+  "description": "Toki's personal knowledge base: distilled digests of program source code and bioinformatics methods, packaged as Claude Code skills.",
+  "owner": {
+    "name": "Toki"
+  },
+  "plugins": [
+    {
+      "name": "knowledge",
+      "source": ".",
+      "description": "Program source-code digests (one skill per program) plus the /digest-program-source workflow for writing new ones.",
+      "version": "0.1.0"
+    }
+  ]
+}

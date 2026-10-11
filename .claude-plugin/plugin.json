@@ -1,0 +1,10 @@
+{
+  "name": "knowledge",
+  "description": "Program source-code digests (one skill per program) plus the /digest-program-source workflow for writing new ones.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Toki"
+  },
+  "repository": "https://github.com/Toki-bio/knowlege",
+  "skills": ["./.claude/skills"]
+}

@@ -16,6 +16,9 @@ plugins:
 
 exclude:
   - README.md
+  - setup
+  - .claude
+  - .claude-plugin
   - Gemfile
   - Gemfile.lock
   - vendor
