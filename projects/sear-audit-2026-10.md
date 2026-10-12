@@ -29,7 +29,10 @@ Verified after the fix (chr21, RepeatMasker truth, 4 threads):
 | identity reported for 98 % copies | ~70 % | 92-98 % | |
 | runtime, 6 kb query | 2 s (chr21) | 9 s (chr21), 106 s (1.65 Gbp lizard genome) | 4 s (chr21) |
 
-Every locus the fixed mode reports lies in an annotated L1. Seeds `-k 11 -w 3` beat
+Every locus the fixed mode reports lies in an annotated L1. For reference, nhmmer
+finds 72 of 73 full-length L1s but takes 21 min on chr21 for one 6 kb query, and
+ssearch36 on 8 kb windows with the 0.8 length rule keeps 58 in 7 min: the fixed
+minimap2 mode is within that range at 9 s. Seeds `-k 11 -w 3` beat
 map-ont's default `-k 15 -w 10` (1.5 kb query: 89 % vs 77 % of dc-megablast's loci) and
 `asm20` (35 of 73). SINE searches (ssearch36 path) reproduce all loci of a pre-fix run.
 The 23 full-length L1s an L1HS query does not keep are other subfamilies (L1PB, L1MA,
@@ -64,6 +67,8 @@ found when hits cover ≥ 50 % of it. 4 threads.
 | blastn `-task megablast` | 0.8 s | 56 | 205 |
 | blastn `-task dc-megablast` | 3.6 s | 68 | 284 |
 | blastn `-task blastn` | 3.8 s | 68 | 288 |
+| nhmmer, L1.3 as query | 1,258 s | 72 | – |
+| ssearch36, 8 kb windows / 2 kb overlap, 0.8 length rule (what `--force-ssearch` would need) | 421 s | 58 | – |
 
 The four loci `sear` reports are all real L1PA2 copies; nothing it reports is
 outside an L1. It just misses almost everything.
