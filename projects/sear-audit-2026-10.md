@@ -9,7 +9,33 @@ type: notes
 > Toki-bio/sear2k `sear` at `85421e7` unless the vendored SINEderella copy
 > (`90d8ac4`) is named.
 
-## Summary
+## Status (2026-10-12)
+
+**minimap2 mode fixed** on `main` of Toki-bio/sear2k (`923ffb6`) and Toki-bio/SINEderella
+(`38d811a`), and merged into both `fast-mode` branches: query indexed, genome streamed
+as overlapping windows (`seqkit sliding`, step max(len, 2 kb), width step + len + 1 kb)
+into `minimap2 -x map-ont -k 11 -w 3 -c --secondary=no`; identity = PAF `$10/$11`,
+score = `AS:i`; cascade removed; output prefix from the file name; `sear` executable in
+sear2k. ssearch36 mode now warns and skips when len x Slf > 2500. The other ssearch36
+findings (1, 2, 3, 5-8) are **not** fixed.
+
+Verified after the fix (chr21, RepeatMasker truth, 4 threads):
+
+| query | old sear | fixed sear | blastn dc-megablast, same filters |
+|---|---|---|---|
+| L1.3 (6,059 bp), full-length L1 kept by the 0.8 length rule (of 73) | 4 | 52 (65 at any length) | 50 |
+| L1PA7 genomic copy (6,468 bp), loci | – | 62 | 47 |
+| L1.3 3' end (1,500 bp), loci | 1 | 305; 89 % of dc-megablast's 308 | 308 |
+| identity reported for 98 % copies | ~70 % | 92-98 % | |
+| runtime, 6 kb query | 2 s (chr21) | 9 s (chr21), 106 s (1.65 Gbp lizard genome) | 4 s (chr21) |
+
+Every locus the fixed mode reports lies in an annotated L1. Seeds `-k 11 -w 3` beat
+map-ont's default `-k 15 -w 10` (1.5 kb query: 89 % vs 77 % of dc-megablast's loci) and
+`asm20` (35 of 73). SINE searches (ssearch36 path) reproduce all loci of a pre-fix run.
+The 23 full-length L1s an L1HS query does not keep are other subfamilies (L1PB, L1MA,
+L1PA10-16) whose alignable span is under 0.8 x 6 kb; dc-megablast drops the same ones.
+
+## Summary (as audited, before the fix)
 
 - **minimap2 mode (queries ≥ 1000 bp) does not work for repeats.** On human
   chr21 with the L1.3 element (6,059 bp) it found **4 of 73** full-length L1s
@@ -38,7 +64,6 @@ found when hits cover ≥ 50 % of it. 4 threads.
 | blastn `-task megablast` | 0.8 s | 56 | 205 |
 | blastn `-task dc-megablast` | 3.6 s | 68 | 284 |
 | blastn `-task blastn` | 3.8 s | 68 | 288 |
-| nhmmer, L1.3 as query | NHMMER_T | NHMMER_FL | NHMMER_Y |
 
 The four loci `sear` reports are all real L1PA2 copies; nothing it reports is
 outside an L1. It just misses almost everything.

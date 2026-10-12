@@ -119,3 +119,7 @@ queries > 3,125 bp, `-b` off by one).
   3+ also use `-z 1`. Regular mode is byte-for-byte the old behaviour. Measured in
   `projects/sine-search-strategy.md` section 8 and SINEderella `docs/FAST_MODE.md`.
   `SEAR_NO_RESCUE=1` skips the ssearch36 round (loses ~1 % of loci).
+- 2026-10-12: minimap2 mode rewritten on `main` (sear2k `923ffb6`, SINEderella `38d811a`): query
+  indexed, genome streamed as windows, `-x map-ont -k 11 -w 3 -c`; old mode found 4 of 73
+  full-length L1s on chr21, new 65 (52 after the length rule). Long-query guard in ssearch36 mode.
+  Line numbers in this digest predate the change. See `projects/sear-audit-2026-10.md`.

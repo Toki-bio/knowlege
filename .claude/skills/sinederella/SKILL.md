@@ -115,3 +115,7 @@ Start with `pipeline-stages.md` when the task is unfamiliar. For the
   searches, written to `manifest.txt` as `SEAR_MODE`, `fasta36` added to `tool_versions`;
   `docs/FAST_MODE.md`, MANUAL 5.1a and 16.1. Steps 2+ untouched. Raw-hit file in fast
   mode carries fasta36's short fragments (see the doc).
+- 2026-10-12: minimap2 mode rewritten on `main` (sear2k `923ffb6`, SINEderella `38d811a`): query
+  indexed, genome streamed as windows, `-x map-ont -k 11 -w 3 -c`; old mode found 4 of 73
+  full-length L1s on chr21, new 65 (52 after the length rule). Long-query guard in ssearch36 mode.
+  Line numbers in this digest predate the change. See `projects/sear-audit-2026-10.md`.
