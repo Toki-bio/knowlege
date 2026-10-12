@@ -11,13 +11,23 @@ Usage: compare_real.py RESULTS_DIR [--ref ssearch36] [--ref-raw ssearch36.raw]
 import argparse, os, sys
 from collections import defaultdict
 
-def load_bed(p):
+def load_bed(p, merge_gap=50):
+    """Load hits and merge overlapping / near-adjacent ones on a chromosome so
+    that a copy reported as two HSPs counts once (strand ignored)."""
     d = defaultdict(list)
     for l in open(p):
         f = l.split("\t")
         d[f[0]].append((int(f[1]), int(f[2]), f[3], float(f[4])))
     for c in d:
         d[c].sort()
+        merged = []
+        for s, e, strand, sc in d[c]:
+            if merged and s - merged[-1][1] <= merge_gap:
+                ps, pe, pstr, psc = merged[-1]
+                merged[-1] = (ps, max(pe, e), pstr, max(psc, sc))
+            else:
+                merged.append((s, e, strand, sc))
+        d[c] = merged
     return d
 
 def load_ref_ident(raw, chunked=True):

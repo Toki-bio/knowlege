@@ -130,6 +130,8 @@ def parse_maf(path):
 T = {}
 T["ssearch36"] = (None, f"{BIN['ssearch36']} -T {{threads}} -n -E 1e-3 -m 8C -z 3 {{query}} {{chunks}} > {{out}}", lambda p: parse_blast_tab(p, True))
 T["ssearch36-fwd"] = (None, f"{BIN['ssearch36']} -T {{threads}} -n -E 1e-3 -m 8C -3 -z 3 {{query}} {{chunks}} > {{out}}", lambda p: parse_blast_tab(p, True))
+T["ssearch36-parts"] = (None, "for p in {parts}; do " + BIN['ssearch36'] + " -T {threads} -n -E 1e-3 -m 8C -z 3 {query} $p; done > {out}", lambda p: parse_blast_tab(p, True))
+T["fasta36-k4-parts"] = (None, "for p in {parts}; do " + BIN['fasta36'] + " -T {threads} -n -E 1e-3 -m 8C -z 3 {query} $p 4; done > {out}", lambda p: parse_blast_tab(p, True))
 T["fasta36-k2"] = (None, f"{BIN['fasta36']} -T {{threads}} -n -E 1e-3 -m 8C -z 3 {{query}} {{chunks}} 2 > {{out}}", lambda p: parse_blast_tab(p, True))
 T["fasta36-k4"] = (None, f"{BIN['fasta36']} -T {{threads}} -n -E 1e-3 -m 8C -z 3 {{query}} {{chunks}} 4 > {{out}}", lambda p: parse_blast_tab(p, True))
 T["megablast"] = ("makeblastdb -in {genome} -dbtype nucl -out {genome}.db > /dev/null",
@@ -153,6 +155,30 @@ T["last-mam8"] = ("lastdb -P{threads} -uMAM8 {genome}.mam8 {genome}", "lastal -P
 T["last-mam4"] = ("lastdb -P{threads} -uMAM4 {genome}.mam4 {genome}", "lastal -P{threads} -E1e-3 -m 100 -D 1e9 {genome}.mam4 {query} > {out}", parse_maf)
 T["last-sens-m1000"] = (None, "lastal -P{threads} -E1e-3 -m 1000 -D 1e9 -r 2 -q 3 -a 5 -b 2 {genome}.lastdb {query} > {out}", parse_maf)
 T["last-sens"] = (None, "lastal -P{threads} -E1e-3 -m 1000 -D 1e9 {genome}.lastdb {query} > {out}", parse_maf)
+
+
+def split_parts(chunks, nrec=20000):
+    """Split the chunk FASTA into files of <= nrec records (like sear's 20 parts);
+    returns the list of part paths. ssearch36 keeps at most MAX_BEST=60,000 scan
+    hits per run (weakest quarter dropped when full), so a genome-sized library
+    must be searched in parts or weak copies are silently lost."""
+    parts = []
+    base = chunks + ".part"
+    if os.path.exists(base + "0000.fa"):
+        i = 0
+        while os.path.exists(f"{base}{i:04d}.fa"):
+            parts.append(f"{base}{i:04d}.fa"); i += 1
+        return parts
+    n, i, fh = 0, 0, None
+    for line in open(chunks):
+        if line.startswith(">"):
+            if n % nrec == 0:
+                if fh: fh.close()
+                fh = open(f"{base}{i:04d}.fa", "w"); parts.append(f"{base}{i:04d}.fa"); i += 1
+            n += 1
+        fh.write(line)
+    fh.close()
+    return parts
 
 
 def chunk_fasta(genome, out, size=5000, overlap=500):
@@ -227,6 +253,7 @@ def main():
     genome, query = os.path.join(d, "genome.fa"), a.query or os.path.join(d, "query.fa")
     chunks = os.path.join(d, "genome.chunks.fa")
     chunk_fasta(genome, chunks)
+    parts = " ".join(split_parts(chunks)) if any("-parts" in t for t in a.tools.split(",")) else ""
     truth = load_truth(os.path.join(d, "truth.bed"))
     summ_path = os.path.join(res, "summary.tsv")
     new = not os.path.exists(summ_path)
@@ -236,7 +263,7 @@ def main():
         for name in a.tools.split(","):
             idx, cmd, parser = T[name]
             out = os.path.join(res, name + a.tag + ".raw")
-            fmt = dict(genome=genome, query=query, chunks=chunks, threads=a.threads, out=out)
+            fmt = dict(genome=genome, query=query, chunks=chunks, parts=parts, threads=a.threads, out=out)
             ti = 0.0
             if idx:
                 ti, rc = run(idx.format(**fmt), d)
