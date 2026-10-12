@@ -409,6 +409,14 @@ ones (the `-z 1` statistics admit slightly different borderline fragments).
 | `regular` (default) | ssearch36 `-z 11` ktup 3 | ssearch36 `-z 11` | longest HSP ≥ 0.8 × len | 390 s | identical, nothing changes |
 | `fast` | fasta36 `-z 11` ktup 6 | ssearch36 `-z 1`, forced once | merged span (gap 50) ≥ 0.8 × len | ~160–210 s | 99.93 %, +0.1 % new weak |
 
+Implemented 2026-10-12 on branch `fast-mode` of Toki-bio/SINEderella (vendored
+`sear`, `SINEderella --fast`, `docs/FAST_MODE.md`) and of Toki-bio/sear2k.
+Measured with the real `sear` on D. valentini, THREADS=4, splits excluded (25 s):
+regular 524 s, 110,493 loci; fast 257 s, 110,710 loci covering 110,490 of the
+regular ones (99.997 %). On a 3 Mbp mini genome every path was exercised
+(regular, fast, both with `--minus`, a query fasta36 finds nothing for): regular
+output unchanged, fast covers every regular locus.
+
 Flag: `sear --mode fast` (or `SEAR_MODE=fast`), one `case` at the top of
 the round loop choosing `prog`, `ktup`, `z` and the awk length test. Later
 rounds in `fast` mode are plain ssearch36, so `DO_MINUS` rounds 3+ behave
