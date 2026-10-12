@@ -323,6 +323,95 @@ For ssearch36 (5 kb windows, same slice): 24.6 s. ssearch36 time falls with wind
   fragments, not detection of copies ssearch36 cannot align. `-E 2` in
   SINEderella already admits the comparable ssearch36 fragments (+79 loci).
 
+## 8. Shortest path for `sear` / SINEderella (2026-10-12)
+
+All numbers: D. valentini 1.67 Gbp, dar_squam1, 4 threads, `sear`'s own
+post-filter (identity ≥ 65 %, length ≥ 0.8 × query) applied to every variant.
+Baseline = `sear`'s exact command (`ssearch36 -g -3 -z 11 -E 2`, 2.5 kb
+windows, 20k-window parts): **390 s, 111,013 loci**.
+
+### 8.1 What does not work, measured
+
+| idea | result |
+|---|---|
+| fasta36 instead of ssearch36, keep sear's filter as is | 18 % of loci lost: fasta36's banded alignments (width 16) are fragmented, so the "longest single HSP ≥ 0.8 × query" rule fails although the locus was found |
+| fasta36 `-A` (full SW for the displayed alignment) | recall back to 99.9 % but 21 s vs 24.6 s on the slice: the scalar re-alignment is exactly what makes ssearch36 slow |
+| re-align fasta36 candidate regions (± 400 bp) with ssearch36 | lossless only with a residual pass, and no faster than the baseline on the slice |
+| run the 20 parts in parallel with `-T 1` instead of serially with `-T 4` | no gain: ssearch36 threads scale 3.95× on 4 cores (35.9 → 9.1 s per part) |
+| residual scan with `-z 3` | breaks: 128k spurious HSPs on the slice, 1.4 M on the genome (precomputed Altschul-Gish parameters misfit a library with its homologs removed) |
+| residual scan with 5 kb or 10 kb windows | not faster than 2.5 kb at `-z 11` (200 s vs 181 s) |
+
+### 8.2 What works: fasta36 round 1, ssearch36 on the minus bank
+
+`sear` already has the structure: a round finds `plus_to_add`, the minus
+bank is the complement, the next round searches the complement
+(`sear:438-449`, `DO_MINUS`). The change is to run round 1 with fasta36 and
+later rounds with ssearch36, and to let round 1's length rule use the merged
+span so fasta36's fragmented alignments count as found:
+
+```
+round 1:  fasta36  -g -3 -T $T -Q -n -z 11 -E 2 -m 8C "$query" "$bank" 6     # ktup 6, DNA default
+          filter: identity >= 65 AND merged span (HSPs within 50 bp joined) >= 0.8 * len
+          -> plus_to_add_1 ; minus bank = complement (as now)
+round 2+: ssearch36 -g -3 -T $T -Q -n -z 1 -E 2 -m 8C "$query" "$minus_bank" 3   # as now, -z 1 instead of 11
+```
+
+Measured on the genome (my Python windowing/masking adds ~40–80 s that
+seqkit/bedtools in `sear` would not):
+
+| scheme | fasta36 | ssearch36 residual | total | loci | vs baseline |
+|---|---|---|---|---|---|
+| baseline `sear` (ssearch36 only, `-z 11`) | – | 390 s | 390 s | 111,013 | ref |
+| round 1 fasta36 → residual `-z 11`, 2.5 kb (N-masked) | 42 s | 181 s | 314 s | 111,102; covers 110,005/111,013 of ref (99.99 %) | −20 % |
+| round 1 fasta36 → residual `-z 1`, 2.5 kb, complement | 42 s | G_RES | G_TOTAL | G_LOCI | G_GAIN |
+| round 1 fasta36 alone (no residual) | 42 s | – | ~60 s | 110,124 (99.1 % of ref) | 6.5× |
+
+The residual pass is what guarantees nothing is lost relative to ssearch36:
+every locus fasta36 did not claim is still in the minus bank and ssearch36
+sees it with the same statistics as before. On the genome it recovered 997
+loci (0.9 %), almost all in the 60–70 % identity bin. Its cost is the
+ssearch36 *scan* of 98 % of the genome, which is the floor for any scheme in
+which ssearch36 must see everything; the only lever left on it is the
+statistics mode (`-z 11` shuffles every window and costs 1.6× `-z 1`; the
+slice gave identical loci for `-z 1`, `-z 2`, `-z 21` and `-z 11`).
+
+### 8.3 Concrete patch to `sear` (about ten lines)
+
+1. New variables near the top: `ENGINE_R1=${SEAR_ENGINE_R1:-fasta36}`,
+   `ENGINE_RN=${SEAR_ENGINE_RN:-ssearch36}`, `ZSTAT_RN=${SEAR_Z_RN:-1}`,
+   `SPAN_GAP=${SEAR_SPAN_GAP:-50}`.
+2. In the round loop (`sear:396`): choose the binary and ktup by round:
+   `if [[ $round == 1 ]]; then prog=$ENGINE_R1; ktup=6; z=11; else prog=$ENGINE_RN; ktup=3; z=$ZSTAT_RN; fi`
+   and call `$prog -g -3 -T ... -z $z -E 2 -w 95 -W 70 -m 8C "$query" "$bank" $ktup`.
+3. In the filter after `bedtools merge` (`sear:405-407`): add `-d $SPAN_GAP`
+   to the merge and test the span `($3-$2) >= flen` instead of (or in
+   addition to) the max single-HSP length `$4`.
+4. Force `DO_MINUS=1` when `ENGINE_R1 != ssearch36`, so round 2 always runs
+   once.
+5. Keep `-z 11` for every ssearch36 call outside the genome scan (step 2
+   voting, step 3, satellites): those libraries are all-homolog and the
+   author's note that default statistics "return nothing" there still holds.
+   Never use `-z 3` on a depleted library.
+
+Validation: `benchmark_sear.sh` already compares old vs new BEDs; run it on
+one genome and expect ≥ 99.99 % of the old loci plus a few dozen new weak
+ones (the `-z 1` statistics admit slightly different borderline fragments).
+
+### 8.4 If 2× is not enough
+
+The remaining cost is ssearch36's scan of the residual (~110–180 s per
+1.67 Gbp here, 4 threads). Options, in order of effort:
+
+- Accept fasta36 alone (6.5×) and lose ~0.9 % of loci, all old copies; then
+  run the ssearch36 residual only on genomes where it matters.
+- Replace the residual scanner with a profile HMM pass (nhmmer on the
+  complement, ~170 s here, finds what both consensus searches miss) — same
+  cost class, different kind of gain.
+- Recompile ssearch36 with `MAX_BEST` raised so the residual can be one run
+  without parts (no speed gain, just simpler).
+- Nothing faster exists for "full Smith-Waterman must see every base": the
+  scan is already SIMD at ~24 GCUPS on 4 threads with `-z 1`.
+
 ## 6. Recommended strategy
 
 ### 6.1 Replace the scan engine inside `sear`, keep everything else
