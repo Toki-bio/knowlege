@@ -6,7 +6,7 @@
 # Output: <out>/loci.bed (chrom start end strand pctid bits source), after sear's 65% / 0.8-length filter.
 # Usage: twopass_sear.sh genome.fa query.fa outdir [THREADS=4] [PAD=400] [RESIDUAL=1]
 set -euo pipefail
-G=$1; Q=$2; O=$3; T=${4:-4}; PAD=${5:-400}; RES=${6:-1}
+G=$1; Q=$2; O=$3; T=${4:-4}; PAD=${5:-400}; RES=${6:-1}; MODE=${MODE:-regions}; RULE=${RULE:-hsp}; GAP=${GAP:-50}; RES_WIN=${RES_WIN:-2500}; RES_OVL=${RES_OVL:-500}; RES_Z=${RES_Z:-11}
 SS=${SSEARCH36:-/home/user/src/fasta36/bin/ssearch36}; FA=${FASTA36:-/home/user/src/fasta36/bin/fasta36}
 B=$(cd "$(dirname "$0")" && pwd)
 mkdir -p "$O"; L=$(grep -v '^>' "$Q" | tr -d '\n' | wc -c)
@@ -41,19 +41,27 @@ with open(f"{O}/regions.fa", "w") as o, open(f"{O}/regions.bed", "w") as b:
 print(f"{n} candidate regions, {tot/1e6:.1f} Mbp")
 PY
 t3=$(date +%s)
-$SS -g -3 -T $T -Q -n -z 11 -E 2 -Z 20000 -m 8C "$Q" "$O/regions.fa" 3 > "$O/pass2a.raw" 2>/dev/null
-t4=$(date +%s); echo "pass2a ssearch36 on regions: $((t4-t3)) s (regions built in $((t3-t2)) s), $(grep -vc '^#' "$O/pass2a.raw") HSPs"
-python3 "$B/sear_filter.py" "$O/pass2a.raw" --L $L 2>/dev/null | awk '{print $0"\tpass2a"}' > "$O/loci.bed"
+if [[ $MODE == regions ]]; then
+  $SS -g -3 -T $T -Q -n -z 11 -E 2 -Z 20000 -m 8C "$Q" "$O/regions.fa" 3 > "$O/pass2a.raw" 2>/dev/null
+  t4=$(date +%s); echo "pass2a ssearch36 on regions: $((t4-t3)) s (regions built in $((t3-t2)) s), $(grep -vc '^#' "$O/pass2a.raw") HSPs"
+  python3 "$B/sear_filter.py" "$O/pass2a.raw" --L $L 2>/dev/null | awk '{print $0"\tpass2a"}' > "$O/loci.bed"
+  MASK="$O/regions.bed"
+else
+  # sear's own structure: filter pass-1 hits (fasta36 alignments), keep them, mask only those loci
+  python3 "$B/sear_filter.py" "$O/pass1.raw" --L $L --rule $RULE --gap $GAP 2>/dev/null | awk '{print $0"\tpass1"}' > "$O/loci.bed"
+  cut -f1-3 "$O/loci.bed" > "$O/plus.bed"; MASK="$O/plus.bed"
+  t4=$(date +%s); echo "pass1 filtered ($RULE rule): $(wc -l < "$O/loci.bed") loci"
+fi
 if [[ $RES == 1 ]]; then
-  python3 "$B/mask_hits.py" "$G" "$O/regions.bed" "$O/masked.fa" --pad 0 2>&1 | tail -1
-  python3 - "$O/masked.fa" "$O/masked.win.fa" <<'PY'
+  python3 "$B/mask_hits.py" "$G" "$MASK" "$O/masked.fa" --pad 0 2>&1 | tail -1
+  python3 - "$O/masked.fa" "$O/masked.win.fa" "$RES_WIN" "$RES_OVL" <<'PY'
 import sys; sys.path.insert(0,'/home/user/knowlege/projects/sine-search-bench')
 from bench import chunk_fasta, split_parts
-chunk_fasta(sys.argv[1], sys.argv[2], 2500, 500); split_parts(sys.argv[2], 20000)
+chunk_fasta(sys.argv[1], sys.argv[2], int(sys.argv[3]), int(sys.argv[4])); split_parts(sys.argv[2], 20000)
 PY
   t5=$(date +%s)
-  for p in "$O"/masked.win.fa.part*.fa; do $SS -g -3 -T $T -Q -n -z 11 -E 2 -m 8C "$Q" "$p" 3; done > "$O/pass2b.raw" 2>/dev/null
+  for p in "$O"/masked.win.fa.part*.fa; do $SS -g -3 -T $T -Q -n -z $RES_Z -E 2 -m 8C "$Q" "$p" 3; done > "$O/pass2b.raw" 2>/dev/null
   t6=$(date +%s); echo "pass2b ssearch36 on masked genome: $((t6-t5)) s (masking+windows $((t5-t4)) s), $(grep -vc '^#' "$O/pass2b.raw") HSPs"
-  python3 "$B/sear_filter.py" "$O/pass2b.raw" --L $L 2>/dev/null | awk '{print $0"\tpass2b"}' >> "$O/loci.bed"
+  python3 "$B/sear_filter.py" "$O/pass2b.raw" --L $L --rule $RULE --gap $GAP 2>/dev/null | awk '{print $0"\tpass2b"}' >> "$O/loci.bed"
 fi
 echo "total $(( $(date +%s) - t0 )) s (incl. windowing $((t1-t0)) s); loci: $(wc -l < "$O/loci.bed") ($(grep -c pass2b "$O/loci.bed") from the residual pass)"
