@@ -38,9 +38,10 @@ and the benchmark below.
    ssearch36 call over a whole genome keeps 43 % of the copies. `sear`'s 20
    parts are what protect SINEderella from it; keep them.
 5. **Stepwise search works, for a reason you measured yourself.** ssearch36's
-   time has a scan term and a per-hit scalar re-alignment term; for a 10^5-copy
-   family the second dominates. A fast first pass that finds and masks the easy
-   copies makes the ssearch36 residual pass cheap (section 5).
+   time is 50 s of SIMD scan plus 350 s of scalar re-alignment of the 141k hit
+   windows on D. valentini. fasta36 ktup 4, mask, then ssearch36 on the residual
+   takes about 3 min in total, keeps 99.9 % of full ssearch36's loci and adds a
+   few, versus 403 s for ssearch36 alone (section 5).
 6. **Do not write a new aligner.** The sensitivity you want is full
    Smith-Waterman or a profile HMM, and both exist in tuned SIMD form. What is
    worth building is the orchestration around them (section 6).
@@ -207,7 +208,23 @@ What this says:
 
 ### Two-pass timing (fasta36 ktup 4, mask, ssearch36 on the residual)
 
-*Pending.*
+| step | time | result |
+|---|---|---|
+| fasta36 ktup 4, 19 parts | 51 s | 141,224 loci (193,467 raw HSPs) |
+| mask HSPs ± 20 bp to N (`mask_hits.py`, pure Python) | ~90 s | 57.0 Mbp masked, 3.46 % of the genome |
+| ssearch36, 19 parts, on the masked genome | **50 s** | 155 merged loci: 141 that full ssearch36 also had, 14 new |
+| total | ~3 min | 99.9 % of full ssearch36's loci plus 14 |
+| full ssearch36, 19 parts, for comparison | 403 s | 141,026 loci |
+
+The residual pass is the cleanest measurement of ssearch36's cost structure:
+the SIMD scan of 1.67 Gbp × 357 bp × 2 strands is **50 s on 4 threads** (about
+6 GCUPS), and the other **350 s of the full run is the scalar Gotoh
+re-alignment of every hit window** (`sw_walign`, `wm_align.c:37`): 141k hits ×
+5 kb × 357 bp ≈ 2.5 × 10^11 scalar cells. In `sear` the windows are 2.5 kb,
+so that term halves but still dominates for any family with 10^5 copies. This
+is what your MASKING.md measured ("the time is the known copies being
+aligned") and it is why masking helps so much. fasta36 pays far less per hit
+because its DNA alignments are banded (width 16, `initfa.c:1699`).
 
 ## 6. Recommended strategy
 
@@ -223,8 +240,11 @@ What this says:
    step 2 (voting on extracted copies) and step 3, where libraries are small
    and the cost is already low.
 2. **Two-pass: fasta36 ktup 4, mask its hits to N, ssearch36 on the masked
-   genome.** The second pass pays the scan term only and recovers whatever
-   ktup 4 missed. Section 5 gives the measured total.
+   genome.** The second pass pays the scan term only (50 s for 1.67 Gbp) and
+   recovers most of what ktup 4 missed. Measured total about 3 min versus
+   403 s, with 99.9 % of the loci plus a handful of new ones. Use
+   `bedtools maskfasta` instead of the Python masker to cut the middle step to
+   seconds. This is the variant to choose if the 0.2 % matters.
 3. **nhmmer with a per-family HMM** built from the previous run's copies
    (`hmmbuild --dna` on a MAFFT alignment of a few hundred oriented copies, one
    second). Best for old subfamilies and the "nomain" copies; needs a
