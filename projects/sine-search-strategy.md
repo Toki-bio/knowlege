@@ -226,6 +226,90 @@ is what your MASKING.md measured ("the time is the known copies being
 aligned") and it is why masking helps so much. fasta36 pays far less per hit
 because its DNA alignments are banded (width 16, `initfa.c:1699`).
 
+## 7. Parameter sweep on a 104 Mbp slice of D. valentini (2026-10-12)
+
+Nine largest scaffolds (104 Mbp), reference = the full-genome part-wise
+ssearch36 loci falling in those scaffolds (8,184 merged loci). 4 threads;
+windows 5 kb / 500 bp overlap unless stated. Recall = fraction of reference
+loci covered; last column = recall in the 60–70 % identity bin, where the
+differences are.
+
+| variant | search s | merged loci | recall | 60–70 % bin | note |
+|---|---|---|---|---|---|
+| ssearch36 `-E 1e-3 -z 3` | 24.6 | 8,185 | 1.000 | 1.00 | reference settings |
+| ssearch36 `-E 2 -z 11` | 28.1 | 8,263 | 1.000 (+79) | 1.00 | SINEderella's statistics; `-z 11` shuffles cost 14 % |
+| ssearch36 `-E 2 -z 3` | 24.0 | 8,370 | 1.000 (+187) | 1.00 | the +187 are weak fragments, see §7.1 |
+| fasta36 ktup 1 | 62.2 | 8,203 | 0.998 | 0.91 | degenerate: every position seeds |
+| fasta36 ktup 2 | 17.1 | 8,199 | 0.997 | 0.90 | |
+| fasta36 ktup 3 | 6.0 | 8,204 | 0.998 | 0.91 | |
+| **fasta36 ktup 4** | **3.1** | 8,204 | 0.998 | 0.91 | |
+| fasta36 ktup 5 | 1.9 | 8,202 | 0.997 | 0.90 | |
+| **fasta36 ktup 6 (DNA default)** | **1.4** | 8,202 | 0.997 | 0.90 | 17× faster than ssearch36 |
+| fasta36 ktup 4 `-E 2 -z 11` | 4.9 | 8,284 | 0.998 (+79) | 0.91 | sear-style statistics |
+| nhmmer, consensus | 10.1 | 8,102 | 0.988 | 0.90 | |
+| nhmmer, HMM from 400 copies | 10.4 | 8,225 | 0.997 (+39) | 0.93 | |
+| blastn word 7, 2/−3 | 1.4 | 8,246 | 0.994 | 0.79 | |
+| blastn word 9 | 1.2 | 8,240 | 0.994 | 0.79 | |
+| blastn word 11 | 1.3 | 8,225 | 0.992 | 0.78 | |
+| **blastn word 7, reward 1 penalty −1, gap 2/1** | 1.6 | 8,202 | **0.997** | **0.87** | scoring matters more than word size |
+| blastn word 11, 1/−1, 2/1 | 1.5 | 8,187 | 0.995 | 0.86 | |
+| blastn word 7, E ≤ 10 | 1.3 | 8,402 | 0.996 (+181) | 0.81 | |
+| dc-megablast | 1.4 | 7,822 | 0.949 | 0.35 | |
+| megablast | 0.7 (+1.0 index) | 6,642 | 0.800 | 0.04 | |
+| LAST `-m 1000 -D 1e9` | 0.3 (+32 index) | 7,862 | 0.953 | 0.31 | |
+| minimap2 k11 w3 -f0 (genome indexed) | 13.3 | 7,767 | 0.947 | 0.63 | |
+| **minimap2, roles swapped** (consensus indexed, windows as reads) k9 w1 | 3.1 | 8,052 | 0.975 | 0.80 | no occurrence filter can bite |
+| minimap2, swapped, k11 w2 | 2.7 | 7,986 | 0.969 | 0.73 | |
+| bwa mem -k 11 (genome indexed) | 1.7 (+112 index) | 3,421 | 0.416 | 0.00 | |
+| **bwa mem, roles swapped**, k 9 or 11 | 10 | 6,975 | 0.789 | 0.01 | seeds fixed, scoring (`-A1 -B4`) still kills < 80 % |
+| BLAT default | 6.4 | 423 | 0.035 | 0.00 | 16-per-target cap |
+| **BLAT, roles swapped**, tile 8 | 2.2 | 7,767 | 0.971 | 0.76 | cap is now per window |
+| BLAT, swapped, tile 11 | 4.4 | 7,477 | 0.936 | 0.43 | |
+
+Window-size variants (same slice):
+
+WINDOW_ROWS
+
+### 7.1 Reading the sweep
+
+- **ktup barely matters for recall, only for time.** Every ktup from 1 to 6
+  recovers 99.7–99.8 % of the reference, all losing the same 9–10 % of the
+  60–70 % identity copies. The DNA default ktup 6 is the fastest at 1.4 s,
+  17× faster than ssearch36 on the same windows. The loss is not in the
+  seeding stage but in fasta36's banded (width 16) alignment and its
+  `init1`/`initn` region thresholds, which is why smaller words do not buy it
+  back.
+- **blastn's problem is scoring, not word size.** Word 7, 9 and 11 give the
+  same recall; switching from the default 2/−3 to reward 1 penalty −1 with gap
+  costs 2/1 lifts the 60–70 % bin from 0.79 to 0.87 and overall recall to
+  0.997 in 1.6 s. The 2/−3 scheme is tuned for ~90 % identity; 1/−1 is the
+  classic choice for ~75 %.
+- **Swapping roles rescues the index-based tools from their occurrence
+  filters.** With the 357 bp consensus as the indexed reference and the 2.5–5
+  kb windows as reads, no k-mer occurs more than a few times in the index, so
+  minimap2's `-f`, bwa's `-c` and BLAT's `repMatch` never fire and BLAT's
+  16-alignments-per-target cap applies per window. BLAT goes from 3.5 % to
+  97 %, bwa from 42 % to 79 %, minimap2 from 95 % to 97.5 %. They still trail
+  fasta36 and blastn because their chaining and scoring were designed for
+  reads, not 70 %-identity repeats.
+- **The raised cap works.** A rebuild with `MAX_BEST` = 4,000,000 in `defs.h`
+  run over the whole genome as one 370k-window library found 140,402 loci,
+  99.6 % of the part-wise reference, in 414 s, versus 43 % for the stock
+  binary. So the loss is a compile-time limit, not an algorithmic one; parts
+  or a rebuilt binary are equivalent fixes.
+- **The HMM-only loci** (§5) split into two kinds. 25 of 465 are strong
+  (270–430 bits) but are not misses: they are tandem pairs or dimers that
+  nhmmer reports as one 700–780 bp envelope while ssearch36 reports two
+  copies 60 bp apart, which my 50 bp merge rule did not join. The other 440
+  are short (median 64 bp of model) and weak (26–40 bits) fragments at ~75 %
+  identity. ssearch36 does align them (532 alignments at E ≤ 10^-3 when the
+  loci are searched in isolation) but at genome-part scale their E-values
+  land at 0.1–2, above the cutoff. The profile scores the same fragment higher
+  because it weights the conserved positions, so the same 64 bp reaches
+  significance. That is the whole HMM advantage here: statistical power on
+  fragments, not detection of copies ssearch36 cannot align. `-E 2` in
+  SINEderella already admits the comparable ssearch36 fragments (+79 loci).
+
 ## 6. Recommended strategy
 
 ### 6.1 Replace the scan engine inside `sear`, keep everything else
