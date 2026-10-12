@@ -363,13 +363,18 @@ seqkit/bedtools in `sear` would not):
 |---|---|---|---|---|---|
 | baseline `sear` (ssearch36 only, `-z 11`) | – | 390 s | 390 s | 111,013 | ref |
 | round 1 fasta36 → residual `-z 11`, 2.5 kb (N-masked) | 42 s | 181 s | 314 s | 111,102; covers 110,005/111,013 of ref (99.99 %) | −20 % |
-| round 1 fasta36 → residual `-z 1`, 2.5 kb, complement | 42 s | G_RES | G_TOTAL | G_LOCI | G_GAIN |
+| **round 1 fasta36 → residual `-z 1`, 2.5 kb, complement (sear's minus bank)** | 41 s | 104 s | **212 s** (57 s of it Python windowing/masking) | 111,071; covers 110,937/111,013 of ref (99.93 %) | **−46 %**, ~−60 % with seqkit/bedtools overheads |
 | round 1 fasta36 alone (no residual) | 42 s | – | ~60 s | 110,124 (99.1 % of ref) | 6.5× |
 
 The residual pass is what guarantees nothing is lost relative to ssearch36:
 every locus fasta36 did not claim is still in the minus bank and ssearch36
 sees it with the same statistics as before. On the genome it recovered 997
-loci (0.9 %), almost all in the 60–70 % identity bin. Its cost is the
+loci (0.9 %), almost all in the 60–70 % identity bin. The complement
+variant misses 76 loci (0.07 %) that the N-masked variant keeps: copies
+adjacent to a found locus get cut at the complement-piece edge. Extending each
+complement piece 300 bp into its neighbours (overlapping pieces, as the
+sliding windows already overlap) should remove that; `sear`'s own minus
+rounds have the same edge today. Its cost is the
 ssearch36 *scan* of 98 % of the genome, which is the floor for any scheme in
 which ssearch36 must see everything; the only lever left on it is the
 statistics mode (`-z 11` shuffles every window and costs 1.6× `-z 1`; the
