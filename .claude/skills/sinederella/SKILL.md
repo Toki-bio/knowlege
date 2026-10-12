@@ -109,3 +109,9 @@ Start with `pipeline-stages.md` when the task is unfamiliar. For the
 ## Change log
 
 - 2026-10-11: initial digest at `90d8ac4`.
+- 2026-10-12: `--fast` added on branch `fast-mode` (not in the pinned commit): sets
+  `SEAR_MODE=fast` for the vendored `sear` (fasta36 round 1, forced `ssearch36 -z 1` round
+  on the minus bank), validated in the option parser, exported for step 1 and `--add`
+  searches, written to `manifest.txt` as `SEAR_MODE`, `fasta36` added to `tool_versions`;
+  `docs/FAST_MODE.md`, MANUAL 5.1a and 16.1. Steps 2+ untouched. Raw-hit file in fast
+  mode carries fasta36's short fragments (see the doc).

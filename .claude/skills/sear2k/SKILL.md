@@ -103,3 +103,11 @@ blastn/minimap2/ssearch comparison and the real-genome timings.
 ## Change log
 
 - 2026-10-11: initial digest at `85421e7`.
+- 2026-10-12: fast mode added on branch `fast-mode` of both sear2k and the vendored
+  SINEderella copy (not in the pinned commit): `--mode fast` / `--fast` / `SEAR_MODE=fast`
+  runs round 1 with `fasta36` ktup 6 (merged span of HSPs within 50 bp >= 0.8 x query
+  instead of the longest-HSP rule, `bedtools merge -d 50`), then one forced `ssearch36 -z 1`
+  round on the minus bank (on the whole part if fasta36 found nothing); `--minus` rounds
+  3+ also use `-z 1`. Regular mode is byte-for-byte the old behaviour. Measured in
+  `projects/sine-search-strategy.md` section 8 and SINEderella `docs/FAST_MODE.md`.
+  `SEAR_NO_RESCUE=1` skips the ssearch36 round (loses ~1 % of loci).
