@@ -100,6 +100,14 @@ blastn/minimap2/ssearch comparison and the real-genome timings.
 - `sear2k_bak` has a `Secs_HMS` timer defined (`sear2k_bak:20-21`) but I did
   not trace whether it is printed anywhere.
 
+## Audit
+
+A verified audit (2026-10-12) with an L1 test of minimap2 mode is in
+`projects/sear-audit-2026-10.md`: minimap2 mode finds 4 of 73 full-length L1s
+on chr21, its identity and score columns are wrong; ssearch36 mode has five
+silent traps (stale splits of another genome, cleanup globs, long contig names,
+queries > 3,125 bp, `-b` off by one).
+
 ## Change log
 
 - 2026-10-11: initial digest at `85421e7`.

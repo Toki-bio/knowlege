@@ -6,8 +6,8 @@ of the FASTA36 manual, not run here (ssearch36 is not installed in this
 container): `-g #` gap-extension penalty (so `-g -3` sets it to -3),
 `-f #` gap-open (never set -> default), `-n` DNA query, `-Q` quiet,
 `-z 11` shuffle-based statistics, `-E` E-value cut, `-Z N` pretend library
-size N, `-d N` max alignments shown, `-w`/`-W` display widths (no effect on
-`-m 8`), `-m 8`/`8C`/`8CB` BLAST tabular (plain / with comments / with BTOP),
+size N, `-d N` max alignments shown, `-w`/`-W` display widths (`-w` also sets the subject-ID width in
+`-m 8` output, 60 by default; see `projects/sear-audit-2026-10.md`), `-m 8`/`8C`/`8CB` BLAST tabular (plain / with comments / with BTOP),
 `-T` threads, trailing positional = ktup (ignored by ssearch).
 `MANUAL.md:1218-1230` glosses `-g` as "gapped" and `-3` as "both strands";
 both strands are searched in every call here either way (minus-strand hits

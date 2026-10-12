@@ -24,7 +24,7 @@ file (1/20th of the 2.5 kb windows), or in minus rounds `minus_<round>_<part>`.
 | `-n` | query is DNA | nucleotide | |
 | `-z 11` | statistics from shuffled library sequences (regression on shuffles) | "shuffle with composition" | makes E-values and bitscores **stochastic run to run** (SINEderella `MANUAL.md:1212`: +-1-3 %; `docs/FAMILY_SUBFAMILY_ASSIGNMENT.md:43-44`: 99.37 % of firm/not-firm outcomes reproduce) |
 | `-E 2` | report hits with E <= 2 | E-value threshold | relative to the **part file** (~1/20 of the windows), no `-Z` given; so the threshold means something different for a 100 Mb and a 3 Gb genome. SINEderella's flankscan fixes this with `-Z 20000` (`flankscan/fs3_partners.sh:95`), sear does not. |
-| `-w 95` | alignment display line width | "alignment width" | no effect with `-m 8C` (tabular) |
+| `-w 95` | alignment display line width | "alignment width" | **also the width of the subject-ID column in `-m 8C`** (60 by default): keeps `contig_sliding:start-end` window IDs up to ~95 characters intact; longer IDs lose the offset and coordinates go wrong (verified 2026-10-12, `projects/sear-audit-2026-10.md`) |
 | `-W 70` | context residues shown around an alignment | "window size" | no effect with `-m 8C` |
 | `-m 8C` | BLAST tabular with comment lines (`#` lines) | tabular | parsed by `/^[^#]/` |
 | trailing `3` | ktup positional; ssearch36 (full Smith-Waterman) does not use ktup | not mentioned | harmless |
