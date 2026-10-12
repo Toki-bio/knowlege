@@ -268,7 +268,20 @@ differences are.
 
 Window-size variants (same slice):
 
-WINDOW_ROWS
+| variant | search s | merged loci | recall | 60–70 % bin |
+|---|---|---|---|---|
+| ssearch36 -E 1e-3 -z 3, 1 kb windows / 300 bp overlap | 13.9 | 8211 | 1.000 (+26) | 0.99 |
+| ssearch36 -E 1e-3 -z 3, 2.5 kb / 500 bp (sear geometry) | 17.4 | 8194 | 1.000 (+10) | 1.00 |
+| **sear's exact command** (ssearch36 -g -3 -z 11 -E 2, 2.5 kb / 500 bp) | 25.3 | 8228 | 1.000 (+65) | 1.00 |
+| ssearch36 -E 1e-3 -z 3, 10 kb / 500 bp | 40.9 | 8183 | 1.000 | 1.00 |
+| fasta36 ktup 4, 1 kb | 3.8 | 8229 | 0.998 (+26) | 0.91 |
+| fasta36 ktup 4, 2.5 kb | 3.1 | 8213 | 0.998 (+9) | 0.91 |
+| fasta36 ktup 6, 2.5 kb | 1.5 | 8212 | 0.998 (+10) | 0.90 |
+| minimap2 swapped k9 w1, 2.5 kb windows | 3.7 | 8095 | 0.979 (+68) | 0.81 |
+| bwa mem swapped k11, 2.5 kb windows | 10.3 | 7154 | 0.798 | 0.01 |
+| BLAT swapped tile 8, 2.5 kb windows | 2.6 | 7858 | 0.973 (+23) | 0.76 |
+
+For ssearch36 (5 kb windows, same slice): 24.6 s. ssearch36 time falls with window size because the per-hit scalar re-alignment covers the whole window: 24.6 s at 5 kb, 17.4 s at 2.5 kb, 13.9 s at 1 kb, with identical loci.  (shuffled statistics) adds ~45 % on top (17.4 → 25.3 s). fasta36 is flat across window sizes because its alignments are banded.
 
 ### 7.1 Reading the sweep
 
@@ -335,6 +348,26 @@ WINDOW_ROWS
    `--tblout` parser in place of the `-m 8C` awk. Run it as an additional pass
    whose new loci are flagged as HMM-only, not as a replacement, until its copy
    sets have been compared on a few genomes.
+
+### 6.1b What the sweep adds (§7)
+
+- If you stay with FASTA36, **ktup 6 (the DNA default) is as sensitive as
+  ktup 4 and twice as fast**; the only cost of fasta36 vs ssearch36 is the
+  same 9 % of 60–70 % identity copies at every ktup.
+- If you want a non-FASTA cross-check, **blastn with word 7, reward 1,
+  penalty −1, gap 2/1** is the best seed-and-extend setting found: 99.7 % of
+  loci in 1.6 s on 104 Mbp, and far better on old copies than blastn's
+  defaults.
+- **Smaller windows make ssearch36 itself faster** (1 kb: 13.9 s, 2.5 kb:
+  17.4 s, 5 kb: 24.6 s, 10 kb: 40.9 s on the slice) because the per-hit
+  re-alignment is over the whole window. `sear`'s 2.5 kb is a reasonable
+  compromise; 1 kb with 300 bp overlap gained 25 % and lost nothing on
+  357 bp copies, but will fragment longer elements.
+- **Swapping roles** (index the consensus, stream the windows as reads) turns
+  BLAT, bwa and minimap2 from useless into 79–98 % recall tools, but none
+  beats fasta36 or blastn 1/−1, so it is a curiosity rather than a plan.
+- **A rebuilt ssearch36 with `MAX_BEST` raised** removes the 60,000-hit cap
+  (99.6 % of loci in one whole-genome run). Parts remain the simpler fix.
 
 ### 6.2 Hygiene fixes in the ssearch36 call, independent of the above
 
