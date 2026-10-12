@@ -72,6 +72,66 @@ def parse_paf(path):
     return hits
 
 
+def _win(name):
+    chrom, rng = name.rsplit(":", 1)
+    return chrom, int(rng.split("-")[0])
+
+
+def parse_paf_swapped(path):
+    """minimap2 with consensus as target and windows as queries: hit = window span."""
+    hits = []
+    for line in open(path):
+        f = line.split("\t")
+        if len(f) < 12:
+            continue
+        chrom, off = _win(f[0])
+        score = int(f[9])
+        for t in f[12:]:
+            if t.startswith("AS:i:"):
+                score = int(t[5:])
+        hits.append((chrom, off + int(f[2]), off + int(f[3]), f[4], score))
+    return hits
+
+
+def parse_sam_swapped(path):
+    """bwa mem with consensus as reference and windows as reads: aligned read span."""
+    hits = []
+    for line in open(path):
+        if line.startswith("@"):
+            continue
+        f = line.split("\t")
+        flag, cigar = int(f[1]), f[5]
+        if flag & 4 or cigar == "*":
+            continue
+        chrom, off = _win(f[0])
+        ops = re.findall(r"(\d+)([MIDNSHP=X])", cigar)
+        lead = sum(int(n) for n, op in ops if op in "SH" and ops.index((n, op)) == 0)
+        qlen_aln = sum(int(n) for n, op in ops if op in "MI=X")
+        total = sum(int(n) for n, op in ops if op in "MIS=XH")
+        if flag & 16:   # read reverse-complemented: leading clip is at the window's end
+            qs = total - lead - qlen_aln
+        else:
+            qs = lead
+        score = 0
+        for t in f[11:]:
+            if t.startswith("AS:i:"):
+                score = int(t[5:])
+        hits.append((chrom, off + qs, off + qs + qlen_aln, "-" if flag & 16 else "+", score))
+    return hits
+
+
+def parse_psl_swapped(path):
+    """BLAT with consensus as database and windows as queries: qStart/qEnd on the window."""
+    hits = []
+    for line in open(path):
+        f = line.rstrip("\n").split("\t")
+        if len(f) < 21 or not f[0].isdigit():
+            continue
+        chrom, off = _win(f[9])
+        hits.append((chrom, off + int(f[11]), off + int(f[12]), f[8][-1], int(f[0]) - int(f[1])))
+    return hits
+
+
 def parse_psl(path, merge_gap=50):
     """BLAT chains distant tiles as 'introns' (maxIntron 750 kb), so one PSL
     line can span several planted copies. Split into block runs instead."""
@@ -132,6 +192,23 @@ T["ssearch36"] = (None, f"{BIN['ssearch36']} -T {{threads}} -n -E 1e-3 -m 8C -z 
 T["ssearch36-fwd"] = (None, f"{BIN['ssearch36']} -T {{threads}} -n -E 1e-3 -m 8C -3 -z 3 {{query}} {{chunks}} > {{out}}", lambda p: parse_blast_tab(p, True))
 T["ssearch36-parts"] = (None, "for p in {parts}; do " + BIN['ssearch36'] + " -T {threads} -n -E 1e-3 -m 8C -z 3 {query} $p; done > {out}", lambda p: parse_blast_tab(p, True))
 T["fasta36-k4-parts"] = (None, "for p in {parts}; do " + BIN['fasta36'] + " -T {threads} -n -E 1e-3 -m 8C -z 3 {query} $p 4; done > {out}", lambda p: parse_blast_tab(p, True))
+for _k in (1, 3, 5, 6):
+    T[f"fasta36-k{_k}-parts"] = (None, "for p in {parts}; do " + BIN['fasta36'] + f" -T {{threads}} -n -E 1e-3 -m 8C -z 3 {{query}} $p {_k}; done > {{out}}", lambda p: parse_blast_tab(p, True))
+T["sear-exact-parts"] = (None, "for p in {parts}; do " + BIN['ssearch36'] + " -g -3 -T {threads} -Q -n -z 11 -E 2 -w 95 -W 70 -m 8C {query} $p 3; done > {out}", lambda p: parse_blast_tab(p, True))
+T["ssearch36-E2z11-parts"] = (None, "for p in {parts}; do " + BIN['ssearch36'] + " -T {threads} -n -E 2 -z 11 -m 8C {query} $p; done > {out}", lambda p: parse_blast_tab(p, True))
+T["ssearch36-E2z3-parts"] = (None, "for p in {parts}; do " + BIN['ssearch36'] + " -T {threads} -n -E 2 -z 3 -m 8C {query} $p; done > {out}", lambda p: parse_blast_tab(p, True))
+T["fasta36-k4-E2z11-parts"] = (None, "for p in {parts}; do " + BIN['fasta36'] + " -T {threads} -n -E 2 -z 11 -m 8C {query} $p 4; done > {out}", lambda p: parse_blast_tab(p, True))
+T["ssearch36-bigbest"] = (None, "/home/user/src/fasta36-bigbest/bin/ssearch36 -T {threads} -n -E 1e-3 -m 8C -z 3 {query} {chunks} > {out}", lambda p: parse_blast_tab(p, True))
+T["blastn-w9"] = (None, "blastn -task blastn -word_size 9 -num_threads {threads} -query {query} -db {genome}.db -evalue 1e-3 -outfmt 6 -max_target_seqs 100000 -max_hsps 1000000 > {out}", parse_blast_tab)
+T["blastn-w7-rp11"] = (None, "blastn -task blastn -word_size 7 -reward 1 -penalty -1 -gapopen 2 -gapextend 1 -num_threads {threads} -query {query} -db {genome}.db -evalue 1e-3 -outfmt 6 -max_target_seqs 100000 -max_hsps 1000000 > {out}", parse_blast_tab)
+T["blastn-w11-rp11"] = (None, "blastn -task blastn -word_size 11 -reward 1 -penalty -1 -gapopen 2 -gapextend 1 -num_threads {threads} -query {query} -db {genome}.db -evalue 1e-3 -outfmt 6 -max_target_seqs 100000 -max_hsps 1000000 > {out}", parse_blast_tab)
+T["blastn-w7-E10"] = (None, "blastn -task blastn -word_size 7 -num_threads {threads} -query {query} -db {genome}.db -evalue 10 -outfmt 6 -max_target_seqs 100000 -max_hsps 1000000 > {out}", parse_blast_tab)
+T["minimap2-swap-k11w2"] = (None, f"{BIN['minimap2']} -t {{threads}} -k 11 -w 2 -c -N 50 --secondary=yes -p 0.1 -n 1 -m 20 -s 30 {{query}} {{chunks}} 2> /dev/null > {{out}}", parse_paf_swapped)
+T["minimap2-swap-k9w1"] = (None, f"{BIN['minimap2']} -t {{threads}} -k 9 -w 1 -c -N 50 --secondary=yes -p 0.1 -n 1 -m 20 -s 30 {{query}} {{chunks}} 2> /dev/null > {{out}}", parse_paf_swapped)
+T["bwa-swap-k11"] = (f"{BIN['bwa']} index {{query}} 2> /dev/null", f"{BIN['bwa']} mem -t {{threads}} -a -k 11 -T 20 -c 100000 {{query}} {{chunks}} 2> /dev/null > {{out}}", parse_sam_swapped)
+T["bwa-swap-k9"] = (None, f"{BIN['bwa']} mem -t {{threads}} -a -k 9 -T 20 -c 100000 {{query}} {{chunks}} 2> /dev/null > {{out}}", parse_sam_swapped)
+T["blat-swap"] = (None, f"{BIN['blat']} {{query}} {{chunks}} -minScore=20 -minIdentity=60 -noHead {{out}} > /dev/null", parse_psl_swapped)
+T["blat-swap-t8"] = (None, f"{BIN['blat']} {{query}} {{chunks}} -tileSize=8 -minScore=20 -minIdentity=60 -noHead {{out}} > /dev/null", parse_psl_swapped)
 T["fasta36-k2"] = (None, f"{BIN['fasta36']} -T {{threads}} -n -E 1e-3 -m 8C -z 3 {{query}} {{chunks}} 2 > {{out}}", lambda p: parse_blast_tab(p, True))
 T["fasta36-k4"] = (None, f"{BIN['fasta36']} -T {{threads}} -n -E 1e-3 -m 8C -z 3 {{query}} {{chunks}} 4 > {{out}}", lambda p: parse_blast_tab(p, True))
 T["megablast"] = ("makeblastdb -in {genome} -dbtype nucl -out {genome}.db > /dev/null",
@@ -247,13 +324,16 @@ def main():
     ap.add_argument("--threads", type=int, default=4)
     ap.add_argument("--query", default=None, help="override query fasta (e.g. an HMM for nhmmer)")
     ap.add_argument("--tag", default="", help="suffix for result names")
+    ap.add_argument("--chunk-size", type=int, default=5000, help="window size for chunked (ssearch36/fasta36/swapped) runs")
+    ap.add_argument("--overlap", type=int, default=500)
+    ap.add_argument("--part-records", type=int, default=20000, help="windows per part for *-parts tools")
     a = ap.parse_args()
     d = os.path.abspath(a.dir)
     res = os.path.join(d, "results"); os.makedirs(res, exist_ok=True)
     genome, query = os.path.join(d, "genome.fa"), a.query or os.path.join(d, "query.fa")
-    chunks = os.path.join(d, "genome.chunks.fa")
-    chunk_fasta(genome, chunks)
-    parts = " ".join(split_parts(chunks)) if any("-parts" in t for t in a.tools.split(",")) else ""
+    chunks = os.path.join(d, f"genome.chunks{a.chunk_size}-{a.overlap}.fa")
+    chunk_fasta(genome, chunks, a.chunk_size, a.overlap)
+    parts = " ".join(split_parts(chunks, a.part_records)) if any("-parts" in t for t in a.tools.split(",")) else ""
     truth = load_truth(os.path.join(d, "truth.bed"))
     summ_path = os.path.join(res, "summary.tsv")
     new = not os.path.exists(summ_path)
