@@ -79,3 +79,16 @@
 - Two-layer assignment, composites' place in the hierarchy, subfamily
   criterion: evaluated, undecided (`docs/FAMILY_SUBFAMILY_ASSIGNMENT.md:120-135`).
 - `benchmark_sear.sh` never reported; `sear_multi` unused.
+
+## Added 2026-10-12 (benchmark in knowlege `projects/sine-search-strategy.md`)
+
+- The hit loss "when the library is huge and one family dominates"
+  (`flankscan/HANDOFF.md:150-153`) is FASTA36's `MAX_BEST` = 60,000 cap on
+  retained scan hits (`defs.h:104`; weakest quarter dropped when full,
+  `compacc2.c:2592-2602`). One ssearch36 call over 370k windows of a 1.67 Gbp
+  genome kept 43 % of dar_squam1 copies, almost all above 90 % identity.
+  `sear`'s 20 parts (~42k windows each for a 2 Gbp genome, ~5k hits per part
+  for a 10^5-copy family) stay under the cap; never collapse them into one run.
+- `fasta36 ... 4` (ktup 4) in place of `ssearch36 ... 3` at `sear:396` gave
+  99.8 % of the ssearch36 copies on D. valentini in 1/8 of the time, same
+  `-m 8C` columns.

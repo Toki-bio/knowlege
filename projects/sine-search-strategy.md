@@ -19,25 +19,31 @@ and the benchmark below.
 
 ## 1. Bottom line
 
-1. **No seed-and-extend tool reaches ssearch36 recall above ~25 % divergence,
-   and most of them also break on copy number.** The failure is structural
-   (seed length, occurrence caps, per-target output caps), not a tuning issue.
-2. **Two tools match ssearch36 recall on the test sets: fasta36 with ktup 4,
-   at about one seventh of the time, and nhmmer, at the same time as ssearch36
-   with a single-sequence query or half of it with a profile built from real
-   copies.** Both report every copy and both are drop-in for `sear`'s
-   `-m 8C` parsing (nhmmer needs a small parser change).
-3. **Stepwise search works for the right reason.** ssearch36's cost in `sear`
-   has two terms: the SIMD scan, which is constant per query and genome, and a
-   scalar re-alignment of every window that scores a hit. For a family with
-   10^5 copies the second term dominates (your own measurement in
-   `docs/MASKING.md`: 37–46 s with 1,500 planted copies vs ~4 s with them
-   masked). A fast first pass that finds and masks the easy 85–95 % of copies
-   therefore makes the ssearch36 residual pass cheap. Section 5 measures this on
-   a real genome.
-4. **Do not write a new aligner.** The sensitivity you want is full
-   Smith-Waterman or a profile HMM, and both already exist in tuned SIMD form.
-   What is worth building is the orchestration around them (section 6).
+1. **No seed-and-extend tool reaches ssearch36 recall on old copies, and most
+   also break on copy number.** The failure is structural (seed length,
+   occurrence caps, per-target output caps), not a tuning issue. On real
+   dar_squam1 copies, which are mostly 85–95 % identical, blastn word 7 still
+   recovers 99.3 % of ssearch36's loci, but loses 22 % of the 60–70 % ones.
+2. **fasta36 with ktup 4 is a drop-in replacement for the genome scan: 99.8 %
+   of ssearch36's copies on the real genome, identical output columns, 8×
+   faster (51 s vs 403 s for 1.67 Gbp on 4 threads).** The 0.2 % it misses
+   are copies below 70 % identity.
+3. **A profile HMM (nhmmer) is the only thing that finds copies ssearch36
+   misses**: 416 extra loci on D. valentini and 94 % of the 60–70 % bin, at
+   half the ssearch36 time. Worth running as an additional pass for old
+   subfamilies, not as the primary scan.
+4. **ssearch36 has a hard cap of 60,000 retained scan hits per run**
+   (`MAX_BEST`, `defs.h:104`); when it fills, the weakest quarter is dropped.
+   This is the mechanism behind the hit loss you saw in flankscan. One
+   ssearch36 call over a whole genome keeps 43 % of the copies. `sear`'s 20
+   parts are what protect SINEderella from it; keep them.
+5. **Stepwise search works, for a reason you measured yourself.** ssearch36's
+   time has a scan term and a per-hit scalar re-alignment term; for a 10^5-copy
+   family the second dominates. A fast first pass that finds and masks the easy
+   copies makes the ssearch36 residual pass cheap (section 5).
+6. **Do not write a new aligner.** The sensitivity you want is full
+   Smith-Waterman or a profile HMM, and both exist in tuned SIMD form. What is
+   worth building is the orchestration around them (section 6).
 
 ## 2. Why each fast tool misses SINE copies (from the source)
 
@@ -155,7 +161,53 @@ Reading the tables:
 
 ## 5. Real genome: D. valentini (GCA_034642135.1, 1.67 Gbp, 3,559 scaffolds)
 
-*Results pending; filled in below when the run finishes.*
+Query dar_squam1, 4 threads, same commands as above. No ground truth, so the
+reference is part-wise ssearch36 (20,000-window parts, as `sear` does) and
+"recall" is the fraction of its merged hits that another tool also covers
+(≥ 50 % overlap; HSPs within 50 bp merged first). Identity bins are
+ssearch36's gapped percent identity of the reference hit.
+
+| tool | search s | merged hits | recall vs ssearch36 | 95–100 | 90–95 | 85–90 | 80–85 | 75–80 | 70–75 | 60–70 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| ssearch36, 19 parts | 403 | 141,026 | ref | 17,549 | 75,123 | 30,150 | 12,115 | 15,867 | 9,759 | 2,387 |
+| **fasta36 ktup 4, 19 parts** | **51** | 141,224 | **0.998** | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 0.99 | 0.93 |
+| nhmmer, HMM from 400 real copies | 179 | 140,924 | 0.994 (+416 not in ref) | 0.98 | 1.00 | 0.99 | 1.00 | 1.00 | 0.99 | 0.94 |
+| nhmmer, consensus as query | 170 | 138,595 | 0.981 | 0.97 | 0.99 | 0.98 | 0.97 | 0.97 | 0.96 | 0.88 |
+| blastn word 7 | 31 | 141,275 | 0.993 (+283) | 1.00 | 1.00 | 1.00 | 1.00 | 0.99 | 0.97 | 0.78 |
+| dc-megablast | 28 | 134,871 | 0.950 | 0.99 | 0.99 | 0.98 | 0.92 | 0.91 | 0.73 | 0.36 |
+| megablast | 16 (+16 index) | 116,360 | 0.812 | 0.99 | 0.98 | 0.90 | 0.69 | 0.35 | 0.11 | 0.05 |
+| LAST -m 1000 -D 1e9 | 2 (+819 index) | 42,346 | 0.296 | 0.65 | 0.40 | 0.21 | 0.08 | 0.02 | 0.01 | 0.01 |
+| ssearch36, **one library of 370k windows** | 190 | 61,435 | 0.431 | 0.79 | 0.68 | 0.08 | 0.08 | 0.09 | 0.08 | 0.07 |
+| fasta36 ktup 4, one library | 39 | 60,936 | 0.427 | 0.80 | 0.68 | 0.07 | 0.08 | 0.09 | 0.08 | 0.07 |
+
+What this says:
+
+- **The 60,000-hit cap is real and it is the mechanism behind "ssearch36
+  loses hits when the library is huge and one family dominates"** (your
+  flankscan HANDOFF.md). `bestp_arr` holds `MAX_BEST` = 60,000 scan hits
+  (`defs.h:104`); when it fills, the weakest quarter is dropped and the cutoff
+  raised (`compacc2.c:2592-2602`). A single run over 370k windows kept 52,002
+  windows with a bit-score floor of 49.5 and lost 57 % of the copies, almost
+  all of them below 90 % identity. `sear`'s 20 parts and flankscan's 20k-record
+  chunks avoid it by construction; any future "run the whole genome in one
+  ssearch36 call" would silently reintroduce it. Keep parts ≤ ~40k windows for
+  families of this size, or fewer for bigger ones.
+- **Real copies are easier than the planted set.** 66 % of ssearch36's copies
+  are above 90 % identity and only 9 % below 75 %, so blastn word 7 already
+  recovers 99.3 % of what ssearch36 finds, in 31 s versus 403 s. Its losses are
+  concentrated where they hurt the most for subfamily work: 22 % of the 60–70 %
+  copies and 3 % of the 70–75 % ones.
+- **fasta36 ktup 4 is a drop-in: 99.8 % of ssearch36's copies, same output,
+  8× faster.** The 0.2 % it misses are in the 60–70 % bin (old copies).
+- **The profile HMM finds copies ssearch36 does not** (416 extra loci) and
+  covers 94 % of the 60–70 % bin, at half the ssearch36 time. With a
+  consensus as query nhmmer is slightly less complete than ssearch36.
+- Index-heavy tools lose on a single query: LAST spends 14 min indexing to
+  answer in 2 s; megablast's index is cheap but its seeds are not.
+
+### Two-pass timing (fasta36 ktup 4, mask, ssearch36 on the residual)
+
+*Pending.*
 
 ## 6. Recommended strategy
 
@@ -163,20 +215,22 @@ Reading the tables:
 
 `sear:396` is one line. Three candidates, in order of how little changes:
 
-1. **fasta36 ktup 4 in place of ssearch36** for the genome scan. Same binary
-   package, same flags, same `-m 8C` columns, so the awk/bedtools pipeline is
-   untouched. Expect ~7× less search time at ≥ 99 % of ssearch36 recall on
-   copies up to 35 % divergence. Keep ssearch36 for step 2 (voting on extracted
-   copies) and step 3 where libraries are small.
+1. **fasta36 ktup 4 in place of ssearch36** for the genome scan: change the
+   binary name and the trailing positional from `3` to `4`. Same package, same
+   flags, same `-m 8C` columns, so the awk/bedtools pipeline is untouched.
+   Measured: 8× less search time at 99.8 % of ssearch36 recall on D. valentini,
+   99.3 % on the planted chr21 set up to 35 % divergence. Keep ssearch36 for
+   step 2 (voting on extracted copies) and step 3, where libraries are small
+   and the cost is already low.
 2. **Two-pass: fasta36 ktup 4, mask its hits to N, ssearch36 on the masked
-   genome.** The second pass pays the scan term only, since almost no window
-   hits, and recovers whatever ktup 4 missed. Total time should be close to one
-   ssearch36 scan without copies (section 5 measures it).
+   genome.** The second pass pays the scan term only and recovers whatever
+   ktup 4 missed. Section 5 gives the measured total.
 3. **nhmmer with a per-family HMM** built from the previous run's copies
-   (`hmmbuild --dna` on a MAFFT alignment of a few hundred copies, 1 s). Best
-   for old subfamilies and for the "nomain" copies; needs a `--tblout` parser
-   in place of the `-m 8C` awk. Run it as an additional pass, not a
-   replacement, until its copy sets have been compared on a few genomes.
+   (`hmmbuild --dna` on a MAFFT alignment of a few hundred oriented copies, one
+   second). Best for old subfamilies and the "nomain" copies; needs a
+   `--tblout` parser in place of the `-m 8C` awk. Run it as an additional pass
+   whose new loci are flagged as HMM-only, not as a replacement, until its copy
+   sets have been compared on a few genomes.
 
 ### 6.2 Hygiene fixes in the ssearch36 call, independent of the above
 
