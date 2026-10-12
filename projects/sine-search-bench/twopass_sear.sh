@@ -53,7 +53,8 @@ else
   t4=$(date +%s); echo "pass1 filtered ($RULE rule): $(wc -l < "$O/loci.bed") loci"
 fi
 if [[ $RES == 1 ]]; then
-  python3 "$B/mask_hits.py" "$G" "$MASK" "$O/masked.fa" --pad 0 2>&1 | tail -1
+  if [[ ${RES_MODE:-mask} == complement ]]; then python3 "$B/complement_fasta.py" "$G" "$MASK" "$O/masked.fa" 2>&1 | tail -1
+  else python3 "$B/mask_hits.py" "$G" "$MASK" "$O/masked.fa" --pad 0 2>&1 | tail -1; fi
   python3 - "$O/masked.fa" "$O/masked.win.fa" "$RES_WIN" "$RES_OVL" <<'PY'
 import sys; sys.path.insert(0,'/home/user/knowlege/projects/sine-search-bench')
 from bench import chunk_fasta, split_parts

@@ -15,7 +15,10 @@ hits = collections.defaultdict(list)
 for l in open(a.raw):
     if l.startswith("#") or not l.strip(): continue
     f = l.rstrip("\n").split("\t"); chrom, rng = f[1].rsplit(":", 1); off = int(rng.split("-")[0])
-    s, e = sorted((int(f[8]), int(f[9]))); hits[chrom].append((s - 1 + off, e + off, int(f[3]), float(f[2]), "+" if int(f[7]) >= int(f[6]) else "-"))
+    s, e = sorted((int(f[8]), int(f[9]))); s, e = s - 1 + off, e + off
+    while ":" in chrom:  # nested names: piece within chromosome
+        chrom, rng = chrom.rsplit(":", 1); o2 = int(rng.split("-")[0]); s, e = s + o2, e + o2
+    hits[chrom].append((s, e, int(f[3]), float(f[2]), "+" if int(f[7]) >= int(f[6]) else "-"))
 n = 0
 for c in sorted(hits):
     hs = sorted(hits[c]); merged = []
