@@ -422,6 +422,34 @@ know the trade, undocumented in `--help`.
 SINEderella passes the mode through to its vendored `sear` and records it in
 the run directory, so a report says which engine found the copies.
 
+### 8.6 A fast mode for SINEderella as a whole
+
+Where the 84 min of the rsi run go (2.1 Gb, 21 consensuses, 66k loci; author's
+timings, `docs/RELEASE_CHECK_2026-10-05.md:75`, `docs/MASKING.md:126-130`):
+
+| stage | time | fast-mode lever | safe? |
+|---|---|---|---|
+| step 1 `sear` search | ~20–25 min | `sear --mode fast` | yes, lossless (8.5) |
+| step 1 satellite stage | ~11.5 min | none left; kind B already `-z -1`, lag-1/2 pairs only | – |
+| step 1 SubFam + MAFFT L-INS-i (30k sample) | ~25 min | `--maxiterate 2` or FFT-NS-i (`tests/bench/run_bench.sh` measures time and Q) | changes alignments; author's call |
+| step 2 voting, 10 × `-z 11` | 12 min | fewer cycles | changes the 10/10 firm rule; evaluate with `tools/vote_eval` first |
+| steps 3, 4, length versions, audit | ~9 min | – | – |
+
+So `SINEderella --fast` should, for now, mean exactly one thing: pass
+`--mode fast` to `sear` and record it in the run directory. On rsi that is
+about −12 min of 84 (−15 %). The gain is larger where it matters more:
+
+- hit-rich families (tbr VES, 620k copies, 54 min for 2 consensuses): the
+  ssearch36 cost there is the copies being re-aligned, not the scan
+  (`docs/MASKING.md:44-46`). In fast mode fasta36 claims those copies cheaply
+  and the ssearch36 round sees a bank with them removed, so only the scan
+  term remains: expect several-fold, not 2×. Worth measuring on tbr first.
+- big banks (Timema, 595 consensuses): step 1 search dominates everything.
+
+Do not put fasta36 into step 2: its banded scores are not the ssearch36
+bitscores the 0.45 rule and the 10-cycle vote were calibrated on. The step 2
+knob is cycle count, and `--add` already avoids ~75 % of step 2 on reruns.
+
 ### 8.4 If 2× is not enough
 
 The remaining cost is ssearch36's scan of the residual (~110–180 s per
