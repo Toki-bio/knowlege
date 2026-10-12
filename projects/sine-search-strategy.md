@@ -402,6 +402,26 @@ Validation: `benchmark_sear.sh` already compares old vs new BEDs; run it on
 one genome and expect ≥ 99.99 % of the old loci plus a few dozen new weak
 ones (the `-z 1` statistics admit slightly different borderline fragments).
 
+### 8.5 Two modes for `sear` (decided 2026-10-12)
+
+| mode | round 1 | rounds 2+ (minus bank) | length rule | D. valentini | loci vs today |
+|---|---|---|---|---|---|
+| `regular` (default) | ssearch36 `-z 11` ktup 3 | ssearch36 `-z 11` | longest HSP ≥ 0.8 × len | 390 s | identical, nothing changes |
+| `fast` | fasta36 `-z 11` ktup 6 | ssearch36 `-z 1`, forced once | merged span (gap 50) ≥ 0.8 × len | ~160–210 s | 99.93 %, +0.1 % new weak |
+
+Flag: `sear --mode fast` (or `SEAR_MODE=fast`), one `case` at the top of
+the round loop choosing `prog`, `ktup`, `z` and the awk length test. Later
+rounds in `fast` mode are plain ssearch36, so `DO_MINUS` rounds 3+ behave
+exactly as in `regular`.
+
+Not a third mode: fasta36 alone (no rescue round) is 6.5× faster but loses
+0.9 % of loci, all old copies, which is what the voting and length-version
+steps need most. Leave it reachable as `SEAR_NO_RESCUE=1` for people who
+know the trade, undocumented in `--help`.
+
+SINEderella passes the mode through to its vendored `sear` and records it in
+the run directory, so a report says which engine found the copies.
+
 ### 8.4 If 2× is not enough
 
 The remaining cost is ssearch36's scan of the residual (~110–180 s per
