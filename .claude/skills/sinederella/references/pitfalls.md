@@ -92,3 +92,17 @@
 - `fasta36 ... 4` (ktup 4) in place of `ssearch36 ... 3` at `sear:396` gave
   99.8 % of the ssearch36 copies on D. valentini in 1/8 of the time, same
   `-m 8C` columns.
+
+## Added 2026-10-13 (KIT install + Timema rerun at `38d811a`)
+
+- **The satellite stage is gated on `trf` being on PATH** (`step1_search_extract.sh:138`); without it the log says
+  "Satellite screen skipped" and the run goes on. `manifest.txt` can say `trf not found` even when the stage ran
+  (KIT: `trf` lives in `/data/V/toki/bin`). Two runs on the same inputs are not comparable unless both did or both
+  skipped the screen. Pin it explicitly: `SKIP_SATELLITES=1`, or put `trf` on PATH.
+- **Kind-B unit check cost on a hit-rich genome:** Timema (1.23 Gb, 14 consensuses, THREADS 24): satellite stage
+  1 h 35 min, of which ~85 min is kind B (2,000 runs per big family, units median 5 kb, max 24 kb, full SW) to find
+  2–12 arrays per family; whole screen removed 1,310 hits (~0.1 %). Searches took 28 min. `SATELLITE_EXCLUDE_B=none`
+  keeps kind A (~8 min) and skips the unit check. Owner's verdict: long alignments are against the design.
+  Replacement spec: skill `tandem-array-unit-check`.
+- **Do not pull or edit a checkout a run executes from.** bash reads scripts incrementally; a run started from
+  `repos/SINEderella` breaks if another session updates that checkout mid-run. Develop in a separate clone.

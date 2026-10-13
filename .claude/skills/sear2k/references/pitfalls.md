@@ -66,3 +66,12 @@
 - taxname path bug and cascade text (above); both fixed only in the
   SINEderella copy.
 - No tests, no issue tracker entries visible in the shallow clone.
+
+## Added 2026-10-13 (KIT toy tests, `923ffb6`)
+
+- **Give the query as a bare file name in the working directory.** Output names are built from the query path
+  (`<3 letters of bank>-<query path>.bed`); `sear ../q.fa genome.fa` writes `tes-../q.bed` and fails at the end with
+  "No such file or directory" after all searches have run. Same in the old (Feb 2026) and new `sear`. Copy the query in.
+- `sear2k` at `923ffb6` adds a 7th BED column (bitscore); coordinates, identity, strand and extracted sequences are
+  identical to the Jan 2026 `sear2k` on a 10 Mb Eryx test. `sear` old vs new: byte-identical BED and best-100.
+- minimap2 mode toy: a 1,500 bp genomic query found its own locus at 100 % in 1 s (16 s with `--force-ssearch`).

@@ -123,3 +123,5 @@ queries > 3,125 bp, `-b` off by one).
   indexed, genome streamed as windows, `-x map-ont -k 11 -w 3 -c`; old mode found 4 of 73
   full-length L1s on chr21, new 65 (52 after the length rule). Long-query guard in ssearch36 mode.
   Line numbers in this digest predate the change. See `projects/sear-audit-2026-10.md`.
+- 2026-10-13: installed on KIT (`/data/V/toki/repos/sear2k`, `~/bin/sear` -> it); old vs new identical on toy data;
+  query-path naming pitfall added to `references/pitfalls.md`.
