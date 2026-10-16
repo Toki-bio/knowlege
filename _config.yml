@@ -54,7 +54,6 @@ defaults:
     values:
       topic: Genomics
   - scope:
-  - scope:
       path: "software"
     values:
       topic: Software
