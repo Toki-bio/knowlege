@@ -251,8 +251,17 @@ against DOM spans and has not been ported:
 | codon mode: amino-acid annotation rows below each sequence | only the AA track is drawn |
 | snapshots | restore into Full/Block |
 | Block (wrapped) layout | Canvas is a single unwrapped grid |
-| Highlight diffs (dim conserved columns to 40 %) | not applied: `_diffColumns` is only in the redraw signature, the cell styler never reads it |
+| Highlight diffs (dim conserved columns to 40 %) | **ported in v250** (2026-10-16): per-cell `globalAlpha` 0.4 and bold glyph variant in `drawRegion`, consensus and ruler included; frame copy unaffected |
 
 Each is a drawing routine on the same data; the hard part is the cell-count arithmetic in
 hit-testing once columns are hidden or rows carry extra annotation lines. Porting them one at
 a time would make Canvas the only view and remove the mode switch.
+
+### Porting order (owner: "ok go", 2026-10-16)
+
+1. Highlight diffs: v250, done. Lesson for checks on the Canvas: untouched canvas pixels are
+   transparent black, so a pixel test must composite over white before judging darkness, and
+   "bold" must be measured as letter pixels against the cell's own background (white-on-black
+   cells have fewer dark pixels when bold).
+2. Variable sites only (hidden columns): next.
+3. Codon annotation rows, snapshot restore, Show 2D, Block layout: after that, one at a time.
