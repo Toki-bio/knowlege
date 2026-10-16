@@ -248,7 +248,7 @@ against DOM spans and has not been ported:
 |---|---|
 | Show 2D (block mask overlay, `renderBlockMaskOverlay`) | not drawn |
 | var-sites mode: hiding invariant columns | **ported in v251** (2026-10-17): slot layout (shown columns + marker cells) used by drawing, overlay, hit-testing, tooltips and jumps |
-| codon mode: amino-acid annotation rows below each sequence | only the AA track is drawn |
+| codon mode: amino-acid annotation rows below each sequence | **ported in v253** (2026-10-17): stop cells, syn/nonsyn underlines, codon boxes, frameshift marks, frame tags, AA only; colours read from the stylesheet via probe elements |
 | snapshots | restore into Full/Block |
 | Block (wrapped) layout | Canvas is a single unwrapped grid |
 | Highlight diffs (dim conserved columns to 40 %) | **ported in v250** (2026-10-16): per-cell `globalAlpha` 0.4 and bold glyph variant in `drawRegion`, consensus and ruler included; frame copy unaffected |
@@ -273,3 +273,24 @@ a time would make Canvas the only view and remove the mode switch.
    there); the zoom slider's render after a tooltip hover was lost once, so checks that need
    scrollable content load a larger alignment instead of zooming.
 3. Codon annotation rows, snapshot restore, Show 2D, Block layout: after that, one at a time.
+
+### v252-v253 (2026-10-17): owner reports and the codon port
+
+- **Name clicks selected a residue** (v252): with sticky names and a scrolled view, the Canvas
+  hit test returned the cell under the name column; Ctrl+C then copied that residue. Fixed in
+  the three hit tests (name column = names).
+- **"Low resolution" Canvas text** (v252): Chrome antialiases text on a transparent canvas in
+  greyscale, on an opaque one with subpixel ClearType like DOM text. Measured headful on
+  Windows (colour-fringe pixels in a 400 x 150 crop): Canvas 0, Full 10,375; opaque Canvas
+  9,704. Content canvas, scroll scratch and glyph canvases are opaque now; clears are white
+  fills; translucent tints compose over white. Headless Chrome has no subpixel text, so the
+  check verifies the contract (context attributes, no transparent pixels), not the fringes.
+- A screen-scale change (devicePixelRatio) now re-renders.
+- Codon port (v253): rounded box ends must be image blits, not path fills, or the frame copy
+  differs by one unit at the antialiased corners under the strip clip.
+- GLM use: aider/glm-5.3 cannot take script.js (416k tokens > 262k context); it did the
+  manual/index text edits in a worktree (reviewed, cherry-picked); glm.js (read-only) audited
+  the codon block against the DOM functions and confirmed it. Windows: run aider with
+  PYTHONUTF8=1 or it crashes on the rich progress bar (cp1252).
+
+Remaining DOM-only: snapshot restore, Show 2D overlay, Block (wrapped) layout.
