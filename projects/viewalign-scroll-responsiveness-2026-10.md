@@ -247,7 +247,7 @@ against DOM spans and has not been ported:
 | feature | Canvas today |
 |---|---|
 | Show 2D (block mask overlay, `renderBlockMaskOverlay`) | not drawn |
-| var-sites mode: hiding invariant columns | breakpoint markers drawn, columns not hidden |
+| var-sites mode: hiding invariant columns | **ported in v251** (2026-10-17): slot layout (shown columns + marker cells) used by drawing, overlay, hit-testing, tooltips and jumps |
 | codon mode: amino-acid annotation rows below each sequence | only the AA track is drawn |
 | snapshots | restore into Full/Block |
 | Block (wrapped) layout | Canvas is a single unwrapped grid |
@@ -263,5 +263,13 @@ a time would make Canvas the only view and remove the mode switch.
    transparent black, so a pixel test must composite over white before judging darkness, and
    "bold" must be measured as letter pixels against the cell's own background (white-on-black
    cells have fewer dark pixels when bold).
-2. Variable sites only (hidden columns): next.
+2. Variable sites only: v251, done. Design: a `slots` Int32Array (column, or `-1 - column` for the
+   marker before that column) and `slotOf[column]` (slot or -1) built once per render; every
+   x = slot * cellW, so the uniform grid, the frame copy and the strip snapping are untouched.
+   Found on the way: `generateScale()` drops a label that does not fit the window it is asked
+   for, so a ruler text made per drawn strip differs from a full redraw (now one text for the
+   whole alignment); the rule under the ruler was drawn beneath sticky names when scrolled.
+   Harness lessons: at a 700 px window the FASTA textarea overlaps the canvas (wheel went
+   there); the zoom slider's render after a tooltip hover was lost once, so checks that need
+   scrollable content load a larger alignment instead of zooming.
 3. Codon annotation rows, snapshot restore, Show 2D, Block layout: after that, one at a time.
