@@ -200,3 +200,31 @@ now asserts they give the same sequences as in Full mode. v247: device-pixel cel
 strip snapped to row/column edges, a state-signature safety net for the frame copy, live
 conservation/consensus caches, PageUp/PageDown in Canvas; the copy is pixel-identical at 1x,
 1.25x and 1.5x scaling and after edits (see techniques write-up, section 10).
+
+## Beyond scrolling: where the time went after v247, and v248 (2026-10-16)
+
+Profiled in the default (Canvas) view at 600 x 600, headful, real input where possible.
+
+| action | v247 | v248 |
+|---|---|---|
+| load to first Canvas frame | 0.2 s (the 2.5 s seen earlier was page navigation + fetch) | same |
+| click a residue / Ctrl+Alt+click a column / Ctrl+click a name | one full redraw each, 29-45 ms | no cell redraw, overlay only |
+| drag a residue-range selection | one full redraw per mouse move | overlay only |
+| type one residue | one full redraw, 27-29 ms | one row + one column band repainted |
+| undo, gap insert, gap column | full re-render (model operation), 30-35 ms | same |
+| zoom, consensus toggle, Highlight diffs, search | full re-render, 15-36 ms wall | same |
+| switch to Full (DOM) | 2.5 s (361k spans) | same |
+
+v248: a transparent **overlay canvas** above the content holds selections, the pending and
+edit cell, and the row-drag indicator; selection paths request an overlay redraw only, and
+the content signature no longer includes selection state. Typing calls `redrawCells(row, col)`,
+which repaints the row band, the column band and the consensus band and then accepts the new
+state as drawn, so the next scroll step can still copy the frame. Check: four selection
+actions and seven keystrokes cause zero full redraws and the view equals a full redraw.
+
+DOM views below the Canvas default (Full mode, same protocol): 150 x 150 (22k residues) smooth
+(p95 8.8 ms); 200 x 200 (40k) p95 16.5 ms with 2-3 frames of 50 ms; 300 x 300 (90k) p95 67 ms,
+16 frames over 34 ms. So the DOM view is only smooth up to roughly 30-40k residues; the
+default threshold of 100k leaves 40k-100k alignments on the janky DOM path unless the user
+picks Canvas. Open for the owner: lower `ALIGN_CANVAS_DEFAULT_RESIDUES` to 40,000, at the cost
+of Show 2D and var-sites column hiding needing a manual switch for those sizes.
