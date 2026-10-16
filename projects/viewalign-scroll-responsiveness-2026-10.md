@@ -190,3 +190,13 @@ equal colour, or windowed rows), which is a rewrite of selection and editing, no
 
 Scripts: `dev-tools/scroll-perf-tests/measure_modes.js` with `INJECT_CSS=...`, and the
 `op_cost_content_visibility.js` next to it.
+
+## v246-v247: editing in Canvas, hardening
+
+v246: editing in Canvas mode (row drag by the name, rename by double-click, the toolbar no
+longer pushes the canvas off screen, static-name hit test, chip no longer "view-only"); the
+tools themselves (typing, gaps, Move, Slide, column select) already worked and a guard check
+now asserts they give the same sequences as in Full mode. v247: device-pixel cell geometry,
+strip snapped to row/column edges, a state-signature safety net for the frame copy, live
+conservation/consensus caches, PageUp/PageDown in Canvas; the copy is pixel-identical at 1x,
+1.25x and 1.5x scaling and after edits (see techniques write-up, section 10).

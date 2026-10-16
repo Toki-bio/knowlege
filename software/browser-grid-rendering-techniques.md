@@ -228,3 +228,37 @@ the problem.
 
 ## Sources
 VS Code terminal renderer 2017 (https://code.visualstudio.com/blogs/2017/10/03/terminal-renderer), VS Code 1.41 notes (https://code.visualstudio.com/updates/v1_41), xterm.js addon-webgl `WebglRenderer.ts`, `GlyphRenderer.ts`, `TextureAtlas.ts`, README; Glide Data Grid README, `data-grid-render.blit.ts`, `infinite-scroller.tsx`; canvas-datagrid, Univer READMEs; Google Docs canvas announcement 2021; VS Code `viewLayer.ts`, `minimap.ts`, `minimapCharSheet.ts`; Figma blog 2015 and WebGPU post; Leaflet and MapLibre option docs; igv.js `trackViewport.js`; JBrowse 2 paper (PMC10108523), `offscreenCanvasPonyfill.ts`, "why not X" design notes; MDN Optimizing canvas, getContext, OffscreenCanvas, createImageBitmap, devicePixelRatio, scroll event, will-change, contain, FontFaceSet.ready, textBaseline, PerformanceEventTiming, Typed arrays; HTML spec canvas section; Chrome blogs desynchronized, scrolling interventions 1 and 2; Chromium `html_canvas_element.cc`, `base_rendering_context_2d.cc/.h`, `layout_unit.h`; Firefox `nsCoord.h`; canvas-size limits table; web.dev rendering-performance, canvas-performance, content-visibility; Chrome DevTools performance reference and rendering docs; Long Animation Frames docs; DevTools protocol `browser_protocol.json`; W3C bug 23516; V8 "Trash talk"; Eric Meyer "Infinite pixels" 2025. Viewer sources as listed in the landscape document.
+
+## 10. Lessons from implementing the frame copy in ViewAlign (v244-v247, 2026-10-16)
+
+- **Copy through a cleared scratch canvas, not onto yourself.** `drawImage(canvas, ...)` onto the
+  same canvas composites source-over; where the destination still holds the previous frame,
+  antialiased glyph pixels gain opacity on every copy (alpha 161 became 255 after six steps).
+  Copy the frame into a cleared second canvas first, then clear the destination region and
+  copy back. The pixel-identity check against a full redraw caught this at once.
+- **Put cell edges on device pixels.** At 125 % or 150 % Windows scaling a 15 CSS px row is
+  18.75 or 22.5 device px: every row edge is antialiased, the copy ends on a device pixel,
+  and the row cut by that edge misses the neighbour's edge composite that a full redraw
+  would apply. Fix: cell width and height are `ceil(css * dpr) / dpr` (xterm.js floors the
+  width, ceils the height in device pixels; same idea), hairlines are `1 / dpr` CSS px, and
+  the band heights (consensus rule + margin) are rounded the same way.
+- **Widen the exposed strip to the nearest row or column edge** so every cell is either
+  copied whole or drawn whole; the strip is cleared under a device-aligned clip before it is
+  drawn. With both rules the copy is pixel-identical at 1x, 1.25x and 1.5x in every
+  direction, including fractional trackpad deltas.
+- **Keep the offsets on device pixels** (`round(offset * dpr) / dpr`), otherwise the copy
+  delta and the strip's drawing phase disagree by a fraction of a pixel.
+- **A safety net for state changes.** Compare a short signature of what can change a cell's
+  look (sequence array identity and length, undo/redo stack lengths, conservation and
+  consensus cache identities, selection sizes, trim previews, edit cell, colour scheme) with
+  the previous frame; any difference forces a full redraw even if the caller forgot to mark
+  the view dirty. Cost: one array compare per frame.
+- **Read live caches each frame.** Edits reshade columns and recompute the consensus into
+  state caches without a re-render; the draw must read those, not the arrays captured when
+  the renderer was created, or copied frames keep stale shading.
+- **Scroll-position inputs that bypass the scroller** (PageUp/PageDown, keyboard, scrollbar
+  mirror) each need their own path into the same offset + draw request; the DOM
+  `scrollTop` has no effect on a canvas viewport.
+- **Measured result**: 600 x 600, Radeon 780M, headful Chrome 155: scroll frames p95 8.5-9 ms,
+  none over 34 ms, in all four directions; a copy frame costs 1.3-4 ms against 25-50 ms for
+  a full redraw.
