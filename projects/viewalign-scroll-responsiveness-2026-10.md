@@ -228,3 +228,30 @@ DOM views below the Canvas default (Full mode, same protocol): 150 x 150 (22k re
 default threshold of 100k leaves 40k-100k alignments on the janky DOM path unless the user
 picks Canvas. Open for the owner: lower `ALIGN_CANVAS_DEFAULT_RESIDUES` to 40,000, at the cost
 of Show 2D and var-sites column hiding needing a manual switch for those sizes.
+
+## v249 (2026-10-16): Canvas default lowered to 40,000 residues
+
+Owner's decision after the DOM measurements above ("yes, small indicator should show the
+limitation statement for like 10 seconds"). `ALIGN_CANVAS_DEFAULT_RESIDUES` is 40,000 (was
+100,000). When the view is chosen automatically, a 10-second status note names what Canvas
+does not do yet, and `showMessage` appends that note to the next message so the following
+"File loaded successfully!" does not hide it. Commits 200c5ee + f002692 on Toki-bio/MSA-viewer
+main; quick suite: only the two pre-existing failures (Highlight diffs in-place check in DOM
+modes, optional server-security suite on this Windows account).
+
+### Could Canvas serve every alignment?
+
+Nothing in Canvas is impossible; what remains is DOM-only today because it was written
+against DOM spans and has not been ported:
+
+| feature | Canvas today |
+|---|---|
+| Show 2D (block mask overlay, `renderBlockMaskOverlay`) | not drawn |
+| var-sites mode: hiding invariant columns | breakpoint markers drawn, columns not hidden |
+| codon mode: amino-acid annotation rows below each sequence | only the AA track is drawn |
+| snapshots | restore into Full/Block |
+| Block (wrapped) layout | Canvas is a single unwrapped grid |
+
+Each is a drawing routine on the same data; the hard part is the cell-count arithmetic in
+hit-testing once columns are hidden or rows carry extra annotation lines. Porting them one at
+a time would make Canvas the only view and remove the mode switch.
