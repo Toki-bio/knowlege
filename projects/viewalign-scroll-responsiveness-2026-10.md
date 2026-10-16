@@ -251,6 +251,7 @@ against DOM spans and has not been ported:
 | codon mode: amino-acid annotation rows below each sequence | only the AA track is drawn |
 | snapshots | restore into Full/Block |
 | Block (wrapped) layout | Canvas is a single unwrapped grid |
+| Highlight diffs (dim conserved columns to 40 %) | not applied: `_diffColumns` is only in the redraw signature, the cell styler never reads it |
 
 Each is a drawing routine on the same data; the hard part is the cell-count arithmetic in
 hit-testing once columns are hidden or rows carry extra annotation lines. Porting them one at
