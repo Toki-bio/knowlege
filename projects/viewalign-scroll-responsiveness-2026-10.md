@@ -135,3 +135,25 @@ either.
   would be slightly more frequent in the first frames.
 - Headless and headful agreed in ranking but not in absolute numbers (headful faster on
   drawImage, slower on fillText).
+
+## Done the same day (v244, commits 0abeb93 + 0adf9a6 on Toki-bio/MSA-viewer main)
+
+Canvas mode now scrolls by copying the previous frame by the whole device-pixel delta
+(through a cleared scratch canvas: an in-place `drawImage` blends antialiased pixels, which
+the pixel-identity check caught) and drawing only the exposed strip; offsets are quantised to
+device pixels; with sticky names a horizontal step leaves the name column in place; names are
+drawn in one pass per frame. Full redraw on dirty state, diagonal moves and page jumps.
+
+| Canvas mode, 600 x 600, headful | before (v243) | after (v244) |
+|---|---|---|
+| vertical frames p95 / max | 33-42 / 50-100 ms | 8.5-9 / 9-33 ms |
+| horizontal frames p95 / max | 33-42 / 50-92 ms | 8.5-8.8 / 9 ms |
+| frames over 34 ms (of ~160-190) | 5-17 | 0 |
+| cost of one scroll frame (regression check) | 25-50 ms (full) | 1.3-3.9 ms (copy) |
+
+Regression check "Canvas mode: wheel scroll copies the frame ..." in `tests/regression/run-all.js`
+asserts the copy path is used, that pixels equal a full redraw at the same offset, and that a
+copy frame is well under a full frame. Still open: Full/Block (DOM) modes at this size are
+unchanged (the default view), so the user only gets the fast path after choosing Canvas; the
+decision whether Canvas becomes the default above ~100k residues (it lacks the consensus
+row, hidden columns in var-sites mode and the Show 2D overlay) is the owner's.
