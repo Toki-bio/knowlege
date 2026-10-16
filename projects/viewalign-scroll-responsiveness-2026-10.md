@@ -246,10 +246,10 @@ against DOM spans and has not been ported:
 
 | feature | Canvas today |
 |---|---|
-| Show 2D (block mask overlay, `renderBlockMaskOverlay`) | not drawn |
+| Show 2D (block mask overlay, `renderBlockMaskOverlay`) | **ported in v254** (2026-10-17): overlay layer, `_canvasBlockMaskRects` + `_canvasBlockMaskHit` for click/tooltip |
 | var-sites mode: hiding invariant columns | **ported in v251** (2026-10-17): slot layout (shown columns + marker cells) used by drawing, overlay, hit-testing, tooltips and jumps |
 | codon mode: amino-acid annotation rows below each sequence | **ported in v253** (2026-10-17): stop cells, syn/nonsyn underlines, codon boxes, frameshift marks, frame tags, AA only; colours read from the stylesheet via probe elements |
-| snapshots | restore into Full/Block |
+| snapshots | **v254**: record and restore Canvas |
 | Block (wrapped) layout | Canvas is a single unwrapped grid |
 | Highlight diffs (dim conserved columns to 40 %) | **ported in v250** (2026-10-16): per-cell `globalAlpha` 0.4 and bold glyph variant in `drawRegion`, consensus and ruler included; frame copy unaffected |
 
@@ -293,7 +293,7 @@ a time would make Canvas the only view and remove the mode switch.
   the codon block against the DOM functions and confirmed it. Windows: run aider with
   PYTHONUTF8=1 or it crashes on the rich progress bar (cp1252).
 
-Remaining DOM-only: snapshot restore, Show 2D overlay, Block (wrapped) layout.
+Remaining DOM-only after v254: only the Block (wrapped) layout, by decision (see the Plan below).
 
 ## Plan (owner's decision 2026-10-17): make the DOM Block view faster, do not port wrapping to Canvas
 
