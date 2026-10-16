@@ -157,3 +157,36 @@ copy frame is well under a full frame. Still open: Full/Block (DOM) modes at thi
 unchanged (the default view), so the user only gets the fast path after choosing Canvas; the
 decision whether Canvas becomes the default above ~100k residues (it lacks the consensus
 row, hidden columns in var-sites mode and the Show 2D overlay) is the owner's.
+
+## Can the DOM view be made cheaper? (tested the same day)
+
+The user asked for this to be tested before deciding. Full mode, 600 x 600, headful, same
+wheel protocol; the only change is CSS injected after the render.
+
+| variant | vertical frames p95 | frames > 34 ms | wall for 60 steps |
+|---|---|---|---|
+| as shipped (`content-visibility: auto` on rows) | 110-160 ms | 58-61 | 6.8-9.1 s |
+| plus `contain: layout style paint` on `.seq-data` | 117-125 ms | 58 | 6.7-7.0 s |
+| `content-visibility` rule off (whole page laid out once) | 17-25 ms | 0-2 | 1.3-1.4 s |
+
+Turning the rule off makes vertical scrolling smooth (the page is laid out once and the
+compositor scrolls it). The price is paid by every operation that lays the page out again:
+
+| Full mode, operation | 600 x 600, rule on | 600 x 600, rule off | 700 x 700, rule on | 700 x 700, rule off |
+|---|---|---|---|---|
+| switch to Full | 2.6 s | 5.8 s | 3.2 s | 10.1 s |
+| Highlight diffs on | 2.7 s | 5.5 s | 3.2 s | 7.9 s |
+| switch to Block | 1.9 s | 4.6 s | 2.5 s | 8.7 s |
+| zoom back to 100 % | 0.4 s | 0.01 s | 0.5 s | 0.2 s |
+
+So the DOM view at this size can scroll smoothly or switch/redraw in 2-3 s, not both; with
+the rule off a horizontal scroll also shows one 0.7 s hitch when the wide layer is first
+painted. Neither variant approaches the Canvas numbers, and the DOM operations are already
+slow in absolute terms (a 361k-span layout costs seconds). Conclusion recorded for the owner:
+the DOM view stays as it is (editing and overlays need it below 100k residues), and Canvas
+becomes the default above `ALIGN_CANVAS_DEFAULT_RESIDUES` = 100,000 (v245) with the consensus
+row drawn in Canvas. A genuinely cheaper DOM would need fewer elements (one span per run of
+equal colour, or windowed rows), which is a rewrite of selection and editing, not a CSS change.
+
+Scripts: `dev-tools/scroll-perf-tests/measure_modes.js` with `INJECT_CSS=...`, and the
+`op_cost_content_visibility.js` next to it.
