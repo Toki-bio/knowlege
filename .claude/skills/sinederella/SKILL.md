@@ -126,3 +126,7 @@ Start with `pipeline-stages.md` when the task is unfamiliar. For the
 - 2026-10-16: `references/review-and-changes-296fa33.md` added (main `296fa33`: MIT licence, strand-aware merge,
   3 kb `sear` windows, short-piece kind-B check; fast mode still only on its branch). Comparison with HitSV and the
   other tools in `projects/hitsv-vs-own-tools.md`.
+- 2026-10-16: unit vs composite assignment. main (296fa33) cannot decide a single unit vs a composite containing it
+  (-z 11 noise; toy units flip 99/100 -> 0/40 firm between runs). Branch `coverage-tiebreak`: declared composites
+  table (COMPOSITES, `composite<TAB>unit:start-end,...`), coordinate rule in step 2 `cycle_votes`, tools/place_modules.py.
+  Auto-detecting pairs from the bank fails (r9 in r7, P2 in P1). Full account: knowlege `methods/composite-vs-unit-sine-assignment.md`.
