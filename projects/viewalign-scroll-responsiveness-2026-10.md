@@ -294,3 +294,31 @@ a time would make Canvas the only view and remove the mode switch.
   PYTHONUTF8=1 or it crashes on the rich progress bar (cp1252).
 
 Remaining DOM-only: snapshot restore, Show 2D overlay, Block (wrapped) layout.
+
+## Plan (owner's decision 2026-10-17): make the DOM Block view faster, do not port wrapping to Canvas
+
+Why not Canvas: wrapping is for few rows over many columns, read like a page; at 600 x 600 a
+wrapped view is six 600-row blocks and nobody reads that. The only gap is a wrapped view of an
+alignment above ~40k residues where DOM Block is too slow, which is rare, and the port would be
+as large as v250-v254 together (every Canvas geometry becomes block + column-in-block, plus a
+new round of frame-copy exactness).
+
+Why Block is slow (measured 2026-10-16): each scroll step unlocks `content-visibility: auto`
+rows, a layout pass plus a whole-layer repaint; not JavaScript. Block pays more than Full
+because each block is its own stack of rows.
+
+Steps, in order:
+1. Measure with `dev-tools/scroll-perf-tests/measure_modes.js` in Block mode at 10 x 5,000,
+   20 x 5,000 and 50 x 3,000 (50k, 100k, 150k residues): baseline; then with
+   content-visibility off (the harness has INJECT_CSS); then with the windowed renderer
+   forced on (`ALIGN_WINDOWED_DOM_THRESHOLD` lowered). Record p50/p95/max frame times and the
+   wall time of a mode switch and a Highlight diffs toggle for each.
+2. If content-visibility off gives p95 under ~25 ms with rebuilds under ~3 s up to ~120k
+   residues: ship it as a size band (off between the Canvas default and that limit), keep it on
+   above. One threshold constant, a regression check that scroll frames stay under the budget
+   at 100k in Block, and that the rebuild time stays bounded.
+3. If the windowed renderer is the better trade from ~120k up: lower its threshold for Block
+   only, after checking the v230 windowed checks still pass.
+4. Expected result: Block p95 from ~70-100 ms to ~20-30 ms in that band; it stays above the
+   Canvas numbers (8-9 ms, flat), which is the ceiling for any DOM path.
+Tested and not worth repeating: paint containment, will-change (no gain).
