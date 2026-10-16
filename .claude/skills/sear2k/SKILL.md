@@ -125,3 +125,5 @@ queries > 3,125 bp, `-b` off by one).
   Line numbers in this digest predate the change. See `projects/sear-audit-2026-10.md`.
 - 2026-10-13: installed on KIT (`/data/V/toki/repos/sear2k`, `~/bin/sear` -> it); old vs new identical on toy data;
   query-path naming pitfall added to `references/pitfalls.md`.
+- 2026-10-16: upstream `923ffb6` still has 2.5 kb windows while SINEderella's vendored `sear` moved to 3 kb
+  (`sear:403-404` there); reviewer points R1–R4 in `projects/hitsv-vs-own-tools.md` §3.2.

@@ -45,6 +45,7 @@ masked-search mode reuse an existing run.
 | Run directory layout and the key TSV/BED columns | `references/io-formats.md` |
 | Gotchas and defaults that surprise | `references/pitfalls.md` |
 | Install, run, tests, debugging | `references/build-run-test.md` |
+| Changes 90d8ac4 → 296fa33, evidence base, reviewer weaknesses W1–W16, what to borrow from HitSV | `references/review-and-changes-296fa33.md` (cites the 296fa33 checkout) |
 
 Start with `pipeline-stages.md` when the task is unfamiliar. For the
 "replace/accelerate ssearch36" question read `aligner-invocation.md`,
@@ -122,3 +123,6 @@ Start with `pipeline-stages.md` when the task is unfamiliar. For the
 - 2026-10-13: Timema rerun at `38d811a` on KIT: satellite kind-B unit check measured at ~85 min (see
   `references/pitfalls.md`, "Added 2026-10-13"); `trf`-on-PATH gate makes runs silently non-comparable.
   Owner rule: no step compares long sequences. Replacement design in skill `tandem-array-unit-check`.
+- 2026-10-16: `references/review-and-changes-296fa33.md` added (main `296fa33`: MIT licence, strand-aware merge,
+  3 kb `sear` windows, short-piece kind-B check; fast mode still only on its branch). Comparison with HitSV and the
+  other tools in `projects/hitsv-vs-own-tools.md`.

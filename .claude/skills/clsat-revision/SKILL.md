@@ -60,6 +60,9 @@ reviewed, 1.4 vs 1.9 Gb sizes, AI-heavy text.
 5. Orthology from flanks; empty site proven only by one read spanning both flanks.
 6. Hybrids locus by locus; parent-split re-assemblies as a cross-check.
 7. Amazon molly control (skill `amazon-molly-paper`).
+Code-level method profile of satpipe at `f77448a` (stages, thresholds, 20 reviewer-style weaknesses with file:line,
+plug-in points for read-based checks): `references/satpipe-method-profile.md`. HitSV-based ideas and reviewer
+objections C1–C12: `projects/hitsv-vs-own-tools.md` §3.4.
 Research: `C:\work\CLsat\review\RESEARCH_LOCAL_REASSEMBLY.md` (Khost 2017, Vondrak 2020, NucFreq/Flagger/VerityMap).
 
 ## Where things are

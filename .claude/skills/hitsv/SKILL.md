@@ -50,6 +50,7 @@ detect MEI–tandem-repeat composite arrays from RepeatMasker and TRF annotation
 | Gotchas, surprising defaults, bugs | `references/pitfalls.md` |
 | Build, demo runs, parallel runs, debugging | `references/build-run-test.md` |
 | Applying it to SINEs / satellites in non-human genomes (notes) | `references/te-satellite-applicability.md` |
+| What to borrow for SINEderella, sear, SINE_orth_loc, CLsat workflow; reviewer objections (notes) | `projects/hitsv-vs-own-tools.md` (repo root) |
 
 Start with `pitfalls.md` "Read these first" before running it. Start with `architecture.md`
 before changing code.
@@ -99,5 +100,6 @@ before changing code.
 
 ## Change log
 
+- 2026-10-16: comparison with the user's tools added at `projects/hitsv-vs-own-tools.md`.
 - 2026-10-16: initial digest at `9388036`. LRS demo, `srs_fa_stat`, the wrapper-script bug and the
   cohort/MEI-TR tool commands were run on a binary built from source.
