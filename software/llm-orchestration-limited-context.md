@@ -91,6 +91,35 @@ of findings, and any change to code with pixel-exact or concurrency invariants (
 Canvas frame copy, hit-testing arithmetic). Text edits, doc updates, single-function
 changes behind a regression check, and first-pass audits go to GLM.
 
+## Field result: whole-repo audit of ViewAlign v255 (2026-10-17)
+
+The recipe above, applied to every product file instead of one feature range: 113 chunks of ~450
+lines cut at top-level boundaries, plus 5 cross-cutting tasks (HTML sinks, per-load state reset,
+workers, undo, server), each worker given a symbol index (`audit/index.txt`, every top-level
+function -> file:line) and an 8-class checklist. 257 findings, 19 dropped because the quoted line
+did not exist (7 %), 238 kept.
+
+Checked by the strong model on 32 high-severity findings: 25 real, 5 refuted, 2 unproven. The real
+ones were mostly in code no earlier audit had read (XSS from file text in BLAST dialogs, rows with
+repeated names losing data in four realign/export paths, a stack overflow from `Math.max(...rows)`
+above ~125k rows, an infinite loop in a FASTA parser). Every accepted finding got a regression check
+that fails on the audited version before it was fixed.
+
+Then every finding goes to two independent re-checks by the cheap model: one told to refute the
+claim, one given only the code location and the user steps (no claim, no reasoning) and asked to
+trace what happens. A finding counts as confirmed only if both confirm. This follows the
+false-positive literature: an independent second pass with a different framing removes most
+confident-but-wrong claims.
+
+False positives seen: XSS through text that is emitted one character per element (cannot form a
+tag); parsing "bugs" excluded by the file format; data loss "by name" where the caller already
+renames rows to unique ids; crashes needing a UI state the app never reaches.
+
+Operational lessons: runs of hours must survive the orchestrator's session (start them outside its
+process tree, make the runner resumable); findings carry line numbers of the frozen snapshot, so
+look code up by function name after the main tree moves on; run the full test suites after audit
+fixes, because a correct fix can break a neighbour no task looked at.
+
 ## Sources
 
 - [RULER effective length, survey table (arXiv 2503.17407)](https://arxiv.org/pdf/2503.17407)
