@@ -120,6 +120,8 @@ process tree, make the runner resumable); findings carry line numbers of the fro
 look code up by function name after the main tree moves on; run the full test suites after audit
 fixes, because a correct fix can break a neighbour no task looked at.
 
+The scripts of this run: [glm-audit-pipeline/](glm-audit-pipeline/README.md).
+
 ## Sources
 
 - [RULER effective length, survey table (arXiv 2503.17407)](https://arxiv.org/pdf/2503.17407)
