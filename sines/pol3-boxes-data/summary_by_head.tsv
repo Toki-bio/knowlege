@@ -1,0 +1,7 @@
+head_Rfam	n	A_tRNAthr	B_tRNAthr	pair_tRNAthr	A_null95	B_null95	both_null95	dimers	spacing_median	spacing_min	spacing_max	A_score_median	B_score_median	pair_head_tRNAthr	A_tRNAthr_pct	B_tRNAthr_pct	pair_tRNAthr_pct
+tRNA	116	93	110	87	96	114	94	2	44.00	43	63	13.79	17.24	85	80.2	94.8	75.0
+5S	7	1	1	1	1	2	1	0	42	42	42	0.10	4.82	1	14.3	14.3	14.3
+none	96	58	83	48	68	89	63	0	44.00	35	75	10.42	13.70	48	60.4	86.5	50.0
+7SL	10	5	8	4	5	10	5	0	44.00	24	62	5.76	14.24	2	50.0	80.0	40.0
+ALL	229	157	202	140	170	215	163	2	44.00	24	75	13.14	15.77	136	68.6	88.2	61.1
+tRNA_genes(hg19)	419	-	-	-	-	-	-	-	44.0	42	79	14.02	17.22	-	-	-	-

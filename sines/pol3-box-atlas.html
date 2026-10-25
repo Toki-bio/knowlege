@@ -1,0 +1,1229 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Pol III Box Atlas</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{--bg:#F5F6F8;--surface:#FFFFFF;--ink:#16212C;--ink2:#3F4B58;--mute:#5E6A77;--rule:#DCE0E6;--hl:#EEF1F5;
+--a:#B45F06;--a-soft:#FBEBD6;--b:#0A6C8C;--b-soft:#D9EEF5;
+--h-trna:#6F4FD8;--h-7sl:#2E8B57;--h-5s:#C2306B;--h-none:#8A939E;--link:#0A5C8A;
+--font:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0F1620;--surface:#161F2B;--ink:#E6EBF1;--ink2:#B8C2CE;--mute:#8F9BA9;--rule:#2A3544;--hl:#1C2733;--a:#F0A24F;--a-soft:#3A2A14;--b:#5CC3DD;--b-soft:#12303B;--h-trna:#A58BFF;--h-7sl:#5FD195;--h-5s:#F27DAA;--h-none:#8A939E;--link:#7CC4F0}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0F1620;--surface:#161F2B;--ink:#E6EBF1;--ink2:#B8C2CE;--mute:#8F9BA9;--rule:#2A3544;--hl:#1C2733;--a:#F0A24F;--a-soft:#3A2A14;--b:#5CC3DD;--b-soft:#12303B;--h-trna:#A58BFF;--h-7sl:#5FD195;--h-5s:#F27DAA;--h-none:#8A939E;--link:#7CC4F0}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.62 var(--font);-webkit-text-size-adjust:100%}
+a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--b);outline-offset:2px;border-radius:3px}
+code{font-family:var(--mono);font-size:.86em;background:var(--hl);padding:.08em .35em;border-radius:3px;overflow-wrap:anywhere}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.hero{border-bottom:1px solid var(--rule);background:var(--surface)}
+.hero .in{max-width:1180px;margin:0 auto;padding-block:36px 26px}
+.eyebrow{font:600 11.5px/1.3 var(--font);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin:0 0 12px}
+h1{font:700 clamp(28px,4.6vw,46px)/1.08 var(--font);letter-spacing:-.02em;margin:0 0 8px;max-width:22ch;text-wrap:balance}
+h1 .A{color:var(--a)}h1 .B{color:var(--b)}
+.sub{color:var(--ink2);margin:0 0 20px;font-size:16.5px;max-width:62ch}
+.schem{overflow-x:auto;margin-top:6px}
+.schem svg{display:block;min-width:780px;width:100%;height:auto}
+.schem text{font-family:var(--font);fill:var(--ink)}
+.schem .m{font-family:var(--mono)}
+.schem .mu{fill:var(--mute)}
+.layout{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:200px minmax(0,1fr);gap:40px;padding-block:28px 60px}
+.toc{position:sticky;top:calc(16px + env(safe-area-inset-top,0px));align-self:start;font-size:13.5px}
+.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.toc a{display:block;padding:5px 10px;border-left:2px solid var(--rule);color:var(--ink2);text-decoration:none}
+.toc a:hover{color:var(--ink);background:var(--hl)}
+.toc a[aria-current="true"]{border-left-color:var(--b);color:var(--ink);font-weight:600;background:var(--hl)}
+.toc .lab{font:600 11px/1 var(--font);letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin:0 0 10px 12px}
+main{min-width:0}
+section{scroll-margin-top:24px;margin-bottom:54px}
+h2{font:700 clamp(22px,3vw,28px)/1.2 var(--font);letter-spacing:-.01em;margin:0 0 16px;text-wrap:balance;padding-top:10px;border-top:2px solid var(--ink)}
+p{margin:0 0 14px;max-width:74ch}
+strong{font-weight:650}
+.lead p{font-size:17px;line-height:1.6}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px;align-items:center}
+.chips button{font:500 12.5px/1 var(--font);border:1px solid var(--rule);background:var(--surface);color:var(--ink2);padding:7px 11px;border-radius:99px;cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chips input[type=search]{font:14px var(--font);padding:7px 12px;border:1px solid var(--rule);border-radius:99px;background:var(--surface);color:var(--ink);min-width:200px;flex:1;max-width:320px}
+.chips .n{color:var(--mute);font-size:12.5px;margin-left:auto}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+.tw{overflow-x:auto;margin:0 0 20px;border:1px solid var(--rule);border-radius:6px;background:var(--surface)}
+.tw.scroll{max-height:520px;overflow:auto}
+table{border-collapse:collapse;width:100%;font-size:13.2px;line-height:1.45}
+th{position:sticky;top:0;background:var(--hl);text-align:left;font:600 11.5px/1.3 var(--font);letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);padding:9px 12px;border-bottom:1px solid var(--rule);white-space:nowrap;z-index:1}
+td{padding:8px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:var(--hl)}
+#t-timeline td:first-child{white-space:nowrap;font-weight:650;font-variant-numeric:tabular-nums;width:5.4em}
+#t-timeline td:nth-child(2){min-width:340px}
+#t-timeline td:nth-child(3){min-width:200px;font-size:12.5px}
+#t-strings td:nth-child(2),#t-strings td:nth-child(3){font-family:var(--mono);font-size:12px;overflow-wrap:anywhere;min-width:150px}
+#t-strings td:nth-child(2){color:var(--a)}
+#t-strings td:nth-child(3){color:var(--b)}
+#t-strings td:nth-child(2) code,#t-strings td:nth-child(3) code{background:transparent;color:inherit;padding:0}
+#t-controls td:nth-child(2){color:var(--a)}
+#t-controls td:nth-child(3){color:var(--b)}
+#t-controls td:nth-child(2) strong,#t-controls td:nth-child(3) strong{font-family:var(--mono);font-size:12px}
+#t-library td:nth-child(2){min-width:300px}
+#t-library td:nth-child(3){font-family:var(--mono);font-size:11.5px;min-width:130px;overflow-wrap:anywhere}
+#t-library td:nth-child(4){min-width:200px}
+#t-library td:nth-child(5){min-width:150px;color:var(--ink2)}
+#t-library td.chk,#t-library th.chk{width:3.6em;text-align:center}
+#t-library tr.got td{opacity:.5}
+#t-library input[type=checkbox]{width:17px;height:17px;accent-color:var(--b)}
+.explorer{background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:18px;margin:0 0 26px}
+.explorer h3{font:650 15px/1.3 var(--font);margin:0 0 4px}
+.explorer .cap{color:var(--mute);font-size:13px;margin:0 0 12px;max-width:80ch}
+.xgrid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;margin-bottom:16px}
+.xgrid figure{margin:0;min-width:0}
+.xgrid svg{width:100%;height:auto;display:block}
+.xgrid figcaption{font-size:12.5px;color:var(--ink2);min-height:3.4em;margin-top:6px}
+.ax text{font:11px var(--font);fill:var(--mute)}
+.ax .t{fill:var(--ink2);font-size:11.5px}
+.grid line{stroke:var(--rule);stroke-width:1}
+.thr{stroke:var(--ink2);stroke-dasharray:4 3;stroke-width:1}
+.pt{stroke:var(--surface);stroke-width:1;opacity:.82;cursor:pointer}
+.pt:hover{opacity:1;stroke:var(--ink);stroke-width:1.5}
+.ctl{font:600 11.5px var(--font);fill:var(--ink)}
+.q{font:600 11px var(--font);fill:var(--mute);letter-spacing:.04em}
+.seqA{font-family:var(--mono);color:var(--a);font-size:12px;white-space:nowrap}
+.seqB{font-family:var(--mono);color:var(--b);font-size:12px;white-space:nowrap}
+.seqA u,.seqB u{text-decoration-thickness:2px;text-underline-offset:2px}
+.sc{color:var(--mute);font-size:11.5px;font-variant-numeric:tabular-nums}
+.fl{display:inline-block;font:600 10.5px/1 var(--font);padding:3px 6px;border-radius:3px;margin-right:3px}
+.fl.a{background:var(--a-soft);color:var(--a)}
+.fl.b{background:var(--b-soft);color:var(--b)}
+.fl.p{background:var(--ink);color:var(--bg)}
+.fl.d{background:var(--hl);color:var(--ink2);border:1px solid var(--rule)}
+#t-all th[data-k]{cursor:pointer}
+#t-all th[data-k]:after{content:" \2195";color:var(--mute)}
+#t-all th.on:after{content:" \2193";color:var(--ink)}
+#t-all th.on.asc:after{content:" \2191"}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--ink2);margin:6px 0 0}
+footer{max-width:1180px;margin:0 auto;padding-block:0 48px;color:var(--mute);font-size:13px}
+footer p{max-width:90ch}
+@media (max-width:960px){
+ .layout{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+ .toc{position:sticky;top:0;z-index:20;background:var(--bg);margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:calc(8px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-left,0px)) 8px;border-bottom:1px solid var(--rule);margin-bottom:22px}
+ .toc .lab{display:none}
+ .toc ol{flex-direction:row;overflow-x:auto;gap:6px;scrollbar-width:thin}
+ .toc a{border:1px solid var(--rule);border-radius:99px;white-space:nowrap;padding:6px 11px}
+ .toc a[aria-current="true"]{border-color:var(--b)}
+ .xgrid{grid-template-columns:minmax(0,1fr)}
+ .chips .n{margin-left:0;width:100%}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+</style>
+</head><body>
+
+<header class="hero wrap"><div class="in">
+ <p class="eyebrow">RNA polymerase III &middot; A and B boxes &middot; SINEs &middot; 1978&ndash;2026</p>
+ <h1><span class="B">B box</span> anchors, <span class="A">A box</span> steers: SINE promoters</h1>
+ <p class="sub">A literature review from the first tRNA-gene promoter maps to the 2026 papers, with an original scan of 229 SINEBase consensus sequences.</p>
+ <div class="schem">
+<svg viewBox="0 0 900 250" role="img" aria-label="Schematic of a tRNA gene with the A box at positions 8 to 19 and the B box at positions 52 to 62, TFIIIC subunits tau A and tau B bound to them, and TFIIIB upstream">
+ <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" style="fill:var(--ink2)"/></marker></defs>
+ <line x1="165" x2="880" y1="150" y2="150" style="stroke:var(--ink2);stroke-width:2"/>
+ <rect x="175.0" y="140" width="690.0" height="20" rx="3" style="fill:var(--hl);stroke:var(--ink2);stroke-width:1.2"/>
+ <rect x="239.39999999999998" y="140" width="101.20000000000005" height="20" rx="3" style="fill:var(--a)"/>
+ <rect x="644.2" y="140" width="91.99999999999989" height="20" rx="3" style="fill:var(--b)"/>
+ <text x="290.0" y="155" text-anchor="middle" class="m" style="fill:var(--surface);font-size:12px;font-weight:600">A box</text>
+ <text x="690.2" y="155" text-anchor="middle" class="m" style="fill:var(--surface);font-size:12px;font-weight:600">B box</text>
+ <path d="M175.0 134 L175.0 112 L201.0 112" fill="none" style="stroke:var(--ink2);stroke-width:1.6" marker-end="url(#ar)"/>
+ <text x="167.0" y="118" text-anchor="end" class="mu" style="font-size:12px">start site</text>
+ <ellipse cx="290.0" cy="88" rx="62" ry="30" style="fill:var(--a-soft);stroke:var(--a);stroke-width:1.6"/>
+ <text x="290.0" y="84" text-anchor="middle" style="font-size:14px;font-weight:700;fill:var(--a)">&#964;A</text>
+ <text x="290.0" y="100" text-anchor="middle" style="font-size:11.5px;fill:var(--a)">reads shape</text>
+ <ellipse cx="690.2" cy="82" rx="92" ry="42" style="fill:var(--b-soft);stroke:var(--b);stroke-width:1.8"/>
+ <text x="690.2" y="78" text-anchor="middle" style="font-size:14px;font-weight:700;fill:var(--b)">&#964;B</text>
+ <text x="690.2" y="94" text-anchor="middle" style="font-size:11.5px;fill:var(--b)">reads bases</text>
+ <text x="690.2" y="108" text-anchor="middle" style="font-size:11px;fill:var(--b)">56-370x per base</text>
+ <path d="M350.0 82 C 441.79999999999995 -4, 552.2 -4, 600.2 76" fill="none" style="stroke:var(--ink2);stroke-width:1.6;stroke-dasharray:5 4"/>
+ <text x="497.0" y="52" text-anchor="middle" style="font-size:12px">flexible TFIIIC220 linker</text>
+ <text x="497.0" y="67" text-anchor="middle" class="mu" style="font-size:11.5px">about 550 residues in human</text>
+ <rect x="25.0" y="168" width="130" height="30" rx="4" style="fill:var(--surface);stroke:var(--ink2);stroke-width:1.4"/>
+ <text x="90.0" y="188" text-anchor="middle" style="font-size:12.5px;font-weight:600">TFIIIB + Pol III</text>
+ <path d="M155.0 183 Q 169.0 176 173.0 158" fill="none" style="stroke:var(--ink2);stroke-width:1.4" marker-end="url(#ar)"/>
+ <text x="25.0" y="216" class="mu" style="font-size:11.5px">A box places it</text>
+ <g class="m mu" style="font-size:11px">
+  <text x="175.0" y="180" text-anchor="middle">1</text><text x="239.39999999999998" y="180" text-anchor="middle">8</text><text x="340.6" y="180" text-anchor="middle">19</text>
+  <text x="644.2" y="180" text-anchor="middle">52</text><text x="736.1999999999999" y="180" text-anchor="middle">62</text><text x="865.0" y="180" text-anchor="middle">76</text>
+ </g>
+ <line x1="239.39999999999998" x2="644.2" y1="200" y2="200" style="stroke:var(--ink2);stroke-width:1.3"/>
+ <line x1="239.39999999999998" x2="239.39999999999998" y1="195" y2="205" style="stroke:var(--ink2);stroke-width:1.3"/>
+ <line x1="644.2" x2="644.2" y1="195" y2="205" style="stroke:var(--ink2);stroke-width:1.3"/>
+ <text x="441.8" y="219" text-anchor="middle" style="font-size:12px">A to B, start to start: median 44 nt in tRNA genes, 30-67 tolerated</text>
+ <text x="441.8" y="236" text-anchor="middle" class="mu" style="font-size:11.5px">tRNA positions, numbered from the mature 5&#8242; end</text>
+</svg></div>
+</div></header>
+<div class="layout wrap">
+<nav class="toc" aria-label="Sections"><p class="lab">Contents</p><ol><li><a href="#summary">Summary</a></li><li><a href="#model">Current model</a></li><li><a href="#timeline">Timeline</a></li><li><a href="#strings">Names and strings</a></li><li><a href="#sines">SINEs in practice</a></li><li><a href="#scan">Box scan</a></li><li><a href="#conflicts">Conflicts</a></li><li><a href="#library">Library list</a></li><li><a href="#limits">Limitations</a></li><li><a href="#conclusion">Conclusion</a></li></ol></nav>
+<main>
+<section id="summary" class="lead"><h2>Summary</h2><p>The split internal promoter of RNA polymerase III is two short sequences inside the transcribed region. The <strong>A box</strong> sits around tRNA positions 8–19 and the <strong>B box</strong> around 52–62. The current mechanistic picture is settled and strikingly asymmetric. The B box is a <strong>high-affinity, base-read anchor</strong> for the τB half of TFIIIC: one base change can cost <strong>56- to 370-fold</strong> in binding. The A box is a <strong>low-affinity element read mainly by DNA shape</strong>, bound by τA through a long flexible linker. That A-box contact places TFIIIB and fixes the start site. This was proposed in 1982 and confirmed biochemically by 1987. Cryo-EM structures in 2023 and 2025 made it visible (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1016/0092-8674(82)90083-6">Hall et al. 1982</a>; <a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11724288/">Seifert-Dávila et al. 2025</a>). In SINEs, an intact box pair is <strong>necessary but far from sufficient</strong>. TFIIIC sits on hundreds to thousands of Alus. Pol III occupies only tens of the roughly 1.2 million copies, and transcripts are detectable from only about 1,300. The regulated step is the TFIIIC→TFIIIB hand-off, which chromatin repressors such as ChAHP block (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2945309/">Oler et al. 2010</a>; <a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4333407/">Conti et al. 2015</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/42413492/">Schnabl-Baumgartner et al. 2026</a>). Upstream flank, nucleotide context and the 3′ end add further layers, so box quality alone cannot rank promoter strength. A new scan of 229 SINEBase consensi, run for this report, puts the asymmetry in numbers. <strong>88 % keep a tRNA-grade B box but only 69 % keep a tRNA-grade A box</strong>, and tRNA-headed consensi reproduce the intron-less tRNA spacing almost exactly. The 7SL-type heads (Alu, B1) carry an atypical A box that a tRNA-trained matrix scores below chance. The ID B box breaks the one invariant A that Martignetti and Brosius flagged in 1995. The report closes with three lists: a timeline, the older works to look for in a library, and every limitation of access or computing that left a direction unfinished.</p></section><section id="model"><h2>The current consensus: two boxes doing two different jobs</h2><p>The modern model has three layers, each with direct evidence. <strong>Recognition is B-box-driven.</strong> Human τB clamps the B box with several winged-helix domains. It makes base-specific contacts to <strong>G66, T68, C69 and G70 on the non-template strand and G69, G74 and G75 on the template strand</strong>, through <strong>R401, R422 (WH3) and K657 (eWH)</strong>, and it also widens and compacts the grooves. That is combined sequence and shape readout at low-nanomolar affinity, on the B box GGTTCGAGTCC of human TRR-TCT3-2 (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11811891/">Seifert-Dávila et al. 2023</a>). The yeast 2.46 Å τB–DNA structure assigns the matching contacts to τ138 R139, S140, H162, K223, R366, K370, K400, D591 and K593. In single-molecule work, <strong>B-box mutation almost abolished binding</strong>, while mutating four conserved A-box bases did not stop stable TFIIIC binding (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11724288/">Seifert-Dávila et al. 2025</a>). This is the same answer equilibrium binding gave in 1986. B-box mutations away from consensus cut the binding constant <strong>43- to 370-fold</strong>, A-box point mutations cut it <strong>less than 2-fold</strong>, and deleting the whole A box cut it <strong>2- to 5-fold</strong> (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/3633923/">Baker, Gabrielsen &amp; Hall 1986</a>).</p>
+<p><strong>Positioning is A-box-driven.</strong> In the first A-box-engaged τA structure, τ95 and τ131 loops sit in the A-box minor groove. The contacts are mostly to the backbone, and "no more precise register of DNA sequence recognition" could be assigned. The authors therefore propose shape readout. Footprinting shows the A box is what TFIIIB needs: without it there is no TATA-like protection and no TFIIIB-induced bend (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11724288/">Seifert-Dávila et al. 2025</a>). <strong>Spacing tolerance has a structural explanation</strong>: a <strong>~550-residue flexible linker</strong> in human TFIIIC220 (~100 residues in yeast) lets τA "fly-cast" for an A box 30–67 bp from the anchored τB (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11811891/">Seifert-Dávila et al. 2023</a>). Natural yeast tRNA genes span <strong>31–93 bp</strong> A–B spacing (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11724288/">Seifert-Dávila et al. 2025</a>).</p>
+<p><strong>Activity is chromatin- and context-limited, not box-limited</strong>, and this matters most for SINEs. In HeLa, <strong>13 of 1,099,242 Alu dimers, 2 of 90,882 Alu monomers and 1 of 587,443 MIRs</strong> were Pol III-occupied (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2945309/">Oler et al. 2010</a>). ENCODE RNA-seq from seven cell lines found <strong>~1,300 Alu loci</strong> with Pol III-type transcripts (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4333407/">Conti et al. 2015</a>). TFIIIC peaks over Alus, by contrast, rose from <strong>140 to 3,096</strong> on serum starvation, with no BDP1 or RPC39 recruitment (<a target="_blank" rel="noopener noreferrer" href="https://www.biorxiv.org/content/10.1101/455733v1.full">Ferrari et al. preprint</a>). In mouse ES cells, ChAHP silences B2 SINEs "by blocking TFIIIB recruitment <strong>without affecting TFIIIC binding</strong>", and DNA methylation plays only a minor role (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/42413492/">Schnabl-Baumgartner et al. 2026</a>). Methylated SINE DNA is still Pol III-occupied, while inhibiting histone methyltransferases releases SINE expression (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/25798578/">Varshney et al. 2015</a>). Mouse B2 is the exception in scale. Direct sequencing of Pol III transcripts found <strong>16,000–20,000 transcribed B2 copies per cell type</strong> (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/40407597/">Borodulina et al. 2025</a>).</p>
+<p>Around the boxes, three further cis layers are now documented. First, a TATA-like box at <strong>−31/−24</strong>, supplied by the genomic flank at each insertion, measurably tunes B1, B2, 4.5SH and 4.5SI transcription (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/32466110/">Tatosyan et al. 2020</a>). Second, nucleotide context outside the boxes matters. The 4.5SI promoter is <strong>12×</strong> stronger than 4.5SH, yet moving all three of its boxes into 4.5SH <strong>lowered</strong> activity by 40 % (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/37107560/">Stasenko et al. 2023</a>). Third, a 3′ module controls the stability of Pol III SINE RNAs through AAUAAA-dependent polyadenylation. It comprises AATAAA, the terminator, a β signal immediately downstream of the B box and a τ signal (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/26700565/">Borodulina et al. 2016</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/33258402/">Ustyantsev et al. 2021</a>). <strong>No structure of TFIIIC on a SINE template could be located</strong>; every structure uses tRNA or 5S DNA.</p></section><section id="timeline"><h2>Timeline of discoveries, 1978–2026</h2>
+<div class="chips" id="tl-chips" role="group" aria-label="Filter by era">
+ <button type="button" data-era="all" aria-pressed="true">All years</button>
+ <button type="button" data-era="e1" aria-pressed="false">1978-1985</button>
+ <button type="button" data-era="e2" aria-pressed="false">1986-1999</button>
+ <button type="button" data-era="e3" aria-pressed="false">2000-2012</button>
+ <button type="button" data-era="e4" aria-pressed="false">2013-2026</button>
+ <input type="search" id="tl-q" placeholder="Search the timeline" aria-label="Search the timeline">
+ <span class="n" id="tl-n"></span>
+</div>
+<p>The table runs from the first oocyte-injection assays to the 2026 papers. Coordinates are quoted with the reference point each source used.</p>
+<div class="tw"><table id="t-timeline">
+<thead>
+<tr>
+<th>Year</th>
+<th>Discovery</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1978</td>
+<td>First oocyte-injection assay of a cloned tRNA gene (<em>X. laevis</em> tRNA1Met); Xenopus germinal-vesicle extract system</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/274710/">Kressmann et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/105357/">Schmidt et al.</a></td>
+</tr>
+<tr>
+<td>1979</td>
+<td>A tRNA gene "contains at least two sites promoting transcription", a 3′ regulatory site and a 5′ initiation site; 22 bp of 5′ flank suffice</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/537910/">Kressmann et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/288049/">Telford et al.</a></td>
+</tr>
+<tr>
+<td>1980</td>
+<td>5S gene control region in the gene centre (5′ border +50/+55, 3′ border +80/+83); "internal control region" in a title (TFIIIA footprint 45–96)</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/7357599/">Sakonju et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6153931/">Engelke et al.</a></td>
+</tr>
+<tr>
+<td>1980</td>
+<td>First intragenic-promoter hypothesis for tRNA genes, with a named motif: the invariant C of TψCG</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/7004643/">Koski et al.</a></td>
+</tr>
+<tr>
+<td>1980</td>
+<td>"Internal" vs "external control region" for a tRNA gene; VAI intragenic region +9/+72, noted as tRNA-like</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6774336/">DeFranco et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/7448868/">Fowlkes &amp; Shenk</a></td>
+</tr>
+<tr>
+<td>1981</td>
+<td>"A split promoter for a eucaryotic tRNA gene": elements at 8–13 (8–30) and 51–72; can be moved apart but not closer</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/7237560/">Hofstetter et al.</a></td>
+</tr>
+<tr>
+<td>1981</td>
+<td>Drosophila tRNAArg control regions 8–25 (essential) and 50–58</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6947245/">Sharp et al.</a></td>
+</tr>
+<tr>
+<td>1981</td>
+<td>Promoter elements mapped to nt 13–20 and 51–64; identified with two conserved sequence blocks; exchangeable between tRNA genes</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/7312050/">Galli et al.</a></td>
+</tr>
+<tr>
+<td>1981</td>
+<td>Alu repeats are Pol III templates with an internal start-specifying region; only the copy whose promoter-block region matches is transcribed</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1016/0378-1119(81)90007-X">Duncan et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6275362/">Fuhrman et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/9.24.6709">Di Segni et al.</a></td>
+</tr>
+<tr>
+<td>1981</td>
+<td>VA RNA internal control region +10/+76; EBER genes carry VA-type intragenic control regions</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6943546/">Guilfoyle &amp; Weinmann</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/9279391/">Rosa et al.</a></td>
+</tr>
+<tr>
+<td>1982</td>
+<td>Minireview names "A and B blocks" (crediting Galli), coordinates 8–19 / 52–62, start 10–16 bp upstream of A; proposes B-block factor binding with A as positioner</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1016/0092-8674(82)90083-6">Hall, Clarkson &amp; Tocchini-Valentini</a></td>
+</tr>
+<tr>
+<td>1982</td>
+<td>"Box A and Box B" (Cortese group); "D-control"/"T-control region" (Söll group); first footprint of a tRNA-gene factor, centred on the B-block 11-mer</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6329706/">Dente et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6924209/">Sharp et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6755466/">Klemenz et al.</a></td>
+</tr>
+<tr>
+<td>1982</td>
+<td>Mouse B2 "contains regions of homology to the RNA polymerase III split promoter" (first rodent-SINE statement)</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6296779/">Krayev et al.</a></td>
+</tr>
+<tr>
+<td>1983</td>
+<td>Alu promoter is bipartite and tRNA-like; Alu B-box point mutations; 5S ICR first 11 nt = tRNA box A</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/16453450/">Paolella et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/11.22.7695">Murphy &amp; Baralle</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6299574/">Ciliberto et al.</a></td>
+</tr>
+<tr>
+<td>1983</td>
+<td>One common factor (TFIIIC) for tRNA, VA and 5S complexes; spacing insertions of 12–77 nt tolerated</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6356356/">Lassar et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6309803/">Dingermann et al.</a></td>
+</tr>
+<tr>
+<td>1984</td>
+<td>Alu: posterior (B) element alone directs accurate initiation, anterior (A) enhances 10–20×; first verbatim box consensus found in print</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6089189/">Perez-Stable et al.</a></td>
+</tr>
+<tr>
+<td>1984</td>
+<td>Yeast τ named; "the B block region exerts a dominant effect"; factor complex stability highest at 34–53 bp spacing</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6370678/">Ruet et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6233142/">Stillman &amp; Geiduschek</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6396080/">Baker &amp; Hall</a></td>
+</tr>
+<tr>
+<td>1984</td>
+<td>ID sequences are Pol III templates, transcribed in neurons (BC1, BC2)</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1038/308237a0">Sutcliffe et al. Nature</a>; <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1126/science.6474179">Sutcliffe et al. Science</a></td>
+</tr>
+<tr>
+<td>1985</td>
+<td>τ DMS contacts only at G10, G18, G19 (A) and G53, C56, C61 (B)</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/2862029/">Camier et al.</a></td>
+</tr>
+<tr>
+<td>1985</td>
+<td>tRNA origin of SINEs announced three times independently, with conflicting isotypes</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/3839306/">Lawrence et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1038/317819a0">Daniels &amp; Deininger</a>; <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1007/BF02101691">Sakamoto &amp; Okada</a></td>
+</tr>
+<tr>
+<td>1985</td>
+<td>7SL internal promoter needs the first 37 nt upstream; Alu ends in a new type of Pol III terminator; B2 RNA made directly by Pol III</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1038/318371a0">Ullu &amp; Weiner</a>; <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1016/0022-2836(85)90039-7">Hess et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1016/0167-4781(85)90084-3">Kramerov et al.</a></td>
+</tr>
+<tr>
+<td>1986</td>
+<td>B-box mutations 43–370× on binding vs A &lt; 2×; proteolysed τB binds only the B block</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/3633923/">Baker et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/3528868/">Marzouki et al.</a></td>
+</tr>
+<tr>
+<td>1986</td>
+<td>Alu spacing series: start fixed 4–5 bp upstream of box A at 47–298 bp, lost at 26 or &gt;600 bp</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1128/mcb.6.6.2041-2052.1986">Perez-Stable &amp; Shen</a></td>
+</tr>
+<tr>
+<td>1986</td>
+<td>Okada's total-genomic-DNA transcription in HeLa extract discovers SINEs via their own promoter (tortoise, newt, salmon)</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1073/pnas.83.2.251">Endoh &amp; Okada</a>; <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1073/pnas.83.10.3156">Matsumoto et al.</a></td>
+</tr>
+<tr>
+<td>1987</td>
+<td>τ binding optimal at 30–60 bp; A–B distance affects only the τA–A interaction; a 365-bp "stretched" gene still works</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/2827154/">Baker et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/3321052/">Fabrizio et al.</a></td>
+</tr>
+<tr>
+<td>1987</td>
+<td>5S ICR = box A + intermediate element + box C; human TFIIIC2 protects the B block (Ks 2 × 10^11 M^-1) and TFIIIC1 extends protection to the A block</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/3791417/">Pieler et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/3473469/">Yoshinaga et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/3667626/">Boulanger et al.</a></td>
+</tr>
+<tr>
+<td>1989</td>
+<td>Electron microscopy: two ~300 kDa τ domains, one on each block; TFIIIB covers ~40 bp upstream; Alu master-gene model with the CpG clock</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/2684647/">Schultz et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/2668737/">Kassavetis et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/17.7.2477">Labuda &amp; Striker</a></td>
+</tr>
+<tr>
+<td>1990</td>
+<td>145 kDa TFIIIC subunit at box B, 95/55 kDa at box A; 12–20 % of nascent poly(A)+ RNA in mouse tumour cells is Pol III-made (B1, B2)</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/2100996/">Bartholomew et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/18.15.4499">Kramerov et al.</a></td>
+</tr>
+<tr>
+<td>1991</td>
+<td>Galago Monomer/Type II promoters stronger and closer to consensus than Alu; promoter strength tracks copy number and recency</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/19.7.1649">Daniels &amp; Deininger</a></td>
+</tr>
+<tr>
+<td>1993</td>
+<td>Methylating one CpG pair in the Alu A box represses; CpG→CpA in and near the A box kills template activity</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/21.6.1351">Liu &amp; Schmid</a></td>
+</tr>
+<tr>
+<td>1994</td>
+<td>Only numeric A/B box weight matrices (Pavesi), later built into tRNAscan-SE</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC523650/">Pavesi et al.</a></td>
+</tr>
+<tr>
+<td>1995</td>
+<td>BC1 (ID) "variant B box, lacking the invariant A residue", rescued by the BC1 upstream region; nucleosome over the Alu box A</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1128/MCB.15.3.1642">Martignetti &amp; Brosius</a>; <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1074/jbc.270.17.10091">Englander &amp; Howard</a></td>
+</tr>
+<tr>
+<td>1995–1996</td>
+<td>MIR as tRNA-derived SINE; 7SL-like terminator raises Alu expression; AP-1 in an Alu source-gene flank; p53 represses Alu Pol III templates</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/23.1.98">Smit &amp; Riggs</a>; <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/23.10.1750">Chu et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1007/BF00163208">Chesnokov &amp; Schmid</a>; <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1128/MCB.16.12.7084">Chesnokov et al.</a></td>
+</tr>
+<tr>
+<td>1999</td>
+<td>CORE-SINE survival linked to "recruitment of the internal promoter"; PCR with box A and box B primers finds SINEs in 30 of 35 eukaryotes</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1073/pnas.96.6.2869">Gilbert &amp; Labuda</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/10471819/">Borodulina &amp; Kramerov</a></td>
+</tr>
+<tr>
+<td>2000</td>
+<td>7SL, U6, vault and BC1 upstream flanks raise Alu/B2/BC1 transcription; Alu subfamily-diagnostic mutations do not change RNA levels</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1006/jmbi.2000.4027">Roy et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/28.23.4755">Alemán et al.</a></td>
+</tr>
+<tr>
+<td>2003</td>
+<td>5S-derived SINE3 uses a type-1 promoter</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://academic.oup.com/mbe/article/20/5/694/985403">Kapitonov &amp; Jurka</a></td>
+</tr>
+<tr>
+<td>2006</td>
+<td>Minimal TFIIIC signatures TRGYnnAnnnG / GWTCRAnnC; AmnSINE1's tRNA part has lost box B</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/gkl085">Marck et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1484453/">Nishihara et al.</a></td>
+</tr>
+<tr>
+<td>2008</td>
+<td>AAUAAA-dependent polyadenylation of Pol III SINE transcripts</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/18658125/">Borodulina &amp; Kramerov</a></td>
+</tr>
+<tr>
+<td>2009</td>
+<td>Alu death dissected (A-tail, 3′ end); box mutations explicitly left untested</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2665774/">Comeaux et al.</a></td>
+</tr>
+<tr>
+<td>2010</td>
+<td>Pol III ChIP quartet: Alu occupancy ~10^-5; TFIIIC-only (ETC) sites</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2945309/">Oler et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3350333/">Moqtaderi et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/20413673/">Canella et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/20418881/">Barski et al.</a></td>
+</tr>
+<tr>
+<td>2011</td>
+<td>SINE-Finder regex <code>[GA][CGA]TGG</code> / <code>GTTC[AG]A</code>; plant B boxes better conserved than A boxes</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3203444/">Wenke et al.</a></td>
+</tr>
+<tr>
+<td>2012</td>
+<td>241 Pol III-bound mouse SINEs: 87 % with a B box, 64 % with an A box, 80 % low-divergence</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3245943/">Carrière et al.</a></td>
+</tr>
+<tr>
+<td>2013</td>
+<td>SINEBase: boxes "only an indication (but not a proof)"</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3531059/">Vassetzky &amp; Kramerov</a></td>
+</tr>
+<tr>
+<td>2015</td>
+<td>~1,300 Pol III-transcribed Alu loci; Alu A/B box strings printed; SINE silencing via histone, not DNA, methylation</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4333407/">Conti et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/25798578/">Varshney et al.</a></td>
+</tr>
+<tr>
+<td>2018</td>
+<td>Pol III pre-initiation complex cryo-EM structures</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/29345638/">Vorländer et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/29345637/">Abascal-Palacios et al.</a></td>
+</tr>
+<tr>
+<td>2020</td>
+<td>TFIIIC on Alus drives looping and H3K18 acetylation; −31/−24 TATA-like box in SINE promoters</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/31759822/">Ferrari et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/32466110/">Tatosyan et al.</a></td>
+</tr>
+<tr>
+<td>2021</td>
+<td>tRNAscan-SE 2.0 filters tRNA-derived SINEs by covariance score; duplicated B boxes in Dip SINEs and B1; β/τ polyadenylation signals</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8450103/">Chan et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8466645/">Vassetzky et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/33258402/">Ustyantsev et al.</a></td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Human TFIIIC–B box structure; "fly-casting" τA; nucleotide context sets promoter strength</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11811891/">Seifert-Dávila et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/37107560/">Stasenko et al.</a></td>
+</tr>
+<tr>
+<td>2024</td>
+<td>e1a derepresses Alus via TFIIIB recruitment; A/B consensus identical across the three domains of life</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/39011896/">Cantarella et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/39519309/">Savina et al.</a></td>
+</tr>
+<tr>
+<td>2025</td>
+<td>First A-box-bound τA structure plus kinetics; 46-nt Alu domain needed for retrotransposition; 16–20 k transcribed B2 copies; Pol III-dependent SINE polyadenylation in infection</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11724288/">Seifert-Dávila et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/40568936/">Moldovan et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/40407597/">Borodulina et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/40768347/">Lari et al.</a></td>
+</tr>
+<tr>
+<td>2026</td>
+<td>ChAHP blocks TFIIIB but not TFIIIC on B2; lagomorph C SINE polyadenylation module; nanopore Pol III transcriptome (DRAP3R)</td>
+<td><a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/42413492/">Schnabl-Baumgartner et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/41828972/">Ustyantsev et al.</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/41490974/">Verstraten et al.</a></td>
+</tr>
+</tbody>
+</table></div></section><section id="strings"><h2>The names and the strings came from four laboratories in 1981–1982</h2><p>The terms were coined almost simultaneously. <strong>"Split promoter"</strong> first appears as a title in Hofstetter, Kressmann and Birnstiel (May 1981) (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/7237560/">PubMed</a>). <strong>"A and B blocks"</strong> are credited to Galli et al. 1981 by Hall, Clarkson and Tocchini-Valentini, who wrote "These sequences, termed the A and B blocks (Galli et al., op. cit.), have the approximate coordinates 8–19 and 52–62". Later papers nevertheless cite the minireview for the terms (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1016/0092-8674(82)90083-6">Hall et al. 1982</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6233142/">Stillman &amp; Geiduschek 1984</a>). <strong>"Box A/Box B"</strong> is the Cortese group's usage. They called the parts "region a/b/c" in February 1982, then "Box A and Box B" in the first sentence of Dente et al. 1982 (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6951168/">Ciliberto et al. 1982</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6329706/">Dente et al. 1982</a>). <strong>"Internal control region"</strong> comes from Engelke et al. 1980 for 5S genes and DeFranco, Schmidt and Söll 1980 for tRNA genes. <strong>"D-/T-control region"</strong> is the Söll group's term (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6153931/">Engelke 1980</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6774336/">DeFranco 1980</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6924209/">Sharp et al. 1982</a>). Whether Galli et al. themselves wrote "block A" or "A block", or used the letters only in a figure, could not be checked. The Nature full text was not reached.</p>
+<p>The consensus strings are the most frequently mis-attributed facts in the field. They are given below verbatim, each with the source that printed it. The <strong>earliest verbatim printing located</strong> is Perez-Stable, Ayres and Shen 1984, citing Galli 1981 and Ciliberto 1983. As OCR'd from the PMC scan, it reads box A "5′ T-G-G-C-N-N-A-G-T-N-G-G 3′" (twelve letters as printed, so the OCR or the original may carry an extra N) and box B "5′ G-G-T-T-C-G-A-N-N-C-C 3′". Box B is "located 33–42 bp downstream from the box A sequence" (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6089189/">Perez-Stable et al. 1984</a>). The attribution of TGGCNNAGTGG / GGTTCGANNCC to Galli 1981 itself appears in later papers but <strong>could not be verified against the original</strong>.</p>
+<div class="tw"><table id="t-strings">
+<thead>
+<tr>
+<th>Source</th>
+<th>Box A (verbatim)</th>
+<th>Box B (verbatim)</th>
+<th>Coordinates / spacing as stated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Galli et al. 1981</td>
+<td>nt 13–20 (experimental)</td>
+<td>nt 51–64</td>
+<td>tRNALeu coding sequence (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/7312050/">PubMed</a>)</td>
+</tr>
+<tr>
+<td>Hall et al. 1982</td>
+<td>"8-19"</td>
+<td>"52-62"</td>
+<td>A–B 31 to &gt;74 bp in natural genes; start 10–16 bp upstream of A (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1016/0092-8674(82)90083-6">DOI</a>)</td>
+</tr>
+<tr>
+<td>Murphy &amp; Baralle 1983 (tRNA and Alu)</td>
+<td>RGYNNRRYGG</td>
+<td>GA/TTCRANNC</td>
+<td>"30–60 nucleotides apart" (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/11.22.7695">DOI</a>)</td>
+</tr>
+<tr>
+<td>Perez-Stable et al. 1984</td>
+<td>T-G-G-C-N-N-A-G-T-N-G-G</td>
+<td>G-G-T-T-C-G-A-N-N-C-C</td>
+<td>33–42 bp (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6089189/">PubMed</a>)</td>
+</tr>
+<tr>
+<td>Perez-Stable &amp; Shen 1986 (Alu)</td>
+<td>5′-Pu-Pu-Py-N-N-Pu-Pu-Py-G-G-3′</td>
+<td>5′-G-A/T-T-C-Pu-A-N-N-C-3′</td>
+<td>start 4–5 bp upstream of box A (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1128/mcb.6.6.2041-2052.1986">DOI</a>)</td>
+</tr>
+<tr>
+<td>Baker &amp; Hall 1984</td>
+<td>"most eukaryotic A blocks … end in AGYGG"</td>
+<td>—</td>
+<td>34–53 bp most stable (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6396080/">PubMed</a>)</td>
+</tr>
+<tr>
+<td>Marck et al. 2006 ("early definitions")</td>
+<td>TGGCnnAGTGG</td>
+<td>GGTTCGAnnCC</td>
+<td>"appear now too restrictive" (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/gkl085">DOI</a>)</td>
+</tr>
+<tr>
+<td>Marck et al. 2006 (minimal signatures)</td>
+<td>TRGYnnAnnnG (11 nt)</td>
+<td>GWTCRAnnC (9 nt)</td>
+<td>C at B-box position 4 (tRNA 56) most critical (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/gkl085">DOI</a>)</td>
+</tr>
+<tr>
+<td>Carrière et al. 2012 (human, for SINE scanning)</td>
+<td>TRGYTYARTGG</td>
+<td>GTTCRAWTC</td>
+<td>P &lt; 10^-3 (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3245943/">PMC</a>)</td>
+</tr>
+<tr>
+<td>Conti et al. 2015 (tRNA general)</td>
+<td>TRGYnnAnnnG</td>
+<td>GWTCRAnnC</td>
+<td>Alu A at +13, B at +77 (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4333407/">PMC</a>)</td>
+</tr>
+<tr>
+<td>Conti et al. 2015 (Alu)</td>
+<td>TGGCTCACGCC</td>
+<td>GWTCGAGAC</td>
+<td>"in Alu is C instead of G" at the last A-box position (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4333407/">PMC</a>)</td>
+</tr>
+<tr>
+<td>Conti et al. 2015 (human 7SL)</td>
+<td>TGGCGCGTGCC</td>
+<td>GTTCTGGGC</td>
+<td>"severe requirement of upstream control elements" (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4333407/">PMC</a>)</td>
+</tr>
+<tr>
+<td>Kojima 2020 (7SL, human / hagfish)</td>
+<td>GGCGCGGTGG / GGCGCAGTGG</td>
+<td>AGTTCTGGGCT / AGCTCTGCGCT</td>
+<td>7SL RNA 6–15 and 76–86 (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7245038/">PMC</a>)</td>
+</tr>
+<tr>
+<td>Tatosyan et al. 2020 (Kramerov lab)</td>
+<td>TRGYnnARBGG</td>
+<td>GGTTCRAnYCY</td>
+<td>+12..+22 and +54..+64 from the TSS; 30–40 bp (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7279448/">PMC</a>)</td>
+</tr>
+<tr>
+<td>Wenke et al. 2011 (plant SINEs)</td>
+<td>RVTGG → <code>[GA][CGA]TGG</code></td>
+<td>GTTCRA → <code>GTTC[AG]A</code></td>
+<td>spacer 25–50 nt (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3203444/">PMC</a>)</td>
+</tr>
+<tr>
+<td>SINE_Scan v1.1.1 code</td>
+<td><code>[GA][CGAT]TGG|TGGCTCACGCC|T[AG]G[CT]\w{2}A\w{3,4}G</code></td>
+<td><code>GTTC[AG]A|G[AT]TC[AG]A\w{2}C</code></td>
+<td><code>.{25,50}</code> search, <code>\w{25,70}</code> re-check (<a target="_blank" rel="noopener noreferrer" href="https://github.com/maohlzj/SINE_Scan">GitHub</a>)</td>
+</tr>
+<tr>
+<td>Seifert-Dávila et al. 2023 (structure template)</td>
+<td>—</td>
+<td>GGTTCGAGTCC (human TRR-TCT3-2)</td>
+<td>(<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11811891/">PMC</a>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>The only numeric matrices in the open are Pavesi et al. 1994, as re-implemented in tRNAscan-SE's EufindtRNA. The A box is a 21-column matrix over tRNA positions 7–25 with gap handling at 17, 20a and 20b. The B box is an 11-column matrix over 52–62. The cut-offs are <strong>B &gt; −14.14</strong>, A+B+distance &gt; <strong>−31.25</strong> and total &gt; <strong>−31.8</strong>, with the A–B distance scored from 24 to 66 nt (<a target="_blank" rel="noopener noreferrer" href="https://raw.githubusercontent.com/UCSC-LoweLab/tRNAscan-SE/master/src/pavesi.c">pavesi.c</a>; <a target="_blank" rel="noopener noreferrer" href="https://raw.githubusercontent.com/UCSC-LoweLab/tRNAscan-SE/master/src/eufind_const.h">eufind_const.h</a>). Read column by column, the matrices give TRGYNNARYGG and GGTTCRANYCC, so they are the quantitative form of the classical strings. One string conflict should stay visible. An earlier pass of these notes rejected the Alu A box TGGCTCACGCC as an unmatched web snippet. A later pass found it printed in Conti et al. 2015, and that source stands. The scan below shows the string scores below chance under a tRNA-trained matrix, which is itself the point Conti makes about Alu's atypical A box.</p></section><section id="sines"><h2>SINEs carry the promoter but rarely use it</h2><p>The SINE story runs in three waves. The internal promoter of Alu was shown functionally in 1981, before anyone called it tRNA-like (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6275362/">Fuhrman et al. 1981</a>; <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/9.5.1171">Elder et al. 1981</a>). Paolella et al. then showed in 1983 that it is "organised in a bipartite structure similar to the split tRNA promoters", with "very little constraint" outside the boxes (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/16453450/">Paolella et al. 1983</a>). The 1985 tRNA-origin papers followed. Daniels and Deininger framed them with "Most SINEs contain an intragenic RNA polymerase III promoter that initiates transcription at the 5′ end" (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1038/317819a0">Daniels &amp; Deininger 1985</a>). Okada's lab turned the promoter into a discovery assay. Total genomic DNA transcribed in a HeLa extract yields discrete Pol III RNAs, which led to the tortoise, newt, salmon, squid, octopus and equine SINEs. By 1994, <strong>twenty tRNA-derived SINEs</strong> had been characterised (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1073/pnas.83.2.251">Endoh &amp; Okada 1986</a>; <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1006/jmbi.1994.1410">Sakagami et al. 1994</a>).</p>
+<p>For the four standard controls, the literature and the new scan agree. <strong>Alu's</strong> promoter lies in the left monomer, with the A box near the 5′ end and the B box around +70 to +82. Its A box is atypical, and the whole promoter was measured as weaker than tRNA-derived galago SINEs: "the Monomer and Type II family promoters are more closely related to the RNA polymerase III promoter consensus sequence than is the Alu family promoter" (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/19.7.1649">Daniels &amp; Deininger 1991</a>). <strong>7SL</strong>, the Alu progenitor, needs 37 nt of upstream sequence. Ullu and Weiner inferred that most Alus lack this element, so "only a small subset of such sequences can be transcribed in vivo" (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1038/318371a0">Ullu &amp; Weiner 1985</a>). <strong>ID/BC1</strong> has "an A box element and a variant B box element … lacking the invariant A residue found in the consensus B boxes of tRNAs". Its activity depends on a correctly spaced upstream region with TATA and PSE sites, and a consensus tRNA B box replaces it efficiently "only if the BC1 upstream region is removed" (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1128/MCB.15.3.1642">Martignetti &amp; Brosius 1995</a>). <strong>B2</strong> "contains regions of homology to the RNA polymerase III split promoter". Its first 101 bp, including the boxes and the β signal, are its most conserved part (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6296779/">Krayev et al. 1982</a>; <a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8466645/">Vassetzky et al. 2021</a>).</p>
+<p>Head type sets the promoter architecture. 5S-derived SINEs (zebrafish SINE3, catfish SINE3_IP, salmonid OS-SINE1, megabat MEG-RS/RL) use the type-1 box A + IE + box C promoter, so no B box is expected (<a target="_blank" rel="noopener noreferrer" href="https://academic.oup.com/mbe/article/20/5/694/985403">Kapitonov &amp; Jurka 2003</a>; <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1016/j.ygeno.2009.02.001">Gogolevsky et al. 2009</a>). AmnSINE1's residual tRNA segment "lacks a Box B sequence", so the 5S part took over as promoter (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1484453/">Nishihara et al. 2006</a>). Extra B boxes arose by insertion or duplication in Dip_a2, Dip_b2 and rodent B1, and Vassetzky et al. suggest an extra B box may let SINEs "bypass cellular mechanisms repressing their retrotransposition" (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8466645/">Vassetzky et al. 2021</a>). In old SINEs such as MIR/Ther-1, the tRNA-like similarity "often remains limited to boxes A and B" once the cloverleaf is lost (<a target="_blank" rel="noopener noreferrer" href="https://mobilednajournal.biomedcentral.com/articles/10.1186/s13100-019-0198-8/figures/3">Mobile DNA 2019 figure</a>; <a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC15861">Gilbert &amp; Labuda 1999</a>).</p>
+<p>Why most copies are silent has two pre-2000 answers that were never separated experimentally. The first is <strong>intrinsic promoter decay</strong>. Methylating "a single pair of CpG dinucleotides in the A box" represses, and three CpG→CpA changes "within and near the A box drastically decrease" template activity (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/21.6.1351">Liu &amp; Schmid 1993</a>). Transcribed Alu cDNAs "exactly match the A box", and selection favours "the consensus sequence in the first 42 bases and the promoter B box" (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/22.6.1087">Liu et al. 1994</a>; <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1006/jmbi.1997.1161">Shaikh et al. 1997</a>). The second is <strong>insertion context</strong>: upstream flanks of Pol III genes raise Alu, B2 and BC1 transcription, and 7SL's flank works best (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1006/jmbi.2000.4027">Roy et al. 2000</a>). For human Alu, deleting the native 5′ flank cut transcription <strong>4- to 5-fold</strong> in several loci, and 6 of 9 Alus lost at least 2-fold (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4333407/">Conti et al. 2015</a>). Box integrity does predict occupancy for mouse SINEs. Of the 241 Pol III-bound copies, <strong>87 % carry a B box, 64 % an A box, and 80 % sit in the low-divergence class</strong> (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3245943/">Carrière et al. 2012</a>). It does not predict occupancy for human tRNA genes: "Occupied and unoccupied tDNAs showed nearly identical A-box and B-box sequences" (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2945309/">Oler et al. 2010</a>).</p>
+<p><strong>No published experiment that mutates the Alu (or B1/B2) A box versus B box and measures retrotransposition quantitatively could be located.</strong> Comeaux et al. state explicitly that they did not test box mutations, because mutations in the left monomer would also change transcription (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2665774/">Comeaux et al. 2009</a>). The tool that would remove this confound now exists: Alu RNA driven from an external CMV promoter retrotransposes efficiently. So far it has been used only for deletion mapping, which found a 46-nt 5′ domain (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/40568936/">Moldovan et al. 2025</a>).</p></section><section id="scan"><h2>A new scan of 229 SINEBase consensi puts the asymmetry in numbers</h2>
+<div class="explorer" id="explorer">
+ <h3>Every SINEBase consensus, scored</h3>
+ <p class="cap">Each dot is one of 229 consensus sequences. Position is its best A box (left to right) and the best B box downstream of it (bottom to top), scored with matrices built from 419 human tRNA genes. Dashed lines mark the 5th percentile of real tRNA genes: a consensus in the top right quadrant has two tRNA-grade boxes. Circled dots are the four classic controls. Hover, focus or tap a dot to read its boxes.</p>
+ <div class="chips" id="head-chips" role="group" aria-label="Show head types">
+  <button type="button" data-h="tRNA" aria-pressed="true"><span class="dot" style="background:var(--h-trna)"></span>tRNA head</button>
+  <button type="button" data-h="7SL" aria-pressed="true"><span class="dot" style="background:var(--h-7sl)"></span>7SL head</button>
+  <button type="button" data-h="5S" aria-pressed="true"><span class="dot" style="background:var(--h-5s)"></span>5S head</button>
+  <button type="button" data-h="none" aria-pressed="true"><span class="dot" style="background:var(--h-none)"></span>no head detected</button>
+ </div>
+ <div class="xgrid">
+  <figure><svg id="scatter" role="img" aria-label="Scatter plot of best A-box score against best B-box score for 229 SINE consensi"></svg><figcaption id="readout" aria-live="polite"></figcaption></figure>
+  <figure><svg id="bars" role="img" aria-label="Share of consensi with tRNA-grade A box, B box and both, by head type"></svg><figcaption>Share of consensi with a tRNA-grade A box, B box, and a spaced A+B pair, by Rfam head type. The B box outlasts the A box in every class.</figcaption></figure>
+ </div>
+ <div class="chips"><input type="search" id="scan-q" placeholder="Filter by name, sequence or head" aria-label="Filter consensi"><span class="n" id="scan-n"></span></div>
+ <div class="tw scroll"><table id="t-all"><thead><tr><th data-k="n">Consensus</th><th data-k="l">Length</th><th data-k="h">Head</th><th data-k="A">A box, position, score</th><th data-k="B">B box, position, score</th><th data-k="s">Spacing</th><th>tRNA-grade</th></tr></thead><tbody></tbody></table></div>
+ <p class="cap" style="margin:0">Underlined letters differ from the classical strings TGGCNNAGTGG (A) and GGTTCGANNCC (B). Spacing is start to start, in nt. Full tables are in the research notes data folder.</p>
+</div>
+<p>No published census of box retention across SINE families could be located, so one was computed for this report. <strong>Inputs</strong>: 229 SINEBase consensi (local copy <code>SINEBase.nr95.uniq.fa</code>, md5 00ba0a8e1b1798526bc8bf7ab97b1fff) and 419 human tRNA genes from GtRNAdb hg19, 29 of them with introns (md5 6b54e95ca5418d7d9c4d331ca3b2c96f). <strong>Method</strong>: A and B sites in each tRNA gene were seeded with loose regexes, with a fallback to the fewest mismatches to the Galli-type strings TGGCNNAGTGG / GGTTCGANNCC. 11-column log2-odds matrices were built (pseudocount 0.5, uniform background), refined once, and scored leave-one-out on the tRNA genes. Each consensus was scanned on the sense strand for the best A box, the best B box 20–120 nt downstream of it, a head A box within the first 40 nt, and a second pair (dimers). Two thresholds were used. "tRNA-grade" means at or above the 5th percentile of tRNA-gene scores (A 8.97, B 9.15). "Above null" means above the 95th percentile of 20 dinucleotide-preserving shuffles of that consensus (<code>esl-shuffle -d -N 20 --seed 42</code>). Head type came from <code>cmscan -E 1</code> against three Rfam models: RF00005 tRNA, RF00001 5S_rRNA and RF00017 Metazoa_SRP.</p>
+<p>The job <strong>ran on KIT at <code>KIT:/data/V/toki/polIII_boxes_20261025/</code></strong> in 53 s. Therioserver and DRAGEN were both unreachable that day: therioserver timed out at the SSH banner exchange, and DRAGEN timed out through the NAU proxy. Every output table is also copied locally to <code>C:\work\Raks_COI\research_notes\Pol III A and B boxes in SINEs\data\out\</code>. The code is in <code>C:\work\Raks_COI\research_notes\Pol III A and B boxes in SINEs\data\box_pwm.py</code> and <code>run_polIII_boxes_kit.sh</code>, in the same folder.</p>
+<p><strong>The tRNA reference itself is noisier than the textbook strings suggest.</strong> The data-derived consensus is <strong>TGGCTCAGTGG</strong> for the A box (13.0 bits) and <strong>GGTTCGAATCC</strong> for the B box (15.8 bits). The strict regex found the A site in only 291 of 419 genes and the B site in 323, so variable D-loop length defeats a fixed 11-mer about 30 % of the time. Against a pooled null of 4,580 shuffles, <strong>22 of 419 real tRNA A boxes and 11 of 419 B boxes do not beat the null's 95th percentile</strong>. Start-to-start A→B spacing in tRNA genes has a median of <strong>44</strong> (range 42–79). Intron-less genes span 42–55, with a 53–55 group of long-variable-arm genes. Intron-containing genes span 56–79, median 64 (<code>trna_summary.txt</code>).</p>
+<div class="tw"><table id="t-heads">
+<thead>
+<tr>
+<th>Head (Rfam, E ≤ 1)</th>
+<th>n</th>
+<th>A tRNA-grade</th>
+<th>B tRNA-grade</th>
+<th>A+B pair</th>
+<th>both &gt; own null</th>
+<th>dimers</th>
+<th>pair spacing median (range)</th>
+<th>median A / B score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tRNA</td>
+<td>116</td>
+<td>93 (80.2 %)</td>
+<td>110 (94.8 %)</td>
+<td>87 (75.0 %)</td>
+<td>94</td>
+<td>2</td>
+<td>44 (43–63)</td>
+<td>13.79 / 17.24</td>
+</tr>
+<tr>
+<td>5S</td>
+<td>7</td>
+<td>1 (14.3 %)</td>
+<td>1 (14.3 %)</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>42</td>
+<td>0.10 / 4.82</td>
+</tr>
+<tr>
+<td>7SL</td>
+<td>10</td>
+<td>5 (50.0 %)</td>
+<td>8 (80.0 %)</td>
+<td>4 (40.0 %)</td>
+<td>5</td>
+<td>0</td>
+<td>44 (24–62)</td>
+<td>5.76 / 14.24</td>
+</tr>
+<tr>
+<td>none detected</td>
+<td>96</td>
+<td>58 (60.4 %)</td>
+<td>83 (86.5 %)</td>
+<td>48 (50.0 %)</td>
+<td>63</td>
+<td>0</td>
+<td>44 (35–75)</td>
+<td>10.42 / 13.70</td>
+</tr>
+<tr>
+<td><strong>all SINEs</strong></td>
+<td>229</td>
+<td><strong>157 (68.6 %)</strong></td>
+<td><strong>202 (88.2 %)</strong></td>
+<td><strong>140 (61.1 %)</strong></td>
+<td>163</td>
+<td>2</td>
+<td>44 (24–75)</td>
+<td>13.14 / 15.77</td>
+</tr>
+<tr>
+<td>human tRNA genes</td>
+<td>419</td>
+<td>95 % by definition</td>
+<td>95 %</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>44 (42–79)</td>
+<td>14.02 / 17.22</td>
+</tr>
+</tbody>
+</table></div>
+<p>Source: <code>summary_by_head.tsv</code>.</p>
+<p>Four readings follow. First, <strong>the B box outlasts the A box in every head class</strong>. This matches the plant result that "SINE B boxes are significantly more highly conserved" (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3203444/">Wenke et al. 2011</a>), the mouse ChIP figures of 87 % vs 64 % (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3245943/">Carrière et al. 2012</a>), and the structural asymmetry that makes the B box the binding anchor. Second, the spacing of tRNA-headed SINEs is the intron-less tRNA spacing: 75 of the 87 pairs fall at 43–45. Apart from single cases at 56–63 and one at 75, no SINE shows the intron-shifted 56–79 spacing. That fits heads derived from processed tRNA transcripts. It also means regex tools capped at a 50-nt spacer lose little on tRNA-type heads. Third, <strong>the boxes outlive the Rfam-detectable head</strong>. Consensi with no RNA head at E ≤ 1 still carry a tRNA-grade pair in 50 % of cases and both boxes above their own null in 66 %. Fourth, 5S heads score low on both boxes, as a type-1 promoter predicts. The one 5S-labelled exception, SB10, carries a perfect tRNA-type pair at positions 11 and 53, so it is either composite or a weak 5S call. In tRNA-grade sites, mismatches to the Galli strings were 0/1/2/3/4 in 47/65/30/7/8 A boxes and 0/1/2/3 in 64/55/16/5 B boxes.</p>
+<p>The controls are given with their exact 11-mers, positions (1-based on the SINEBase consensus) and mismatches to the Galli strings (<code>controls.tsv</code>):</p>
+<div class="tw"><table id="t-controls">
+<thead>
+<tr>
+<th>Element (length, Rfam head)</th>
+<th>A box</th>
+<th>B box</th>
+<th>Spacing</th>
+<th>tRNA-grade A / B / pair</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alu (290, Metazoa_SRP)</td>
+<td>literature A box <strong>TGGCTCACGCC</strong> @13–23 scores −4.89; best head A −1.62 @5 GGGCGCGGTGG</td>
+<td><strong>AGATCGAGACC</strong> @74–84, 7.76 (2 mm)</td>
+<td>61 from @13</td>
+<td>0 / 0 / 0 (B above own null)</td>
+</tr>
+<tr>
+<td>B1 (145, Metazoa_SRP)</td>
+<td>7SL-type <strong>TGGCGCACGCC</strong> @12–22 scores −5.49; best −4.02 @4 GGGCATGGTGG</td>
+<td><strong>AGTTCGAGGCC</strong> @65–75, 10.72 (1 mm)</td>
+<td>53 from @12</td>
+<td>0 / 1 / 0</td>
+</tr>
+<tr>
+<td>B2 (209, tRNA 13–71)</td>
+<td><strong>TGGCTCAGTGG</strong> @13–23, 16.80 (0 mm)</td>
+<td><strong>AGTTCAATTCC</strong> @58–68, 14.01 (2 mm)</td>
+<td>45</td>
+<td>1 / 1 / 1</td>
+</tr>
+<tr>
+<td>ID (85, tRNA 7–75)</td>
+<td><strong>TAGCTCAGTGG</strong> @14–24, 16.56 (1 mm)</td>
+<td><strong>GGTTCGGTCCT</strong> @57–67, 4.60 (2 mm; G at the invariant A)</td>
+<td>43</td>
+<td>1 / 0 / 0</td>
+</tr>
+<tr>
+<td>ID-Spe (146, tRNA)</td>
+<td>TGGCTCAGTGG @14, 16.80</td>
+<td>GGTTTGATCCT @57, 8.52</td>
+<td>43</td>
+<td>1 / 0 / 0</td>
+</tr>
+<tr>
+<td>B1-dID (221, Metazoa_SRP)</td>
+<td>TGGCTCAGTGG @161 (the ID unit), 16.80; B1 part TGGCGCANGCC @13</td>
+<td>GGTTCAATCCC @185, 15.77</td>
+<td>24 (B1 part 53)</td>
+<td>1 / 1 / 1</td>
+</tr>
+<tr>
+<td>B4 (299, SRP + tRNA)</td>
+<td>TGGCTCAGTCG @14, 14.35</td>
+<td>AGTTCAGATCC @58, 4.95</td>
+<td>44</td>
+<td>1 / 0 / 0</td>
+</tr>
+</tbody>
+</table></div>
+<p>These controls reproduce three findings from the literature without being tuned to them. The Alu B box AGATCGAGACC contains, at its positions 2–10, the 9-mer <strong>GATCGAGAC</strong>. That matches Conti's GWTCGAGAC and Murphy and Baralle's active "GTTCGAGAC" at W = A. The Alu and B1 A boxes share the tRNA 5′ half (TGGC) but diverge at the 3′ GTGG, and so fall below chance. This is the "C instead of G" difference Conti describes, and it echoes "SINEs B1 and Alu possess the same atypical boxes A" (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7279448/">Tatosyan et al. 2020</a>). The ID B box GGTTCGGTCCT carries a <strong>G where the tRNA consensus has its invariant A (tRNA A58)</strong>. That is the "variant B box lacking the invariant A residue" Martignetti and Brosius described for BC1 in 1995. B2, the only control with two tRNA-grade boxes, is also the SINE that moves as efficiently as Alu in L1-driven assays, while B1 moves 20–100-fold less. That retrotransposition result is abstract-level only and does not test promoters (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/15890192/">Dewannieux &amp; Heidmann 2005</a>).</p>
+<p>Three subsets are worth singling out. <strong>Seventeen consensi carry an A box without a downstream tRNA-grade B box</strong>, mostly with a B 11-mer one or two changes off at an invariant position: SlmII, EC-1, OR1, Bfl1, Oegop, DAS-IIb, B4, Sepioth2A, OR2, PRE-1, Sepioth2B, MEG-T2, SB1, SB4, SB2, ID-Spe and ID. Examples are PRE-1 GATTCAATCCC (8.39) and OR1/OR2 GTTTCGATTCC (8.82). <strong>Sixty-two carry a B box without an A box.</strong> Twenty-three of these are Rfam-tRNA heads, such as CQ-1 with A TGGCTGACTGG (7.85) and B GGTTCGATGCC, AC1 with A TGGTGTGGTGG (6.43), and Bov-tA with A TGGCTCAGATG (8.95). The rest are all the 7SL-type elements (B1, pB1, Tu-I, Tu-II) and 36 with no Rfam-detected head (<code>A_without_B.tsv</code>; <code>B_without_A.tsv</code>). <strong>Two dimers pass the tRNA-grade test for both units.</strong> STRIDM has A TGGCTCAGTGG @13 / B GGTTCGATCCT @56 and a second pair, A TGGCTCAAGCG @110 / B GGTTCGATCCT @153, each at spacing 43. IDL-Geo has A @13 / B GGTTCGATTCC @56 and a second pair, A TGGCTCAAGTG @107 / B AGTTCAAGCCC @170, at spacing 63 (<code>dimers.tsv</code>).</p>
+<p>Several caveats bound these numbers. The matrices were seeded by Galli-like regexes, so they are partly circular: "tRNA-grade" means "resembles regex-found human tRNA sites". The matrices are trained on human tRNAs and applied to plant, fish and invertebrate consensi. An 11-mer matrix cannot follow the variable-gap A box. Twenty shuffles make each consensus's own null little more than its best shuffle. Rfam at E ≤ 1 with only three models misses decayed heads and cannot see U-snRNA heads. A family consensus can be master-like and overstate what genomic copies retain. Spacing is start-to-start, so the literature's "30–40 bp", measured end-to-start, corresponds to about 41–51 here. Only the sense strand was scanned.</p></section><section id="conflicts"><h2>Conflicts the record does not resolve</h2><p><strong>Which box dominates Alu.</strong> In tRNA genes, the A box positions the start and the B box anchors binding (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1016/0092-8674(82)90083-6">Hall et al. 1982</a>; <a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/2827154/">Baker et al. 1987</a>). In the 3′-α1 Alu, by contrast, the posterior (B) element "alone is sufficient and necessary for accurate initiation", and the distance to the start is constant relative to B, not A (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6089189/">Perez-Stable et al. 1984</a>). Two years later the same group found the start fixed 4–5 bp upstream of box A at spacings of 47–298 bp, and an A-like second element activated at long spacing (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1128/mcb.6.6.2041-2052.1986">Perez-Stable &amp; Shen 1986</a>). Meanwhile the regulatory literature puts Alu's fragility in the A box: methylation sensitivity, CpG decay, the fidelity of transcribed copies, and the nucleosome positioned over it (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/21.6.1351">Liu &amp; Schmid 1993</a>; <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/22.6.1087">Liu et al. 1994</a>; <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1074/jbc.270.17.10091">Englander &amp; Howard 1995</a>). The B-box mutation Conti tested caused "a dramatic reduction" in Alu transcription (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4333407/">Conti et al. 2015</a>). One reading reconciles all of this: the B box is necessary for binding and the A box is the decay-prone positioning element. No single experiment tests that reading on Alu.</p>
+<p><strong>The 1985 tRNA isotype assignments.</strong> Sakamoto and Okada assigned rat ID to <strong>phenylalanine</strong> tRNA, rodent type 2 Alu (≈ B2) to <strong>lysine tRNA5</strong>, and rabbit C and the bovine/goat 73-bp repeat to <strong>glycine</strong> tRNA (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1007/BF02101691">Sakamoto &amp; Okada 1985</a>). Daniels and Deininger assigned rat ID to <strong>alanine</strong> and mouse B2 to <strong>serine</strong>, and the galago Monomer/Type II to methionine (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1038/317819a0">Daniels &amp; Deininger 1985</a>). Later work indexes the BC1/ID phylogeny under tRNA-Ala (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1073/pnas.90.20.9698">Martignetti &amp; Brosius 1993</a>). The scan in this report labels heads only to tRNA/5S/7SL and does not settle the isotypes. That needs whole-molecule isotype models, as the earlier report <code>C:\work\Raks_COI\reports\tRNA similarity scans for SINEs.md</code> describes.</p>
+<p><strong>Alemán 2000 versus promoter-quality succession.</strong> Daniels and Deininger found promoter strength tracking copy number and recency across three galago SINE families (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/19.7.1649">1991</a>), and Liu and Schmid tied young-Alu success to A-box CpG integrity (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/21.6.1351">1993</a>). Alemán et al., however, found that "Alu subfamily diagnostic mutations do not significantly alter the amount of Alu RNA". Right-half and 3′-flank variation did change RNA levels, so master elements win through "a multitude of individual differences" (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/28.23.4755">Alemán et al. 2000</a>). Comeaux's estimate of a ~3-fold subfamily effect within ~180-fold total regulation sits between the two positions (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2665774/">Comeaux et al. 2009</a>).</p>
+<p><strong>Smaller numerical conflicts.</strong> The optimal tRNA A–B distance is "about 40–50 nucleotides" in Ciliberto, Traboni and Cortese 1982, but Hall et al. quote the same paper as "30–40 bp" (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6952243/">Ciliberto 1982</a>; <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1016/0092-8674(82)90083-6">Hall 1982</a>). Other values are 34–53 bp (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/6396080/">Baker &amp; Hall 1984</a>) and 30–60 bp (<a target="_blank" rel="noopener noreferrer" href="https://pubmed.ncbi.nlm.nih.gov/2827154/">Baker et al. 1987</a>). The start-to-A-box distance is "10–16 bp" in Hall 1982 but "about 25 nt" in Marck 2006 (<a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1093/nar/gkl085">DOI</a>), and the two count from different reference points. The A-block coordinates are 8–13 (Hofstetter), 13–20 (Galli) and 8–19 (Hall). Box integrity predicts occupancy for mouse SINEs (Carrière) but not for tRNA genes (Oler), and Alu in vitro transcription rates did not reflect in vivo expression (<a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4333407/">Conti et al. 2015</a>).</p></section><section id="library"><h2>Older works to look for in a library</h2>
+<div class="chips" id="lib-chips" role="group" aria-label="Filter by access problem">
+ <button type="button" data-f="all" aria-pressed="true">All</button>
+ <button type="button" data-f="pay" aria-pressed="false">Paywalled</button>
+ <button type="button" data-f="img" aria-pressed="false">Page-image scans</button>
+ <button type="button" data-f="abs" aria-pressed="false">Abstract only</button>
+ <button type="button" data-f="blk" aria-pressed="false">Site blocked</button>
+ <button type="button" data-f="loc" aria-pressed="false">Not located or unverified</button>
+ <input type="search" id="lib-q" placeholder="Search authors, journals, topics" aria-label="Search the library list">
+ <span class="n" id="lib-n"></span>
+</div>
+<p class="cap" style="color:var(--mute);font-size:13px">Tick an entry when you find it. Ticks are kept in this browser only.</p>
+<p>The table lists works whose full text, figures or exact strings could not be reached here. Each entry carries its identifiers, why it matters, and how far access got. "Abstract only" means the PubMed abstract was read. "Page images" means the PMC copy is a scan whose figures and tables could not be extracted.</p>
+<div class="tw"><table id="t-library">
+<thead>
+<tr>
+<th>Citation</th>
+<th>DOI / PMID</th>
+<th>Why it matters</th>
+<th>What blocked it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Galli G, Hofstetter H, Birnstiel ML (1981) Two conserved sequence blocks within eukaryotic tRNA genes are major promoter elements. Nature 294:626–631</td>
+<td>10.1038/294626a0; PMID 7312050</td>
+<td>Origin of the A/B "blocks"; whether the TGGCNNAGTGG / GGTTCGANNCC strings are printed here</td>
+<td>Paywall; nature.com blocked; abstract only</td>
+</tr>
+<tr>
+<td>Hofstetter H, Kressmann A, Birnstiel ML (1981) A split promoter for a eucaryotic tRNA gene. Cell 24:573–585</td>
+<td>10.1016/0092-8674(81)90348-2; PMID 7237560</td>
+<td>First "split promoter"; element maps</td>
+<td>Cell scan not read; abstract only</td>
+</tr>
+<tr>
+<td>Ciliberto G, Castagnoli L, Cortese R (1983) Transcription by RNA polymerase III. Curr Top Dev Biol 18:59–88</td>
+<td>10.1016/s0070-2153(08)60579-7; PMID 6340979</td>
+<td>One of the two reviews cited for the box names</td>
+<td>Paywalled chapter</td>
+</tr>
+<tr>
+<td>Ciliberto G, Raugei G, Costanzo F, Dente L, Cortese R (1983) Common and interchangeable elements in the promoters of genes transcribed by RNA polymerase III. Cell 32:725–733</td>
+<td>10.1016/0092-8674(83)90058-2; PMID 6299574</td>
+<td>5S box A = tRNA box A; cited by Perez-Stable for the strings</td>
+<td>Full text not reached</td>
+</tr>
+<tr>
+<td>Geiduschek EP, Tocchini-Valentini GP (1988) Transcription by RNA polymerase III. Annu Rev Biochem 57:873–914</td>
+<td>10.1146/annurev.bi.57.070188.004301; PMID 3052292</td>
+<td>Synthesis of the 1980s; often credited with the "31–93 bp" range, which could not be verified</td>
+<td>Annual Reviews HTTP 403; no abstract</td>
+</tr>
+<tr>
+<td>Sharp SJ, Schaack J, Cooley L, Burke DJ, Söll D (1985) Structure and transcription of eukaryotic tRNA genes. CRC Crit Rev Biochem 19:107–144</td>
+<td>10.3109/10409238509082541; PMID 3905254</td>
+<td>Söll-lab synthesis (D-/T-control)</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Willis IM (1993) RNA polymerase III. Genes, factors and transcriptional specificity. Eur J Biochem 212:1–11</td>
+<td>10.1111/j.1432-1033.1993.tb17626.x; PMID 8444147</td>
+<td>Consensus table of the early 1990s</td>
+<td>Free PDF is an image scan with no text layer</td>
+</tr>
+<tr>
+<td>Pavesi A, Conterio F, Bolchi A, Dieci G, Ottonello S (1994) Identification of new eukaryotic tRNA genes in genomic DNA databases by a multistep weight matrix analysis of transcriptional control regions. NAR 22:1247–1256</td>
+<td>10.1093/nar/22.7.1247; PMC523650</td>
+<td>The only published numeric A/B matrices; training set, pseudocounts, the extragenic-B-box subroutine</td>
+<td>Scanned PDF behind a download gate; read only via the tRNAscan-SE C code</td>
+</tr>
+<tr>
+<td>Lassar AB, Martin PL, Roeder RG (1983) Transcription of class III genes: formation of preinitiation complexes. Science 222:740–748</td>
+<td>10.1126/science.6356356; PMID 6356356</td>
+<td>TFIIIC as the common factor</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Marzouki N et al. (1986) Selective proteolysis defines two DNA binding domains in yeast transcription factor tau. Nature 323:176–178</td>
+<td>PMID 3528868</td>
+<td>τB binds only the B block</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Wilson ET, Larson D, Young LS, Sprague KU (1985) A large region controls tRNA gene transcription. J Mol Biol 183:153–163</td>
+<td>PMID 3847510</td>
+<td>Early "A and B boxes" usage; control region −13/+146</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Wu GJ, Railey JF, Cannon RE (1987) J Mol Biol 194:423–442</td>
+<td>PMID 3625769</td>
+<td>VA RNA B-block essential domain</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Johnson JD, Raymond GJ, deParasis J (1984) Mol Gen Genet 197:55–61</td>
+<td>PMID 6392825</td>
+<td>Equates "A-block/D-control" with "B-block/T-control"</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Stillman DJ, Better M, Geiduschek EP (1985) J Mol Biol 185:451–455</td>
+<td>PMID 3903164</td>
+<td>Electron microscopy of τ bending DNA</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Tocchini-Valentini GP et al. (1983) Cold Spring Harb Symp Quant Biol 47:885–892</td>
+<td>PMID 6305589</td>
+<td>tRNA gene structure in transcription</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Kassavetis GA, Braun BR, Nguyen LH, Geiduschek EP (1990) S. cerevisiae TFIIIB is the transcription initiation factor proper of RNA polymerase III, while TFIIIA and TFIIIC are assembly factors. Cell 60:235–245</td>
+<td>could not retrieve</td>
+<td>The 1990 end-state of the assembly model</td>
+<td>Cited from memory; PMID/DOI not verified</td>
+</tr>
+<tr>
+<td>Paolella G, Lucero MA, Murphy MH, Baralle FE (1983) The Alu family repeat promoter has a tRNA-like bipartite structure. EMBO J 2:691–696</td>
+<td>10.1002/j.1460-2075.1983.tb01486.x; PMID 16453450</td>
+<td>Alu promoter strings and coordinates</td>
+<td>PMC page images; empty full-text body</td>
+</tr>
+<tr>
+<td>Perez-Stable C, Ayres TM, Shen CK (1984) PNAS 81:5291–5295; Perez-Stable C, Shen CK (1986) MCB 6:2041–2052</td>
+<td>10.1073/pnas.81.17.5291 (PMID 6089189); 10.1128/mcb.6.6.2041-2052.1986 (PMID 3023916)</td>
+<td>Earliest verbatim box strings found; Alu spacing series</td>
+<td>Page images; the 1984 A-box string has 12 letters in OCR, needs checking against print</td>
+</tr>
+<tr>
+<td>Murphy MH, Baralle FE (1984) J Biol Chem 259:10208–10211; Philos Trans R Soc B 307:283–291</td>
+<td>PMID 6088488; 10.1098/rstb.1984.0128 (PMID 6151698)</td>
+<td>Synthetic box pairs at 51 bp</td>
+<td>Abstract only</td>
+</tr>
+<tr>
+<td>Krayev AS et al. (1980) NAR 8:1201–1215 (B1); Krayev AS et al. (1982) NAR 10:7461–7475 (B2)</td>
+<td>10.1093/nar/8.6.1201 (PMID 7433120); 10.1093/nar/10.23.7461 (PMID 6296779)</td>
+<td>B2 split-promoter alignment (Fig. 4); verbatim B1/B2 box strings</td>
+<td>Page images</td>
+</tr>
+<tr>
+<td>Sutcliffe JG et al. (1984) Identifier sequences are transcribed specifically in brain. Nature 308:237–241; Science 225:1308–1315</td>
+<td>10.1038/308237a0 (PMID 6199680); 10.1126/science.6474179 (PMID 6474179)</td>
+<td>ID as a Pol III template</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Martignetti JA, Brosius J (1995) BC1 RNA: transcriptional analysis of a neural cell-specific RNA polymerase III transcript. MCB 15:1642–1650</td>
+<td>10.1128/MCB.15.3.1642; PMID 7862155</td>
+<td>The BC1 variant B-box string and the upstream elements</td>
+<td>PDF only; strings not reached</td>
+</tr>
+<tr>
+<td>Daniels GR, Deininger PL (1985) Repeat sequence families derived from mammalian tRNA genes. Nature 317:819–822</td>
+<td>10.1038/317819a0; PMID 3851163</td>
+<td>tRNA origin; isotypes conflicting with Okada</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Sakamoto K, Okada N (1985) J Mol Evol 22:134–140</td>
+<td>10.1007/BF02101691; PMID 3934392</td>
+<td>The other 1985 isotype set</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Daniels GR, Deininger PL (1991) NAR 19:1649–1656</td>
+<td>10.1093/nar/19.7.1649; PMID 1840654</td>
+<td>Side-by-side box comparison of three SINE families</td>
+<td>Page images; box strings unreadable</td>
+</tr>
+<tr>
+<td>Ullu E, Weiner AM (1985) Upstream sequences modulate the internal promoter of the human 7SL RNA gene. Nature 318:371–374</td>
+<td>10.1038/318371a0; PMID 2415825</td>
+<td>7SL/Alu dependence on upstream sequence</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Hess J et al. (1985) End-to-end transcription of an Alu family repeat. J Mol Biol 184:7–21</td>
+<td>10.1016/0022-2836(85)90039-7; PMID 2411938</td>
+<td>Alu terminator</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Kramerov DA et al. (1985) Biochim Biophys Acta 824:85–98</td>
+<td>10.1016/0167-4781(85)90084-3; PMID 2578817</td>
+<td>B2 RNA is made by Pol III</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Rogers JH (1985) The origin and evolution of retroposons. Int Rev Cytol 93:187–279</td>
+<td>10.1016/s0074-7696(08)61375-3; PMID 2409043</td>
+<td>Early comprehensive review</td>
+<td>Paywall; no abstract</td>
+</tr>
+<tr>
+<td>Weiner AM, Deininger PL, Efstratiadis A (1986) Nonviral retroposons. Annu Rev Biochem 55:631–661</td>
+<td>10.1146/annurev.bi.55.070186.003215; PMID 2427017</td>
+<td>Field-defining review</td>
+<td>Paywall; no abstract</td>
+</tr>
+<tr>
+<td>Okada N et al. (1988) Several aspects of total genomic DNA transcription in a HeLa cell extract. Nucleic Acids Symp Ser 19:181–184</td>
+<td>PMID 3226915</td>
+<td>Coins "Pol III/SINEs"; logic of the assay</td>
+<td>Obscure symposium series</td>
+</tr>
+<tr>
+<td>Okada N (1991) SINEs. Curr Opin Genet Dev 1:498–504; Okada N (1991) Trends Ecol Evol 6:358–361</td>
+<td>10.1016/S0959-437X(05)80198-4 (PMID 1668310); 10.1016/0169-5347(91)90226-N (PMID 21232509)</td>
+<td>Possibly the first cross-SINE box table</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Deininger PL (1989) SINEs: short interspersed repeated DNA elements in higher eucaryotes. In: Mobile DNA (ASM, Washington DC)</td>
+<td>— (book chapter)</td>
+<td>Pre-1990 SINE promoter synthesis</td>
+<td>Book; editors not verified</td>
+</tr>
+<tr>
+<td>Deininger PL, Batzer MA (1993) Evolution of retroposons. Evolutionary Biology 27 (Springer)</td>
+<td>— (pages 157–196 unconfirmed)</td>
+<td>Possibly a cross-SINE box table</td>
+<td>Book chapter; not in PubMed</td>
+</tr>
+<tr>
+<td>Schmid CW (1996) Alu: structure, origin, evolution, significance and function of one-tenth of human DNA. Prog Nucleic Acid Res Mol Biol 53:283–319</td>
+<td>10.1016/s0079-6603(08)60148-8; PMID 8650306</td>
+<td>Alu promoter synthesis</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Schmid CW (1998) Does SINE evolution preclude Alu function?</td>
+<td>PMID 9753719 (volume/pages not retrieved)</td>
+<td>The pre-2000 "most Alus are dead" position</td>
+<td>Metadata call failed</td>
+</tr>
+<tr>
+<td>Deininger PL, Tiedge H, Kim J, Brosius J (1996) Prog Nucleic Acid Res Mol Biol 52:67–88</td>
+<td>10.1016/s0079-6603(08)60964-2; PMID 8821258</td>
+<td>BC1 master-gene review</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Deininger PL, Batzer MA, Hutchison CA, Edgell MH (1992) Master genes in mammalian repetitive DNA amplification. Trends Genet 8:307–311</td>
+<td>10.1016/0168-9525(92)90262-3; PMID 1365396</td>
+<td>Master-gene model</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Shen MR, Batzer MA, Deininger PL (1991) J Mol Evol 33:311–320; Leeflang EP et al. (1993) J Mol Evol 37:559–565</td>
+<td>10.1007/BF02102862 (PMID 1774786); 10.1007/BF00182741 (PMID 8114108)</td>
+<td>Sequential master genes; founder drift</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Chesnokov I, Schmid CW (1996) J Mol Evol 42:30–36</td>
+<td>10.1007/BF00163208; PMID 8576961</td>
+<td>AP-1 in an Alu source-gene flank</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Shaikh TH et al. (1997) J Mol Biol 271:222–234</td>
+<td>10.1006/jmbi.1997.1161; PMID 9268654</td>
+<td>Selection on the first 42 bases and the B box</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Englander EW, Wolffe AP, Howard BH (1993) J Biol Chem 268:19565–19573</td>
+<td>PMID 8366099</td>
+<td>Alu nucleosome over the 5′ end</td>
+<td>Full metadata not retrieved</td>
+</tr>
+<tr>
+<td>Kramerov DA, Vassetzky NS (2005) Short retroposons in eukaryotic genomes. Int Rev Cytol 247:165–221</td>
+<td>10.1016/S0074-7696(05)47004-7; PMID 16344113</td>
+<td>Box consensus drawn only in figures</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Fichant GA, Burks C (1991) J Mol Biol 220:659–671</td>
+<td>10.1016/0022-2836(91)90108-i</td>
+<td>tRNAscan 1.3 box strings</td>
+<td>Abstract only</td>
+</tr>
+<tr>
+<td>Lowe TM, Eddy SR (1997) tRNAscan-SE. NAR (PMC146525), and T. Lowe's thesis chapters</td>
+<td>PMC146525</td>
+<td>Scores of tRNA-derived repeats; EufindtRNA parameters per mode</td>
+<td>Full text not reached; thesis host refused connections; web archive blocked</td>
+</tr>
+<tr>
+<td>Dieci G et al. (2013) Identification of RNA polymerase III-transcribed genes in eukaryotic genomes. BBA 1829:296–305</td>
+<td>10.1016/j.bbagrm.2012.09.010</td>
+<td>Review of Pol III gene detection</td>
+<td>ScienceDirect HTTP 403</td>
+</tr>
+<tr>
+<td>Gogolevsky KP, Vassetzky NS, Kramerov DA (2009) Genomics 93:494–500; Akasaki T et al. (2010) Gene 454:8–19</td>
+<td>10.1016/j.ygeno.2009.02.001; 10.1016/j.gene.2009.11.005</td>
+<td>5S-SINE promoter "most invariant"; Ceph-SINE box alignments</td>
+<td>Paywall</td>
+</tr>
+<tr>
+<td>Ogiwara I et al. (1999, 2002; Genome Res 12:316) elasmobranch SINEs and V-SINEs; Deragon JM, Zhang X (2006) Syst Biol 55:949–956</td>
+<td>PMID 17345676 (Deragon)</td>
+<td>Box descriptions in fish and plant SINEs</td>
+<td>Full texts not reached</td>
+</tr>
+<tr>
+<td>Canella D et al. (2010) Genome Res 20:710–721</td>
+<td>10.1101/gr.101337.109; PMID 20413673</td>
+<td>Alu counts in the fourth 2010 ChIP study</td>
+<td>CSHL sign-in wall</td>
+</tr>
+<tr>
+<td>Dewannieux M, Heidmann T (2005) J Mol Biol 349:241–247</td>
+<td>10.1016/j.jmb.2005.03.068; PMID 15890192</td>
+<td>B1 vs B2 retrotransposition</td>
+<td>Not in PMC; Elsevier paywall</td>
+</tr>
+<tr>
+<td>Tatosyan KA et al. (2017, 2018), Ustyantsev IG et al. (2020, 2024), Mol Biol (Mosk)</td>
+<td>10.7868/S0026898417010177; 10.1134/S0026898418060162; 10.31857/S0026898419040165; 10.31857/S0026898424030083</td>
+<td>4.5S RNA expression and protein binding; polyadenylation and lifetime; CPSF</td>
+<td>Russian-language; abstracts only</td>
+</tr>
+<tr>
+<td>Koval AP et al. (2011) "Additional box B of RNA polymerase III promoter in SINE B1 can be functional"</td>
+<td>could not locate</td>
+<td>Primary source for B1's extra B box</td>
+<td>Could not locate in PubMed by title or author</td>
+</tr>
+<tr>
+<td>Kramerov et al. (1979)</td>
+<td>could not locate</td>
+<td>Possible earliest Kramerov-lab SINE paper</td>
+<td>Could not locate; earliest found is 1980</td>
+</tr>
+</tbody>
+</table></div></section><section id="limits"><h2>Every limitation of access or computing, listed</h2><p>No direction was dropped. Each is listed below with what stopped it and what would complete it. <strong>Server access.</strong> Therioserver (188.44.47.123) failed six OpenSSH attempts and one ssh-keyscan with "banner exchange: Connection timed out", and the user reports it as temporarily unavailable. DRAGEN (copilot@100.104.25.22) timed out twice. Tailscale reached it only by DERP relay while the laptop sat behind the NAU proxy, which is known to block Tailscale-carried SSH. The scan therefore ran on KIT, which forced four deviations. The 229-consensus local SINEBase copy replaced the 231-sequence <code>therioserver:/home/toki/SINEs_post2015.fas</code>, so up to two families are not scored. Three Rfam models replaced the full Rfam.cm. tRNAscan-SE, which is not installed on KIT, was replaced by GtRNAdb's own tRNAscan-SE output for intron coordinates. The Dfam curated SINE set at <code>therioserver:/home/toki/refs/dfam_current/</code> was not used. The ready therioserver pipeline, <code>C:\work\Raks_COI\research_notes\Pol III A and B boxes in SINEs\data\run_polIII_boxes.sh</code>, will redo the run with all four restored once the server answers.</p>
+<p><strong>Computation not yet done.</strong> No copy-level box census of SINEs in any genome was made, only family consensi, so decay among genomic copies, which drives the Carrière and Oler occupancy results, is unmeasured here. The SINEBase website head annotations (column <code>head_SINEBase</code>) are still empty, so the "none" class mixes decayed tRNA heads, U-snRNA heads and true non-RNA cases. No tRNA isotype was assigned. The matrices are trained on human hg19 tRNAs only. Plant, insect or fish tRNA training sets would be needed for those SINEs. The null uses 20 shuffles per consensus, which is coarse. The minus strand was not scanned. No box-quality-vs-occupancy test was run for human Alu, although Oler's occupied loci would allow one. A position-weight-to-activity calibration, which the notes report as never published, was not attempted.</p>
+<p><strong>Literature access.</strong> Programmatic access to PMC, Europe PMC, Cell, Nature and Wiley was bot-blocked (HTTP 403 or reCAPTCHA). nature.com was blocked for both the web fetcher and the browser. Annual Reviews returned 403, ScienceDirect 403, CSHL redirected to a sign-in page, and Springer redirected to login. The Pavesi 1994 PDF sat behind a download gate. The Lowe thesis host refused connections, and the web archive was blocked. Many pre-1997 NAR, PNAS, EMBO J and MCB papers are free in PMC only as page images, so their figures, tables and box strings could not be read. Only the OCR text layer was available, and that is the source of the 12-letter Perez-Stable A-box string. The supplementary parameter table of SINE_Scan and the AnnoSINE_v2 methods text were not reached, so the code was used instead. Several recent papers were read at abstract level only, so their numbers are abstract-level: ChAHP 2026, Matharu 2025, Moldovan 2025, DRAP3R 2026, Bennett 2008, Barski 2010, Raha 2010, and the Ferrari 2020 journal version (the preprint was read). Whether Matharu's 165,087-haplotype library covers box positions is therefore unknown.</p>
+<p><strong>Items that could not be located or verified.</strong> These are a published quantitative A-box-vs-B-box retrotransposition experiment; a TFIIIC or Pol III structure on any SINE template; a cross-family census of B-box decay; a SINE-specific revised A/B consensus from the Kramerov lab; the Galli 1981 printed strings; the PMID of Kassavetis 1990; the volume and pages of Schmid 1998; Koval et al. 2011; Kramerov et al. 1979; and the "31–93 bp" range credited to Geiduschek 1988. Each is a statement about the search, not about the world. A library copy, or a pointer to another name or journal, would change these answers.</p></section><section id="conclusion"><h2>Conclusion</h2><p>The forty-five-year arc has a simple shape. The 1982 guess that a factor binds the B block and the A block merely positions the polymerase turned out to be right in detail, down to the residues. What changed is where the action is for SINEs. It is not in recognition, which TFIIIC performs on thousands of Alus, but in the TFIIIB step that the shape-read A box serves. Repressors (ChAHP), viral activators (e1a) and the insertion-site −31/−24 sequence all act at that step. This reframes "promoter decay". A SINE copy can lose activity through B-box erosion (binding), A-box or upstream erosion (positioning), chromatin, or 3′-module decay, and only the first two are visible in a box score.</p>
+<p>The new scan turns that into a working rule for SINE annotation. Across 229 families, a tRNA-grade B box is the more robust signature, at 88 % against 69 % for the A box. The boxes persist after Rfam can no longer see the head, so a box pair is good corroboration of a degraded tRNA head. A box score is not a liveness test, though, and for 7SL-type heads a low A score is the expected state, not a defect. The experiment the field still lacks is now technically easy. It would put A-box and B-box point mutants into the CMV-driven Alu or B2 retrotransposition assay and into the 2025 massively parallel jumping library. That would give the first box-to-activity calibration and settle the Alu A-versus-B dispute on its merits.</p></section>
+</main>
+</div>
+<footer class="wrap"><p><a href="pol3-a-b-boxes.html">Plain-text version of this review</a> &middot; <a href="https://toki-bio.github.io/knowlege/">Knowledge base</a>. Built from the research report <code>C:\work\Raks_COI\reports\Pol III A and B boxes in SINEs.md</code> and the scan table <code>per_consensus.tsv</code> in the research notes folder. The scan ran on KIT at <code>/data/V/toki/polIII_boxes_20261025/</code>. Written 25 October 2026. Where a source could not be reached, the text says &ldquo;could not locate&rdquo; or &ldquo;full text not reached&rdquo;; it never says a paper does not exist.</p></footer>
+<script>window.SCAN=[{"n":"CQ-1","l":672,"h":"tRNA","a":"TGGCTGACTGG","ap":"11","A":7.85,"b":"GGTTCGATGCC","bp":"55","B":14.32,"s":44,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"CQ-4","l":593,"h":"tRNA","a":"TGGCTTAATGG","ap":"11","A":14.35,"b":"GGTTCGATTCC","bp":"55","B":18.53,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SINE3","l":573,"h":"5S","a":"TGGNTGAGGAG","ap":"487","A":3.46,"b":"GCTTTGAGTGC","bp":"523","B":-5.62,"s":36,"ap1":0,"bp1":0,"pp1":0,"dm":0},{"n":"Bfl7","l":551,"h":"tRNA","a":"TGGCGCAGTCG","ap":"12","A":13.76,"b":"GGTTCGAACCC","bp":"56","B":17.88,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Cre-1","l":532,"h":"none","a":"TGGTGCAGAAG","ap":"197","A":3.92,"b":"GGTTCAAGACA","bp":"231","B":7.73,"s":34,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"AcaNinDC","l":524,"h":"tRNA","a":"TGGCCTAGAGG","ap":"13","A":9.79,"b":"GGTTCGAATCC","bp":"56","B":19.17,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"BbeA9","l":514,"h":"tRNA","a":"TGGCGCAATCG","ap":"12","A":11.92,"b":"GGTTCGAACCC","bp":"56","B":17.88,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Cre-4","l":512,"h":"none","a":"CGGTACAGGGG","ap":"80","A":1.18,"b":"TATTCAAATCA","bp":"104","B":-0.9,"s":24,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"Cre-3","l":506,"h":"tRNA","a":"TGGTGCAGGGA","ap":"148","A":4.54,"b":"AGTTCAAGATC","bp":"210","B":3.39,"s":62,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"AnolisSINE2","l":481,"h":"none","a":"TGGCGCAGGCT","ap":"13","A":1.54,"b":"AGTTCGAGGCC","bp":"69","B":10.72,"s":56,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"LF","l":481,"h":"tRNA","a":"TGGCTCAGTGG","ap":"11","A":16.8,"b":"GGTTCAAATCC","bp":"64","B":17.7,"s":53,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"OS","l":477,"h":"5S","a":"TGCTGGAAGTG","ap":"93","A":-0.58,"b":"GGGACATTGCC","bp":"179","B":-11.77,"s":86,"ap1":0,"bp1":0,"pp1":0,"dm":0},{"n":"SlmII","l":465,"h":"none","a":"TGGCGCAGTCG","ap":"14","A":13.76,"b":"GGTTCGCGCCC","bp":"73","B":6.99,"s":59,"ap1":1,"bp1":0,"pp1":0,"dm":0},{"n":"SacSINE1","l":463,"h":"tRNA","a":"TGGCTCAGTTG","ap":"8","A":14.71,"b":"GGTTCAAGTCC","bp":"52","B":16.52,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Bm1","l":447,"h":"none","a":"TGGCCTAAAGG","ap":"11","A":7.96,"b":"TGTTCGAATCC","bp":"62","B":13.55,"s":51,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"BbeA6","l":446,"h":"tRNA","a":"TGGCGTAACGG","ap":"12","A":11.55,"b":"GGTTCGAATCC","bp":"55","B":19.17,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Idio2","l":431,"h":"none","a":"TGGCTCAGTGG","ap":"12","A":16.8,"b":"GGTTCGAATCC","bp":"56","B":19.17,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Asu1","l":419,"h":"tRNA","a":"TAGCGTAGTTG","ap":"9","A":13.26,"b":"GGTTCGATTCC","bp":"53","B":18.53,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"CQ-3","l":414,"h":"tRNA","a":"TGGTGTAGGGG","ap":"11","A":12.05,"b":"GGTTCGATCCC","bp":"54","B":17.24,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"DAS-III","l":412,"h":"tRNA","a":"TGGCCCAGTGG","ap":"13","A":16.17,"b":"GGTTCAAACCC","bp":"57","B":16.41,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"OK","l":411,"h":"none","a":"TGGCTGTGTGG","ap":"12","A":5.17,"b":"GGTTCAGTCCC","bp":"55","B":6.07,"s":43,"ap1":0,"bp1":0,"pp1":0,"dm":0},{"n":"BbeA8","l":407,"h":"tRNA","a":"TGGTGTAGTGG","ap":"12","A":14.55,"b":"GGTTCGATTCC","bp":"55","B":18.53,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"EC-1","l":407,"h":"tRNA","a":"TGGTCTAGTGG","ap":"13","A":14.51,"b":"GGTTTGTTTCC","bp":"56","B":5.85,"s":43,"ap1":1,"bp1":0,"pp1":0,"dm":0},{"n":"BbeA5","l":389,"h":"tRNA","a":"TGGCGTAGTCG","ap":"12","A":13.14,"b":"GGTTCGAATCC","bp":"56","B":19.17,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"DANA","l":389,"h":"tRNA","a":"TGGCGCAGTAG","ap":"11","A":10.72,"b":"GGTTCGAGCCT","bp":"55","B":13.75,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"BbeA1","l":387,"h":"tRNA","a":"TGGCGCAGTCG","ap":"12","A":13.76,"b":"GGTTCGAATCC","bp":"56","B":19.17,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Taluc","l":387,"h":"none","a":"TGGACTAGTGG","ap":"12","A":6.41,"b":"GGTTCGATCCC","bp":"56","B":17.24,"s":44,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"NV-3","l":386,"h":"tRNA","a":"TAGCTCTGTTG","ap":"339","A":4.76,"b":"GGTGGAAATAG","bp":"372","B":-17.74,"s":33,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"HaSE1","l":385,"h":"tRNA","a":"TGGCCTAGTGG","ap":"10","A":15.55,"b":"GGTTCGATTCC","bp":"54","B":18.53,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"OR1","l":385,"h":"none","a":"TGGCCCAGTGG","ap":"13","A":16.17,"b":"GTTTCGATTCC","bp":"57","B":8.82,"s":44,"ap1":1,"bp1":0,"pp1":0,"dm":0},{"n":"Bfl1","l":383,"h":"tRNA","a":"TGGCGCAGCGG","ap":"13","A":14.0,"b":"AGTCCGAATCC","bp":"56","B":6.4,"s":43,"ap1":1,"bp1":0,"pp1":0,"dm":0},{"n":"Oegop","l":383,"h":"none","a":"TGGCGTAGTCG","ap":"12","A":13.14,"b":"AGTTCAAACTC","bp":"55","B":6.47,"s":43,"ap1":1,"bp1":0,"pp1":0,"dm":0},{"n":"AC1","l":376,"h":"tRNA","a":"TGGTGTGGTGG","ap":"11","A":6.43,"b":"GGTTCGATCCC","bp":"55","B":17.24,"s":44,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"BbeA3","l":372,"h":"tRNA","a":"TGGCGCAGCGG","ap":"12","A":14.0,"b":"GGTTCGATCCC","bp":"55","B":17.24,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"BbeA4","l":372,"h":"tRNA","a":"TGGCGCAGCGG","ap":"12","A":14.0,"b":"AGTTCGATCCC","bp":"55","B":14.19,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"DAS-IIb","l":372,"h":"none","a":"TGGCTCAAGTG","ap":"206","A":10.37,"b":"GGTTCNGTTCC","bp":"250","B":5.28,"s":44,"ap1":1,"bp1":0,"pp1":0,"dm":0},{"n":"EbuSINE2","l":370,"h":"none","a":"TCCCTCAGATG","ap":"134","A":-2.83,"b":"ATTACAAATTC","bp":"250","B":-11.65,"s":116,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"BbeA2","l":367,"h":"tRNA","a":"TGGCGCAGCGG","ap":"12","A":14.0,"b":"GGTTCGATCCC","bp":"55","B":17.24,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SP-3","l":365,"h":"tRNA","a":"TGGCTCAGTCG","ap":"12","A":14.35,"b":"GGTTCGACTCC","bp":"56","B":15.94,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"HaSE3","l":364,"h":"none","a":"TGGCGCGGTCG","ap":"63","A":5.63,"b":"GGCACGATAAA","bp":"126","B":-14.23,"s":63,"ap1":0,"bp1":0,"pp1":0,"dm":0},{"n":"LgiNinDC","l":362,"h":"none","a":"TGGCTCAGTGA","ap":"12","A":8.68,"b":"GGTTCAATCCC","bp":"56","B":15.77,"s":44,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"SB7","l":362,"h":"tRNA","a":"TAGCCTATTGG","ap":"13","A":5.96,"b":"GGTTCAAATCC","bp":"57","B":17.7,"s":44,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"EbuSINE1","l":355,"h":"none","a":"TGGCCTAGAGG","ap":"13","A":9.79,"b":"GGTTTGAATCC","bp":"56","B":13.39,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SP-6","l":354,"h":"tRNA","a":"TGGTCGAGTGG","ap":"13","A":13.2,"b":"GGTTCAANTCC","bp":"58","B":14.83,"s":45,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SM-alpha","l":353,"h":"tRNA","a":"TAGCTGAGTGG","ap":"48","A":14.64,"b":"GGTTCGAGTCC","bp":"92","B":17.98,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Sauria","l":350,"h":"none","a":"TGGCTCAGTGG","ap":"11","A":16.8,"b":"GGTTCGAATCC","bp":"66","B":19.17,"s":55,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"5S-Sauria","l":348,"h":"5S","a":"TAGATCAATAG","ap":"170","A":0.1,"b":"GCACCAACCCC","bp":"289","B":-8.64,"s":119,"ap1":0,"bp1":0,"pp1":0,"dm":0},{"n":"HE1","l":348,"h":"tRNA","a":"TAGCNCAGTGG","ap":"12","A":13.89,"b":"GGTTCGATTCC","bp":"56","B":18.53,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"CteNinDC","l":343,"h":"none","a":"TAGCTCAGTGG","ap":"12","A":16.56,"b":"GGTTCGAGACC","bp":"74","B":14.8,"s":62,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Pca-1","l":342,"h":"tRNA","a":"TGGTTCAGTGG","ap":"4","A":15.77,"b":"GGTTCGATTCC","bp":"47","B":18.53,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"NV-2","l":336,"h":"tRNA","a":"TGGCGCAGTTG","ap":"13","A":14.11,"b":"GGTTCGATTCC","bp":"71","B":18.53,"s":58,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"C","l":335,"h":"tRNA","a":"TGGCGCAGTAG","ap":"14","A":10.72,"b":"GGTTCGAGTCC","bp":"67","B":17.98,"s":53,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Bovc-tA2","l":329,"h":"tRNA","a":"TGGCTCAGCTG","ap":"132","A":12.5,"b":"GGTTCGATCCC","bp":"175","B":17.24,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"LmeSINE1","l":328,"h":"none","a":"TGGCTCAGTAG","ap":"14","A":11.31,"b":"GGTTCAAATCT","bp":"58","B":14.76,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Xt-2","l":328,"h":"none","a":"TGGCTCAGTGA","ap":"9","A":8.68,"b":"AGTTCAATCCC","bp":"53","B":12.72,"s":44,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"AFC","l":325,"h":"tRNA","a":"TGGCTCAAGAG","ap":"10","A":6.97,"b":"GGTTCGAGCCC","bp":"53","B":16.69,"s":43,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"Mac1","l":322,"h":"tRNA","a":"TGGTGCAGTGG","ap":"12","A":15.17,"b":"AGTTCAAATCT","bp":"56","B":11.71,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"CHRS-2","l":321,"h":"tRNA","a":"TGGCGCAGTGG","ap":"13","A":16.21,"b":"GGTTCGAGCCC","bp":"56","B":16.69,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"CM-1","l":320,"h":"tRNA","a":"TAGCTCAGTGG","ap":"12","A":16.56,"b":"NGTTCAATTCC","bp":"55","B":13.25,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Lun1","l":315,"h":"none","a":"TTGCCCAGTAG","ap":"273","A":3.47,"b":"CCTATGAACCT","bp":"295","B":-18.2,"s":22,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"Sepia","l":312,"h":"none","a":"TGGAGTAATGG","ap":"7","A":4.61,"b":"AGTTCGAATTC","bp":"51","B":9.23,"s":44,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"GA-1","l":308,"h":"none","a":"TGGGTGAGTGG","ap":"10","A":5.74,"b":"GGTTCGATCCC","bp":"54","B":17.24,"s":44,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"SB3","l":307,"h":"none","a":"TNGNCTAGTGG","ap":"14","A":9.05,"b":"GGTTCGATNCN","bp":"65","B":11.39,"s":51,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SB6","l":307,"h":"tRNA","a":"TGGCCCAGTGG","ap":"14","A":16.17,"b":"GGTTCGAATCC","bp":"67","B":19.17,"s":53,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"IscNinDC","l":300,"h":"none","a":"TGGCCGAGTGG","ap":"11","A":14.24,"b":"GGTTCGAGCCC","bp":"86","B":16.69,"s":75,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"B4","l":299,"h":"7SL","a":"TGGCTCAGTCG","ap":"14","A":14.35,"b":"AGTTCAGATCC","bp":"58","B":4.95,"s":44,"ap1":1,"bp1":0,"pp1":0,"dm":0},{"n":"Ras1","l":299,"h":"none","a":"TGGNTCNGTGG","ap":"2","A":9.39,"b":"GGTTNGAGCCT","bp":"46","B":9.78,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Cics-1","l":297,"h":"tRNA","a":"TGGCAAAGTGG","ap":"12","A":7.98,"b":"GGTTCAAGGCT","bp":"55","B":9.37,"s":43,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"MamSINE1","l":296,"h":"tRNA","a":"TAGCTCAGTTG","ap":"14","A":14.47,"b":"GGTTCGATCCC","bp":"59","B":17.24,"s":45,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"HaSE2","l":294,"h":"none","a":"TTGCTCAGCAG","ap":"258","A":1.9,"b":"AGGCTGATGAT","bp":"280","B":-23.3,"s":22,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"OsSN1","l":293,"h":"none","a":"TAGCCTAGTGG","ap":"14","A":15.31,"b":"GGTTCGACTCC","bp":"57","B":15.94,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Sepioth2A","l":293,"h":"tRNA","a":"TGGTGTAATGG","ap":"12","A":12.72,"b":"GGTATGAACCC","bp":"112","B":2.38,"s":100,"ap1":1,"bp1":0,"pp1":0,"dm":0},{"n":"SBi-1","l":292,"h":"tRNA","a":"TAGATCAGTTG","ap":"13","A":5.33,"b":"AGTTCGAATCC","bp":"58","B":16.12,"s":45,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"Sepioth1","l":292,"h":"none","a":"TGGTGTAATGG","ap":"12","A":12.72,"b":"AGTTCAAATCC","bp":"55","B":14.65,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Alu","l":290,"h":"7SL","a":"AGGCCGAGGCG","ap":"44","A":1.16,"b":"AGATCGAGACC","bp":"74","B":7.76,"s":30,"ap1":0,"bp1":0,"pp1":0,"dm":0},{"n":"OsSN2","l":290,"h":"none","a":"TAGCTCAACTG","ap":"13","A":10.42,"b":"GGTTCAAATCC","bp":"57","B":17.7,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"AFC-2","l":289,"h":"tRNA","a":"TAGCTCAGGAG","ap":"11","A":8.57,"b":"GGTTCGATCCC","bp":"56","B":17.24,"s":45,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"Tu-II","l":288,"h":"7SL","a":"TGGTCCAACCT","ap":"72","A":-1.07,"b":"AGCTCAANGCT","bp":"151","B":-1.51,"s":79,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"Talub","l":287,"h":"tRNA","a":"TGGCTCAGGCG","ap":"11","A":11.85,"b":"GGTTCGATCCC","bp":"54","B":17.24,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Bfl2","l":286,"h":"tRNA","a":"TGGCCTAGTGG","ap":"11","A":15.55,"b":"AGTTCGATCCC","bp":"55","B":14.19,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Feilai","l":286,"h":"tRNA","a":"TGTCCCAGTGG","ap":"247","A":6.46,"b":"AGAAAGAAGAA","bp":"270","B":-25.2,"s":23,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"FR-1","l":283,"h":"none","a":"TAGCTCAGTCT","ap":"10","A":4.4,"b":"GGTTCNAGCCC","bp":"54","B":13.14,"s":44,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"ACar-1","l":279,"h":"none","a":"TGGCGTAGTGG","ap":"12","A":15.59,"b":"GGTTCGAATCC","bp":"72","B":19.17,"s":60,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SaliS-V","l":278,"h":"none","a":"TAGCTCAGTGG","ap":"15","A":16.56,"b":"GGTTCGAGCTC","bp":"58","B":9.8,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SINE_type_II","l":276,"h":"7SL","a":"TAGCACAGTGG","ap":"15","A":14.19,"b":"GGTTCGAACCC","bp":"59","B":17.88,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SP-4","l":276,"h":"tRNA","a":"TGGTCGAGTGG","ap":"10","A":13.2,"b":"GGTTCGAGTCC","bp":"54","B":17.98,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Talud","l":273,"h":"tRNA","a":"TAGCGTAGTNG","ap":"6","A":11.88,"b":"GGTTCGAATCC","bp":"50","B":19.17,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Mon-1","l":272,"h":"tRNA","a":"TGGCCTAGTGG","ap":"13","A":15.55,"b":"GGTTCTAATCC","bp":"57","B":11.49,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"MEN","l":269,"h":"7SL","a":"TGGCTCAGCCG","ap":"14","A":12.14,"b":"GGTTCNATTCC","bp":"58","B":14.98,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"AvaIII","l":268,"h":"tRNA","a":"TAGCCTGGCGG","ap":"13","A":4.98,"b":"GGATCGAATCC","bp":"58","B":15.18,"s":45,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"OR2","l":268,"h":"none","a":"TGGCTTAGTGG","ap":"12","A":16.19,"b":"GTTTCGATTCC","bp":"56","B":8.82,"s":44,"ap1":1,"bp1":0,"pp1":0,"dm":0},{"n":"Idio1","l":267,"h":"none","a":"TGGCCCAGTGG","ap":"13","A":16.17,"b":"AGTTCNAATCC","bp":"57","B":12.57,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"NV-1","l":266,"h":"tRNA","a":"TGGCCCAGTGT","ap":"13","A":6.46,"b":"GGTTCGATTCC","bp":"67","B":18.53,"s":54,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"CELE45","l":264,"h":"none","a":"TAGCTCAGTCG","ap":"10","A":14.11,"b":"AGTTCAAGTCC","bp":"54","B":13.47,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"TAL","l":263,"h":"none","a":"TGGCGCAGTGG","ap":"13","A":16.21,"b":"GGTTCGATCCC","bp":"67","B":17.24,"s":54,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Ther-1","l":263,"h":"tRNA","a":"TGGCGCAGTGG","ap":"7","A":16.21,"b":"GGTTCGAATCC","bp":"51","B":19.17,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Otri","l":262,"h":"tRNA","a":"TGGTGTAGGGG","ap":"10","A":12.05,"b":"GGTTCAATCCC","bp":"54","B":15.77,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Talua","l":262,"h":"tRNA","a":"TCGTCCAGAGG","ap":"152","A":4.97,"b":"GGCCCTAGGCC","bp":"218","B":-9.76,"s":66,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"ERE-A","l":261,"h":"none","a":"TGGCCGAGTGG","ap":"14","A":14.24,"b":"GGTTCGGATCC","bp":"66","B":9.46,"s":52,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"BmSE","l":259,"h":"tRNA","a":"TGGTGTAGTGG","ap":"11","A":14.55,"b":"GGTTCGAATCC","bp":"55","B":19.17,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SP-1","l":259,"h":"tRNA","a":"TGGCTCAGTCA","ap":"12","A":6.23,"b":"GGTTCGAACCC","bp":"56","B":17.88,"s":44,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"Mar1","l":258,"h":"none","a":"TGGCGCAGTGG","ap":"13","A":16.21,"b":"AGTTCAAATCT","bp":"65","B":11.71,"s":52,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Tu-III","l":258,"h":"none","a":"TGGTGTAATGG","ap":"13","A":12.72,"b":"GGTTCGAGTCC","bp":"56","B":17.98,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"DR-1","l":256,"h":"none","a":"TTGTTGAATCG","ap":"179","A":2.35,"b":"TCCTCAATTGT","bp":"199","B":-15.46,"s":20,"ap1":0,"bp1":0,"pp1":0,"dm":0},{"n":"SolS-IIIb","l":256,"h":"none","a":"TGACTCAGTTG","ap":"13","A":5.0,"b":"GGATCGATCCC","bp":"57","B":13.25,"s":44,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"SK","l":250,"h":"tRNA","a":"TAGCTCAGTCG","ap":"6","A":14.11,"b":"GGTTCGATACC","bp":"50","B":15.35,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"ERE-B2","l":249,"h":"none","a":"TGGCCTAGTGG","ap":"14","A":15.55,"b":"GGTTCGGATCC","bp":"66","B":9.46,"s":52,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"CQ-2","l":248,"h":"tRNA","a":"TGGATCAATCG","ap":"14","A":3.38,"b":"GGTTCGAATCC","bp":"59","B":19.17,"s":45,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"CQ-5","l":247,"h":"tRNA","a":"TGGCGCGGTGG","ap":"7","A":8.08,"b":"GGTTCGATTCC","bp":"61","B":18.53,"s":54,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"WallSI4","l":245,"h":"tRNA","a":"TGGCATAGTGG","ap":"12","A":13.81,"b":"GGTTCAAGTCC","bp":"56","B":16.52,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"PRE-1","l":243,"h":"none","a":"TGGCTCAGTGG","ap":"16","A":16.8,"b":"GATTCAATCCC","bp":"59","B":8.39,"s":43,"ap1":1,"bp1":0,"pp1":0,"dm":0},{"n":"Ped-1","l":243,"h":"5S","a":"TACTTGGATGG","ap":"60","A":-3.74,"b":"CATTGAAAACC","bp":"134","B":-12.07,"s":74,"ap1":0,"bp1":0,"pp1":0,"dm":0},{"n":"SP-2","l":243,"h":"tRNA","a":"TGGCTCAGTGG","ap":"13","A":16.8,"b":"GGTTCGAACCC","bp":"57","B":17.88,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Sepioth2B","l":242,"h":"none","a":"TGGTGTAATGG","ap":"12","A":12.72,"b":"GGTATGAACCC","bp":"112","B":2.38,"s":100,"ap1":1,"bp1":0,"pp1":0,"dm":0},{"n":"Ruka","l":241,"h":"tRNA","a":"TGGTCTAGTGG","ap":"12","A":14.51,"b":"GGTTCAAATCC","bp":"56","B":17.7,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SolS-IIIa","l":241,"h":"none","a":"TGGCCCAGTGG","ap":"12","A":16.17,"b":"AGTTCGAAACC","bp":"56","B":12.94,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"PinS-I","l":237,"h":"none","a":"TGTTGTAATGG","ap":"102","A":3.01,"b":"GGTACCATCCT","bp":"170","B":-4.68,"s":68,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"SP-5","l":237,"h":"tRNA","a":"TGGTATAGTGG","ap":"12","A":12.77,"b":"GGTTCGAATCC","bp":"56","B":19.17,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SP-D-Geo","l":237,"h":"7SL","a":"TGGCTCAAGTG","ap":"145","A":10.37,"b":"AGTTCAAGCCC","bp":"207","B":12.18,"s":62,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SB13","l":235,"h":"none","a":"TGGCCTAGTGG","ap":"11","A":15.55,"b":"GGTTCGATTCG","bp":"56","B":10.6,"s":45,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SolS-VI","l":235,"h":"none","a":"TGGTGCACTTG","ap":"136","A":6.05,"b":"GGTGCAAATCA","bp":"216","B":2.39,"s":80,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"MEG-T2","l":232,"h":"tRNA","a":"TAGTGTAGTGG","ap":"13","A":14.31,"b":"GGTTCGCGCCC","bp":"57","B":6.99,"s":44,"ap1":1,"bp1":0,"pp1":0,"dm":0},{"n":"Lam1","l":228,"h":"tRNA","a":"TGGNCCAGNNG","ap":"12","A":5.77,"b":"GGTTCGATTCC","bp":"56","B":18.53,"s":44,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"AFC-3","l":227,"h":"tRNA","a":"TAGCTCAGTAG","ap":"11","A":11.07,"b":"GGTTCGAATCC","bp":"55","B":19.17,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"STRIDM","l":227,"h":"tRNA","a":"TGGCTCAGTGG","ap":"13","A":16.8,"b":"GGTTCGATCCT","bp":"56","B":14.3,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":1},{"n":"SlmI","l":227,"h":"tRNA","a":"TGGCGCAGCGG","ap":"13","A":14.0,"b":"GGTTCGATTCC","bp":"69","B":18.53,"s":56,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Twin","l":227,"h":"tRNA","a":"TCGACTAGCGG","ap":"145","A":-0.2,"b":"AGTTCGATTCT","bp":"185","B":12.54,"s":40,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"SolS-II","l":226,"h":"none","a":"TGGCCTAGTGG","ap":"14","A":15.55,"b":"GGTTCAAATCC","bp":"58","B":17.7,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"UnaSINE1","l":225,"h":"none","a":"TAGCACAGTGG","ap":"8","A":14.19,"b":"GGTTCGATTCC","bp":"52","B":18.53,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Xt-1","l":223,"h":"none","a":"TGGCCTAGAGG","ap":"7","A":9.79,"b":"GGTTTGATTCC","bp":"62","B":12.75,"s":55,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"AfroSINE","l":222,"h":"tRNA","a":"TGGCATAGTGG","ap":"12","A":13.81,"b":"AGTTCNAATCC","bp":"56","B":12.57,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SB9","l":222,"h":"none","a":"TGGTCTAGTGG","ap":"11","A":14.51,"b":"GGTTCGAGCCT","bp":"54","B":13.75,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"B1-dID","l":221,"h":"7SL","a":"TGGCTCAGTGG","ap":"161","A":16.8,"b":"GGTTCAATCCC","bp":"185","B":15.77,"s":24,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SolS-VII","l":221,"h":"none","a":"TAGCTCAGCTG","ap":"14","A":12.26,"b":"AGTTCGAGCCC","bp":"59","B":13.64,"s":45,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"ScroS-I","l":220,"h":"tRNA","a":"TGGCCTAGCGG","ap":"12","A":13.34,"b":"AGTTCGAATCC","bp":"55","B":16.12,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"VES","l":220,"h":"tRNA","a":"TGGCTCAGTGG","ap":"14","A":16.8,"b":"GGTTCGATTCC","bp":"58","B":18.53,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"CQ-6","l":218,"h":"tRNA","a":"TGGCGCAGGGG","ap":"11","A":13.7,"b":"GGTTCGATTCC","bp":"64","B":18.53,"s":53,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"CucuS-I","l":216,"h":"none","a":"TGGCCTAGTGG","ap":"14","A":15.55,"b":"GGTTCAATCCA","bp":"68","B":10.17,"s":54,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SB15","l":216,"h":"none","a":"TGGCCTGGTGG","ap":"14","A":7.43,"b":"GGTTCGAGTCC","bp":"58","B":17.98,"s":44,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"FabaS-IV","l":215,"h":"none","a":"TGGCCTAGTGG","ap":"15","A":15.55,"b":"GGTTCGATTCC","bp":"66","B":18.53,"s":51,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Ther-2","l":215,"h":"tRNA","a":"TGGTACAGTGG","ap":"12","A":13.39,"b":"GGTTCAAATCC","bp":"56","B":17.7,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"DAS-IIa","l":214,"h":"tRNA","a":"TGGCTCAGTGG","ap":"137","A":16.8,"b":"GGTTCAATCCC","bp":"180","B":15.77,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"CYN-III","l":213,"h":"none","a":"TGGCTGAGCGA","ap":"102","A":4.54,"b":"GGTTGCATCCC","bp":"131","B":-1.71,"s":29,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"SP-7","l":211,"h":"tRNA","a":"TAGCTCAGTCG","ap":"13","A":14.11,"b":"GGTTCGAAACC","bp":"56","B":15.99,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Bov-tA","l":210,"h":"tRNA","a":"TGGCTCAGATG","ap":"13","A":8.95,"b":"GGTTCNATCCC","bp":"56","B":13.69,"s":43,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"B2","l":209,"h":"tRNA","a":"TGGCTCAGTGG","ap":"13","A":16.8,"b":"AGTTCAATTCC","bp":"58","B":14.01,"s":45,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"DIP","l":208,"h":"tRNA","a":"TGGCTCAGNGG","ap":"13","A":13.3,"b":"GGTTCGATTCC","bp":"57","B":18.53,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SP-7_2","l":208,"h":"tRNA","a":"TGGCTCAGTGG","ap":"11","A":16.8,"b":"GGTTCGAAACC","bp":"54","B":15.99,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"MEG-RL","l":207,"h":"5S","a":"TGCTGTAGGCG","ap":"109","A":2.21,"b":"GGATTGTAAGC","bp":"139","B":-10.38,"s":30,"ap1":0,"bp1":0,"pp1":0,"dm":0},{"n":"Squam2","l":206,"h":"tRNA","a":"TAGCTCAGTGG","ap":"7","A":16.56,"b":"GGTTCAATCCC","bp":"50","B":15.77,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SINE200","l":205,"h":"tRNA","a":"TAGTACAGTCG","ap":"11","A":10.7,"b":"GGTTCAANCCC","bp":"56","B":13.54,"s":45,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Mad-2","l":203,"h":"none","a":"TGGCCCAGTGG","ap":"14","A":16.17,"b":"AGTTCGATTCC","bp":"68","B":15.48,"s":54,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Opo-1","l":203,"h":"none","a":"TGGCTCAGTGG","ap":"13","A":16.8,"b":"GGTTCAAATCT","bp":"57","B":14.76,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SolS-IV","l":203,"h":"none","a":"TAGCTCAAGTG","ap":"13","A":10.13,"b":"GGTTCAAGCCC","bp":"57","B":15.23,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Lj-2","l":201,"h":"none","a":"TGGCACAAGTG","ap":"13","A":7.99,"b":"GGTTCGATCCC","bp":"70","B":17.24,"s":57,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"Cry","l":200,"h":"tRNA","a":"TAGCTCAGTGG","ap":"9","A":16.56,"b":"AGTTCAATCCT","bp":"52","B":9.78,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"PTr-1","l":197,"h":"none","a":"TGGCCCAGTGG","ap":"16","A":16.17,"b":"GGTTCGAGCCC","bp":"69","B":16.69,"s":53,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Ped-2","l":197,"h":"tRNA","a":"TAGCTCAGTTG","ap":"12","A":14.47,"b":"AGTTCAATTCC","bp":"56","B":14.01,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"ERI-2","l":196,"h":"none","a":"TGGTGAAGCAG","ap":"103","A":1.02,"b":"TGTCCCTATCC","bp":"176","B":-12.32,"s":73,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"FabaS-VI","l":196,"h":"none","a":"TAGCTTAACCA","ap":"39","A":1.33,"b":"TGTTAAAACTC","bp":"88","B":-5.78,"s":49,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"MEG-TR","l":196,"h":"5S","a":"CGCCCCAGTGG","ap":"40","A":-0.92,"b":"GGGTCGGGCCT","bp":"120","B":-3.97,"s":80,"ap1":0,"bp1":0,"pp1":0,"dm":0},{"n":"FabaS-V","l":195,"h":"none","a":"TGGTCTAGTGG","ap":"14","A":14.51,"b":"GGTTCGAGCCC","bp":"58","B":16.69,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Lm1","l":195,"h":"tRNA","a":"TGGCCGAGGGG","ap":"12","A":11.74,"b":"GGTTCGAATCC","bp":"67","B":19.17,"s":55,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SaliS-IV","l":195,"h":"none","a":"TGGCCTAGCGG","ap":"14","A":13.34,"b":"GGTTCGAGCCT","bp":"57","B":13.75,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"IDL-Geo","l":194,"h":"tRNA","a":"TGGCNTAGTGG","ap":"13","A":13.51,"b":"GGTTCGATTCC","bp":"56","B":18.53,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":1},{"n":"Lj-3","l":192,"h":"tRNA","a":"TGGTGTAGTGG","ap":"12","A":14.55,"b":"GGTTCGAATCC","bp":"56","B":19.17,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"ERE-B1","l":190,"h":"tRNA","a":"TGGCCTAGTGG","ap":"14","A":15.55,"b":"GGTTCGGATCC","bp":"57","B":9.46,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"HpaI","l":189,"h":"tRNA","a":"TAGCCTAGTGG","ap":"13","A":15.31,"b":"AGTTCAAATCC","bp":"57","B":14.65,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SolS-I","l":189,"h":"none","a":"TGGTGCAGTGG","ap":"15","A":15.17,"b":"GGTTCGAGCCC","bp":"59","B":16.69,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Tu-I","l":189,"h":"7SL","a":"AGGCGTGGCGG","ap":"100","A":-2.87,"b":"GGATCGCGATA","bp":"153","B":-11.39,"s":53,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"Gecko","l":188,"h":"tRNA","a":"TGGTGTAGTGG","ap":"12","A":14.55,"b":"GGATCGAATCC","bp":"55","B":15.18,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Au","l":184,"h":"none","a":"TGGCGCAACTG","ap":"13","A":10.07,"b":"GGTTCGAGTCC","bp":"57","B":17.98,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"DR-2","l":184,"h":"none","a":"TAGCCTAGTGG","ap":"12","A":15.31,"b":"AGTTCGATTCC","bp":"66","B":15.48,"s":54,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"OsSN3","l":183,"h":"none","a":"TAGCCTAGTGG","ap":"14","A":15.31,"b":"AGTTCAAATCT","bp":"58","B":11.71,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"MARE3","l":182,"h":"tRNA","a":"TGGGCCAGTTA","ap":"59","A":-3.19,"b":"TGTTCCATGGC","bp":"92","B":-10.26,"s":33,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"Rhin-1","l":182,"h":"tRNA","a":"TNGCTCAGTTG","ap":"13","A":11.64,"b":"GGTTCGATTCC","bp":"58","B":18.53,"s":45,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SB1","l":180,"h":"none","a":"TAGTCCAGTGG","ap":"14","A":14.89,"b":"TGTTCGACTCG","bp":"57","B":2.39,"s":43,"ap1":1,"bp1":0,"pp1":0,"dm":0},{"n":"SB11","l":180,"h":"none","a":"TGGGCTAGTGG","ap":"14","A":6.41,"b":"AGTTCGATTCC","bp":"58","B":15.48,"s":44,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"SB12","l":180,"h":"none","a":"TGGGCTAGTGG","ap":"11","A":6.41,"b":"AGTTCGAGTCC","bp":"56","B":14.93,"s":45,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"SOR","l":179,"h":"tRNA","a":"TAGCACAGTGG","ap":"14","A":14.19,"b":"GGTTCGATTCC","bp":"57","B":18.53,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SaliS-III","l":178,"h":"none","a":"TAGCGTGATGG","ap":"15","A":5.39,"b":"AGTTCGAGTCA","bp":"58","B":9.33,"s":43,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"UCON3","l":178,"h":"tRNA","a":"TGGCTTAGTGG","ap":"14","A":16.19,"b":"GGTTCAAATCC","bp":"68","B":17.7,"s":54,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"FabaS-III","l":176,"h":"none","a":"GGCTCCAGTGG","ap":"15","A":-1.96,"b":"GGTTCGATTCC","bp":"64","B":18.53,"s":49,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"CAN","l":175,"h":"tRNA","a":"TGGCTCAGTCG","ap":"13","A":14.35,"b":"GGATCGAGCCC","bp":"68","B":12.7,"s":55,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"CYN-II","l":172,"h":"none","a":"TGGCGCACTNG","ap":"12","A":5.71,"b":"GGTTCGGATCC","bp":"65","B":9.46,"s":53,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"SB5","l":172,"h":"none","a":"TGGTCTGGTGG","ap":"13","A":6.39,"b":"AGTTCGAGCCC","bp":"57","B":13.64,"s":44,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"PTr-2","l":171,"h":"none","a":"TAGCTCAACTG","ap":"10","A":10.42,"b":"AGTTCGAGTCT","bp":"54","B":11.99,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Mad-1","l":169,"h":"none","a":"CGGTCTAGTGG","ap":"15","A":4.8,"b":"GGTTCGATTCT","bp":"58","B":15.59,"s":43,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"SB10","l":169,"h":"5S","a":"TGGTCTAGTGG","ap":"11","A":14.51,"b":"GGTTCGAGTCG","bp":"53","B":10.05,"s":42,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SB4","l":169,"h":"none","a":"TGGCCCAGTGG","ap":"14","A":16.17,"b":"GGTTCGAGGCA","bp":"49","B":8.17,"s":35,"ap1":1,"bp1":0,"pp1":0,"dm":0},{"n":"AfroLA","l":168,"h":"none","a":"TGGCGTAGTGG","ap":"12","A":15.59,"b":"AGTTCGAATCC","bp":"56","B":16.12,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"PoaS-I","l":166,"h":"none","a":"TAGCTTGGGTG","ap":"12","A":3.22,"b":"AGTTCGATCCT","bp":"56","B":11.25,"s":44,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"SB14","l":166,"h":"tRNA","a":"TAGCTCTGGTG","ap":"14","A":2.25,"b":"GGTTCGATTCC","bp":"59","B":18.53,"s":45,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"TS","l":161,"h":"tRNA","a":"GGGTCTATCGG","ap":"65","A":-6.76,"b":"AGTGGGATTAT","bp":"142","B":-14.98,"s":77,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"SB2","l":159,"h":"none","a":"TAGCTCAANTG","ap":"13","A":9.13,"b":"GGTTCGAGTGA","bp":"56","B":2.68,"s":43,"ap1":1,"bp1":0,"pp1":0,"dm":0},{"n":"ERI-1","l":158,"h":"none","a":"TGGCGCAGTGG","ap":"14","A":16.21,"b":"AGTTCAATCCC","bp":"58","B":12.72,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"vic-1","l":150,"h":"tRNA","a":"TAGCTCAGTGG","ap":"11","A":16.56,"b":"GGTTCAATCCC","bp":"54","B":15.77,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"RSINE1","l":149,"h":"none","a":"TGGCTCAGTGG","ap":"14","A":16.8,"b":"AGTTCGATCCC","bp":"58","B":14.19,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"ID-Spe","l":146,"h":"tRNA","a":"TGGCTCAGTGG","ap":"14","A":16.8,"b":"GGTTTGATCCT","bp":"57","B":8.52,"s":43,"ap1":1,"bp1":0,"pp1":0,"dm":0},{"n":"TUB","l":146,"h":"none","a":"TGGCATGGTGG","ap":"13","A":5.69,"b":"GGTTCGAGTCC","bp":"57","B":17.98,"s":44,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"B1","l":145,"h":"7SL","a":"GGGCATGGTGG","ap":"4","A":-4.02,"b":"AGTTCGAGGCC","bp":"65","B":10.72,"s":61,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"Lj-1","l":145,"h":"tRNA","a":"TAGCTCAAGTG","ap":"13","A":10.13,"b":"GGTTCGAACCC","bp":"75","B":17.88,"s":62,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"BraS-I","l":144,"h":"none","a":"TAGTCAAGTGG","ap":"14","A":8.44,"b":"AGTTCGACTCC","bp":"57","B":12.89,"s":43,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"FabaS-I","l":141,"h":"tRNA","a":"TAGCTCAACTG","ap":"13","A":10.42,"b":"GGTTCGAACCC","bp":"63","B":17.88,"s":50,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"NymS-I","l":141,"h":"none","a":"TGGTATGGTTG","ap":"81","A":2.56,"b":"TGCCTAACCCC","bp":"109","B":-14.08,"s":28,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"SmaI","l":140,"h":"tRNA","a":"TAGCTCAGTTG","ap":"11","A":14.47,"b":"GGTTCGATTCC","bp":"55","B":18.53,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"TguSINE1","l":140,"h":"tRNA","a":"TAGCTCAGTTG","ap":"5","A":14.47,"b":"GGTTTGATCCC","bp":"50","B":11.46,"s":45,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"Mar3","l":139,"h":"none","a":"TGGCACAGTGG","ap":"14","A":14.43,"b":"AGTTCAAATCT","bp":"58","B":11.71,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"FabaS-VII","l":134,"h":"tRNA","a":"TAGCTCAGNTG","ap":"14","A":10.97,"b":"GGTTCGAACCC","bp":"58","B":17.88,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SS-1","l":131,"h":"tRNA","a":"TGGCTCAGNGG","ap":"13","A":13.3,"b":"GGTTTGATCCC","bp":"76","B":11.46,"s":63,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"FabaS-IX","l":130,"h":"tRNA","a":"TGGCTTGGTGG","ap":"14","A":8.06,"b":"GGTTCGAATCC","bp":"68","B":19.17,"s":54,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"FabaS-II","l":126,"h":"none","a":"TGGCCTAGTGG","ap":"14","A":15.55,"b":"GGTTCGATTCT","bp":"68","B":15.59,"s":54,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"pB1","l":126,"h":"7SL","a":"GGGCGCGGTGG","ap":"4","A":-1.62,"b":"AGTTCGAGGCC","bp":"75","B":10.72,"s":71,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"FabaS-VIII","l":125,"h":"tRNA","a":"TAGCTCAACTG","ap":"10","A":10.42,"b":"GGTTCAAACCC","bp":"55","B":16.41,"s":45,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"PoaS-II","l":125,"h":"none","a":"TGGTGGAGTTG","ap":"22","A":11.15,"b":"GGTTCAAATCC","bp":"57","B":17.7,"s":35,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"p-SINE1","l":124,"h":"none","a":"TAGCCGACCTG","ap":"47","A":2.67,"b":"AGGTCCTTCCC","bp":"94","B":-9.99,"s":47,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"Fc-1_cat","l":121,"h":"tRNA","a":"TGGCTCAGTCG","ap":"13","A":14.35,"b":"AGTTCGAGCCC","bp":"57","B":13.64,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"CHRS-1","l":119,"h":"tRNA","a":"TGGTCCAGTGG","ap":"14","A":15.13,"b":"GGTTCAATCCC","bp":"58","B":15.77,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SolS-V","l":117,"h":"none","a":"TGCTCGGATGG","ap":"14","A":-4.14,"b":"AGTTCGAGTCA","bp":"58","B":9.33,"s":44,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"Fc-1","l":115,"h":"tRNA","a":"TGGCTCAGTCG","ap":"13","A":14.35,"b":"AGTTCGAGCCC","bp":"57","B":13.64,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"CucuS-II","l":108,"h":"tRNA","a":"TAGCTCAACTG","ap":"14","A":10.42,"b":"GGTTCAAATCC","bp":"58","B":17.7,"s":44,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SB8","l":105,"h":"none","a":"TAGCCTAGTGG","ap":"13","A":15.31,"b":"GGTTCGAGTCC","bp":"58","B":17.98,"s":45,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"VitaS-I","l":103,"h":"none","a":"TGGCTCAAGTG","ap":"13","A":10.37,"b":"GGTTCAAGTCC","bp":"58","B":16.52,"s":45,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"EuphS-I","l":93,"h":"none","a":"TAGCCTGGTGG","ap":"14","A":7.19,"b":"GGTTCGACTCC","bp":"57","B":15.94,"s":43,"ap1":0,"bp1":1,"pp1":0,"dm":0},{"n":"MyrSINE","l":93,"h":"tRNA","a":"TGGCTCAGCAG","ap":"14","A":9.1,"b":"GGTTCGATTCC","bp":"57","B":18.53,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"SINE_type_III","l":93,"h":"tRNA","a":"TGGCTCAAAGG","ap":"13","A":9.21,"b":"GGTTCAAACCC","bp":"58","B":16.41,"s":45,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"CYN-I","l":89,"h":"tRNA","a":"TAGCTCAGTTG","ap":"8","A":14.47,"b":"GGTTCAAATTC","bp":"51","B":10.81,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"DAS-I","l":87,"h":"tRNA","a":"TAGCTCAGTGG","ap":"12","A":16.56,"b":"GGTTCAATCCC","bp":"55","B":15.77,"s":43,"ap1":1,"bp1":1,"pp1":1,"dm":0},{"n":"ID","l":85,"h":"tRNA","a":"TAGCTCAGTGG","ap":"14","A":16.56,"b":"GGTTCGGTCCT","bp":"57","B":4.6,"s":43,"ap1":1,"bp1":0,"pp1":0,"dm":0}];</script>
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function store(k,v){try{if(v===undefined){return localStorage.getItem(k)}localStorage.setItem(k,v)}catch(e){return null}}
+
+/* ---------- table of contents scroll spy ---------- */
+try{
+ var links=$$(".toc a"),secs=links.map(function(a){return $(a.getAttribute("href"))});
+ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.removeAttribute("aria-current")});var i=secs.indexOf(e.target);if(i>-1){links[i].setAttribute("aria-current","true")}}})},{rootMargin:"-20% 0px -70% 0px"});
+ secs.forEach(function(s){if(s)io.observe(s)});
+}catch(e){}
+
+/* ---------- timeline filter ---------- */
+(function(){
+ var t=$("#t-timeline");if(!t)return;
+ var rows=$$("tbody tr",t),era="all",q="";
+ rows.forEach(function(r){var m=r.cells[0].textContent.match(/\d{4}/);r._y=m?parseInt(m[0],10):0;r._t=r.textContent.toLowerCase()});
+ var eras={all:[0,9999],e1:[1978,1985],e2:[1986,1999],e3:[2000,2012],e4:[2013,2026]};
+ function apply(){var n=0;rows.forEach(function(r){var e=eras[era];var ok=r._y>=e[0]&&r._y<=e[1]&&(!q||r._t.indexOf(q)>-1);r.hidden=!ok;if(ok)n++});$("#tl-n").textContent=n+" of "+rows.length+" rows"}
+ $$("#tl-chips button").forEach(function(b){b.addEventListener("click",function(){era=b.dataset.era;$$("#tl-chips button").forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});apply()})});
+ $("#tl-q").addEventListener("input",function(e){q=e.target.value.trim().toLowerCase();apply()});
+ apply();
+})();
+
+/* ---------- library checklist ---------- */
+(function(){
+ var t=$("#t-library");if(!t)return;
+ var rows=$$("tbody tr",t),KEY="polIII_library_found_v1",got={};
+ try{got=JSON.parse(store(KEY)||"{}")||{}}catch(e){got={}}
+ var hr=$("thead tr",t),th=document.createElement("th");th.className="chk";th.textContent="Found";hr.insertBefore(th,hr.firstChild);
+ var filt="all",q="";
+ rows.forEach(function(r,i){
+  var td=document.createElement("td");td.className="chk";
+  var c=document.createElement("input");c.type="checkbox";c.id="lib"+i;c.setAttribute("aria-label","Mark as found in my library: "+r.cells[0].textContent.slice(0,60));
+  c.checked=!!got[i];r.classList.toggle("got",c.checked);
+  c.addEventListener("change",function(){if(c.checked){got[i]=1}else{delete got[i]}r.classList.toggle("got",c.checked);store(KEY,JSON.stringify(got));count()});
+  td.appendChild(c);r.insertBefore(td,r.firstChild);
+  var last=r.cells[r.cells.length-1].textContent.toLowerCase();
+  r._tags=[/paywall/.test(last)?"pay":"",/page image|scan/.test(last)?"img":"",/could not locate|could not retrieve|not verified|not in pubmed|obscure|book/.test(last+" "+r.cells[2].textContent.toLowerCase())?"loc":"",/abstract/.test(last)?"abs":"",/403|blocked|refused|sign-in|login|gate/.test(last)?"blk":""].join(" ");
+  r._t=r.textContent.toLowerCase();
+ });
+ function count(){var shown=0,f=Object.keys(got).length;rows.forEach(function(r){var ok=(filt==="all"||r._tags.indexOf(filt)>-1)&&(!q||r._t.indexOf(q)>-1);r.hidden=!ok;if(ok)shown++});$("#lib-n").textContent=f+" found of "+rows.length+" - showing "+shown}
+ $$("#lib-chips button").forEach(function(b){b.addEventListener("click",function(){filt=b.dataset.f;$$("#lib-chips button").forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});count()})});
+ $("#lib-q").addEventListener("input",function(e){q=e.target.value.trim().toLowerCase();count()});
+ count();
+})();
+
+/* ---------- box scan explorer ---------- */
+(function(){
+ var D=window.SCAN;if(!D||!$("#scatter"))return;
+ var HEADS=["tRNA","7SL","5S","none"],HC={tRNA:"var(--h-trna)","7SL":"var(--h-7sl)","5S":"var(--h-5s)",none:"var(--h-none)"};
+ var TA=8.97,TB=9.15,CTL=["Alu","B1","B2","ID"],on={tRNA:1,"7SL":1,"5S":1,none:1};
+ var GA="TGGCNNAGTGG",GB="GGTTCGANNCC";
+ function hl(s,ref){var o="";for(var i=0;i<s.length;i++){var c=s[i];o+=(ref[i]==="N"||ref[i]===c)?c:"<u>"+c+"</u>"}return o}
+ function vis(){return D.filter(function(d){return on[d.h]})}
+ var NS="http://www.w3.org/2000/svg";
+ function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a){e.setAttribute(k,a[k])}if(p)p.appendChild(e);return e}
+ function scatter(){
+  var svg=$("#scatter");svg.innerHTML="";
+  var W=640,H=460,m={l:50,r:14,t:34,b:46};
+  var xs=D.map(function(d){return d.A}),ys=D.map(function(d){return d.B});
+  var x0=Math.floor(Math.min.apply(null,xs)/4)*4,x1=Math.ceil(Math.max.apply(null,xs)/4)*4;
+  var y0=Math.floor(Math.min.apply(null,ys)/4)*4,y1=Math.ceil(Math.max.apply(null,ys)/4)*4;
+  function X(v){return m.l+(v-x0)/(x1-x0)*(W-m.l-m.r)}
+  function Y(v){return H-m.b-(v-y0)/(y1-y0)*(H-m.t-m.b)}
+  svg.setAttribute("viewBox","0 0 "+W+" "+H);
+  var g=el("g",{"class":"grid"},svg),ax=el("g",{"class":"ax"},svg);
+  for(var v=x0;v<=x1;v+=4){el("line",{x1:X(v),x2:X(v),y1:m.t,y2:H-m.b},g);var t=el("text",{x:X(v),y:H-m.b+15,"text-anchor":"middle"},ax);t.textContent=v}
+  for(var w=y0;w<=y1;w+=4){el("line",{x1:m.l,x2:W-m.r,y1:Y(w),y2:Y(w)},g);var t2=el("text",{x:m.l-7,y:Y(w)+4,"text-anchor":"end"},ax);t2.textContent=w}
+  var xl=el("text",{x:(m.l+W-m.r)/2,y:H-8,"text-anchor":"middle","class":"t"},ax);xl.textContent="Best A-box score (log-odds, bits)";
+  var yl=el("text",{x:14,y:(m.t+H-m.b)/2,"text-anchor":"middle","class":"t",transform:"rotate(-90 14 "+((m.t+H-m.b)/2)+")"},ax);yl.textContent="Best B-box score downstream (bits)";
+  el("line",{x1:X(TA),x2:X(TA),y1:m.t,y2:H-m.b,"class":"thr"},svg);
+  el("line",{x1:m.l,x2:W-m.r,y1:Y(TB),y2:Y(TB),"class":"thr"},svg);
+  var V=vis(),q={ab:0,b:0,a:0,n:0};
+  V.forEach(function(d){var a=d.A>=TA,b=d.B>=TB;if(a&&b)q.ab++;else if(b)q.b++;else if(a)q.a++;else q.n++});
+  var ql=[["both tRNA-grade: "+q.ab,W-m.r,m.t-10,"end"],["B only: "+q.b,m.l,m.t-10,"start"],["A only: "+q.a,W-m.r-6,H-m.b-8,"end"],["neither: "+q.n,m.l+6,H-m.b-8,"start"]];
+  ql.forEach(function(a){var e=el("text",{x:a[1],y:a[2],"text-anchor":a[3],"class":"q"},svg);e.textContent=a[0]});
+  var tl=el("text",{x:X(TA)+4,y:H-m.b-24,"class":"q"},svg);tl.textContent="A "+TA;
+  var tl2=el("text",{x:W-m.r-6,y:Y(TB)-5,"text-anchor":"end","class":"q"},svg);tl2.textContent="B "+TB;
+  HEADS.slice().reverse().forEach(function(h){
+   V.filter(function(d){return d.h===h}).forEach(function(d){
+    var c=el("circle",{cx:X(d.A),cy:Y(d.B),r:4.2,"class":"pt",tabindex:0,"aria-label":d.n+", A "+d.A+", B "+d.B},svg);c.style.fill=HC[h];
+    var show=function(){readout(d)};c.addEventListener("mouseenter",show);c.addEventListener("focus",show);c.addEventListener("click",show);
+   });
+  });
+  V.filter(function(d){return CTL.indexOf(d.n)>-1}).forEach(function(d){
+   el("circle",{cx:X(d.A),cy:Y(d.B),r:8,fill:"none",stroke:"var(--ink)","stroke-width":1.4},svg);
+   var t=el("text",{x:X(d.A)+11,y:Y(d.B)-8,"class":"ctl"},svg);t.textContent=d.n;
+  });
+ }
+ function readout(d){
+  $("#readout").innerHTML="<strong>"+esc(d.n)+"</strong> ("+d.l+" bp, "+esc(d.h)+" head). A box <span class='seqA'>"+hl(d.a,GA)+"</span> at "+d.ap+", "+d.A+" bits. B box <span class='seqB'>"+hl(d.b,GB)+"</span> at "+d.bp+", "+d.B+" bits. Spacing "+d.s+" nt."+(d.dm?" Second box pair present (dimer).":"");
+ }
+ function bars(){
+  var svg=$("#bars");svg.innerHTML="";
+  var rows=HEADS.map(function(h){return {k:h,d:D.filter(function(d){return d.h===h})}});
+  rows.push({k:"all",d:D});
+  var W=420,gh=58,H=rows.length*gh+30,lx=96,bw=250;
+  svg.setAttribute("viewBox","0 0 "+W+" "+H);
+  var ax=el("g",{"class":"ax"},svg),g=el("g",{"class":"grid"},svg);
+  [0,25,50,75,100].forEach(function(p){var x=lx+p/100*bw;el("line",{x1:x,x2:x,y1:6,y2:H-22},g);var t=el("text",{x:x,y:H-8,"text-anchor":"middle"},ax);t.textContent=p+"%"});
+  rows.forEach(function(r,i){
+   var y=10+i*gh,n=r.d.length||1;
+   var tx=el("text",{x:20,y:y+16,"text-anchor":"start","class":"t",style:"font-weight:600"},ax);tx.textContent=r.k==="all"?"all SINEs":r.k;
+   var tn=el("text",{x:20,y:y+30,"text-anchor":"start"},ax);tn.textContent="n = "+r.d.length;
+   if(r.k!=="all"){var dt=el("circle",{cx:8,cy:y+12,r:4},svg);dt.style.fill=HC[r.k]}
+   var vals=[[r.d.filter(function(d){return d.ap1}).length/n,"var(--a)","A"],[r.d.filter(function(d){return d.bp1}).length/n,"var(--b)","B"],[r.d.filter(function(d){return d.pp1}).length/n,"var(--ink)","A+B"]];
+   vals.forEach(function(v,j){
+    var yy=y+j*15,w=Math.max(v[0]*bw,1);
+    var rc=el("rect",{x:lx,y:yy,width:w,height:11,rx:2},svg);rc.style.fill=v[1];
+    var tt=el("text",{x:lx+w+5,y:yy+9.5,"class":"t"},svg);tt.setAttribute("style","font-size:11px");tt.textContent=(v[0]*100).toFixed(1)+"%  "+v[2];
+   });
+  });
+ }
+ var key="n",asc=true,qs="";
+ function table(){
+  var rows=vis().filter(function(d){return !qs||(d.n+" "+d.a+" "+d.b+" "+d.h).toLowerCase().indexOf(qs)>-1});
+  rows.sort(function(x,y){var a=x[key],b=y[key];var r=(typeof a==="string")?a.localeCompare(b,undefined,{numeric:true}):(a-b);return asc?r:-r});
+  $("#scan-n").textContent=rows.length+" of "+D.length+" consensi";
+  var h="";
+  rows.forEach(function(d){
+   h+="<tr><td><strong>"+esc(d.n)+"</strong></td><td>"+d.l+"</td><td style='white-space:nowrap'><span class='dot' style='background:"+HC[d.h]+"'></span>"+esc(d.h)+"</td>"
+    +"<td><span class='seqA'>"+hl(d.a,GA)+"</span> <span class='sc'>@"+d.ap+" &middot; "+d.A+"</span></td>"
+    +"<td><span class='seqB'>"+hl(d.b,GB)+"</span> <span class='sc'>@"+d.bp+" &middot; "+d.B+"</span></td>"
+    +"<td>"+d.s+"</td><td>"+(d.ap1?"<span class='fl a'>A</span>":"")+(d.bp1?"<span class='fl b'>B</span>":"")+(d.pp1?"<span class='fl p'>A+B</span>":"")+(d.dm?"<span class='fl d'>dimer</span>":"")+"</td></tr>";
+  });
+  $("#t-all tbody").innerHTML=h;
+ }
+ $$("#t-all th[data-k]").forEach(function(th){th.addEventListener("click",function(){var k=th.dataset.k;if(key===k){asc=!asc}else{key=k;asc=(k==="n"||k==="h")}$$("#t-all th").forEach(function(x){x.classList.remove("on","asc")});th.classList.add("on");if(asc)th.classList.add("asc");table()})});
+ $("#scan-q").addEventListener("input",function(e){qs=e.target.value.trim().toLowerCase();table()});
+ $$("#head-chips button").forEach(function(b){b.addEventListener("click",function(){var h=b.dataset.h;on[h]=on[h]?0:1;b.setAttribute("aria-pressed",on[h]?"true":"false");scatter();table()})});
+ scatter();bars();table();
+ var al=D.filter(function(d){return d.n==="B2"})[0];if(al)readout(al);
+})();
+})();
+
+</script>
+
+</body></html>

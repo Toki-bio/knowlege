@@ -1,0 +1,16 @@
+tRNA genes: 419
+A seed method: {'regex': 291, 'mismatch': 128} ; B seed method: {'regex': 323, 'mismatch': 96}
+sites moved in refinement: A 25, B 0
+PWM A consensus TGGCTCAGTGG  IC 13.0 bits  max score 16.80
+PWM B consensus GGTTCGAATCC  IC 15.8 bits  max score 19.17
+tRNA A score (leave-one-out): min -9.82  p5 8.97  median 14.02
+tRNA B score (leave-one-out): min 1.17  p5 9.15  median 17.22
+tRNA A->B spacing (start-to-start): median 44.0  p5 43.0  p95 60.0  min 42  max 79
+  with intron (n=29): median 64.0  range 56-79
+  without intron (n=390): median 44.0  range 42-55
+spacing histogram: 42:20 43:152 44:111 45:55 53:37 54:13 55:2 56:1 57:1 58:1 59:2 60:5 61:1 62:2 64:4 65:7 76:1 77:2 78:1 79:1
+null (pooled, 4580 shuffles): A p95 9.14 p99 13.01 max 15.93 ; B p95 6.92 p99 10.71 max 17.98
+SINE consensi scored: 229 ; with shuffles: 229
+tRNA genes whose own A site scores above the pooled null p95 (9.14): 397/419 ; above p99 (13.01): 247/419
+tRNA genes whose own B site scores above the pooled null p95 (6.92): 408/419 ; above p99 (10.71): 366/419
+flags: *_tRNA = score >= 5th percentile of leave-one-out tRNA-gene site scores (A 8.97, B 9.15); *_null = score > 95th percentile of the 20 shuffles of that consensus; pair = A plus B 20..120 nt downstream of it; head = A starting within the first 40 nt
