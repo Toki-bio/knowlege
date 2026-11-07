@@ -16,16 +16,16 @@ file (1/20th of the 2.5 kb windows), or in minus rounds `minus_<round>_<part>`.
 
 ### Flag-by-flag (FASTA36 semantics; **not run-verified here**, ssearch36 is not installed in this container)
 
-| Token | FASTA36 meaning (my reading of the fasta36 manual) | What SINEderella's MANUAL.md:1218-1230 says | Note |
+| Token | FASTA36 meaning | What SINEderella's MANUAL.md:1218-1230 says | Note |
 |---|---|---|---|
-| `-g -3` | `-g #` is the **gap-extension penalty**; here it consumes `-3` as its argument, so gap-extend = -3 (DNA default -4). | `-g` = "Global/gapped alignment", `-3` = "Forward strand + reverse complement" | `notes`: if my reading is right, `-3` as a standalone flag (forward strand only) is never set, both strands are searched because that is the DNA default, and gap-open stays at the default (-16 for DNA, `-f`). Verify with `ssearch36 -g -3 ... ` vs `ssearch36 -g=-3 ...` on a toy before relying on either reading. Either way both strands ARE searched: the awk at `sear:399-400` sees minus-strand hits (qend < qstart) and the result tables contain `-` strands. |
+| `-g -3` | `-g #` is the **gap-extension penalty**; `-3` is its value, so gap-extend = -3 (DNA default -4). Tested 2026-11-07: a gap of k costs 12 + 3k. | corrected 2026-11-07 (SINEderella 0002153) | `-3` as a standalone flag (forward strand only) is never set; both strands are searched because that is the DNA default; gap-open stays -12 (first residue costs 12 + 3 = 15; the -16 of `initfa.c:81` is a stale comment). |
 | `-T N` | threads for the library scan | thread count | `THREADS` env or `nproc` |
 | `-Q` | quiet (no interactive prompts) | quiet | |
 | `-n` | query is DNA | nucleotide | |
-| `-z 11` | statistics from shuffled library sequences (regression on shuffles) | "shuffle with composition" | makes E-values and bitscores **stochastic run to run** (SINEderella `MANUAL.md:1212`: +-1-3 %; `docs/FAMILY_SUBFAMILY_ASSIGNMENT.md:43-44`: 99.37 % of firm/not-firm outcomes reproduce) |
+| `-z 11` | statistics from shuffled library sequences (regression on shuffles) | corrected 2026-11-07 | makes E-values and bitscores **stochastic run to run** (SINEderella `MANUAL.md:1212`: +-1-3 %; `docs/FAMILY_SUBFAMILY_ASSIGNMENT.md:43-44`: 99.37 % of firm/not-firm outcomes reproduce) |
 | `-E 2` | report hits with E <= 2 | E-value threshold | relative to the **part file** (~1/20 of the windows), no `-Z` given; so the threshold means something different for a 100 Mb and a 3 Gb genome. SINEderella's flankscan fixes this with `-Z 20000` (`flankscan/fs3_partners.sh:95`), sear does not. |
 | `-w 95` | alignment display line width | "alignment width" | **also the width of the subject-ID column in `-m 8C`** (60 by default): keeps `contig_sliding:start-end` window IDs up to ~95 characters intact; longer IDs lose the offset and coordinates go wrong (verified 2026-10-12, `projects/sear-audit-2026-10.md`) |
-| `-W 70` | context residues shown around an alignment | "window size" | no effect with `-m 8C` |
+| `-W 70` | context residues shown around an alignment | corrected 2026-11-07 | no effect with `-m 8C` (tested 2026-11-07) |
 | `-m 8C` | BLAST tabular with comment lines (`#` lines) | tabular | parsed by `/^[^#]/` |
 | trailing `3` | ktup positional; ssearch36 (full Smith-Waterman) does not use ktup | not mentioned | harmless |
 

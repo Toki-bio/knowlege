@@ -90,11 +90,7 @@ blastn/minimap2/ssearch comparison and the real-genome timings.
 
 ## Open questions / unverified
 
-- FASTA36 option semantics for `-g -3` (gap-extension penalty -3 vs
-  "forward strand only"), `-w 95 -W 70` (display widths, no effect with `-m 8C`),
-  the trailing `3` (ktup, ignored by ssearch) are my reading of the FASTA36
-  manual; ssearch36 is not installed here, so not run-verified. SINEderella's
-  MANUAL reads the same flags differently (see `references/pitfalls.md`).
+- FASTA36 `-g -3`: settled 2026-11-07, gap extension 3, a gap of k costs 12 + 3k, both strands searched (`references/pitfalls.md`).
 - No timing data exists in this repo; all wall-clock numbers come from the
   SINEderella repo (sibling skill).
 - `sear2k_bak` has a `Secs_HMS` timer defined (`sear2k_bak:20-21`) but I did

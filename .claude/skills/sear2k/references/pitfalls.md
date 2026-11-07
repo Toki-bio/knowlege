@@ -1,13 +1,9 @@
 # Pitfalls and gotchas
 
-- **`-g -3` is probably not what the manual says.** In FASTA36 `-g` takes a
-  numeric gap-extension penalty; `-g -3` sets it to -3 and `-3` is never seen
-  as the "forward strand only" switch. SINEderella `MANUAL.md:1218-1230`
-  documents `-g` as "Global/gapped alignment" and `-3` as "forward + reverse
-  complement". Both strands are searched regardless (that is the default), so
-  results are unaffected, but anyone re-implementing "the same parameters"
-  elsewhere should test which reading holds (`sear:396`). Unverified: ssearch36
-  is not installed in this container.
+- **`-g -3` is the gap extension, not a strand switch.** `-3` is the value of `-g`: a gap of k costs
+  12 + 3k instead of the default 12 + 4k, and both strands are searched (the default). Tested with ssearch36
+  on 2026-11-07: scores exact for k = 1, 2, 5, 10; a real `-3` alone misses the reverse strand. Anyone
+  re-implementing "the same parameters" must keep the 3. SINEderella `MANUAL.md` corrected in 0002153.
 - **`-E 2` has no `-Z`.** E-values are computed against each part file
   (~1/20 of the windows), so the effective threshold tightens with genome size.
   SINEderella's flankscan uses `-Z 20000` for exactly this reason
