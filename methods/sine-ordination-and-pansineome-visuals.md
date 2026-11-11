@@ -16,8 +16,9 @@ Related: [dimensionality reduction for SINE separation](../dim-reduction-for-sin
 ## In short
 
 - A 2D PCA of SINE copies shows a low percentage on its axes because the subfamily signal is spread over many weak axes. The low percentage is expected, and by itself it does not make the PCA picture wrong.
-- On the toy, t-SNE, UMAP and PaCMAP drew the six simulated subfamilies as separate groups. PCA drew them as overlapping groups. PCoA and NMDS on K2P distances scored below PCA on silhouette, kNN accuracy and ARI.
-- The comparison is weaker than the table suggests: three of the four scores are measured inside the 2D picture, the methods did not all get the same input, NMDS was run with one random start, and the toy has no indels and one seed. See [2.5](#25-what-the-toy-cannot-show).
+- On the toy, t-SNE, UMAP and PaCMAP recovered the six simulated subfamilies in each of 5 seeds (ARI 0.98 to 0.99, sd at most 0.006). PCA, PCoA and NMDS did so far less reliably (ARI 0.73 ± 0.18, 0.69 ± 0.15 and 0.22 ± 0.10). The first single-seed table in 2.3 (PCA ARI 0.905) happened to use a favourable seed. See [2.6](#26-repaired-run-5-seeds).
+- Scored in sequence space, t-SNE, UMAP and PaCMAP all sit at the silhouette value of the true labels themselves (about 0.10). They reproduce the true grouping and cannot exceed it, and the three cannot be ranked against each other. The much higher silhouettes in the first table (0.86 to 0.89) were measured in the 2D picture.
+- The toy is still easy in other ways: no indels, one noise model, and the number of subfamilies given. See [2.5](#25-what-the-toy-cannot-show).
 - For presence/absence of orthologous loci, the tree + heatmap with three states (present, empty site, missing) is the main figure. The other panels are summaries of it.
 - No real presence/absence matrix exists yet, so every real-data item in [section 4](#4-further-developments) is a proposal.
 
@@ -56,7 +57,9 @@ Script: `ordination_toy.py`.
 
 The UMAP sweep figure uses `n_neighbors` 5, 15, 50 and 150.
 
-### 2.3 Results
+### 2.3 Results of the first run (seed 1 only)
+
+Superseded by [2.6](#26-repaired-run-5-seeds); kept because the figures below come from this run.
 
 | Method | Trustworthiness | Silhouette | kNN accuracy | ARI |
 |---|---|---|---|---|
@@ -89,19 +92,59 @@ Variance and stress:
 ### 2.4 What the toy shows
 
 - **The low variance is not a bug.** The scree panel shows the structure spread over many weak axes. The percentage is the wrong yardstick for a 2D plot of such data.
-- **PCA already separates most of it** (ARI 0.905), with the neighboring subfamilies overlapping.
-- **t-SNE, UMAP and PaCMAP separate all six subfamilies** (ARI 0.981 to 0.993).
-- **Trustworthiness is 0.68 to 0.70 for every method**, so it did not tell the methods apart here.
+- **PCA separates most of it in a good seed** (ARI 0.905 in seed 1, but 0.733 ± 0.178 over 5 seeds), with the neighboring subfamilies overlapping.
+- **t-SNE, UMAP and PaCMAP separate all six subfamilies** (ARI 0.981 to 0.993 in seed 1; 0.98 to 0.99 in every seed, see 2.6).
+- **Trustworthiness is 0.67 to 0.71 for every method**, so it did not tell the methods apart here.
 - UMAP, t-SNE and PaCMAP have no variance percentage, and their axes have no meaning. The position of one group relative to another should not be read.
 
 ### 2.5 What the toy cannot show
 
-- **Three of the four scores are measured in the 2D picture.** Silhouette, kNN accuracy and ARI all reward a method for drawing compact, separate groups. That is what UMAP and PaCMAP are built to do, so their high silhouette (0.86, 0.89) is partly a property of the method. Only trustworthiness refers back to sequence distances, and it does not separate the methods.
+- **Three of the four scores in the first table are measured in the 2D picture (repaired in 2.6).** Silhouette, kNN accuracy and ARI all reward a method for drawing compact, separate groups. That is what UMAP and PaCMAP are built to do, so their high silhouette (0.86, 0.89) is partly a property of the method. Only trustworthiness refers back to sequence distances, and it does not separate the methods.
 - **The methods did not get the same input.** PCA used one-hot, PaCMAP used the first 30 PCs, the others used K2P. Method and input cannot be told apart in this table.
-- **NMDS was run weakly.** One random start and 300 iterations; the NMDS panel is star-shaped, which looks like a run that did not converge. "NMDS did not beat PCA" may describe this run and not the method.
+- **NMDS was run weakly.** One random start and 300 iterations; the NMDS panel is star-shaped, which looks like a run that did not converge. "NMDS did not beat PCA" may describe this run and not the method. Checked in 2.6: restarted from the PCoA solution with 3,000 iterations, NMDS did not improve (ARI 0.22 ± 0.10), so the weak run does not explain it.
 - **Initialization differs.** t-SNE started from random positions and UMAP from its default. The large-scale arrangement of groups depends on initialization (Kobak & Linderman 2021), so the arrangements in the figure are not comparable.
 - **The toy is easy.** No indels, no truncated copies, one noise model, one seed. An ARI of 0.99 leaves no room to compare anything better.
 - **K is given.** ARI uses Ward clustering with the true number of subfamilies (6). On real data that number is unknown.
+
+### 2.6 Repaired run, 5 seeds
+
+Script `ordination_toy_v2.py`, run on therioserver on 2026-11-11 (Python 3.14, numpy 2.5.4, scikit-learn 1.9.1, umap-learn 0.5.12, pacmap 0.9.1). Results: `ordination_v2_metrics.json`; log: `ordination_v2_run_seed5.log`.
+
+What changed against the first run:
+
+- **Scored in sequence space.** Each picture is clustered (Ward, k = 6) and the silhouette of those clusters is computed on the K2P matrix. For reference, the silhouette of the *true* labels on K2P is 0.098 (mean over seeds).
+- **Same input for every method.** Condition O: PCA-30 of the one-hot matrix (PCA itself on one-hot). Condition K: the K2P matrix (PaCMAP gets the first 30 PCoA axes of K2P).
+- **NMDS** starts from the PCoA solution (`init="classical_mds"`), 3,000 iterations.
+- **t-SNE** also run from the PCoA start.
+- **Seeds 1 to 5.** The seed sets both the simulation (including which sites are diagnostic) and the method; the table gives mean ± sd (population sd, n = 5).
+- **Control passed.** Seed 1 reproduces PCA ARI 0.905 and PC1 + PC2 = 11.9 %.
+
+| Picture | Trustworthiness | Silhouette in K2P | kNN accuracy | ARI |
+|---|---|---|---|---|
+| true labels (reference) | | 0.098 | | |
+| O: PCA (one-hot) | 0.672 ± 0.018 | 0.030 ± 0.028 | 0.930 ± 0.052 | 0.733 ± 0.178 |
+| O: t-SNE | 0.711 ± 0.004 | 0.101 ± 0.007 | 0.992 ± 0.001 | 0.980 ± 0.002 |
+| O: UMAP | 0.680 ± 0.004 | 0.101 ± 0.008 | 0.992 ± 0.002 | 0.981 ± 0.004 |
+| O: PaCMAP | 0.673 ± 0.004 | 0.101 ± 0.005 | 0.993 ± 0.002 | 0.982 ± 0.004 |
+| K: PCoA | 0.683 ± 0.022 | 0.053 ± 0.033 | 0.877 ± 0.078 | 0.692 ± 0.149 |
+| K: NMDS (PCoA start) | 0.678 ± 0.008 | 0.080 ± 0.026 | 0.912 ± 0.032 | 0.224 ± 0.096 |
+| K: t-SNE | 0.696 ± 0.004 | 0.100 ± 0.003 | 0.996 ± 0.001 | 0.989 ± 0.004 |
+| K: t-SNE (PCoA start) | 0.697 ± 0.004 | 0.099 ± 0.004 | 0.996 ± 0.001 | 0.990 ± 0.002 |
+| K: UMAP | 0.673 ± 0.003 | 0.100 ± 0.004 | 0.996 ± 0.001 | 0.991 ± 0.002 |
+| K: PaCMAP | 0.691 ± 0.004 | 0.096 ± 0.006 | 0.992 ± 0.002 | 0.980 ± 0.006 |
+
+Reading:
+
+- **t-SNE, UMAP and PaCMAP are equivalent here.** ARI 0.98 to 0.99 in every seed, and the differences between them are within the sd. Their silhouette in K2P (0.096 to 0.101) equals that of the true labels: they recover the true grouping and cannot exceed it.
+- **The silhouette in the picture overstated them.** In the first table UMAP and PaCMAP had 0.86 and 0.89; that measures compact blobs in 2D, not agreement with sequence distances.
+- **PCA, PCoA and NMDS depend strongly on the seed.** PCA ARI per seed: 0.905, 0.920, 0.441, 0.761, 0.641. PCoA: 0.592, 0.821, 0.447, 0.777, 0.822. NMDS: 0.136, 0.082, 0.303, 0.282, 0.316. The original single-seed PCA value (0.905) was close to the best of five.
+- **Input choice hardly matters.** The same method on K2P or on PCA-30 of one-hot differs by about 0.01 in ARI. Starting t-SNE from the PCoA solution instead of random changes ARI by 0.001.
+- **Silhouette in K2P is low for every method** (at most 0.11), because the 9 % per-copy noise is much larger than the 6 diagnostic sites. It cannot separate the good methods from each other; ARI separates them from PCA.
+- **Seed 3 is a harder draw.** PCA and PCoA fall to 0.44 ARI, the true-label silhouette is lowest (0.087) and the negative-eigenvalue share highest (0.378). That the subfamilies lie closer together in that draw is a guess; the cause was not checked.
+- **NMDS stress in seed 3 is 0.022, against 0.245 to 0.251 in the other four seeds,** while its ARI stays poor (0.303). That run is not understood and its stress should not be trusted; a degenerate solution is a guess, not a finding.
+- **Negative-eigenvalue share of the K2P PCoA** is 0.331 to 0.378 in all seeds.
+
+Still open: no indels, no truncated copies, one noise model; the number of subfamilies is given to the clustering; ARI measures whether Ward clustering of the picture returns the true groups, which is a property of the picture as much as of the method.
 
 ## 3. Toy pan-SINEome and orthologous-locus visuals
 
@@ -177,7 +220,7 @@ Rules that every item below has to respect:
 
 ### 4.1 Repair the toy
 
-Cheap, and needed before the table in 2.3 can be quoted. It needs an environment with `umap-learn` and `pacmap`.
+The ordination rows (first five) were done on 2026-11-11 in `ordination_toy_v2.py`; results in [2.6](#26-repaired-run-5-seeds). The last two rows (pan-SINEome toy) are still open; the Jaccard negative-eigenvalue share was only recomputed once and found to be 0.
 
 | Change | Why | Known answer to check against |
 |---|---|---|
@@ -277,4 +320,4 @@ Checked on 2026-11-11 by opening each source. "Abstract" means only the abstract
 
 ## 6. Reproduce
 
-Run the two scripts in `projects/sine-ordination-toy/`; each writes its figures to the working directory. Versions used: Python 3.13, numpy, scipy, scikit-learn, matplotlib, umap-learn 0.5.12, pacmap 0.9.1. `ordination_toy.py` also writes `ordination_metrics.json`; `pansineome_toy.py` writes `toy_pansineome_PAV.tsv`.
+Run the scripts in `projects/sine-ordination-toy/`; the first two write their figures to the working directory. Versions used for the figures and the first table: Python 3.13, numpy, scipy, scikit-learn, matplotlib, umap-learn 0.5.12, pacmap 0.9.1. `ordination_toy_v2.py [NSEED]` (versions in 2.6) writes `ordination_v2_metrics.json` and no figures. `ordination_toy.py` also writes `ordination_metrics.json`; `pansineome_toy.py` writes `toy_pansineome_PAV.tsv`.

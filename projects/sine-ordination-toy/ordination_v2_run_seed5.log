@@ -1,0 +1,82 @@
+start Wed Nov 11 04:39:00 PM MSK 2026 NSEED=5 pwd=/home/toki/ordination_toy
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+Warning: random state is set to 1.
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/sklearn/manifold/_mds.py:752: FutureWarning: The `dissimilarity` parameter is deprecated and will be removed in 1.10. Use `metric` instead.
+  warnings.warn(
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/sklearn/manifold/_mds.py:760: FutureWarning: Use metric_mds=False instead of metric=False. The support for metric={True/False} will be dropped in 1.10.
+  warnings.warn(
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/umap/umap_.py:1865: UserWarning: using precomputed metric; inverse_transform will be unavailable
+  warn("using precomputed metric; inverse_transform will be unavailable")
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+Warning: random state is set to 1.
+seed 1 done  true-label silhouette on K2P = 0.099  PCoA neg share = 0.333  NMDS stress = 0.246
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+Warning: random state is set to 2.
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/sklearn/manifold/_mds.py:752: FutureWarning: The `dissimilarity` parameter is deprecated and will be removed in 1.10. Use `metric` instead.
+  warnings.warn(
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/sklearn/manifold/_mds.py:760: FutureWarning: Use metric_mds=False instead of metric=False. The support for metric={True/False} will be dropped in 1.10.
+  warnings.warn(
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/umap/umap_.py:1865: UserWarning: using precomputed metric; inverse_transform will be unavailable
+  warn("using precomputed metric; inverse_transform will be unavailable")
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+Warning: random state is set to 2.
+seed 2 done  true-label silhouette on K2P = 0.104  PCoA neg share = 0.336  NMDS stress = 0.245
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+Warning: random state is set to 3.
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/sklearn/manifold/_mds.py:752: FutureWarning: The `dissimilarity` parameter is deprecated and will be removed in 1.10. Use `metric` instead.
+  warnings.warn(
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/sklearn/manifold/_mds.py:760: FutureWarning: Use metric_mds=False instead of metric=False. The support for metric={True/False} will be dropped in 1.10.
+  warnings.warn(
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/umap/umap_.py:1865: UserWarning: using precomputed metric; inverse_transform will be unavailable
+  warn("using precomputed metric; inverse_transform will be unavailable")
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+Warning: random state is set to 3.
+seed 3 done  true-label silhouette on K2P = 0.087  PCoA neg share = 0.378  NMDS stress = 0.022
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+Warning: random state is set to 4.
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/sklearn/manifold/_mds.py:752: FutureWarning: The `dissimilarity` parameter is deprecated and will be removed in 1.10. Use `metric` instead.
+  warnings.warn(
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/sklearn/manifold/_mds.py:760: FutureWarning: Use metric_mds=False instead of metric=False. The support for metric={True/False} will be dropped in 1.10.
+  warnings.warn(
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/umap/umap_.py:1865: UserWarning: using precomputed metric; inverse_transform will be unavailable
+  warn("using precomputed metric; inverse_transform will be unavailable")
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+Warning: random state is set to 4.
+seed 4 done  true-label silhouette on K2P = 0.099  PCoA neg share = 0.331  NMDS stress = 0.251
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+Warning: random state is set to 5.
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/sklearn/manifold/_mds.py:752: FutureWarning: The `dissimilarity` parameter is deprecated and will be removed in 1.10. Use `metric` instead.
+  warnings.warn(
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/sklearn/manifold/_mds.py:760: FutureWarning: Use metric_mds=False instead of metric=False. The support for metric={True/False} will be dropped in 1.10.
+  warnings.warn(
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/umap/umap_.py:1865: UserWarning: using precomputed metric; inverse_transform will be unavailable
+  warn("using precomputed metric; inverse_transform will be unavailable")
+/home/toki/venvs/ordtoy/lib/python3.14/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+Warning: random state is set to 5.
+seed 5 done  true-label silhouette on K2P = 0.100  PCoA neg share = 0.336  NMDS stress = 0.245
+
+picture                          trust          silh_seq          silh_pic               knn               ari
+O:PCA2                    0.672 ±0.018      0.030 ±0.028      0.443 ±0.145      0.930 ±0.052      0.733 ±0.178
+O:t-SNE                   0.711 ±0.004      0.101 ±0.007      0.809 ±0.007      0.992 ±0.001      0.980 ±0.002
+O:UMAP                    0.680 ±0.004      0.101 ±0.008      0.917 ±0.016      0.992 ±0.002      0.981 ±0.004
+O:PaCMAP                  0.673 ±0.004      0.101 ±0.005      0.879 ±0.019      0.993 ±0.002      0.982 ±0.004
+K:PCoA                    0.683 ±0.022      0.053 ±0.033      0.347 ±0.122      0.877 ±0.078      0.692 ±0.149
+K:NMDS(PCoA init)         0.678 ±0.008      0.080 ±0.026      0.078 ±0.064      0.912 ±0.032      0.224 ±0.096
+K:t-SNE                   0.696 ±0.004      0.100 ±0.003      0.744 ±0.010      0.996 ±0.001      0.989 ±0.004
+K:t-SNE(PCoA init)        0.697 ±0.004      0.099 ±0.004      0.744 ±0.010      0.996 ±0.001      0.990 ±0.002
+K:UMAP                    0.673 ±0.003      0.100 ±0.004      0.838 ±0.029      0.996 ±0.001      0.991 ±0.002
+K:PaCMAP                  0.691 ±0.004      0.096 ±0.006      0.905 ±0.005      0.992 ±0.002      0.980 ±0.006
+
+reference: true-label silhouette on K2P  mean 0.098
+CONTROL seed1: PCA2 ARI = 0.905 (old 0.905); PC1+PC2 var = 0.119 (old 0.119)
+end Wed Nov 11 04:44:59 PM MSK 2026
