@@ -18,7 +18,8 @@ Related: [dimensionality reduction for SINE separation](../dim-reduction-for-sin
 - A 2D PCA of SINE copies shows a low percentage on its axes because the subfamily signal is spread over many weak axes. The low percentage is expected, and by itself it does not make the PCA picture wrong.
 - On the toy, t-SNE, UMAP and PaCMAP recovered the six simulated subfamilies in each of 5 seeds (ARI 0.98 to 0.99, sd at most 0.006). PCA, PCoA and NMDS did so far less reliably (ARI 0.73 ± 0.18, 0.69 ± 0.15 and 0.22 ± 0.10). The first single-seed table in 2.3 (PCA ARI 0.905) happened to use a favourable seed. See [2.6](#26-repaired-run-5-seeds).
 - Scored in sequence space, t-SNE, UMAP and PaCMAP all sit at the silhouette value of the true labels themselves (about 0.10). They reproduce the true grouping and cannot exceed it, and the three cannot be ranked against each other. The much higher silhouettes in the first table (0.86 to 0.89) were measured in the 2D picture.
-- The toy is still easy in other ways: no indels, one noise model, and the number of subfamilies given. See [2.5](#25-what-the-toy-cannot-show).
+- With indels, 5′ truncation and CpG decay added (2.7), only t-SNE and UMAP on K2P distances with pairwise deletion stayed good (ARI 0.93). Anything built on one-hot fell to 0.30–0.46, because truncated copies are placed by their missing block. Masking CpG columns improved every K2P picture. Without being told the number of subfamilies, HDBSCAN on the UMAP picture found the 6 subfamilies in 13 of 15 runs; HDBSCAN on the distances themselves found almost nothing. See [2.7](#27-harder-toy-indels-truncation-cpg-decay-number-of-subfamilies-not-given).
+- Not yet in any toy: recombination between subfamilies, a continuum of copy ages, very unequal subfamily sizes.
 - For presence/absence of orthologous loci, the tree + heatmap with three states (present, empty site, missing) is the main figure. The other panels are summaries of it.
 - No real presence/absence matrix exists yet, so every real-data item in [section 4](#4-further-developments) is a proposal.
 
@@ -146,6 +147,60 @@ Reading:
 
 Still open: no indels, no truncated copies, one noise model; the number of subfamilies is given to the clustering; ARI measures whether Ward clustering of the picture returns the true groups, which is a property of the picture as much as of the method.
 
+### 2.7 Harder toy: indels, truncation, CpG decay; number of subfamilies not given
+
+Script `ordination_toy_v3.py`, therioserver, 2026-11-11, same versions as 2.6. Results: `ordination_v3_base.json`, `ordination_v3_notrunc.json`, `ordination_v3_maskcpg.json` and the matching `.log` files.
+
+**Why this toy.** I found no published SINE subfamily study that tested its method on simulated copies with known labels; they validate against an established scheme, trees, copy age, PCR of young loci or function (literature in 5). The only per-copy ordination case found, mouse L1 promoter monomers (Zhou et al. 2019), excluded truncated copies, used PCA to 100 axes, then HDBSCAN without a set number of clusters, and t-SNE only for display. So the toy borrows its ingredients from TE simulators and mutation studies:
+
+| Ingredient | Value | Source |
+|---|---|---|
+| Subfamily tree, sizes, per-copy divergence | as in 2.1 | |
+| CpG decay | substitution rate ×6 at CpG sites of the copy's consensus, as C→T or G→A | Xing et al. 2004 (CpG : non-CpG ≈ 6 in AluY/AluS) |
+| Transitions | 2/3 of other substitutions | my choice |
+| Indels | 0.15 events per substitution; 40 % insertions, 60 % deletions; length geometric, mean ≈ 1.7, max 20 | between Lunter et al. 2006 (≈ 1:10) and Hubley et al. 2022 (0.20; 0.08 : 0.12; mean 1.7, max 20) |
+| 5′ truncation | 30 % of copies, 0–50 % of the length removed | TEvarSim defaults (Miao & Li 2026) |
+
+Deletions and truncations become gap columns. Insertions add no column, so they never enter a distance (a simplification). Measured in the base version: 8 % of cells are gaps, 27–32 % of copies are truncated, CpG sites changed 6.0 times as often as other sites (local check, seeds 1 and 3). Distance: K2P with pairwise deletion (only columns where both copies have a base; fewer than 50 shared columns counts as saturated). One-hot: a gap is all zeros.
+
+Three versions, 5 seeds each: **base**; **no truncation**; **CpG masked** (columns at CpG sites of the family consensus removed, as COSEG users are told to discount TG/CA changes). Control: the base version reproduced, to the third decimal, a separate earlier run of the same script.
+
+ARI (mean ± sd over 5 seeds; Ward clustering, number of subfamilies given):
+
+| Picture | base | no truncation | CpG masked |
+|---|---|---|---|
+| one-hot: PCA | 0.30 ± 0.05 | 0.30 ± 0.06 | 0.37 ± 0.01 |
+| one-hot PCA-30: UMAP | 0.46 ± 0.05 | 0.91 ± 0.06 | 0.52 ± 0.06 |
+| one-hot PCA-30: PaCMAP | 0.44 ± 0.07 | 0.90 ± 0.08 | 0.48 ± 0.03 |
+| K2P: PCoA | 0.32 ± 0.06 | 0.38 ± 0.07 | 0.65 ± 0.18 |
+| K2P: NMDS | 0.26 ± 0.04 | 0.28 ± 0.02 | 0.32 ± 0.05 |
+| K2P: t-SNE | **0.93 ± 0.04** | 0.98 ± 0.02 | **0.96 ± 0.04** |
+| K2P: UMAP | **0.93 ± 0.05** | 0.99 ± 0.01 | **0.95 ± 0.05** |
+| K2P: PaCMAP (PCoA-30) | 0.78 ± 0.12 | 0.80 ± 0.11 | **0.95 ± 0.04** |
+| true-label silhouette on K2P | 0.115 | 0.111 | 0.155 |
+
+HDBSCAN, number of subfamilies **not** given (`min_cluster_size` 20; unclustered copies counted as one extra label):
+
+| Clustered | base | no truncation | CpG masked |
+|---|---|---|---|
+| UMAP picture of K2P | 0.90 ± 0.09; 6 clusters in 4 seeds, 5 in 1; 3 % unclustered | 0.99 ± 0.01; 6 in all; 0 % | 0.93 ± 0.09; 6, 6, 5, 6, 6; 1 % |
+| t-SNE picture of K2P | 0.83 ± 0.10; 6, 6, 5, 6, 6; 8 % | 0.96 ± 0.04; 6 in all; 2 % | 0.91 ± 0.09; 6, 6, 5, 6, 6; 3 % |
+| K2P matrix itself | 0.00; 0–2 clusters; 99 % unclustered | 0.00; none; 100 % | 0.00; 2–3; 88 % |
+| one-hot PCA-100 (Zhou et al. 2019 recipe) | 0.00; 2 clusters; 67 % | 0.00; 2–5; 91 % | 0.01; 2–6; 57 % |
+
+What it shows:
+
+- **One-hot fails with truncated copies.** UMAP and PaCMAP on one-hot drop from 0.90 (no truncation) to 0.45: a truncated copy has a block of zeros and is placed by that block, not by its subfamily. Zhou et al. removed truncated copies before PCA for this reason. K2P with pairwise deletion compares only shared columns and is affected far less (0.93 against 0.99).
+- **On K2P, t-SNE and UMAP stay best** (0.93 in base). PaCMAP is weaker and less stable (0.78 ± 0.12), unlike in the easy toy.
+- **Masking CpG columns helps every K2P picture** (PCoA 0.32 → 0.65, PaCMAP 0.78 → 0.95) and raises the true-label silhouette from 0.115 to 0.155: CpG decay is noise shared across subfamilies.
+- **PCA, PCoA and NMDS do not separate the subfamilies in this toy** (ARI 0.26 to 0.32 in base).
+- **Without the number of subfamilies, HDBSCAN on the UMAP picture found 6 groups in 13 of 15 runs and 5 in 2** (all in seed 3), with on average 0 to 3 % of copies left unclustered (up to 10 % in a single run). HDBSCAN directly on the K2P matrix or on 100 PCA axes found almost nothing, probably because in that many dimensions the density contrast between subfamilies, which differ at 6 sites among 9 % noise, is too weak. Clustering the 2D picture works here, but the picture's clusters are partly made by UMAP itself (see 2.6), so on real data every such group has to be shown as an alignment before it means anything.
+- **Seed 3 is the hardest draw in the base and CpG-masked versions** (lowest UMAP ARI in both, lowest t-SNE ARI in base; 5 instead of 6 clusters in both), but not without truncation, where it is among the best. Not explained.
+
+Seed 3 of the easy toy (2.6) has a separate, explained cause: one pair of copies whose K2P distance is saturated (the formula's logarithm hits its clip value). Removing them alone moves seed 3 back in line: PCA ARI 0.441 → 0.917, PCoA 0.447 → 0.794, NMDS stress 0.022 → 0.251, true-label silhouette 0.087 → 0.092. So two extreme copies were enough to distort PCA, PCoA and NMDS; t-SNE, UMAP and PaCMAP were unaffected. The low NMDS stress was a by-product of those outliers, not a good fit. (In the harder toy no copy is saturated, so its "filter" arm equals the base and is not shown.)
+
+Still not in any toy: gene conversion and recombination between subfamilies, copies that continue to decay in a continuum rather than forming groups, and very unequal subfamily sizes. Carey et al. 2021 discuss recombination and chance mutation at diagnostic sites as reasons subfamily labels disagree on real data; Wacholder et al. 2014 found recombination in 7.7 % of full-length LAVA copies.
+
 ## 3. Toy pan-SINEome and orthologous-locus visuals
 
 Script: `pansineome_toy.py`. Matrix: `toy_pansineome_PAV.tsv`.
@@ -234,18 +289,18 @@ The ordination rows (first five) were done on 2026-11-11 in `ordination_toy_v2.p
 
 ### 4.2 Make the toy as hard as real copies
 
-Add indels, 5′-truncated copies, faster decay at CpG sites, and subfamilies of very unequal size. Then repeat 4.1.
+Indels, 5′ truncation and CpG decay: done in [2.7](#27-harder-toy-indels-truncation-cpg-decay-number-of-subfamilies-not-given). ARI fell below 0.99 as required, and the methods now separate: K2P with pairwise deletion + t-SNE or UMAP holds; one-hot does not.
 
-- Question: do the non-linear methods still separate subfamilies when copies are gapped and truncated, and does K2P (which ignores gapped columns) remain a usable distance?
-- Check: ARI has to fall below the present 0.99. If it does not, the toy is still too easy to rank anything.
+Still to add, each being a named cause of label disagreement on real data (Carey et al. 2021): recombination / gene conversion between subfamilies, a continuum of copy ages without discrete groups, and very unequal subfamily sizes (a small subfamily next to a large one).
 
 ### 4.3 One real family from a SINEderella run
 
 - Input: the copies of one family that the workflow accepted (unique flanks), in the alignment the workflow already makes. Nothing new is searched or aligned.
-- Picture: PCA and one non-linear method side by side, colored by the subfamily the workflow assigned.
+- Distance (supported by the toy in 2.7): K2P with pairwise deletion over shared columns, CpG columns of the family consensus masked. Not one-hot. Also exclude the poly-A tail and low-complexity 3′ parts, as the Alu network studies and the bat Ves SINE study did (reported by the literature agent from full texts; not in section 5).
+- Picture: t-SNE or UMAP of that distance, with PCoA beside it, colored by the subfamily the workflow assigned.
 - Question: do the assigned subfamilies appear as groups, and which copies sit between groups?
 - Control: a family whose subfamilies are already established should show them. If it does not, the picture is not informative for this kind of data and the idea stops here.
-- Open point to decide first: how truncated copies enter the distance (pairwise over shared columns, or full-length copies only).
+- Possible check without known labels (after Carey et al. 2021, who used segmental duplicates and human–chimp orthologs): orthologous copies of one insertion in two related genomes, from SINE_orth_loc, should get the same subfamily. Segmental duplicates are excluded here, since their flanks are shared.
 
 ### 4.4 A real presence/absence matrix
 
@@ -295,6 +350,18 @@ Checked on 2026-11-11 by opening each source. "Abstract" means only the abstract
 - Wang Y, Huang H, Rudin C, Shaposhnik Y (2021) Understanding how dimension reduction tools work. *JMLR* 22(201):1-73. [jmlr.org/papers/v22/20-1061.html](https://jmlr.org/papers/v22/20-1061.html). Abstract. Source of PaCMAP.
 - Negative eigenvalues in PCoA and the Lingoes / Cailliez corrections: documentation of [`ape::pcoa`](https://search.r-project.org/CRAN/refmans/ape/html/pcoa.html).
 - NMDS stress above 0.2 as "poor": attributed to Kruskal (1964, *Psychometrika*). Seen only second-hand, in a software manual; the original was not opened.
+
+**Subfamily delimitation in practice, and simulation (sources for 2.7)**
+
+- Zhou Y, et al. (2019) Subtype classification and functional annotation of L1Md retrotransposon promoters. *Mobile DNA* 10:14. [doi:10.1186/s13100-019-0156-5](https://doi.org/10.1186/s13100-019-0156-5). Full text. Truncated monomers excluded ("we defined a set of 'core' monomers ... Monomers not meeting these criteria were excluded"); PCA to 100 axes, HDBSCAN (min points 10–20), t-SNE for display only.
+- Storer J, Hubley R, Rosen J, Smit AF (2021) Curation guidelines for de novo generated transposable element families. *Curr Protoc* 1:e154. [doi:10.1002/cpz1.154](https://doi.org/10.1002/cpz1.154). Full text. COSEG on full-length copies; "aligned TG and CA dinucleotides sequences are the result of a single differential decay of a CpG site and do not constitute co-segregating individual substitutions"; "COSEG is not appropriate because depending upon the number of sequences that appear 'truncated', a large section of sequences will be missed."
+- Carey KM, Patterson G, Wheeler TJ (2021) Transposable element subfamily annotation has a reproducibility problem. *Mobile DNA* 12:4. [doi:10.1186/s13100-021-00232-4](https://doi.org/10.1186/s13100-021-00232-4). Full text. Two copies of one ancestral insertion get different subfamily labels in over 10 % of cases (Alu 12.4 %, L1 14.1 %, MIR 10.4 %); recombination and chance mutation at diagnostic sites are the causes discussed.
+- Wacholder AC, et al. (2014) Inference of transposable element ancestry. *PLoS Genet* 10:e1004482. [doi:10.1371/journal.pgen.1004482](https://doi.org/10.1371/journal.pgen.1004482). Full text; author list not checked.
+- Vassetzky NS, Kosushkin SA, Korchagin VI, et al. (2021) New Ther1-derived SINE Squam3 in scaled reptiles. *Mobile DNA* 12. [doi:10.1186/s13100-021-00238-y](https://doi.org/10.1186/s13100-021-00238-y). Full text. Subfamilies told apart by insertions/deletions, because "single-nucleotide mutations can be used to identify subfamilies only for highly conserved SINEs".
+- Hubley R, Wheeler TJ, Smit AF (2022) Accuracy of multiple sequence alignment methods in the reconstruction of transposable element families. *NAR Genom Bioinform* 4:lqac040. [doi:10.1093/nargab/lqac040](https://doi.org/10.1093/nargab/lqac040). Full text. Simulated TE copies: indel rate 0.20 of substitutions (insertion 0.08, deletion 0.12), length mean 1.7, max 20. SINE simulation only planned: "additionally consider SINE and LTR TE classes".
+- Miao, Li (2026) TEvarSim (initials not checked). *PLoS Comput Biol* 22:e1013933. [doi:10.1371/journal.pcbi.1013933](https://doi.org/10.1371/journal.pcbi.1013933). Full text. Defaults: proportion of sequences truncated 0.3, maximum proportion truncated 0.5.
+- Xing J, et al. (2004) *J Mol Biol* 344:675-682. [doi:10.1016/j.jmb.2004.09.058](https://doi.org/10.1016/j.jmb.2004.09.058). Abstract: "a relatively constant CpG versus non-CpG substitution ratio of approximately 6 for the young (AluY) and intermediate (AluS) Alu subfamilies".
+- Lunter G, Ponting CP, Hein J (2006) *PLoS Comput Biol* 2:e5. [doi:10.1371/journal.pcbi.0020005](https://doi.org/10.1371/journal.pcbi.0020005). Indels "approximately 10-fold less frequent" than substitutions (quote as returned by the fetch tool; full text not read).
 
 **Subfamily clustering**
 

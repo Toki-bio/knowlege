@@ -65,9 +65,17 @@ def scores(Z, D, lab, seed):
         silh_pic=silhouette_score(Z, lab),          # old score, kept only to show the gap
         knn=knn, ari=adjusted_rand_score(lab, cl))
 
+import os
+DROP_SAT = os.environ.get("DROP_SAT") == "1"   # diagnostic: drop copies with a saturated (clipped) K2P cell
+
 def run(seed):
-    X, lab = simulate(seed); N = len(lab)
-    D = k2p(X); OH = np.eye(4)[X].reshape(N, -1)
+    X, lab = simulate(seed)
+    D = k2p(X)
+    if DROP_SAT:
+        keep = ~(D >= -0.5 * np.log(1e-6) - 1e-9).any(1)
+        print("seed", seed, "DROP_SAT: dropping", int((~keep).sum()), "copies", flush=True)
+        X, lab, D = X[keep], lab[keep], D[np.ix_(keep, keep)]
+    N = len(lab); OH = np.eye(4)[X].reshape(N, -1)
     ref = silhouette_score(D, lab, metric="precomputed")   # TRUE labels on K2P: reference for every method
     P30 = PCA(30, random_state=seed).fit_transform(OH)     # one-hot condition
     C30, posmass, w, neg = pcoa(D, 30)                     # K2P condition (PaCMAP feature input)
@@ -97,7 +105,8 @@ def run(seed):
 
 if __name__ == "__main__":
     allr = []; metas = []
-    for s in range(1, NSEED + 1):
+    seeds = [int(x) for x in os.environ["SEEDS"].split(",")] if os.environ.get("SEEDS") else range(1, NSEED + 1)
+    for s in seeds:
         r, m = run(s); allr.append(r); metas.append(m)
         print("seed", s, "done  true-label silhouette on K2P = %.3f  PCoA neg share = %.3f  NMDS stress = %.3f" %
               (m["silh_true_on_K2P"], m["pcoa_neg_share"], m["nmds_stress"]), flush=True)
@@ -112,4 +121,4 @@ if __name__ == "__main__":
     # control (seed 1 only): old table value for PCA(one-hot) ARI = 0.905; PC1+PC2 = 0.119
     print("CONTROL seed1: PCA2 ARI = %.3f (old 0.905); PC1+PC2 var = %.3f (old 0.119)" %
           (allr[0]["O:PCA2"]["ari"], metas[0]["pca12_var"]))
-    json.dump(dict(results=allr, meta=metas), open("ordination_v2_metrics.json", "w"), indent=1)
+    json.dump(dict(results=allr, meta=metas), open(os.environ.get("OUT", "ordination_v2_metrics.json"), "w"), indent=1)

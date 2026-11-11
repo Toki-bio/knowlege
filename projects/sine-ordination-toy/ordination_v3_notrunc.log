@@ -1,0 +1,55 @@
+Warning: random state is set to 1.
+Warning: random state is set to 1.
+Warning: random state is set to 1.
+Warning: random state is set to 1.
+seed 1 {"seed": 1, "frac_gap": 0.01303021978021978, "frac_truncated": 0.0064285714285714285, "n_sat_cells": 0, "n_copies_with_sat": 0, "HDBSCAN": {"K:UMAP picture": {"ari": 0.9946739768595699, "n_clusters": 6, "frac_noise": 0.0007142857142857143}, "K:t-SNE picture": {"ari": 0.9903757754642029, "n_clusters": 6, "frac_noise": 0.004285714285714286}, "K2P matrix": {"ari": 0.0, "n_clusters": 0, "frac_noise": 1.0}, "one-hot PCA-100 (Zhou 2019)": {"ari": -0.0006730461165042152, "n_clusters": 3, "frac_noise": 0.9271428571428572}}, "ALL": {"n": 1400, "silh_true_on_K2P": 0.11197481305230335, "pcoa_neg_share": 0.34518487026746447, "nmds_stress": 0.21493231376016822}, "FILTER": {"n": 1400, "silh_true_on_K2P": 0.11197481305230335, "pcoa_neg_share": 0.34518487026746447, "nmds_stress": 0.21493231376016822}}
+Warning: random state is set to 2.
+Warning: random state is set to 2.
+Warning: random state is set to 2.
+Warning: random state is set to 2.
+seed 2 {"seed": 2, "frac_gap": 0.013695054945054946, "frac_truncated": 0.007857142857142858, "n_sat_cells": 0, "n_copies_with_sat": 0, "HDBSCAN": {"K:UMAP picture": {"ari": 0.9756025744064923, "n_clusters": 6, "frac_noise": 0.002857142857142857}, "K:t-SNE picture": {"ari": 0.9485566956944962, "n_clusters": 6, "frac_noise": 0.03142857142857143}, "K2P matrix": {"ari": 0.0, "n_clusters": 0, "frac_noise": 1.0}, "one-hot PCA-100 (Zhou 2019)": {"ari": 0.00536703735565519, "n_clusters": 5, "frac_noise": 0.8692857142857143}}, "ALL": {"n": 1400, "silh_true_on_K2P": 0.11173111886597045, "pcoa_neg_share": 0.3467175944540091, "nmds_stress": 0.21503820619663605}, "FILTER": {"n": 1400, "silh_true_on_K2P": 0.11173111886597045, "pcoa_neg_share": 0.3467175944540091, "nmds_stress": 0.21503820619663605}}
+Warning: random state is set to 3.
+Warning: random state is set to 3.
+Warning: random state is set to 3.
+Warning: random state is set to 3.
+seed 3 {"seed": 3, "frac_gap": 0.0134010989010989, "frac_truncated": 0.005714285714285714, "n_sat_cells": 0, "n_copies_with_sat": 0, "HDBSCAN": {"K:UMAP picture": {"ari": 0.9948387143832105, "n_clusters": 6, "frac_noise": 0.0}, "K:t-SNE picture": {"ari": 0.9898019857791601, "n_clusters": 6, "frac_noise": 0.005}, "K2P matrix": {"ari": 0.0, "n_clusters": 0, "frac_noise": 1.0}, "one-hot PCA-100 (Zhou 2019)": {"ari": -0.002020034517125459, "n_clusters": 2, "frac_noise": 0.9371428571428572}}, "ALL": {"n": 1400, "silh_true_on_K2P": 0.11278359128065524, "pcoa_neg_share": 0.34466070323267683, "nmds_stress": 0.22263493335285672}, "FILTER": {"n": 1400, "silh_true_on_K2P": 0.11278359128065524, "pcoa_neg_share": 0.34466070323267683, "nmds_stress": 0.22263493335285672}}
+Warning: random state is set to 4.
+Warning: random state is set to 4.
+Warning: random state is set to 4.
+Warning: random state is set to 4.
+seed 4 {"seed": 4, "frac_gap": 0.01301098901098901, "frac_truncated": 0.010714285714285714, "n_sat_cells": 0, "n_copies_with_sat": 0, "HDBSCAN": {"K:UMAP picture": {"ari": 0.9921644815748777, "n_clusters": 6, "frac_noise": 0.0007142857142857143}, "K:t-SNE picture": {"ari": 0.9848301589182747, "n_clusters": 6, "frac_noise": 0.008571428571428572}, "K2P matrix": {"ari": 0.0, "n_clusters": 0, "frac_noise": 1.0}, "one-hot PCA-100 (Zhou 2019)": {"ari": 0.00397583746135386, "n_clusters": 3, "frac_noise": 0.9028571428571428}}, "ALL": {"n": 1400, "silh_true_on_K2P": 0.1153439020680841, "pcoa_neg_share": 0.3443142822319134, "nmds_stress": 0.2046445646066639}, "FILTER": {"n": 1400, "silh_true_on_K2P": 0.1153439020680841, "pcoa_neg_share": 0.3443142822319134, "nmds_stress": 0.2046445646066639}}
+Warning: random state is set to 5.
+Warning: random state is set to 5.
+Warning: random state is set to 5.
+Warning: random state is set to 5.
+seed 5 {"seed": 5, "frac_gap": 0.013587912087912088, "frac_truncated": 0.010714285714285714, "n_sat_cells": 0, "n_copies_with_sat": 0, "HDBSCAN": {"K:UMAP picture": {"ari": 0.9662580467126174, "n_clusters": 6, "frac_noise": 0.017142857142857144}, "K:t-SNE picture": {"ari": 0.8960701376526297, "n_clusters": 6, "frac_noise": 0.07071428571428572}, "K2P matrix": {"ari": 0.0, "n_clusters": 0, "frac_noise": 1.0}, "one-hot PCA-100 (Zhou 2019)": {"ari": 0.0009587954124918244, "n_clusters": 5, "frac_noise": 0.8892857142857142}}, "ALL": {"n": 1400, "silh_true_on_K2P": 0.10296678892315861, "pcoa_neg_share": 0.3458465869063373, "nmds_stress": 0.21273063334848374}, "FILTER": {"n": 1400, "silh_true_on_K2P": 0.10296678892315861, "pcoa_neg_share": 0.3458465869063373, "nmds_stress": 0.21273063334848374}}
+
+== ALL ==   true-label silhouette on K2P mean 0.111
+picture                  trust          silh_seq               knn               ari
+O:PCA2            0.729 ±0.015      0.023 ±0.029      0.832 ±0.045      0.303 ±0.060
+O:UMAP            0.782 ±0.009      0.071 ±0.029      0.995 ±0.003      0.909 ±0.064
+O:PaCMAP          0.769 ±0.010      0.075 ±0.037      0.993 ±0.002      0.902 ±0.082
+K:PCoA            0.731 ±0.013      0.088 ±0.016      0.748 ±0.047      0.380 ±0.066
+K:NMDS            0.741 ±0.018      0.119 ±0.009      0.791 ±0.054      0.283 ±0.016
+K:t-SNE           0.794 ±0.009      0.104 ±0.016      0.994 ±0.004      0.977 ±0.021
+K:UMAP            0.759 ±0.008      0.110 ±0.006      0.995 ±0.003      0.987 ±0.008
+K:PaCMAP          0.794 ±0.010      0.058 ±0.032      0.988 ±0.004      0.798 ±0.106
+ARI per seed: {'O:PCA2': [0.236, 0.351, 0.225, 0.347, 0.357], 'O:UMAP': [0.966, 0.88, 0.998, 0.821, 0.88], 'O:PaCMAP': [0.965, 0.832, 0.997, 0.937, 0.781], 'K:PCoA': [0.41, 0.256, 0.431, 0.433, 0.371], 'K:NMDS': [0.299, 0.279, 0.291, 0.254, 0.29], 'K:t-SNE': [0.989, 0.974, 0.994, 0.991, 0.937], 'K:UMAP': [0.994, 0.981, 0.995, 0.991, 0.975], 'K:PaCMAP': [0.951, 0.731, 0.77, 0.881, 0.655]}
+
+== FILTER ==   true-label silhouette on K2P mean 0.111
+picture                  trust          silh_seq               knn               ari
+O:PCA2            0.729 ±0.015      0.023 ±0.029      0.832 ±0.045      0.303 ±0.060
+O:UMAP            0.782 ±0.009      0.071 ±0.029      0.995 ±0.003      0.909 ±0.064
+O:PaCMAP          0.769 ±0.010      0.075 ±0.037      0.993 ±0.002      0.902 ±0.082
+K:PCoA            0.731 ±0.013      0.088 ±0.016      0.748 ±0.047      0.380 ±0.066
+K:NMDS            0.741 ±0.018      0.119 ±0.009      0.791 ±0.054      0.283 ±0.016
+K:t-SNE           0.794 ±0.009      0.104 ±0.016      0.994 ±0.004      0.977 ±0.021
+K:UMAP            0.759 ±0.008      0.110 ±0.006      0.995 ±0.003      0.987 ±0.008
+K:PaCMAP          0.794 ±0.010      0.058 ±0.032      0.988 ±0.004      0.798 ±0.106
+ARI per seed: {'O:PCA2': [0.236, 0.351, 0.225, 0.347, 0.357], 'O:UMAP': [0.966, 0.88, 0.998, 0.821, 0.88], 'O:PaCMAP': [0.965, 0.832, 0.997, 0.937, 0.781], 'K:PCoA': [0.41, 0.256, 0.431, 0.433, 0.371], 'K:NMDS': [0.299, 0.279, 0.291, 0.254, 0.29], 'K:t-SNE': [0.989, 0.974, 0.994, 0.991, 0.937], 'K:UMAP': [0.994, 0.981, 0.995, 0.991, 0.975], 'K:PaCMAP': [0.951, 0.731, 0.77, 0.881, 0.655]}
+
+== HDBSCAN (min_cluster_size 20, k not given; noise counted as its own label) ==
+K:UMAP picture                 ARI 0.985 ±0.012  clusters [6, 6, 6, 6, 6]  noise 0.00
+K:t-SNE picture                ARI 0.962 ±0.036  clusters [6, 6, 6, 6, 6]  noise 0.02
+K2P matrix                     ARI 0.000 ±0.000  clusters [0, 0, 0, 0, 0]  noise 1.00
+one-hot PCA-100 (Zhou 2019)    ARI 0.002 ±0.003  clusters [3, 5, 2, 3, 5]  noise 0.91
