@@ -1,0 +1,3 @@
+hdbscan_cluster	s1_30seqs	s2_38seqs	s3_43seqs	s4_60seqs	s5_5seqs	s6_7seqs	s7g_172seqs	s8_225seqs	s9_20seqs	total
+0	98	98	64	0	0	0	98	0	97	455
+1	0	0	35	88	90	94	2	100	2	411

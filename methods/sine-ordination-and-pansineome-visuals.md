@@ -201,6 +201,23 @@ Seed 3 of the easy toy (2.6) has a separate, explained cause: one pair of copies
 
 Still not in any toy: gene conversion and recombination between subfamilies, copies that continue to decay in a continuum rather than forming groups, and very unequal subfamily sizes. Carey et al. 2021 discuss recombination and chance mutation at diagnostic sites as reasons subfamily labels disagree on real data; Wacholder et al. 2014 found recombination in 7.7 % of full-length LAVA copies.
 
+### 2.8 First real family: *Scalopus aquaticus* Tal SINE, published subfamilies s1–s9
+
+Script and results: `projects/sine-ordination-toy/real_saq/` (`saq_ordination.py`, `saq_ordination.json`, `saq_ordination.png`, `saq_hdbscan_vs_labels.tsv`, `saq_between_copies.tsv`, `saq_all.aln.fa`). Therioserver, 2026-11-11.
+
+**Input.** The 100 random copies per subfamily published in the Tal repository (`saq/alignments/saq_s*_rand100.aln.fa`, last changed 2026-04-28). These rows carry 50 bp of left and 70 bp of right flank; the element body was cut out by that rule for the 866 copies whose length is exactly element + 120 bp (34 copies at contig ends dropped). The flanks of these copies were **not** tested for uniqueness in this run. Bodies + 9 consensuses aligned with MAFFT 7.526 `--auto`. Distance as in 2.7: K2P with pairwise deletion, columns with a base in fewer than half the copies dropped (251 kept), CpG columns of the majority consensus masked (30), 221 columns used.
+
+**What came out.**
+
+- The published labels do not form groups in sequence distance: their silhouette on K2P is 0.01 (toy reference values 0.10–0.16). Ward clustering into 9 on the pictures: ARI 0.28 (PCoA), 0.45 (t-SNE), 0.37 (UMAP).
+- HDBSCAN on the UMAP picture, number not given, found **2 clusters** with no copy left out. Cluster 0: all of s1, s2, s7g, s9 and 64 of 99 s3. Cluster 1: all of s4, s5, s6, s8 and 35 of s3.
+- The 9 consensuses fall into the same two sets. Within {s1, s2, s3, s7g, s9}: 4–18 substitutions apart; within {s4, s5, s6, s8}: 5–16; between the sets: 20–34 substitutions and 29–53 columns differing by an indel.
+- Mean K2P within one subfamily is 0.07–0.23, far more than the distance between neighbouring consensuses (for example s1 and s9 differ at 4 sites). So at the copy level the close subfamilies overlap, as in the toy when noise swamps diagnostic sites.
+- Nearest consensus (mismatches plus gap differences) agrees with the published label for 677 of 866 copies. Largest disagreements: s3 43 of 99 copies nearest s8 (the other set); s9 45 of 99 nearest its own, the rest nearest s1, s7g or s2; s6 24 of 94 nearest s4; s5 18 of 90 nearest s4.
+- In the t-SNE and UMAP pictures the s3 copies sit in two places, one beside each set.
+
+**Not understood, not decided here:** why 43 s3 copies are closest to s8. The numbers above are facts about these 866 copies; what they mean for the s3 subfamily is for the alignment and the owner. Before any such alignment is shown, these copies need the unique-flank test.
+
 ## 3. Toy pan-SINEome and orthologous-locus visuals
 
 Script: `pansineome_toy.py`. Matrix: `toy_pansineome_PAV.tsv`.
