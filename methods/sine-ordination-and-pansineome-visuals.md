@@ -216,6 +216,12 @@ Script and results: `projects/sine-ordination-toy/real_saq/` (`saq_ordination.py
 - Nearest consensus (mismatches plus gap differences) agrees with the published label for 677 of 866 copies. Largest disagreements: s3 43 of 99 copies nearest s8 (the other set); s9 45 of 99 nearest its own, the rest nearest s1, s7g or s2; s6 24 of 94 nearest s4; s5 18 of 90 nearest s4.
 - In the t-SNE and UMAP pictures the s3 copies sit in two places, one beside each set.
 
+**Labels.** The s1–s9 labels of these rows come from the run's automatic assignment of copies to consensuses by bit score, not from hand curation.
+
+**Flank check (within the 866 copies).** Method of the Tal `eri/LOG.md` test: position-by-position flank identity between every pair, no alignment. No pair shares flanks above 60 % on both sides, also when shifts of up to ±5 bp are allowed (`saq_flank_test.py`). A copy whose flanks match a locus outside this sample would not be seen; that genome-wide test needs the saq genome (on KIT) and was not run.
+
+**s3 alignment:** the 99 s3 copies in their published order, with the s3, s8 and s7g consensuses as the first rows; each name carries its nearest consensus and its distances to s3 and s8 (`saq_s3_copies_vs_s3_s8_s7g.aln.fa`, columns from the joint MAFFT alignment). [Open in MSA viewer](https://toki-bio.github.io/MSA-viewer/?url=https%3A%2F%2Fraw.githubusercontent.com%2FToki-bio%2Fknowlege%2Fmain%2Fprojects%2Fsine-ordination-toy%2Freal_saq%2Fsaq_s3_copies_vs_s3_s8_s7g.aln.fa&title=saq%20s3%20copies%20vs%20s3%2C%20s8%2C%20s7g%20consensuses).
+
 **Not understood, not decided here:** why 43 s3 copies are closest to s8. The numbers above are facts about these 866 copies; what they mean for the s3 subfamily is for the alignment and the owner. Before any such alignment is shown, these copies need the unique-flank test.
 
 ## 3. Toy pan-SINEome and orthologous-locus visuals
