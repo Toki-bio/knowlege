@@ -15,25 +15,43 @@ Related: [dimensionality reduction for SINE separation](../dim-reduction-for-sin
 
 ## Conclusion: how to present dimensionality reduction of SINE copies
 
-Based on the toys (2.6, 2.7, 2.9) and four real families (2.8–2.10). An earlier version of this section used K2P over all columns as the only input; 2.9 shows that was too narrow.
+The aim is a picture of copies that SINEderella has already assigned to subfamilies. It is not a way to find subfamilies.
 
-1. **The input matters more than the picture method.** A subfamily is a few diagnostic positions among many private mutations. A distance over all columns (K2P) dilutes them. Two inputs should be made and shown side by side:
-   - **all columns:** K2P with pairwise deletion, columns covered by fewer than half the copies dropped, CpG columns masked;
-   - **diagnostic positions:** minor-allele characters (substitutions, and indels as characters) that co-vary with a character at another position, found without labels (2.9), then a Hamming distance on them with pairwise deletion.
+**Recipe.**
 
-   Not one-hot, and not PCA of everything: truncated copies are then placed by their missing block, and a signal carried by a few columns stays below the noise of the rest.
-2. **Picture:** UMAP (`n_neighbors` 30, `min_dist` 0.3) with t-SNE (perplexity 40) beside it, of each input. Colours = the workflow's subfamily assignment. Axes without units or percentages.
-3. **Numbers under the picture, measured on the distance and not on the 2D picture:**
-   - how many positions were selected as co-varying (none = no evidence of subfamilies in this set);
-   - the share of copies whose 15 nearest copies are mostly of their own assigned subfamily;
-   - the silhouette of the assigned subfamilies.
-4. **How to read it:**
-   - The diagnostic-position distance is the better measure of whether subfamilies are distinct: in the toy it equals a distance on the true diagnostic columns. Its picture is not better than the K2P picture, because a few discrete positions break a group into islands; do not count islands.
-   - If the all-column picture shows two blobs and the diagnostic-position numbers show more, as for saq, the subfamilies are real at the level of positions but differ at too few of them for an all-column distance.
-   - Groups proposed from a picture or from the nested procedure of 2.9 are candidates. In the toy the nested procedure returned one or two groups too many. Each candidate has to be shown as an alignment before it means anything.
-   - A picture never assigns copies and never defines a subfamily.
+1. **Input:** the alignment of the element bodies of one family (no flanks), with the subfamily consensuses.
+2. **Columns:** only the columns where the subfamily consensuses differ. Substitutions and indels are both used as characters; a copy that does not cover a column is not compared there (pairwise deletion). Distance = share of compared characters that differ.
+3. **Picture:** UMAP (`n_neighbors` 30, `min_dist` 0.3) of that distance, with t-SNE (perplexity 40) beside it. Colours = the assigned subfamily. No units or percentages on the axes; distances between groups in these pictures have no meaning.
+4. **Beside it, for comparison:** the same UMAP on a distance over all columns (K2P, CpG columns masked). It shows how much of the picture comes from choosing the columns.
+5. **Two numbers under each picture, measured on the distance and not on the picture:** the share of copies whose 15 nearest copies are mostly of their own subfamily, and the silhouette of the assigned subfamilies.
 
-Limits: not tested with recombination between subfamilies or very unequal subfamily sizes; four real families (2.10), 100 copies per subfamily; the nested procedure over-splits in the toy for a reason not yet found.
+**Why these columns.** Subfamilies differ at a few positions; copies differ from each other at many more. A distance over all columns blurs the subfamilies (saq: two blobs). On the columns where the consensuses differ the same methods separate them better in all four families tried:
+
+| Family | Copies | All columns | Columns where the consensuses differ |
+|---|---|---|---|
+| *Scalopus aquaticus* Tal, s1–s9 | 866 | 64 % / 0.01 | 83 % / 0.08 |
+| *Timema cristinae* t6 | 373 | 91 % / 0.18 | 92 % / 0.26 |
+| *Timema cristinae* t1 | 322 | 71 % / 0.15 | 86 % / 0.28 |
+| *Rhinolophus sinicus* units r5–r10 | 599 | 92 % / 0.20 | 96 % / 0.45 |
+
+(share of copies whose nearest copies are mostly of their own subfamily / silhouette)
+
+![saq: all columns against consensus-difference columns]({{ '/assets/img/sine-ordination/saq_figure.png' | relative_url }})
+
+![Rhinolophus sinicus units]({{ '/assets/img/sine-ordination/rsi_units_figure.png' | relative_url }})
+
+![Timema cristinae t6]({{ '/assets/img/sine-ordination/tim_t6_figure.png' | relative_url }})
+
+![Timema cristinae t1]({{ '/assets/img/sine-ordination/tim_t1_figure.png' | relative_url }})
+
+**What to keep in mind when reading such a picture.**
+
+- The copies were assigned by similarity to those consensuses, so on these columns they look separated partly by construction. The picture shows how cleanly the copies carry their subfamily's states; it is not independent proof that the subfamilies exist. A label-free check exists (2.9: positions found by covariation give nearly the same columns and the same scores).
+- Overlap is information: in saq, s9 lies inside s1 and s7g, and s3 sits in two places; in *Timema* t1, t1-2 and t1-4 overlap and t1_1 is in two islands.
+- Do not use PCA, PCoA or NMDS as the main picture (2.6, 2.7), and do not use one-hot input when copies are truncated (2.7).
+- Scripts: `projects/sine-ordination-toy/families/prep_family.py` (bodies, flank check) and `family_figure.py` (the figure and its two numbers).
+
+Limits: four families, 100 random copies per subfamily; flanks checked within each set only, not genome-wide; composite (multi-unit) subfamilies not tried. The attempts to find groups without labels (2.9, 2.10) are a side result and not part of this recipe.
 
 ## In short
 

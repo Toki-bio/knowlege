@@ -1,0 +1,32 @@
+{
+ "copies": 599,
+ "subfamilies": [
+  "r5_27seqs",
+  "r6_210seqs",
+  "r7_133seqs",
+  "r8_83seqs",
+  "r9_15seqs",
+  "r10_19seqs"
+ ],
+ "all_columns": {
+  "cols": 138,
+  "knn_on_D": 0.9232053422370617,
+  "silh_labels_on_D": 0.20397639212898333,
+  "ari_umap_ward": 0.8501159887358491,
+  "ari_tsne_ward": 0.842347664028657,
+  "hdb_ari": 0.7255470989266132,
+  "hdb_n": 5,
+  "hdb_noise": 0.038397328881469114
+ },
+ "consensus_difference_columns": {
+  "characters": 162,
+  "cols": 106,
+  "knn_on_D": 0.9649415692821369,
+  "silh_labels_on_D": 0.4514403178673231,
+  "ari_umap_ward": 0.9242074192733685,
+  "ari_tsne_ward": 0.927971320193798,
+  "hdb_ari": 0.9242074192733685,
+  "hdb_n": 6,
+  "hdb_noise": 0.0
+ }
+}
