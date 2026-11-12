@@ -1,0 +1,733 @@
+{
+ "copies": 866,
+ "align_cols": 1659,
+ "subfamilies": [
+  "s1_30seqs",
+  "s2_38seqs",
+  "s3_43seqs",
+  "s4_60seqs",
+  "s5_5seqs",
+  "s6_7seqs",
+  "s7g_172seqs",
+  "s8_225seqs",
+  "s9_20seqs"
+ ],
+ "K2P CpG-masked": {
+  "knn_on_D": 0.6374133949191686,
+  "silh_labels_on_D": 0.01007172628474132,
+  "ari_umap_ward": 0.36940131054169767,
+  "ari_tsne_ward": 0.4473930206971352,
+  "hdb_ari": 0.19198207753129615,
+  "hdb_n": 2,
+  "hdb_noise": 0.0
+ },
+ "selection sub": {
+  "features": 207,
+  "selected": 79,
+  "selected_indel": 0,
+  "threshold_z2": 30.407234578831382,
+  "selected_on_CpG_cols": 19
+ },
+ "feat-all": {
+  "knn_on_D": 0.7170900692840647,
+  "silh_labels_on_D": 0.03410227979072435,
+  "ari_umap_ward": 0.5244279795881801,
+  "ari_tsne_ward": 0.5254183503133149,
+  "hdb_ari": 0.19271815215965404,
+  "hdb_n": 2,
+  "hdb_noise": 0.0
+ },
+ "cov-selected sub": {
+  "knn_on_D": 0.8094688221709007,
+  "silh_labels_on_D": 0.0879300712018,
+  "ari_umap_ward": 0.5531751654032512,
+  "ari_tsne_ward": 0.5446422689475285,
+  "hdb_ari": 0.19502484258883535,
+  "hdb_n": 2,
+  "hdb_noise": 0.0
+ },
+ "cov-weighted sub": {
+  "knn_on_D": 0.76905311778291,
+  "silh_labels_on_D": 0.07991187175559268,
+  "ari_umap_ward": 0.435544167739064,
+  "ari_tsne_ward": 0.44322610215910496,
+  "hdb_ari": 0.194321332738478,
+  "hdb_n": 2,
+  "hdb_noise": 0.0
+ },
+ "heavy50 sub": {
+  "knn_on_D": 0.7655889145496536,
+  "silh_labels_on_D": 0.04983795375416018,
+  "ari_umap_ward": 0.5331426098634992,
+  "ari_tsne_ward": 0.5317485134035256,
+  "hdb_ari": 0.19292780810287918,
+  "hdb_n": 2,
+  "hdb_noise": 0.0
+ },
+ "heavy75 sub": {
+  "knn_on_D": 0.7944572748267898,
+  "silh_labels_on_D": 0.07259899319360359,
+  "ari_umap_ward": 0.5584236404531048,
+  "ari_tsne_ward": 0.5557197338348242,
+  "hdb_ari": 0.19315475536504156,
+  "hdb_n": 2,
+  "hdb_noise": 0.0
+ },
+ "heavy90 sub": {
+  "knn_on_D": 0.8106235565819861,
+  "silh_labels_on_D": 0.08240559282435912,
+  "ari_umap_ward": 0.5783554078613069,
+  "ari_tsne_ward": 0.5545070968879531,
+  "hdb_ari": 0.19502484258883535,
+  "hdb_n": 2,
+  "hdb_noise": 0.0
+ },
+ "selection sub+indel": {
+  "features": 307,
+  "selected": 168,
+  "selected_indel": 90,
+  "threshold_z2": 40.77662259812288,
+  "selected_on_CpG_cols": 37
+ },
+ "cov-selected sub+indel": {
+  "knn_on_D": 0.8267898383371824,
+  "silh_labels_on_D": 0.0745111811163065,
+  "ari_umap_ward": 0.5620648719871384,
+  "ari_tsne_ward": 0.623463918850332,
+  "hdb_ari": 0.2737081874020926,
+  "hdb_n": 3,
+  "hdb_noise": 0.0
+ },
+ "cov-weighted sub+indel": {
+  "knn_on_D": 0.7863741339491916,
+  "silh_labels_on_D": 0.022337909356146657,
+  "ari_umap_ward": 0.5190357764893776,
+  "ari_tsne_ward": 0.462925354956722,
+  "hdb_ari": 0.27219268944847563,
+  "hdb_n": 3,
+  "hdb_noise": 0.0
+ },
+ "heavy50 sub+indel": {
+  "knn_on_D": 0.7794457274826789,
+  "silh_labels_on_D": 0.029846549739926505,
+  "ari_umap_ward": 0.6021990399519009,
+  "ari_tsne_ward": 0.5174531977969573,
+  "hdb_ari": 0.18467772821136358,
+  "hdb_n": 2,
+  "hdb_noise": 0.0
+ },
+ "heavy75 sub+indel": {
+  "knn_on_D": 0.8198614318706697,
+  "silh_labels_on_D": 0.054988187094594805,
+  "ari_umap_ward": 0.5928831169767915,
+  "ari_tsne_ward": 0.5722304338687096,
+  "hdb_ari": 0.18467772821136358,
+  "hdb_n": 2,
+  "hdb_noise": 0.0
+ },
+ "heavy90 sub+indel": {
+  "knn_on_D": 0.8187066974595842,
+  "silh_labels_on_D": 0.06717978624802369,
+  "ari_umap_ward": 0.5973000118279203,
+  "ari_tsne_ward": 0.6289375375795114,
+  "hdb_ari": 0.2757538222536633,
+  "hdb_n": 3,
+  "hdb_noise": 0.0
+ },
+ "PCA-pa axes": 1,
+ "PCA-pa": {
+  "knn_on_D": 0.38683602771362585,
+  "silh_labels_on_D": -0.05260730190341857,
+  "ari_umap_ward": 0.22196863126127578,
+  "ari_tsne_ward": 0.2360365226348657,
+  "hdb_ari": 0.1519581255868376,
+  "hdb_n": 3,
+  "hdb_noise": 0.02424942263279446
+ },
+ "consensus check (sub+indel)": {
+  "selected_features": 168,
+  "selected_features_that_are_a_consensus_difference": 78,
+  "columns_where_consensuses_differ": 100,
+  "of_those_with_a_feature": 87,
+  "of_those_selected": 80,
+  "selected_columns": 134,
+  "selected_columns_where_consensuses_do_not_differ": 54
+ },
+ "consensus-difference columns (NOT label-free)": {
+  "knn_on_D": 0.8279445727482679,
+  "silh_labels_on_D": 0.08391187618164023,
+  "ari_umap_ward": 0.6300636513624542,
+  "ari_tsne_ward": 0.6211518755373711,
+  "hdb_ari": 0.28307523455762373,
+  "hdb_n": 4,
+  "hdb_noise": 0.016166281755196306
+ },
+ "split-half selection (5 random splits)": [
+  {
+   "a": 129,
+   "b": 89,
+   "both": 78
+  },
+  {
+   "a": 127,
+   "b": 112,
+   "both": 92
+  },
+  {
+   "a": 132,
+   "b": 139,
+   "both": 99
+  },
+  {
+   "a": 112,
+   "b": 136,
+   "both": 96
+  },
+  {
+   "a": 94,
+   "b": 128,
+   "both": 80
+  }
+ ],
+ "nested sub": {
+  "leaves": 8,
+  "sizes": [
+   241,
+   132,
+   86,
+   35,
+   93,
+   103,
+   80,
+   96
+  ],
+  "ari_vs_published": 0.5413223127949919,
+  "log": [
+   {
+    "node": "r",
+    "n": 866,
+    "features": 207,
+    "selected": 79,
+    "proposed": 2,
+    "split": [
+     459,
+     407
+    ],
+    "diag_positions_between_parts": {
+     "0-1": [
+      287,
+      307,
+      344,
+      387,
+      439,
+      564,
+      611,
+      641,
+      681,
+      757,
+      1018,
+      1070,
+      1181,
+      1240,
+      1259,
+      1305
+     ]
+    }
+   },
+   {
+    "node": "r.0",
+    "n": 459,
+    "features": 272,
+    "selected": 50,
+    "proposed": 3,
+    "split": [
+     241,
+     132,
+     86
+    ],
+    "diag_positions_between_parts": {
+     "0-1": [
+      198,
+      213,
+      231,
+      299
+     ],
+     "0-2": [
+      167,
+      173,
+      198,
+      258,
+      299,
+      438,
+      1285
+     ],
+     "1-2": [
+      167,
+      173,
+      1285
+     ]
+    }
+   },
+   {
+    "node": "r.0.0",
+    "n": 241,
+    "leaf": "12 co-varying features, 2 proposed parts not separated by 2 positions"
+   },
+   {
+    "node": "r.0.1",
+    "n": 132,
+    "leaf": "12 co-varying features, one cluster"
+   },
+   {
+    "node": "r.0.2",
+    "n": 86,
+    "leaf": "2 co-varying features, one cluster"
+   },
+   {
+    "node": "r.1",
+    "n": 407,
+    "features": 112,
+    "selected": 47,
+    "proposed": 4,
+    "split": [
+     35,
+     93,
+     103,
+     176
+    ],
+    "diag_positions_between_parts": {
+     "0-1": [
+      132,
+      198,
+      233,
+      247,
+      387,
+      439,
+      564,
+      642,
+      676,
+      681,
+      842,
+      1070,
+      1241,
+      1305,
+      1330,
+      1378
+     ],
+     "0-2": [
+      198,
+      247,
+      387,
+      439,
+      564,
+      923,
+      1070,
+      1241,
+      1311
+     ],
+     "0-3": [
+      198,
+      247,
+      387,
+      439,
+      564,
+      642,
+      681,
+      1070,
+      1241,
+      1305,
+      1311
+     ],
+     "1-2": [
+      132,
+      233,
+      642,
+      676,
+      842,
+      923,
+      1305,
+      1311,
+      1330,
+      1378
+     ],
+     "1-3": [
+      842,
+      1311,
+      1330,
+      1378
+     ],
+     "2-3": [
+      642,
+      923,
+      1305
+     ]
+    }
+   },
+   {
+    "node": "r.1.0",
+    "n": 35,
+    "leaf": "small"
+   },
+   {
+    "node": "r.1.1",
+    "n": 93,
+    "leaf": "8 co-varying features, one cluster"
+   },
+   {
+    "node": "r.1.2",
+    "n": 103,
+    "leaf": "6 co-varying features, one cluster"
+   },
+   {
+    "node": "r.1.3",
+    "n": 176,
+    "features": 60,
+    "selected": 13,
+    "proposed": 2,
+    "split": [
+     80,
+     96
+    ],
+    "diag_positions_between_parts": {
+     "0-1": [
+      132,
+      233,
+      456,
+      594,
+      982
+     ]
+    }
+   },
+   {
+    "node": "r.1.3.0",
+    "n": 80,
+    "leaf": "4 co-varying features, one cluster"
+   },
+   {
+    "node": "r.1.3.1",
+    "n": 96,
+    "leaf": "5 co-varying features, one cluster"
+   }
+  ]
+ },
+ "nested sub+indel": {
+  "leaves": 12,
+  "sizes": [
+   48,
+   44,
+   114,
+   142,
+   28,
+   65,
+   47,
+   108,
+   65,
+   27,
+   85,
+   93
+  ],
+  "ari_vs_published": 0.568063632637037,
+  "log": [
+   {
+    "node": "r",
+    "n": 866,
+    "features": 307,
+    "selected": 168,
+    "proposed": 3,
+    "split": [
+     441,
+     155,
+     270
+    ],
+    "diag_positions_between_parts": {
+     "0-1": [
+      199,
+      287,
+      307,
+      344,
+      399,
+      565,
+      593,
+      641,
+      757,
+      893,
+      923,
+      1018,
+      1128,
+      1240,
+      1259
+     ],
+     "0-2": [
+      199,
+      287,
+      307,
+      344,
+      387,
+      439,
+      475,
+      564,
+      593,
+      641,
+      681,
+      757,
+      893,
+      923,
+      1018,
+      1070,
+      1128,
+      1181,
+      1240,
+      1259,
+      1305
+     ],
+     "1-2": [
+      642,
+      929,
+      1305,
+      1338
+     ]
+    }
+   },
+   {
+    "node": "r.0",
+    "n": 441,
+    "features": 399,
+    "selected": 113,
+    "proposed": 4,
+    "split": [
+     92,
+     114,
+     170,
+     65
+    ],
+    "diag_positions_between_parts": {
+     "0-1": [
+      167,
+      173,
+      332,
+      457,
+      664,
+      1285,
+      1397
+     ],
+     "0-2": [
+      167,
+      173,
+      258,
+      299,
+      332,
+      438,
+      664,
+      1259,
+      1285,
+      1397
+     ],
+     "0-3": [
+      167,
+      173,
+      200,
+      258,
+      299,
+      332,
+      438,
+      648,
+      757,
+      1261,
+      1397
+     ],
+     "1-2": [
+      198,
+      213,
+      231,
+      299
+     ],
+     "1-3": [
+      198,
+      213,
+      231,
+      299,
+      357,
+      475,
+      648,
+      1261
+     ],
+     "2-3": [
+      200,
+      357,
+      1261
+     ]
+    }
+   },
+   {
+    "node": "r.0.0",
+    "n": 92,
+    "features": 106,
+    "selected": 22,
+    "proposed": 2,
+    "split": [
+     48,
+     44
+    ],
+    "diag_positions_between_parts": {
+     "0-1": [
+      213,
+      1311
+     ]
+    }
+   },
+   {
+    "node": "r.0.0.0",
+    "n": 48,
+    "leaf": "small"
+   },
+   {
+    "node": "r.0.0.1",
+    "n": 44,
+    "leaf": "small"
+   },
+   {
+    "node": "r.0.1",
+    "n": 114,
+    "leaf": "25 co-varying features, one cluster"
+   },
+   {
+    "node": "r.0.2",
+    "n": 170,
+    "features": 185,
+    "selected": 8,
+    "proposed": 2,
+    "split": [
+     142,
+     28
+    ],
+    "diag_positions_between_parts": {
+     "0-1": [
+      356,
+      399
+     ]
+    }
+   },
+   {
+    "node": "r.0.2.0",
+    "n": 142,
+    "leaf": "9 co-varying features, 2 proposed parts not separated by 2 positions"
+   },
+   {
+    "node": "r.0.2.1",
+    "n": 28,
+    "leaf": "small"
+   },
+   {
+    "node": "r.0.3",
+    "n": 65,
+    "leaf": "no co-varying features"
+   },
+   {
+    "node": "r.1",
+    "n": 155,
+    "features": 115,
+    "selected": 51,
+    "proposed": 2,
+    "split": [
+     47,
+     108
+    ],
+    "diag_positions_between_parts": {
+     "0-1": [
+      198,
+      247,
+      387,
+      439,
+      1070,
+      1181,
+      1241
+     ]
+    }
+   },
+   {
+    "node": "r.1.0",
+    "n": 47,
+    "leaf": "small"
+   },
+   {
+    "node": "r.1.1",
+    "n": 108,
+    "leaf": "2 co-varying features, 2 proposed parts not separated by 2 positions"
+   },
+   {
+    "node": "r.2",
+    "n": 270,
+    "features": 101,
+    "selected": 31,
+    "proposed": 3,
+    "split": [
+     92,
+     85,
+     93
+    ],
+    "diag_positions_between_parts": {
+     "0-1": [
+      233,
+      842,
+      982,
+      1311,
+      1330,
+      1378
+     ],
+     "0-2": [
+      132,
+      456,
+      842,
+      1311,
+      1330,
+      1378
+     ],
+     "1-2": [
+      132,
+      233,
+      456,
+      982,
+      1338
+     ]
+    }
+   },
+   {
+    "node": "r.2.0",
+    "n": 92,
+    "features": 26,
+    "selected": 9,
+    "proposed": 2,
+    "split": [
+     65,
+     27
+    ],
+    "diag_positions_between_parts": {
+     "0-1": [
+      1311,
+      1330
+     ]
+    }
+   },
+   {
+    "node": "r.2.0.0",
+    "n": 65,
+    "leaf": "5 co-varying features, one cluster"
+   },
+   {
+    "node": "r.2.0.1",
+    "n": 27,
+    "leaf": "small"
+   },
+   {
+    "node": "r.2.1",
+    "n": 85,
+    "leaf": "2 co-varying features, one cluster"
+   },
+   {
+    "node": "r.2.2",
+    "n": 93,
+    "leaf": "8 co-varying features, one cluster"
+   }
+  ]
+ }
+}

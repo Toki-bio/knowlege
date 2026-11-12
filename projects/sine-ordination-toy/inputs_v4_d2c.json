@@ -1,0 +1,1337 @@
+[
+ {
+  "seed": 1,
+  "diag_cols": 10,
+  "K2P": {
+   "knn_on_D": 0.8207142857142857,
+   "silh_labels_on_D": 0.038552871772014954,
+   "ari_umap_ward": 0.5185711335267958,
+   "ari_tsne_ward": 0.5506239581229451,
+   "hdb_ari": 0.33058291437576476,
+   "hdb_n": 4,
+   "hdb_noise": 0.21642857142857144
+  },
+  "K2P CpG-masked": {
+   "knn_on_D": 0.8492857142857143,
+   "silh_labels_on_D": 0.05911788001119961,
+   "ari_umap_ward": 0.6395780613709896,
+   "ari_tsne_ward": 0.5978404360043502,
+   "hdb_ari": 0.5735926130664659,
+   "hdb_n": 5,
+   "hdb_noise": 0.13285714285714287
+  },
+  "selection": {
+   "features": 233,
+   "selected": 14,
+   "threshold_z2": 43.076872160073464,
+   "selected_cols": 13,
+   "selected_cols_true": 10,
+   "true_cols_found": 10,
+   "true_cols": 10
+  },
+  "feat-all": {
+   "knn_on_D": 0.8192857142857143,
+   "silh_labels_on_D": 0.04430616373432875,
+   "ari_umap_ward": 0.517838588821021,
+   "ari_tsne_ward": 0.4812335210937871,
+   "hdb_ari": 0.32383831212330877,
+   "hdb_n": 6,
+   "hdb_noise": 0.325
+  },
+  "cov-selected": {
+   "knn_on_D": 0.8957142857142857,
+   "silh_labels_on_D": 0.3210476760315628,
+   "ari_umap_ward": 0.4479793953155258,
+   "ari_tsne_ward": 0.5113247671074026,
+   "hdb_ari": 0.5530542778311252,
+   "hdb_n": 11,
+   "hdb_noise": 0.027142857142857142
+  },
+  "cov-weighted": {
+   "knn_on_D": 0.8871428571428571,
+   "silh_labels_on_D": 0.3811033854365599,
+   "ari_umap_ward": 0.2830208645846815,
+   "ari_tsne_ward": 0.5143197716616467,
+   "hdb_ari": 0.41265873136073616,
+   "hdb_n": 15,
+   "hdb_noise": 0.035
+  },
+  "heavy50": {
+   "knn_on_D": 0.9057142857142857,
+   "silh_labels_on_D": 0.2207101656423053,
+   "ari_umap_ward": 0.4839973309512861,
+   "ari_tsne_ward": 0.5612897034153633,
+   "hdb_ari": 0.461466522901025,
+   "hdb_n": 12,
+   "hdb_noise": 0.10214285714285715
+  },
+  "heavy75": {
+   "knn_on_D": 0.9035714285714286,
+   "silh_labels_on_D": 0.27757876344610055,
+   "ari_umap_ward": 0.4462997692710278,
+   "ari_tsne_ward": 0.488083537729696,
+   "hdb_ari": 0.45529202773089833,
+   "hdb_n": 12,
+   "hdb_noise": 0.08071428571428571
+  },
+  "heavy90": {
+   "knn_on_D": 0.9028571428571428,
+   "silh_labels_on_D": 0.304887776494136,
+   "ari_umap_ward": 0.42603084254364987,
+   "ari_tsne_ward": 0.4756675513367145,
+   "hdb_ari": 0.44254405867453595,
+   "hdb_n": 12,
+   "hdb_noise": 0.09357142857142857
+  },
+  "selection+indel": {
+   "features": 233,
+   "selected": 14,
+   "selected_indel": 0
+  },
+  "cov-sel+indel": {
+   "knn_on_D": 0.8957142857142857,
+   "silh_labels_on_D": 0.3210476760315628,
+   "ari_umap_ward": 0.4479793953155258,
+   "ari_tsne_ward": 0.5113247671074026,
+   "hdb_ari": 0.5530542778311252,
+   "hdb_n": 11,
+   "hdb_noise": 0.027142857142857142
+  },
+  "PCA-pa axes": 1,
+  "PCA-pa": {
+   "knn_on_D": 0.195,
+   "silh_labels_on_D": -0.08534096650742257,
+   "ari_umap_ward": 0.003824545252172752,
+   "ari_tsne_ward": 0.0021639211471043665,
+   "hdb_ari": 0.0015209158058144309,
+   "hdb_n": 3,
+   "hdb_noise": 0.0
+  },
+  "oracle": {
+   "knn_on_D": 0.9235714285714286,
+   "silh_labels_on_D": 0.41195385096311904,
+   "ari_umap_ward": 0.6097817491694429,
+   "ari_tsne_ward": 0.5171781896461856,
+   "hdb_ari": 0.5713694204039089,
+   "hdb_n": 9,
+   "hdb_noise": 0.04428571428571428
+  },
+  "nested": {
+   "leaves": 7,
+   "ari": 0.6794533432601975,
+   "sizes": [
+    295,
+    254,
+    247,
+    190,
+    168,
+    137,
+    109
+   ],
+   "log": [
+    {
+     "node": "r",
+     "n": 1400,
+     "features": 233,
+     "selected": 14,
+     "proposed": 7,
+     "split": [
+      739,
+      109,
+      168,
+      137,
+      247
+     ],
+     "diag_positions_between_parts": {
+      "0-1": [
+       181,
+       197
+      ],
+      "0-2": [
+       237,
+       254
+      ],
+      "0-3": [
+       20,
+       145,
+       229,
+       251
+      ],
+      "0-4": [
+       229,
+       251
+      ],
+      "1-2": [
+       181,
+       197,
+       237,
+       254
+      ],
+      "1-3": [
+       20,
+       81,
+       145,
+       181,
+       185,
+       197,
+       229,
+       251
+      ],
+      "1-4": [
+       81,
+       181,
+       185,
+       197,
+       229,
+       251
+      ],
+      "2-3": [
+       20,
+       81,
+       145,
+       185,
+       229,
+       237,
+       251,
+       254
+      ],
+      "2-4": [
+       81,
+       185,
+       229,
+       237,
+       251,
+       254
+      ],
+      "3-4": [
+       20,
+       145
+      ]
+     }
+    },
+    {
+     "node": "r.0",
+     "n": 739,
+     "features": 234,
+     "selected": 5,
+     "proposed": 6,
+     "split": [
+      295,
+      190,
+      254
+     ],
+     "diag_positions_between_parts": {
+      "0-1": [
+       81,
+       181,
+       185,
+       197
+      ],
+      "0-2": [
+       81,
+       185
+      ],
+      "1-2": [
+       181,
+       197
+      ]
+     }
+    },
+    {
+     "node": "r.0.0",
+     "n": 295,
+     "leaf": "2 co-varying features, one cluster"
+    },
+    {
+     "node": "r.0.1",
+     "n": 190,
+     "leaf": "no co-varying features"
+    },
+    {
+     "node": "r.0.2",
+     "n": 254,
+     "leaf": "2 co-varying features, one cluster"
+    },
+    {
+     "node": "r.1",
+     "n": 109,
+     "leaf": "no co-varying features"
+    },
+    {
+     "node": "r.2",
+     "n": 168,
+     "leaf": "no co-varying features"
+    },
+    {
+     "node": "r.3",
+     "n": 137,
+     "leaf": "no co-varying features"
+    },
+    {
+     "node": "r.4",
+     "n": 247,
+     "leaf": "no co-varying features"
+    }
+   ]
+  }
+ },
+ {
+  "seed": 2,
+  "diag_cols": 10,
+  "K2P": {
+   "knn_on_D": 0.8935714285714286,
+   "silh_labels_on_D": 0.04457308423201768,
+   "ari_umap_ward": 0.6039116404522394,
+   "ari_tsne_ward": 0.6161621472735597,
+   "hdb_ari": 0.5097071872522202,
+   "hdb_n": 4,
+   "hdb_noise": 0.17214285714285715
+  },
+  "K2P CpG-masked": {
+   "knn_on_D": 0.9135714285714286,
+   "silh_labels_on_D": 0.0550466148258452,
+   "ari_umap_ward": 0.7535185428560096,
+   "ari_tsne_ward": 0.788160328197798,
+   "hdb_ari": 0.47580001301065505,
+   "hdb_n": 3,
+   "hdb_noise": 0.029285714285714286
+  },
+  "selection": {
+   "features": 256,
+   "selected": 12,
+   "threshold_z2": 42.79221588359672,
+   "selected_cols": 11,
+   "selected_cols_true": 10,
+   "true_cols_found": 10,
+   "true_cols": 10
+  },
+  "feat-all": {
+   "knn_on_D": 0.89,
+   "silh_labels_on_D": 0.05452077896007528,
+   "ari_umap_ward": 0.5581712879782238,
+   "ari_tsne_ward": 0.5625996497899044,
+   "hdb_ari": 0.37013437175342184,
+   "hdb_n": 3,
+   "hdb_noise": 0.11857142857142858
+  },
+  "cov-selected": {
+   "knn_on_D": 0.9328571428571428,
+   "silh_labels_on_D": 0.5206194862167821,
+   "ari_umap_ward": 0.48126768194676156,
+   "ari_tsne_ward": 0.39517423002207974,
+   "hdb_ari": 0.4908814279095011,
+   "hdb_n": 18,
+   "hdb_noise": 0.015
+  },
+  "cov-weighted": {
+   "knn_on_D": 0.9321428571428572,
+   "silh_labels_on_D": 0.6130267771842054,
+   "ari_umap_ward": 0.400004061799828,
+   "ari_tsne_ward": 0.7499728116838247,
+   "hdb_ari": 0.4589924040455741,
+   "hdb_n": 18,
+   "hdb_noise": 0.015714285714285715
+  },
+  "heavy50": {
+   "knn_on_D": 0.9335714285714286,
+   "silh_labels_on_D": 0.3620706466856277,
+   "ari_umap_ward": 0.41256000017664934,
+   "ari_tsne_ward": 0.6767911208909135,
+   "hdb_ari": 0.49400259569262867,
+   "hdb_n": 19,
+   "hdb_noise": 0.054285714285714284
+  },
+  "heavy75": {
+   "knn_on_D": 0.935,
+   "silh_labels_on_D": 0.4531765334412637,
+   "ari_umap_ward": 0.3641344679726747,
+   "ari_tsne_ward": 0.5079907798745938,
+   "hdb_ari": 0.49715982383905116,
+   "hdb_n": 19,
+   "hdb_noise": 0.05285714285714286
+  },
+  "heavy90": {
+   "knn_on_D": 0.935,
+   "silh_labels_on_D": 0.4957966266468117,
+   "ari_umap_ward": 0.27960825841476733,
+   "ari_tsne_ward": 0.48405650460467525,
+   "hdb_ari": 0.45617844117598866,
+   "hdb_n": 20,
+   "hdb_noise": 0.03214285714285714
+  },
+  "selection+indel": {
+   "features": 256,
+   "selected": 12,
+   "selected_indel": 0
+  },
+  "cov-sel+indel": {
+   "knn_on_D": 0.9328571428571428,
+   "silh_labels_on_D": 0.5206194862167821,
+   "ari_umap_ward": 0.48126768194676156,
+   "ari_tsne_ward": 0.39517423002207974,
+   "hdb_ari": 0.4908814279095011,
+   "hdb_n": 18,
+   "hdb_noise": 0.015
+  },
+  "PCA-pa axes": 1,
+  "PCA-pa": {
+   "knn_on_D": 0.18357142857142858,
+   "silh_labels_on_D": -0.0736829453455421,
+   "ari_umap_ward": 0.0022992540483009333,
+   "ari_tsne_ward": 0.00394727071161564,
+   "hdb_ari": 0.006285789975006249,
+   "hdb_n": 2,
+   "hdb_noise": 0.0
+  },
+  "oracle": {
+   "knn_on_D": 0.9585714285714285,
+   "silh_labels_on_D": 0.5254589855547338,
+   "ari_umap_ward": 0.6018880429035246,
+   "ari_tsne_ward": 0.7739678232984216,
+   "hdb_ari": 0.6638989093341274,
+   "hdb_n": 10,
+   "hdb_noise": 0.027857142857142858
+  },
+  "nested": {
+   "leaves": 8,
+   "ari": 0.7181710109878756,
+   "sizes": [
+    314,
+    294,
+    215,
+    148,
+    139,
+    110,
+    96,
+    84
+   ],
+   "log": [
+    {
+     "node": "r",
+     "n": 1400,
+     "features": 256,
+     "selected": 12,
+     "proposed": 9,
+     "split": [
+      110,
+      526,
+      96,
+      314,
+      139,
+      215
+     ],
+     "diag_positions_between_parts": {
+      "0-1": [
+       145,
+       164
+      ],
+      "0-2": [
+       49,
+       124,
+       145,
+       164
+      ],
+      "0-3": [
+       145,
+       164,
+       214,
+       253
+      ],
+      "0-4": [
+       27,
+       131,
+       145,
+       164,
+       210,
+       214,
+       250,
+       253
+      ],
+      "0-5": [
+       145,
+       164,
+       210,
+       214,
+       250,
+       253
+      ],
+      "1-2": [
+       49,
+       124
+      ],
+      "1-3": [
+       214,
+       253
+      ],
+      "1-4": [
+       27,
+       131,
+       210,
+       214,
+       250,
+       253
+      ],
+      "1-5": [
+       210,
+       214,
+       250,
+       253
+      ],
+      "2-3": [
+       49,
+       124,
+       214,
+       253
+      ],
+      "2-4": [
+       27,
+       49,
+       124,
+       131,
+       210,
+       214,
+       250,
+       253
+      ],
+      "2-5": [
+       49,
+       124,
+       210,
+       214,
+       250,
+       253
+      ],
+      "3-4": [
+       27,
+       131,
+       210,
+       250
+      ],
+      "3-5": [
+       210,
+       250
+      ],
+      "4-5": [
+       27,
+       131
+      ]
+     }
+    },
+    {
+     "node": "r.0",
+     "n": 110,
+     "leaf": "2 co-varying features, one cluster"
+    },
+    {
+     "node": "r.1",
+     "n": 526,
+     "features": 253,
+     "selected": 4,
+     "proposed": 4,
+     "split": [
+      148,
+      294,
+      84
+     ],
+     "diag_positions_between_parts": {
+      "0-1": [
+       145,
+       164
+      ],
+      "0-2": [
+       49,
+       124,
+       145,
+       164
+      ],
+      "1-2": [
+       49,
+       124
+      ]
+     }
+    },
+    {
+     "node": "r.1.0",
+     "n": 148,
+     "leaf": "no co-varying features"
+    },
+    {
+     "node": "r.1.1",
+     "n": 294,
+     "leaf": "no co-varying features"
+    },
+    {
+     "node": "r.1.2",
+     "n": 84,
+     "leaf": "3 co-varying features, one cluster"
+    },
+    {
+     "node": "r.2",
+     "n": 96,
+     "leaf": "no co-varying features"
+    },
+    {
+     "node": "r.3",
+     "n": 314,
+     "leaf": "2 co-varying features, 2 proposed parts not separated by 2 positions"
+    },
+    {
+     "node": "r.4",
+     "n": 139,
+     "leaf": "no co-varying features"
+    },
+    {
+     "node": "r.5",
+     "n": 215,
+     "leaf": "2 co-varying features, one cluster"
+    }
+   ]
+  }
+ },
+ {
+  "seed": 3,
+  "diag_cols": 10,
+  "K2P": {
+   "knn_on_D": 0.8021428571428572,
+   "silh_labels_on_D": 0.029089101065894303,
+   "ari_umap_ward": 0.42268432145678325,
+   "ari_tsne_ward": 0.40429207367998093,
+   "hdb_ari": 0.30992142509582976,
+   "hdb_n": 3,
+   "hdb_noise": 0.19714285714285715
+  },
+  "K2P CpG-masked": {
+   "knn_on_D": 0.8328571428571429,
+   "silh_labels_on_D": 0.053592063475817776,
+   "ari_umap_ward": 0.5484834755146464,
+   "ari_tsne_ward": 0.596248172542434,
+   "hdb_ari": 0.4224363128147312,
+   "hdb_n": 4,
+   "hdb_noise": 0.06785714285714285
+  },
+  "selection": {
+   "features": 239,
+   "selected": 13,
+   "threshold_z2": 35.74454163854571,
+   "selected_cols": 13,
+   "selected_cols_true": 10,
+   "true_cols_found": 10,
+   "true_cols": 10
+  },
+  "feat-all": {
+   "knn_on_D": 0.7871428571428571,
+   "silh_labels_on_D": 0.03799460179425703,
+   "ari_umap_ward": 0.40157139554538274,
+   "ari_tsne_ward": 0.4428406142913003,
+   "hdb_ari": 0.2788914044691215,
+   "hdb_n": 5,
+   "hdb_noise": 0.29642857142857143
+  },
+  "cov-selected": {
+   "knn_on_D": 0.8442857142857143,
+   "silh_labels_on_D": 0.5290481654338055,
+   "ari_umap_ward": 0.6823419984515016,
+   "ari_tsne_ward": 0.6655640871558348,
+   "hdb_ari": 0.4241843775812515,
+   "hdb_n": 4,
+   "hdb_noise": 0.0
+  },
+  "cov-weighted": {
+   "knn_on_D": 0.8478571428571429,
+   "silh_labels_on_D": 0.5522289081003041,
+   "ari_umap_ward": 0.4299989403099648,
+   "ari_tsne_ward": 0.6361404284952683,
+   "hdb_ari": 0.4371241633617989,
+   "hdb_n": 7,
+   "hdb_noise": 0.0
+  },
+  "heavy50": {
+   "knn_on_D": 0.8385714285714285,
+   "silh_labels_on_D": 0.321801005564074,
+   "ari_umap_ward": 0.6436655947960279,
+   "ari_tsne_ward": 0.6427930435636644,
+   "hdb_ari": 0.4610274916367646,
+   "hdb_n": 6,
+   "hdb_noise": 0.0014285714285714286
+  },
+  "heavy75": {
+   "knn_on_D": 0.8385714285714285,
+   "silh_labels_on_D": 0.4349418739953914,
+   "ari_umap_ward": 0.4578990446433836,
+   "ari_tsne_ward": 0.6376040482372131,
+   "hdb_ari": 0.45937615284734,
+   "hdb_n": 6,
+   "hdb_noise": 0.03357142857142857
+  },
+  "heavy90": {
+   "knn_on_D": 0.84,
+   "silh_labels_on_D": 0.4934401422593521,
+   "ari_umap_ward": 0.45571272843853433,
+   "ari_tsne_ward": 0.649258653762579,
+   "hdb_ari": 0.45634265683289993,
+   "hdb_n": 7,
+   "hdb_noise": 0.0
+  },
+  "selection+indel": {
+   "features": 239,
+   "selected": 13,
+   "selected_indel": 0
+  },
+  "cov-sel+indel": {
+   "knn_on_D": 0.8442857142857143,
+   "silh_labels_on_D": 0.5290481654338055,
+   "ari_umap_ward": 0.6823419984515016,
+   "ari_tsne_ward": 0.6655640871558348,
+   "hdb_ari": 0.4241843775812515,
+   "hdb_n": 4,
+   "hdb_noise": 0.0
+  },
+  "PCA-pa axes": 1,
+  "PCA-pa": {
+   "knn_on_D": 0.185,
+   "silh_labels_on_D": -0.04909896996971847,
+   "ari_umap_ward": -0.0002916465212595996,
+   "ari_tsne_ward": -0.0020744190557337905,
+   "hdb_ari": -0.0006128427705787573,
+   "hdb_n": 5,
+   "hdb_noise": 0.004285714285714286
+  },
+  "oracle": {
+   "knn_on_D": 0.8714285714285714,
+   "silh_labels_on_D": 0.5250724999008116,
+   "ari_umap_ward": 0.6471544695057518,
+   "ari_tsne_ward": 0.6159394746394765,
+   "hdb_ari": 0.4649649046815827,
+   "hdb_n": 4,
+   "hdb_noise": 0.0
+  },
+  "nested": {
+   "leaves": 6,
+   "ari": 0.6795016679516923,
+   "sizes": [
+    400,
+    296,
+    235,
+    233,
+    135,
+    101
+   ],
+   "log": [
+    {
+     "node": "r",
+     "n": 1400,
+     "features": 239,
+     "selected": 13,
+     "proposed": 4,
+     "split": [
+      797,
+      235,
+      233,
+      135
+     ],
+     "diag_positions_between_parts": {
+      "0-1": [
+       101,
+       241
+      ],
+      "0-2": [
+       82,
+       119,
+       150,
+       183
+      ],
+      "0-3": [
+       82,
+       105,
+       119,
+       147,
+       150,
+       183
+      ],
+      "1-2": [
+       82,
+       101,
+       119,
+       150,
+       183,
+       241
+      ],
+      "1-3": [
+       82,
+       101,
+       105,
+       119,
+       147,
+       150,
+       183,
+       241
+      ],
+      "2-3": [
+       105,
+       147
+      ]
+     }
+    },
+    {
+     "node": "r.0",
+     "n": 797,
+     "features": 224,
+     "selected": 5,
+     "proposed": 2,
+     "split": [
+      296,
+      501
+     ],
+     "diag_positions_between_parts": {
+      "0-1": [
+       82,
+       119
+      ]
+     }
+    },
+    {
+     "node": "r.0.0",
+     "n": 296,
+     "leaf": "no co-varying features"
+    },
+    {
+     "node": "r.0.1",
+     "n": 501,
+     "features": 195,
+     "selected": 3,
+     "proposed": 2,
+     "split": [
+      400,
+      101
+     ],
+     "diag_positions_between_parts": {
+      "0-1": [
+       22,
+       27
+      ]
+     }
+    },
+    {
+     "node": "r.0.1.0",
+     "n": 400,
+     "leaf": "2 co-varying features, one cluster"
+    },
+    {
+     "node": "r.0.1.1",
+     "n": 101,
+     "leaf": "2 co-varying features, one cluster"
+    },
+    {
+     "node": "r.1",
+     "n": 235,
+     "leaf": "2 co-varying features, one cluster"
+    },
+    {
+     "node": "r.2",
+     "n": 233,
+     "leaf": "no co-varying features"
+    },
+    {
+     "node": "r.3",
+     "n": 135,
+     "leaf": "2 co-varying features, 2 proposed parts not separated by 2 positions"
+    }
+   ]
+  }
+ },
+ {
+  "seed": 4,
+  "diag_cols": 10,
+  "K2P": {
+   "knn_on_D": 0.8921428571428571,
+   "silh_labels_on_D": 0.035827995486050965,
+   "ari_umap_ward": 0.684292313531798,
+   "ari_tsne_ward": 0.6120316678265402,
+   "hdb_ari": 0.48850059251872513,
+   "hdb_n": 5,
+   "hdb_noise": 0.18714285714285714
+  },
+  "K2P CpG-masked": {
+   "knn_on_D": 0.8785714285714286,
+   "silh_labels_on_D": 0.05623107131719857,
+   "ari_umap_ward": 0.7442466625091451,
+   "ari_tsne_ward": 0.685508265757218,
+   "hdb_ari": 0.6497588853556162,
+   "hdb_n": 4,
+   "hdb_noise": 0.027857142857142858
+  },
+  "selection": {
+   "features": 227,
+   "selected": 14,
+   "threshold_z2": 38.42032466613775,
+   "selected_cols": 12,
+   "selected_cols_true": 10,
+   "true_cols_found": 10,
+   "true_cols": 10
+  },
+  "feat-all": {
+   "knn_on_D": 0.8807142857142857,
+   "silh_labels_on_D": 0.05421351273495855,
+   "ari_umap_ward": 0.5353354522945064,
+   "ari_tsne_ward": 0.5723920032035889,
+   "hdb_ari": 0.48830039316125773,
+   "hdb_n": 5,
+   "hdb_noise": 0.15857142857142856
+  },
+  "cov-selected": {
+   "knn_on_D": 0.9521428571428572,
+   "silh_labels_on_D": 0.615415206720342,
+   "ari_umap_ward": 0.7365599445194951,
+   "ari_tsne_ward": 0.706925558320434,
+   "hdb_ari": 0.77285079667574,
+   "hdb_n": 8,
+   "hdb_noise": 0.0014285714285714286
+  },
+  "cov-weighted": {
+   "knn_on_D": 0.9542857142857143,
+   "silh_labels_on_D": 0.6513094552869864,
+   "ari_umap_ward": 0.6707339668479722,
+   "ari_tsne_ward": 0.7797288626472826,
+   "hdb_ari": 0.7494722119283357,
+   "hdb_n": 11,
+   "hdb_noise": 0.04071428571428572
+  },
+  "heavy50": {
+   "knn_on_D": 0.9528571428571428,
+   "silh_labels_on_D": 0.3691464334920158,
+   "ari_umap_ward": 0.7393794829501881,
+   "ari_tsne_ward": 0.7382607549735444,
+   "hdb_ari": 0.7798237404897238,
+   "hdb_n": 10,
+   "hdb_noise": 0.02857142857142857
+  },
+  "heavy75": {
+   "knn_on_D": 0.9564285714285714,
+   "silh_labels_on_D": 0.5017976654351693,
+   "ari_umap_ward": 0.7156109917388966,
+   "ari_tsne_ward": 0.7397137098697015,
+   "hdb_ari": 0.7671142598706403,
+   "hdb_n": 11,
+   "hdb_noise": 0.04928571428571429
+  },
+  "heavy90": {
+   "knn_on_D": 0.9564285714285714,
+   "silh_labels_on_D": 0.5718300349266789,
+   "ari_umap_ward": 0.6084821415995134,
+   "ari_tsne_ward": 0.7355385440267659,
+   "hdb_ari": 0.7274446245625229,
+   "hdb_n": 10,
+   "hdb_noise": 0.015
+  },
+  "selection+indel": {
+   "features": 227,
+   "selected": 14,
+   "selected_indel": 0
+  },
+  "cov-sel+indel": {
+   "knn_on_D": 0.9521428571428572,
+   "silh_labels_on_D": 0.615415206720342,
+   "ari_umap_ward": 0.7365599445194951,
+   "ari_tsne_ward": 0.706925558320434,
+   "hdb_ari": 0.77285079667574,
+   "hdb_n": 8,
+   "hdb_noise": 0.0014285714285714286
+  },
+  "PCA-pa axes": 1,
+  "PCA-pa": {
+   "knn_on_D": 0.17357142857142857,
+   "silh_labels_on_D": -0.09734898850492564,
+   "ari_umap_ward": 0.0006085277749612323,
+   "ari_tsne_ward": 0.001407681137450162,
+   "hdb_ari": 0.006908597055671205,
+   "hdb_n": 9,
+   "hdb_noise": 0.08
+  },
+  "oracle": {
+   "knn_on_D": 0.9692857142857143,
+   "silh_labels_on_D": 0.5208890143946275,
+   "ari_umap_ward": 0.7616608653786882,
+   "ari_tsne_ward": 0.6770088816615037,
+   "hdb_ari": 0.6278057532385638,
+   "hdb_n": 12,
+   "hdb_noise": 0.0064285714285714285
+  },
+  "nested": {
+   "leaves": 5,
+   "ari": 0.6823575422990069,
+   "sizes": [
+    526,
+    314,
+    222,
+    204,
+    134
+   ],
+   "log": [
+    {
+     "node": "r",
+     "n": 1400,
+     "features": 227,
+     "selected": 14,
+     "proposed": 7,
+     "split": [
+      222,
+      526,
+      204,
+      134,
+      314
+     ],
+     "diag_positions_between_parts": {
+      "0-1": [
+       160,
+       200,
+       233,
+       241
+      ],
+      "0-2": [
+       94,
+       200,
+       204,
+       241
+      ],
+      "0-3": [
+       62,
+       160,
+       200,
+       215,
+       233,
+       241
+      ],
+      "0-4": [
+       200,
+       241
+      ],
+      "1-2": [
+       94,
+       160,
+       204,
+       233
+      ],
+      "1-3": [
+       62,
+       242
+      ],
+      "1-4": [
+       160,
+       233
+      ],
+      "2-3": [
+       62,
+       94,
+       160,
+       204,
+       215,
+       233,
+       242
+      ],
+      "2-4": [
+       94,
+       204
+      ],
+      "3-4": [
+       62,
+       160,
+       215,
+       233,
+       242
+      ]
+     }
+    },
+    {
+     "node": "r.0",
+     "n": 222,
+     "leaf": "no co-varying features"
+    },
+    {
+     "node": "r.1",
+     "n": 526,
+     "leaf": "no co-varying features"
+    },
+    {
+     "node": "r.2",
+     "n": 204,
+     "leaf": "no co-varying features"
+    },
+    {
+     "node": "r.3",
+     "n": 134,
+     "leaf": "no co-varying features"
+    },
+    {
+     "node": "r.4",
+     "n": 314,
+     "leaf": "4 co-varying features, one cluster"
+    }
+   ]
+  }
+ },
+ {
+  "seed": 5,
+  "diag_cols": 9,
+  "K2P": {
+   "knn_on_D": 0.8035714285714286,
+   "silh_labels_on_D": 0.02893140465075809,
+   "ari_umap_ward": 0.4063973433593077,
+   "ari_tsne_ward": 0.3738628926925866,
+   "hdb_ari": 0.06309305523650031,
+   "hdb_n": 3,
+   "hdb_noise": 0.47
+  },
+  "K2P CpG-masked": {
+   "knn_on_D": 0.8928571428571429,
+   "silh_labels_on_D": 0.057451580010816766,
+   "ari_umap_ward": 0.7374220983731156,
+   "ari_tsne_ward": 0.754943938687254,
+   "hdb_ari": 0.49089186783358335,
+   "hdb_n": 5,
+   "hdb_noise": 0.20142857142857143
+  },
+  "selection": {
+   "features": 233,
+   "selected": 12,
+   "threshold_z2": 52.36701300888914,
+   "selected_cols": 11,
+   "selected_cols_true": 9,
+   "true_cols_found": 9,
+   "true_cols": 9
+  },
+  "feat-all": {
+   "knn_on_D": 0.8142857142857143,
+   "silh_labels_on_D": 0.04174805997041625,
+   "ari_umap_ward": 0.4131633750249532,
+   "ari_tsne_ward": 0.3642186585172982,
+   "hdb_ari": 0.2169424447018029,
+   "hdb_n": 7,
+   "hdb_noise": 0.44142857142857145
+  },
+  "cov-selected": {
+   "knn_on_D": 0.9321428571428572,
+   "silh_labels_on_D": 0.5518512515635111,
+   "ari_umap_ward": 0.5476342280882563,
+   "ari_tsne_ward": 0.6703547529623185,
+   "hdb_ari": 0.6913845747025973,
+   "hdb_n": 12,
+   "hdb_noise": 0.03214285714285714
+  },
+  "cov-weighted": {
+   "knn_on_D": 0.9214285714285714,
+   "silh_labels_on_D": 0.6036655314429211,
+   "ari_umap_ward": 0.5790288779362396,
+   "ari_tsne_ward": 0.6443053705643063,
+   "hdb_ari": 0.7026233908467303,
+   "hdb_n": 11,
+   "hdb_noise": 0.0064285714285714285
+  },
+  "heavy50": {
+   "knn_on_D": 0.9335714285714286,
+   "silh_labels_on_D": 0.3398305741910815,
+   "ari_umap_ward": 0.6110007232582824,
+   "ari_tsne_ward": 0.6988371097232992,
+   "hdb_ari": 0.7013724571519603,
+   "hdb_n": 11,
+   "hdb_noise": 0.0
+  },
+  "heavy75": {
+   "knn_on_D": 0.9357142857142857,
+   "silh_labels_on_D": 0.45474741649037775,
+   "ari_umap_ward": 0.5656527867381411,
+   "ari_tsne_ward": 0.6995505947790212,
+   "hdb_ari": 0.6900320645203679,
+   "hdb_n": 12,
+   "hdb_noise": 0.017857142857142856
+  },
+  "heavy90": {
+   "knn_on_D": 0.9357142857142857,
+   "silh_labels_on_D": 0.514702250835411,
+   "ari_umap_ward": 0.5740423624542058,
+   "ari_tsne_ward": 0.712310417695754,
+   "hdb_ari": 0.6740126956656601,
+   "hdb_n": 12,
+   "hdb_noise": 0.011428571428571429
+  },
+  "selection+indel": {
+   "features": 233,
+   "selected": 12,
+   "selected_indel": 0
+  },
+  "cov-sel+indel": {
+   "knn_on_D": 0.9321428571428572,
+   "silh_labels_on_D": 0.5518512515635111,
+   "ari_umap_ward": 0.5476342280882563,
+   "ari_tsne_ward": 0.6703547529623185,
+   "hdb_ari": 0.6913845747025973,
+   "hdb_n": 12,
+   "hdb_noise": 0.03214285714285714
+  },
+  "PCA-pa axes": 1,
+  "PCA-pa": {
+   "knn_on_D": 0.2092857142857143,
+   "silh_labels_on_D": -0.08098162384530465,
+   "ari_umap_ward": 0.0008287437094910803,
+   "ari_tsne_ward": -2.365431884030608e-05,
+   "hdb_ari": 0.0010886345643387097,
+   "hdb_n": 2,
+   "hdb_noise": 0.008571428571428572
+  },
+  "oracle": {
+   "knn_on_D": 0.9592857142857143,
+   "silh_labels_on_D": 0.5704804022160468,
+   "ari_umap_ward": 0.8248929582067543,
+   "ari_tsne_ward": 0.8378612443008009,
+   "hdb_ari": 0.768366679049528,
+   "hdb_n": 9,
+   "hdb_noise": 0.03357142857142857
+  },
+  "nested": {
+   "leaves": 6,
+   "ari": 0.8207413716723438,
+   "sizes": [
+    315,
+    251,
+    240,
+    239,
+    225,
+    130
+   ],
+   "log": [
+    {
+     "node": "r",
+     "n": 1400,
+     "features": 233,
+     "selected": 12,
+     "proposed": 8,
+     "split": [
+      225,
+      251,
+      239,
+      240,
+      130,
+      315
+     ],
+     "diag_positions_between_parts": {
+      "0-1": [
+       56,
+       203,
+       229,
+       254
+      ],
+      "0-2": [
+       10,
+       55,
+       140,
+       190,
+       203,
+       229
+      ],
+      "0-3": [
+       10,
+       190,
+       203,
+       229
+      ],
+      "0-4": [
+       10,
+       55,
+       108,
+       140,
+       203,
+       229
+      ],
+      "0-5": [
+       203,
+       229
+      ],
+      "1-2": [
+       10,
+       55,
+       140,
+       190,
+       254
+      ],
+      "1-3": [
+       10,
+       56,
+       190,
+       254
+      ],
+      "1-4": [
+       10,
+       55,
+       108,
+       140,
+       254
+      ],
+      "1-5": [
+       56,
+       254
+      ],
+      "2-3": [
+       55,
+       140
+      ],
+      "2-4": [
+       108,
+       190
+      ],
+      "2-5": [
+       10,
+       55,
+       140,
+       190
+      ],
+      "3-4": [
+       55,
+       108,
+       140,
+       190
+      ],
+      "3-5": [
+       10,
+       190
+      ],
+      "4-5": [
+       10,
+       55,
+       108,
+       140
+      ]
+     }
+    },
+    {
+     "node": "r.0",
+     "n": 225,
+     "leaf": "no co-varying features"
+    },
+    {
+     "node": "r.1",
+     "n": 251,
+     "leaf": "no co-varying features"
+    },
+    {
+     "node": "r.2",
+     "n": 239,
+     "leaf": "no co-varying features"
+    },
+    {
+     "node": "r.3",
+     "n": 240,
+     "leaf": "2 co-varying features, one cluster"
+    },
+    {
+     "node": "r.4",
+     "n": 130,
+     "leaf": "no co-varying features"
+    },
+    {
+     "node": "r.5",
+     "n": 315,
+     "leaf": "6 co-varying features, one cluster"
+    }
+   ]
+  }
+ }
+]

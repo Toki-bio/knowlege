@@ -15,20 +15,25 @@ Related: [dimensionality reduction for SINE separation](../dim-reduction-for-sin
 
 ## Conclusion: how to present dimensionality reduction of SINE copies
 
-Based on the toys (2.6, 2.7) and the saq family (2.8).
+Based on the toys (2.6, 2.7, 2.9) and the saq family (2.8, 2.9). An earlier version of this section used K2P over all columns as the only input; 2.9 shows that was too narrow.
 
-1. **Input:** the alignment of the element bodies (no flanks), as a K2P distance with pairwise deletion. Drop columns where fewer than half the copies have a base, and mask CpG columns of the consensus. Do not use one-hot or PCA of one-hot when copies are 5′-truncated: truncated copies are then placed by their missing block (ARI 0.45 against 0.93).
-2. **Picture:** UMAP of that distance (`n_neighbors` 30, `min_dist` 0.3), with t-SNE (perplexity 40) beside it as a check. These two were the only methods that kept the subfamilies apart in the harder toy (ARI 0.93; PCA, PCoA and NMDS 0.26–0.32). PCA is not the main figure. If a PCA is shown, its variance percentage is not a quality measure: in the easy toy, where t-SNE and UMAP recovered the subfamilies almost perfectly (ARI 0.98–0.99), PC1 + PC2 were only 11.9 %.
-3. **Colours:** the workflow's subfamily assignment. Axes without units or percentages, because UMAP and t-SNE distances between groups have no meaning.
-4. **Two numbers printed under the picture**, both measured outside the 2D picture:
-   - the silhouette of the assigned subfamilies on the K2P matrix. About 0.10–0.16 in the toys, where the subfamilies were real and separable; 0.01 for saq;
-   - the number of HDBSCAN clusters found in the UMAP picture without being told the number (`min_cluster_size` 20), compared with the number of assigned subfamilies. 6 of 6 in 13 of 15 toy runs; 2 of 9 for saq.
-5. **How to read it:**
-   - If both numbers agree with the assignment, the subfamilies are distinct at the level of single copies.
-   - If they do not, as for saq, the subfamilies differ at fewer sites than copies differ from each other. The picture cannot show them, and that is the finding. The evidence for those subfamilies is then the alignment of copies against the consensuses.
+1. **The input matters more than the picture method.** A subfamily is a few diagnostic positions among many private mutations. A distance over all columns (K2P) dilutes them. Two inputs should be made and shown side by side:
+   - **all columns:** K2P with pairwise deletion, columns covered by fewer than half the copies dropped, CpG columns masked;
+   - **diagnostic positions:** minor-allele characters (substitutions, and indels as characters) that co-vary with a character at another position, found without labels (2.9), then a Hamming distance on them with pairwise deletion.
+
+   Not one-hot, and not PCA of everything: truncated copies are then placed by their missing block, and a signal carried by a few columns stays below the noise of the rest.
+2. **Picture:** UMAP (`n_neighbors` 30, `min_dist` 0.3) with t-SNE (perplexity 40) beside it, of each input. Colours = the workflow's subfamily assignment. Axes without units or percentages.
+3. **Numbers under the picture, measured on the distance and not on the 2D picture:**
+   - how many positions were selected as co-varying (none = no evidence of subfamilies in this set);
+   - the share of copies whose 15 nearest copies are mostly of their own assigned subfamily;
+   - the silhouette of the assigned subfamilies.
+4. **How to read it:**
+   - The diagnostic-position distance is the better measure of whether subfamilies are distinct: in the toy it equals a distance on the true diagnostic columns. Its picture is not better than the K2P picture, because a few discrete positions break a group into islands; do not count islands.
+   - If the all-column picture shows two blobs and the diagnostic-position numbers show more, as for saq, the subfamilies are real at the level of positions but differ at too few of them for an all-column distance.
+   - Groups proposed from a picture or from the nested procedure of 2.9 are candidates. In the toy the nested procedure returned one or two groups too many. Each candidate has to be shown as an alignment before it means anything.
    - A picture never assigns copies and never defines a subfamily.
 
-Limits: not tested with recombination between subfamilies, a continuum of copy ages, or very unequal subfamily sizes; one real family so far.
+Limits: not tested with recombination between subfamilies or very unequal subfamily sizes; one real family; the nested procedure over-splits for a reason not yet found.
 
 ## In short
 
@@ -36,7 +41,8 @@ Limits: not tested with recombination between subfamilies, a continuum of copy a
 - On the toy, t-SNE, UMAP and PaCMAP recovered the six simulated subfamilies in each of 5 seeds (ARI 0.98 to 0.99, sd at most 0.006). PCA, PCoA and NMDS did so far less reliably (ARI 0.73 ± 0.18, 0.69 ± 0.15 and 0.22 ± 0.10). The first single-seed table in 2.3 (PCA ARI 0.905) happened to use a favourable seed. See [2.6](#26-repaired-run-5-seeds).
 - Scored in sequence space, t-SNE, UMAP and PaCMAP all sit at the silhouette value of the true labels themselves (about 0.10). They reproduce the true grouping and cannot exceed it, and the three cannot be ranked against each other. The much higher silhouettes in the first table (0.86 to 0.89) were measured in the 2D picture.
 - With indels, 5′ truncation and CpG decay added (2.7), only t-SNE and UMAP on K2P distances with pairwise deletion stayed good (ARI 0.93). Anything built on one-hot fell to 0.30–0.46, because truncated copies are placed by their missing block. Masking CpG columns improved every K2P picture. Without being told the number of subfamilies, HDBSCAN on the UMAP picture found the 6 subfamilies in 13 of 15 runs; HDBSCAN on the distances themselves found almost nothing. See [2.7](#27-harder-toy-indels-truncation-cpg-decay-number-of-subfamilies-not-given).
-- Not yet in any toy: recombination between subfamilies, a continuum of copy ages, very unequal subfamily sizes.
+- A distance on positions that co-vary across copies (found without labels) is far better than K2P over all columns: on saq the K2P picture shows 2 groups, while the co-varying positions recover most of the published s1–s8. See [2.9](#29-other-inputs-diagnostic-positions-found-by-covariation).
+- Not yet in any toy: recombination between subfamilies, very unequal subfamily sizes.
 - For presence/absence of orthologous loci, the tree + heatmap with three states (present, empty site, missing) is the main figure. The other panels are summaries of it.
 - No real presence/absence matrix exists yet, so every real-data item in [section 4](#4-further-developments) is a proposal.
 
@@ -239,7 +245,92 @@ Script and results: `projects/sine-ordination-toy/real_saq/` (`saq_ordination.py
 
 **s3 alignment:** the 99 s3 copies in their published order, with the s3, s8 and s7g consensuses as the first rows; each name carries its nearest consensus and its distances to s3 and s8 (`saq_s3_copies_vs_s3_s8_s7g.aln.fa`, columns from the joint MAFFT alignment). [Open in MSA viewer](https://toki-bio.github.io/MSA-viewer/?url=https%3A%2F%2Fraw.githubusercontent.com%2FToki-bio%2Fknowlege%2Fmain%2Fprojects%2Fsine-ordination-toy%2Freal_saq%2Fsaq_s3_copies_vs_s3_s8_s7g.aln.fa&title=saq%20s3%20copies%20vs%20s3%2C%20s8%2C%20s7g%20consensuses).
 
-**Owner's reading of the s3 alignment (2026-11-12):** s3 and s8 split faintly; a signal from s7g is not obvious; the separation is very weak. This explains the low scores above: the ordination did not fail. These subfamilies differ at a few sites, fewer than the differences between any two copies of one subfamily, so no picture of copy distances can draw them apart. For such a family the evidence is the alignment of copies against the consensuses, not a picture.
+**Owner's reading of the s3 alignment (2026-11-12):** s3 and s8 split faintly; a signal from s7g is not obvious; the separation is very weak.
+
+The low scores in this section belong to the input, K2P over all columns, and not to the family: see 2.9.
+
+### 2.9 Other inputs: diagnostic positions found by covariation
+
+Owner's point (2026-11-12): the input should not be limited to a K2P distance; fine-scale structure and a matrix with heavy diagnostic positions should be considered. Script `sine_inputs_v4.py`; saq: `real_saq/saq_inputs_v4.py`. Therioserver, 2026-11-12. Results: `inputs_v4_d6c`, `_d3c`, `_d2c`, `_nosubc` (`.json`, `.log`); `real_saq/saq_inputs_v4.json`, `saq_inputs_v4_features.tsv`, `saq_inputs_v4_crosstabs.txt`, `saq_inputs_v4.png`.
+
+**Idea.** The diagnostic positions of a subfamily co-vary across copies: a copy that has one usually has the others. Private mutations do not. So positions can be selected without labels.
+
+**Method.**
+
+- Characters: every (column, minor state) present in at least 3 % of the copies. Terminal gaps are "not observed"; internal gaps and insertions can be used as characters, a run of adjacent gap columns counting once.
+- Covariation: correlation between two characters at different positions (at least 3 columns apart, 25 if an indel is involved), over copies where both are observed.
+- Copy age: an old copy carries more of everything, which alone makes all noise positions co-vary. So each character is first centred within bins of copies of similar divergence from the majority consensus. The threshold is the largest value seen after shuffling each character within those bins.
+- A character is **selected** if it co-varies above the threshold with at least one other.
+- **Nested:** copies are split on the selected characters (HDBSCAN on UMAP proposes parts; parts are merged until every two differ at 2 or more positions with a frequency difference of at least 0.5); then selection is repeated inside each part, until nothing co-varies.
+
+**Toy** (the harder toy of 2.7 with 6, 3 or 2 diagnostic sites per step of the tree, and a control with no subfamilies; 5 seeds each):
+
+| | 6 sites | 3 sites | 2 sites | no subfamilies |
+|---|---|---|---|---|
+| true diagnostic columns found, per seed | 30/30, 27/27, 28/28, 29/29, 28/28 | 15/15 ×4, 14/14 | 10/10 ×4, 9/9 | none exist |
+| other columns selected, per seed | 7, 8, 8, 7, 9 | 10, 1, 4, 4, 5 | 3, 1, 3, 2, 2 | 0, 0, 2, 0, 0 |
+
+In the one seed examined (3 sites, seed 1), the other columns were mostly the CpG partner of a diagnostic site: the diagnostic change made or destroyed a CpG, so the neighbour mutates at a different rate in that subfamily.
+
+Scores on the distance itself (mean of 5 seeds): share of copies whose 15 nearest copies are mostly their own subfamily / silhouette of the true labels.
+
+| Input | 6 sites | 3 sites | 2 sites |
+|---|---|---|---|
+| K2P | 0.98 / 0.12 | 0.90 / 0.05 | 0.84 / 0.04 |
+| K2P, CpG masked | 0.98 / 0.16 | 0.91 / 0.08 | 0.87 / 0.06 |
+| all characters, unweighted | 0.97 / 0.13 | 0.90 / 0.07 | 0.84 / 0.05 |
+| selected characters | 0.98 / 0.44 | 0.94 / 0.51 | 0.91 / 0.51 |
+| all characters, selected ones carrying 75 % of the weight | 0.98 / 0.38 | 0.95 / 0.42 | 0.91 / 0.42 |
+| true diagnostic columns (upper bound) | 0.99 / 0.50 | 0.95 / 0.52 | 0.94 / 0.51 |
+| PCA of all characters, axes by parallel analysis | 0.77 / 0.07 | 0.20 / −0.09 | 0.19 / −0.08 |
+
+Groups recovered (ARI against the truth; 6 true subfamilies):
+
+| Route | 6 sites | 3 sites | 2 sites |
+|---|---|---|---|
+| UMAP of K2P CpG-masked, Ward k = 6 | 0.95 | 0.77 | 0.69 |
+| UMAP of selected characters, Ward k = 6 | 0.67 | 0.68 | 0.58 |
+| UMAP of all characters, selected ones carrying 50 % of the weight, Ward k = 6 | 0.93 | 0.72 | 0.58 |
+| UMAP of the true diagnostic columns, Ward k = 6 | 0.93 | 0.75 | 0.69 |
+| HDBSCAN on UMAP of K2P CpG-masked, number not given | 0.93 (6, 6, 5, 6, 6 groups) | 0.60 (5, 5, 3, 2, 5) | 0.52 (5, 3, 4, 4, 5) |
+| nested, number not given | 0.91 (8, 7, 8, 8, 7) | 0.86 (6, 6, 8, 8, 7) | 0.72 (7, 8, 6, 5, 6) |
+
+Nested on the no-subfamily control: one group in 5 of 5 seeds.
+
+What the toy shows:
+
+- **Selection works.** Nearly every true diagnostic column is found, with few others, down to 2 sites per step. With no subfamilies almost nothing is selected and the nested procedure returns one group.
+- **The selected distance is as good as knowing the diagnostic columns** (silhouette 0.44–0.51 against 0.50–0.52; K2P 0.04–0.16).
+- **The picture does not follow.** A UMAP of 10–40 discrete positions breaks subfamilies into islands, and even the true-column picture is no better than the K2P picture. Keeping all characters with the selected ones heavy repairs the strong-signal case (0.93) and not the weak ones. The gain of the selected input is in the distance and in the nested grouping, not in the 2D picture.
+- **Nested grouping is much better than clustering the K2P picture when the signal is weak** (0.86 against 0.60; 0.72 against 0.52), **and returns one or two groups too many when it is strong.** A stricter merging rule (the separating positions must co-vary with each other in the parent set) changed one run of fifteen. The cause is not found.
+- **PCA of all characters fails**: a signal in a few columns does not rise above the noise of the others.
+- Weighting the selected characters by the strength of their covariation was worse than weighting them equally.
+
+**saq, 866 copies** (same alignment as 2.8; label-free unless said):
+
+- Selected: 79 of 207 substitution characters; with indels 168 of 307 (90 of them indels).
+- **Check against the published consensuses, which the selection never saw:** of the 87 columns where the 9 consensuses differ and a character exists, 80 were selected. In the other direction, 78 of the 168 selected characters are a state in which the consensuses differ; 54 selected columns are ones where they do not differ. What those 54 are (further structure, CpG partners, alignment shifts next to indels) was not examined.
+- **Split-half:** selection repeated in two disjoint random halves of the copies, 5 times: 78–99 characters selected in both halves, of 89–139 per half.
+
+| Input | 15 nearest mostly own published subfamily | silhouette of published labels | HDBSCAN groups on UMAP |
+|---|---|---|---|
+| K2P, CpG masked (2.8) | 0.64 | 0.01 | 2 |
+| all characters | 0.72 | 0.03 | 2 |
+| selected, substitutions | 0.81 | 0.09 | 2 |
+| selected, substitutions + indels | 0.83 | 0.07 | 3 |
+| columns where the published consensuses differ (not label-free) | 0.83 | 0.08 | 4 |
+
+![saq: inputs compared]({{ '/assets/img/sine-ordination/saq_inputs_v4.png' | relative_url }})
+
+- With substitutions and indels the UMAP picture has three islands: {s1, s2, s7g, s9 and 53 s3 copies}, {s8 and 46 s3 copies}, {s4, s5, s6}.
+- **Nested, substitutions only: 8 groups.** Published subfamily and its largest share in one group: s5 88 of 90, s8 95 of 100, s6 81 of 94, s1 82 of 98, s2 76 of 98, s4 72 of 88. One group holds all 99 s7g copies together with 65 s3 and 56 s9 copies. A further group of 35 copies is 32 s3. s9 has no group of its own; its copies sit with s7g (56), s1 (34) and s2 (9).
+- **Nested, substitutions + indels: 12 groups**, among them s3 in two groups (51 of 65 and 42 of 47), s2 in two and s5 in two. ARI against the published labels 0.54 and 0.57 (K2P route: 0.19).
+- The number of groups is not settled: 8 or 12 depending on indels, and the toy says the procedure tends to one or two too many. Several groups still contain co-varying characters that were not split (for example 25 in the group that is mostly s1).
+- The label-free selection does as well as the columns where the published consensuses differ.
+
+So the statement made here earlier, that no picture of copy distances can draw the saq subfamilies apart, was wrong: it held for K2P over all columns. On positions that co-vary, most published subfamilies are recovered without labels. Full tables: `saq_inputs_v4_crosstabs.txt`; every character with its weight, the consensus states and its frequency in each published subfamily: `saq_inputs_v4_features.tsv`.
+
+Not done: the groups shown as alignments; the 54 unexplained columns; the cause of the over-splitting; a toy with recombination.
 
 ## 3. Toy pan-SINEome and orthologous-locus visuals
 

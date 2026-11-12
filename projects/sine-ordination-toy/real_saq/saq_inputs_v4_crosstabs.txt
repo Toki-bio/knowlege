@@ -1,0 +1,104 @@
+## K2P CpG-masked: HDBSCAN on UMAP x published
+cluster	s1_30seqs	s2_38seqs	s3_43seqs	s4_60seqs	s5_5seqs	s6_7seqs	s7g_172seqs	s8_225seqs	s9_20seqs	total
+0	98	98	64	0	0	0	98	0	97	455
+1	0	0	35	88	90	94	2	100	2	411
+
+## feat-all: HDBSCAN on UMAP x published
+cluster	s1_30seqs	s2_38seqs	s3_43seqs	s4_60seqs	s5_5seqs	s6_7seqs	s7g_172seqs	s8_225seqs	s9_20seqs	total
+0	98	97	63	0	0	0	98	0	99	455
+1	0	1	36	88	90	94	2	100	0	411
+
+## cov-selected sub: HDBSCAN on UMAP x published
+cluster	s1_30seqs	s2_38seqs	s3_43seqs	s4_60seqs	s5_5seqs	s6_7seqs	s7g_172seqs	s8_225seqs	s9_20seqs	total
+0	98	98	65	0	0	0	99	0	99	459
+1	0	0	34	88	90	94	1	100	0	407
+
+## cov-weighted sub: HDBSCAN on UMAP x published
+cluster	s1_30seqs	s2_38seqs	s3_43seqs	s4_60seqs	s5_5seqs	s6_7seqs	s7g_172seqs	s8_225seqs	s9_20seqs	total
+0	98	98	66	0	0	0	99	0	98	459
+1	0	0	33	88	90	94	1	100	1	407
+
+## heavy50 sub: HDBSCAN on UMAP x published
+cluster	s1_30seqs	s2_38seqs	s3_43seqs	s4_60seqs	s5_5seqs	s6_7seqs	s7g_172seqs	s8_225seqs	s9_20seqs	total
+0	98	97	64	0	0	0	98	0	99	456
+1	0	1	35	88	90	94	2	100	0	410
+
+## heavy75 sub: HDBSCAN on UMAP x published
+cluster	s1_30seqs	s2_38seqs	s3_43seqs	s4_60seqs	s5_5seqs	s6_7seqs	s7g_172seqs	s8_225seqs	s9_20seqs	total
+0	98	97	65	0	0	0	98	0	99	457
+1	0	1	34	88	90	94	2	100	0	409
+
+## heavy90 sub: HDBSCAN on UMAP x published
+cluster	s1_30seqs	s2_38seqs	s3_43seqs	s4_60seqs	s5_5seqs	s6_7seqs	s7g_172seqs	s8_225seqs	s9_20seqs	total
+0	98	98	65	0	0	0	99	0	99	459
+1	0	0	34	88	90	94	1	100	0	407
+
+## cov-selected sub+indel: HDBSCAN on UMAP x published
+cluster	s1_30seqs	s2_38seqs	s3_43seqs	s4_60seqs	s5_5seqs	s6_7seqs	s7g_172seqs	s8_225seqs	s9_20seqs	total
+0	97	97	53	0	0	1	95	1	97	441
+1	1	1	46	0	1	3	5	96	2	155
+2	0	0	0	88	89	90	0	3	0	270
+
+## cov-weighted sub+indel: HDBSCAN on UMAP x published
+cluster	s1_30seqs	s2_38seqs	s3_43seqs	s4_60seqs	s5_5seqs	s6_7seqs	s7g_172seqs	s8_225seqs	s9_20seqs	total
+0	97	97	53	0	0	1	95	1	97	441
+1	0	0	0	88	89	90	0	4	0	271
+2	1	1	46	0	1	3	5	95	2	154
+
+## heavy50 sub+indel: HDBSCAN on UMAP x published
+cluster	s1_30seqs	s2_38seqs	s3_43seqs	s4_60seqs	s5_5seqs	s6_7seqs	s7g_172seqs	s8_225seqs	s9_20seqs	total
+0	97	97	53	0	0	1	95	0	97	440
+1	1	1	46	88	90	93	5	100	2	426
+
+## heavy75 sub+indel: HDBSCAN on UMAP x published
+cluster	s1_30seqs	s2_38seqs	s3_43seqs	s4_60seqs	s5_5seqs	s6_7seqs	s7g_172seqs	s8_225seqs	s9_20seqs	total
+0	97	97	53	0	0	1	95	0	97	440
+1	1	1	46	88	90	93	5	100	2	426
+
+## heavy90 sub+indel: HDBSCAN on UMAP x published
+cluster	s1_30seqs	s2_38seqs	s3_43seqs	s4_60seqs	s5_5seqs	s6_7seqs	s7g_172seqs	s8_225seqs	s9_20seqs	total
+0	97	97	53	0	0	1	95	0	97	440
+1	1	1	46	0	1	3	5	97	2	156
+2	0	0	0	88	89	90	0	3	0	270
+
+## PCA-pa: HDBSCAN on UMAP x published
+cluster	s1_30seqs	s2_38seqs	s3_43seqs	s4_60seqs	s5_5seqs	s6_7seqs	s7g_172seqs	s8_225seqs	s9_20seqs	total
+-1	0	1	3	1	2	5	2	7	0	21
+0	0	0	0	77	80	45	0	5	0	207
+1	98	97	96	0	0	13	98	52	99	553
+2	0	0	0	10	8	31	0	36	0	85
+
+## consensus-difference columns (NOT label-free): HDBSCAN on UMAP x published
+cluster	s1_30seqs	s2_38seqs	s3_43seqs	s4_60seqs	s5_5seqs	s6_7seqs	s7g_172seqs	s8_225seqs	s9_20seqs	total
+-1	1	0	6	0	0	0	3	3	1	14
+0	97	97	53	0	0	1	95	1	97	441
+1	0	0	0	88	89	90	0	3	0	270
+2	0	1	38	0	0	0	1	0	0	40
+3	0	0	2	0	1	3	1	93	1	101
+
+## nested sub: leaves x published (leaf order = ['r.0.0', 'r.0.1', 'r.0.2', 'r.1.0', 'r.1.1', 'r.1.2', 'r.1.3.0', 'r.1.3.1'])
+cluster	s1_30seqs	s2_38seqs	s3_43seqs	s4_60seqs	s5_5seqs	s6_7seqs	s7g_172seqs	s8_225seqs	s9_20seqs	total
+0	15	6	65	0	0	0	99	0	56	241
+1	82	16	0	0	0	0	0	0	34	132
+2	1	76	0	0	0	0	0	0	9	86
+3	0	0	32	0	0	1	1	1	0	35
+4	0	0	0	3	88	2	0	0	0	93
+5	0	0	2	1	0	5	0	95	0	103
+6	0	0	0	72	1	5	0	2	0	80
+7	0	0	0	12	1	81	0	2	0	96
+
+## nested sub+indel: leaves x published (leaf order = ['r.0.0.0', 'r.0.0.1', 'r.0.1', 'r.0.2.0', 'r.0.2.1', 'r.0.3', 'r.1.0', 'r.1.1', 'r.2.0.0', 'r.2.0.1', 'r.2.1', 'r.2.2'])
+cluster	s1_30seqs	s2_38seqs	s3_43seqs	s4_60seqs	s5_5seqs	s6_7seqs	s7g_172seqs	s8_225seqs	s9_20seqs	total
+0	2	41	0	0	0	0	0	0	5	48
+1	1	40	0	0	0	0	0	0	3	44
+2	77	10	0	0	0	0	0	0	27	114
+3	16	1	2	0	0	1	82	1	39	142
+4	1	5	0	0	0	0	3	0	19	28
+5	0	0	51	0	0	0	10	0	4	65
+6	0	1	42	0	0	0	4	0	0	47
+7	1	0	4	0	1	3	1	96	2	108
+8	0	0	0	2	60	3	0	0	0	65
+9	0	0	0	1	26	0	0	0	0	27
+10	0	0	0	77	2	6	0	0	0	85
+11	0	0	0	8	1	81	0	3	0	93
+

@@ -1,0 +1,209 @@
+start Thu Nov 12 10:11:25 AM MSK 2026 pwd=/home/toki/ordination_toy/real_saq
+K2P CpG-masked {"knn_on_D": 0.6374133949191686, "silh_labels_on_D": 0.01007172628474132, "ari_umap_ward": 0.36940131054169767, "ari_tsne_ward": 0.4473930206971352, "hdb_ari": 0.19198207753129615, "hdb_n": 2, "hdb_noise": 0.0}
+feat-all {"knn_on_D": 0.7170900692840647, "silh_labels_on_D": 0.03410227979072435, "ari_umap_ward": 0.5244279795881801, "ari_tsne_ward": 0.5254183503133149, "hdb_ari": 0.19271815215965404, "hdb_n": 2, "hdb_noise": 0.0}
+cov-selected sub {"knn_on_D": 0.8094688221709007, "silh_labels_on_D": 0.0879300712018, "ari_umap_ward": 0.5531751654032512, "ari_tsne_ward": 0.5446422689475285, "hdb_ari": 0.19502484258883535, "hdb_n": 2, "hdb_noise": 0.0}
+cov-weighted sub {"knn_on_D": 0.76905311778291, "silh_labels_on_D": 0.07991187175559268, "ari_umap_ward": 0.435544167739064, "ari_tsne_ward": 0.44322610215910496, "hdb_ari": 0.194321332738478, "hdb_n": 2, "hdb_noise": 0.0}
+heavy50 sub {"knn_on_D": 0.7655889145496536, "silh_labels_on_D": 0.04983795375416018, "ari_umap_ward": 0.5331426098634992, "ari_tsne_ward": 0.5317485134035256, "hdb_ari": 0.19292780810287918, "hdb_n": 2, "hdb_noise": 0.0}
+heavy75 sub {"knn_on_D": 0.7944572748267898, "silh_labels_on_D": 0.07259899319360359, "ari_umap_ward": 0.5584236404531048, "ari_tsne_ward": 0.5557197338348242, "hdb_ari": 0.19315475536504156, "hdb_n": 2, "hdb_noise": 0.0}
+heavy90 sub {"knn_on_D": 0.8106235565819861, "silh_labels_on_D": 0.08240559282435912, "ari_umap_ward": 0.5783554078613069, "ari_tsne_ward": 0.5545070968879531, "hdb_ari": 0.19502484258883535, "hdb_n": 2, "hdb_noise": 0.0}
+cov-selected sub+indel {"knn_on_D": 0.8267898383371824, "silh_labels_on_D": 0.0745111811163065, "ari_umap_ward": 0.5620648719871384, "ari_tsne_ward": 0.623463918850332, "hdb_ari": 0.2737081874020926, "hdb_n": 3, "hdb_noise": 0.0}
+cov-weighted sub+indel {"knn_on_D": 0.7863741339491916, "silh_labels_on_D": 0.022337909356146657, "ari_umap_ward": 0.5190357764893776, "ari_tsne_ward": 0.462925354956722, "hdb_ari": 0.27219268944847563, "hdb_n": 3, "hdb_noise": 0.0}
+heavy50 sub+indel {"knn_on_D": 0.7794457274826789, "silh_labels_on_D": 0.029846549739926505, "ari_umap_ward": 0.6021990399519009, "ari_tsne_ward": 0.5174531977969573, "hdb_ari": 0.18467772821136358, "hdb_n": 2, "hdb_noise": 0.0}
+heavy75 sub+indel {"knn_on_D": 0.8198614318706697, "silh_labels_on_D": 0.054988187094594805, "ari_umap_ward": 0.5928831169767915, "ari_tsne_ward": 0.5722304338687096, "hdb_ari": 0.18467772821136358, "hdb_n": 2, "hdb_noise": 0.0}
+heavy90 sub+indel {"knn_on_D": 0.8187066974595842, "silh_labels_on_D": 0.06717978624802369, "ari_umap_ward": 0.5973000118279203, "ari_tsne_ward": 0.6289375375795114, "hdb_ari": 0.2757538222536633, "hdb_n": 3, "hdb_noise": 0.0}
+PCA-pa {"knn_on_D": 0.38683602771362585, "silh_labels_on_D": -0.05260730190341857, "ari_umap_ward": 0.22196863126127578, "ari_tsne_ward": 0.2360365226348657, "hdb_ari": 0.1519581255868376, "hdb_n": 3, "hdb_noise": 0.02424942263279446}
+consensus-difference columns (NOT label-free) {"knn_on_D": 0.8279445727482679, "silh_labels_on_D": 0.08391187618164023, "ari_umap_ward": 0.6300636513624542, "ari_tsne_ward": 0.6211518755373711, "hdb_ari": 0.28307523455762373, "hdb_n": 4, "hdb_noise": 0.016166281755196306}
+{
+ "copies": 866,
+ "align_cols": 1659,
+ "subfamilies": [
+  "s1_30seqs",
+  "s2_38seqs",
+  "s3_43seqs",
+  "s4_60seqs",
+  "s5_5seqs",
+  "s6_7seqs",
+  "s7g_172seqs",
+  "s8_225seqs",
+  "s9_20seqs"
+ ],
+ "K2P CpG-masked": {
+  "knn_on_D": 0.6374133949191686,
+  "silh_labels_on_D": 0.01007172628474132,
+  "ari_umap_ward": 0.36940131054169767,
+  "ari_tsne_ward": 0.4473930206971352,
+  "hdb_ari": 0.19198207753129615,
+  "hdb_n": 2,
+  "hdb_noise": 0.0
+ },
+ "selection sub": {
+  "features": 207,
+  "selected": 79,
+  "selected_indel": 0,
+  "threshold_z2": 30.407234578831382,
+  "selected_on_CpG_cols": 19
+ },
+ "feat-all": {
+  "knn_on_D": 0.7170900692840647,
+  "silh_labels_on_D": 0.03410227979072435,
+  "ari_umap_ward": 0.5244279795881801,
+  "ari_tsne_ward": 0.5254183503133149,
+  "hdb_ari": 0.19271815215965404,
+  "hdb_n": 2,
+  "hdb_noise": 0.0
+ },
+ "cov-selected sub": {
+  "knn_on_D": 0.8094688221709007,
+  "silh_labels_on_D": 0.0879300712018,
+  "ari_umap_ward": 0.5531751654032512,
+  "ari_tsne_ward": 0.5446422689475285,
+  "hdb_ari": 0.19502484258883535,
+  "hdb_n": 2,
+  "hdb_noise": 0.0
+ },
+ "cov-weighted sub": {
+  "knn_on_D": 0.76905311778291,
+  "silh_labels_on_D": 0.07991187175559268,
+  "ari_umap_ward": 0.435544167739064,
+  "ari_tsne_ward": 0.44322610215910496,
+  "hdb_ari": 0.194321332738478,
+  "hdb_n": 2,
+  "hdb_noise": 0.0
+ },
+ "heavy50 sub": {
+  "knn_on_D": 0.7655889145496536,
+  "silh_labels_on_D": 0.04983795375416018,
+  "ari_umap_ward": 0.5331426098634992,
+  "ari_tsne_ward": 0.5317485134035256,
+  "hdb_ari": 0.19292780810287918,
+  "hdb_n": 2,
+  "hdb_noise": 0.0
+ },
+ "heavy75 sub": {
+  "knn_on_D": 0.7944572748267898,
+  "silh_labels_on_D": 0.07259899319360359,
+  "ari_umap_ward": 0.5584236404531048,
+  "ari_tsne_ward": 0.5557197338348242,
+  "hdb_ari": 0.19315475536504156,
+  "hdb_n": 2,
+  "hdb_noise": 0.0
+ },
+ "heavy90 sub": {
+  "knn_on_D": 0.8106235565819861,
+  "silh_labels_on_D": 0.08240559282435912,
+  "ari_umap_ward": 0.5783554078613069,
+  "ari_tsne_ward": 0.5545070968879531,
+  "hdb_ari": 0.19502484258883535,
+  "hdb_n": 2,
+  "hdb_noise": 0.0
+ },
+ "selection sub+indel": {
+  "features": 307,
+  "selected": 168,
+  "selected_indel": 90,
+  "threshold_z2": 40.77662259812288,
+  "selected_on_CpG_cols": 37
+ },
+ "cov-selected sub+indel": {
+  "knn_on_D": 0.8267898383371824,
+  "silh_labels_on_D": 0.0745111811163065,
+  "ari_umap_ward": 0.5620648719871384,
+  "ari_tsne_ward": 0.623463918850332,
+  "hdb_ari": 0.2737081874020926,
+  "hdb_n": 3,
+  "hdb_noise": 0.0
+ },
+ "cov-weighted sub+indel": {
+  "knn_on_D": 0.7863741339491916,
+  "silh_labels_on_D": 0.022337909356146657,
+  "ari_umap_ward": 0.5190357764893776,
+  "ari_tsne_ward": 0.462925354956722,
+  "hdb_ari": 0.27219268944847563,
+  "hdb_n": 3,
+  "hdb_noise": 0.0
+ },
+ "heavy50 sub+indel": {
+  "knn_on_D": 0.7794457274826789,
+  "silh_labels_on_D": 0.029846549739926505,
+  "ari_umap_ward": 0.6021990399519009,
+  "ari_tsne_ward": 0.5174531977969573,
+  "hdb_ari": 0.18467772821136358,
+  "hdb_n": 2,
+  "hdb_noise": 0.0
+ },
+ "heavy75 sub+indel": {
+  "knn_on_D": 0.8198614318706697,
+  "silh_labels_on_D": 0.054988187094594805,
+  "ari_umap_ward": 0.5928831169767915,
+  "ari_tsne_ward": 0.5722304338687096,
+  "hdb_ari": 0.18467772821136358,
+  "hdb_n": 2,
+  "hdb_noise": 0.0
+ },
+ "heavy90 sub+indel": {
+  "knn_on_D": 0.8187066974595842,
+  "silh_labels_on_D": 0.06717978624802369,
+  "ari_umap_ward": 0.5973000118279203,
+  "ari_tsne_ward": 0.6289375375795114,
+  "hdb_ari": 0.2757538222536633,
+  "hdb_n": 3,
+  "hdb_noise": 0.0
+ },
+ "PCA-pa axes": 1,
+ "PCA-pa": {
+  "knn_on_D": 0.38683602771362585,
+  "silh_labels_on_D": -0.05260730190341857,
+  "ari_umap_ward": 0.22196863126127578,
+  "ari_tsne_ward": 0.2360365226348657,
+  "hdb_ari": 0.1519581255868376,
+  "hdb_n": 3,
+  "hdb_noise": 0.02424942263279446
+ },
+ "consensus check (sub+indel)": {
+  "selected_features": 168,
+  "selected_features_that_are_a_consensus_difference": 78,
+  "columns_where_consensuses_differ": 100,
+  "of_those_with_a_feature": 87,
+  "of_those_selected": 80,
+  "selected_columns": 134,
+  "selected_columns_where_consensuses_do_not_differ": 54
+ },
+ "consensus-difference columns (NOT label-free)": {
+  "knn_on_D": 0.8279445727482679,
+  "silh_labels_on_D": 0.08391187618164023,
+  "ari_umap_ward": 0.6300636513624542,
+  "ari_tsne_ward": 0.6211518755373711,
+  "hdb_ari": 0.28307523455762373,
+  "hdb_n": 4,
+  "hdb_noise": 0.016166281755196306
+ },
+ "split-half selection (5 random splits)": [
+  {
+   "a": 129,
+   "b": 89,
+   "both": 78
+  },
+  {
+   "a": 127,
+   "b": 112,
+   "both": 92
+  },
+  {
+   "a": 132,
+   "b": 139,
+   "both": 99
+  },
+  {
+   "a": 112,
+   "b": 136,
+   "both": 96
+  },
+  {
+   "a": 94,
+   "b": 128,
+   "both": 80
+  }
+ ]
+}
+{'nested sub': {'leaves': 8, 'sizes': [241, 132, 86, 35, 93, 103, 80, 96], 'ari_vs_published': 0.5413223127949919}, 'nested sub+indel': {'leaves': 12, 'sizes': [48, 44, 114, 142, 28, 65, 47, 108, 65, 27, 85, 93], 'ari_vs_published': 0.568063632637037}}
+end Thu Nov 12 10:12:38 AM MSK 2026
