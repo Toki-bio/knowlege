@@ -1,0 +1,53 @@
+## K2P CpG-masked: HDBSCAN on UMAP x published
+group	t1_1	t1-2	t1-3	t1-4	total
+-1	19	42	21	54	136
+0	0	1	59	9	69
+1	71	4	0	2	77
+2	0	38	0	2	40
+
+## all characters: HDBSCAN on UMAP x published
+group	t1_1	t1-2	t1-3	t1-4	total
+-1	1	10	14	13	38
+0	89	75	8	54	226
+1	0	0	58	0	58
+
+## selected sub: HDBSCAN on UMAP x published
+group	t1_1	t1-2	t1-3	t1-4	total
+0	26	0	0	0	26
+1	63	0	0	0	63
+2	1	85	18	67	171
+3	0	0	62	0	62
+
+## selected sub+indel: HDBSCAN on UMAP x published
+group	t1_1	t1-2	t1-3	t1-4	total
+-1	9	0	0	0	9
+0	1	85	21	67	174
+1	0	0	59	0	59
+2	52	0	0	0	52
+3	28	0	0	0	28
+
+## consensus-difference columns (NOT label-free): HDBSCAN on UMAP x published
+group	t1_1	t1-2	t1-3	t1-4	total
+0	63	0	0	0	63
+1	27	0	0	0	27
+2	0	0	66	1	67
+3	0	85	14	66	165
+
+## nested sub: groups x published (group order = ['r.0', 'r.1.0', 'r.1.1', 'r.2.0', 'r.2.1', 'r.2.2', 'r.3'])
+group	t1_1	t1-2	t1-3	t1-4	total
+0	26	0	0	0	26
+1	32	0	0	0	32
+2	31	0	0	0	31
+3	0	2	5	31	38
+4	1	47	11	28	87
+5	0	36	2	8	46
+6	0	0	62	0	62
+
+## nested sub+indel: groups x published (group order = ['r.0', 'r.1', 'r.2.0', 'r.2.1', 'r.3'])
+group	t1_1	t1-2	t1-3	t1-4	total
+0	1	85	21	67	174
+1	0	0	59	0	59
+2	31	0	0	0	31
+3	30	0	0	0	30
+4	28	0	0	0	28
+

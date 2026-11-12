@@ -1,0 +1,44 @@
+{
+ "subfamilies": [
+  "t6-1",
+  "t6-2",
+  "t6-3",
+  "t6-4",
+  "t6-5"
+ ],
+ "per_subfamily": {
+  "t6-1": {
+   "copies": 100,
+   "consensus_len": 346
+  },
+  "t6-2": {
+   "copies": 100,
+   "consensus_len": 341
+  },
+  "t6-3": {
+   "copies": 100,
+   "consensus_len": 342
+  },
+  "t6-4": {
+   "copies": 100,
+   "consensus_len": 327
+  },
+  "t6-5": {
+   "copies": 100,
+   "consensus_len": 226
+  }
+ },
+ "copies_in": 500,
+ "dropped_short_flank_or_body": 125,
+ "dropped_shared_flanks": 2,
+ "copies_kept": 373,
+ "mean_pair_identity_left": 0.285606253754418,
+ "mean_pair_identity_right": 0.2808115829602016,
+ "kept_per_subfamily": {
+  "t6-1": 77,
+  "t6-2": 77,
+  "t6-3": 61,
+  "t6-4": 77,
+  "t6-5": 81
+ }
+}

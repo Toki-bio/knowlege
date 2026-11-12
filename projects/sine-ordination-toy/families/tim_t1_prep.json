@@ -1,0 +1,38 @@
+{
+ "subfamilies": [
+  "t1_1",
+  "t1-2",
+  "t1-3",
+  "t1-4"
+ ],
+ "per_subfamily": {
+  "t1_1": {
+   "copies": 100,
+   "consensus_len": 264
+  },
+  "t1-2": {
+   "copies": 100,
+   "consensus_len": 254
+  },
+  "t1-3": {
+   "copies": 100,
+   "consensus_len": 254
+  },
+  "t1-4": {
+   "copies": 100,
+   "consensus_len": 242
+  }
+ },
+ "copies_in": 400,
+ "dropped_short_flank_or_body": 76,
+ "dropped_shared_flanks": 2,
+ "copies_kept": 322,
+ "mean_pair_identity_left": 0.28735483556586916,
+ "mean_pair_identity_right": 0.28492738758011726,
+ "kept_per_subfamily": {
+  "t1_1": 90,
+  "t1-2": 85,
+  "t1-3": 80,
+  "t1-4": 67
+ }
+}

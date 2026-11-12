@@ -1,0 +1,67 @@
+## K2P CpG-masked: HDBSCAN on UMAP x published
+group	r5_27seqs	r6_210seqs	r7_133seqs	r8_83seqs	r9_15seqs	r10_19seqs	total
+-1	0	1	12	8	2	0	23
+0	99	87	0	1	0	1	188
+1	0	0	0	1	0	99	100
+2	1	0	1	1	97	0	100
+3	0	2	86	2	1	0	91
+4	0	9	1	87	0	0	97
+
+## all characters: HDBSCAN on UMAP x published
+group	r5_27seqs	r6_210seqs	r7_133seqs	r8_83seqs	r9_15seqs	r10_19seqs	total
+-1	3	7	0	0	0	0	10
+0	0	0	0	0	0	100	100
+1	0	0	2	0	98	0	100
+2	2	13	98	99	2	0	214
+3	93	2	0	0	0	0	95
+4	2	77	0	1	0	0	80
+
+## selected sub: HDBSCAN on UMAP x published
+group	r5_27seqs	r6_210seqs	r7_133seqs	r8_83seqs	r9_15seqs	r10_19seqs	total
+-1	1	0	0	2	1	0	4
+0	0	0	0	0	98	0	98
+1	0	0	0	2	0	100	102
+2	97	5	0	0	0	0	102
+3	2	82	0	1	0	0	85
+4	0	3	97	3	0	0	103
+5	0	9	3	92	1	0	105
+
+## selected sub+indel: HDBSCAN on UMAP x published
+group	r5_27seqs	r6_210seqs	r7_133seqs	r8_83seqs	r9_15seqs	r10_19seqs	total
+0	0	0	0	0	100	0	100
+1	98	1	0	2	0	0	101
+2	1	87	0	0	0	0	88
+3	0	0	0	2	0	100	102
+4	1	0	100	1	0	0	102
+5	0	11	0	95	0	0	106
+
+## consensus-difference columns (NOT label-free): HDBSCAN on UMAP x published
+group	r5_27seqs	r6_210seqs	r7_133seqs	r8_83seqs	r9_15seqs	r10_19seqs	total
+0	0	0	0	0	100	0	100
+1	1	86	0	0	0	0	87
+2	98	1	0	2	0	0	101
+3	0	11	0	95	0	0	106
+4	1	1	100	1	0	0	103
+5	0	0	0	2	0	100	102
+
+## nested sub: groups x published (group order = ['r.0', 'r.1', 'r.2', 'r.3', 'r.4', 'r.5'])
+group	r5_27seqs	r6_210seqs	r7_133seqs	r8_83seqs	r9_15seqs	r10_19seqs	total
+0	0	0	0	0	98	0	98
+1	0	0	0	2	0	100	102
+2	98	5	0	0	0	0	103
+3	2	82	0	1	0	0	85
+4	0	3	97	5	1	0	106
+5	0	9	3	92	1	0	105
+
+## nested sub+indel: groups x published (group order = ['r.0', 'r.1', 'r.2.0', 'r.2.1', 'r.3', 'r.4.0', 'r.4.1', 'r.5.0', 'r.5.1'])
+group	r5_27seqs	r6_210seqs	r7_133seqs	r8_83seqs	r9_15seqs	r10_19seqs	total
+0	0	0	0	0	100	0	100
+1	98	1	0	2	0	0	101
+2	1	61	0	0	0	0	62
+3	0	26	0	0	0	0	26
+4	0	0	0	2	0	100	102
+5	1	0	20	0	0	0	21
+6	0	0	80	1	0	0	81
+7	0	9	0	73	0	0	82
+8	0	2	0	22	0	0	24
+

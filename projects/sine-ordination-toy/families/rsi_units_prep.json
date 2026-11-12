@@ -1,0 +1,50 @@
+{
+ "subfamilies": [
+  "r5_27seqs",
+  "r6_210seqs",
+  "r7_133seqs",
+  "r8_83seqs",
+  "r9_15seqs",
+  "r10_19seqs"
+ ],
+ "per_subfamily": {
+  "r5_27seqs": {
+   "copies": 100,
+   "consensus_len": 178
+  },
+  "r6_210seqs": {
+   "copies": 100,
+   "consensus_len": 225
+  },
+  "r7_133seqs": {
+   "copies": 100,
+   "consensus_len": 154
+  },
+  "r8_83seqs": {
+   "copies": 100,
+   "consensus_len": 181
+  },
+  "r9_15seqs": {
+   "copies": 100,
+   "consensus_len": 105
+  },
+  "r10_19seqs": {
+   "copies": 100,
+   "consensus_len": 146
+  }
+ },
+ "copies_in": 600,
+ "dropped_short_flank_or_body": 1,
+ "dropped_shared_flanks": 0,
+ "copies_kept": 599,
+ "mean_pair_identity_left": 0.2918077976176857,
+ "mean_pair_identity_right": 0.3012616440774572,
+ "kept_per_subfamily": {
+  "r5_27seqs": 100,
+  "r6_210seqs": 99,
+  "r7_133seqs": 100,
+  "r8_83seqs": 100,
+  "r9_15seqs": 100,
+  "r10_19seqs": 100
+ }
+}

@@ -15,7 +15,7 @@ Related: [dimensionality reduction for SINE separation](../dim-reduction-for-sin
 
 ## Conclusion: how to present dimensionality reduction of SINE copies
 
-Based on the toys (2.6, 2.7, 2.9) and the saq family (2.8, 2.9). An earlier version of this section used K2P over all columns as the only input; 2.9 shows that was too narrow.
+Based on the toys (2.6, 2.7, 2.9) and four real families (2.8–2.10). An earlier version of this section used K2P over all columns as the only input; 2.9 shows that was too narrow.
 
 1. **The input matters more than the picture method.** A subfamily is a few diagnostic positions among many private mutations. A distance over all columns (K2P) dilutes them. Two inputs should be made and shown side by side:
    - **all columns:** K2P with pairwise deletion, columns covered by fewer than half the copies dropped, CpG columns masked;
@@ -33,7 +33,7 @@ Based on the toys (2.6, 2.7, 2.9) and the saq family (2.8, 2.9). An earlier vers
    - Groups proposed from a picture or from the nested procedure of 2.9 are candidates. In the toy the nested procedure returned one or two groups too many. Each candidate has to be shown as an alignment before it means anything.
    - A picture never assigns copies and never defines a subfamily.
 
-Limits: not tested with recombination between subfamilies or very unequal subfamily sizes; one real family; the nested procedure over-splits for a reason not yet found.
+Limits: not tested with recombination between subfamilies or very unequal subfamily sizes; four real families (2.10), 100 copies per subfamily; the nested procedure over-splits in the toy for a reason not yet found.
 
 ## In short
 
@@ -331,6 +331,44 @@ What the toy shows:
 So the statement made here earlier, that no picture of copy distances can draw the saq subfamilies apart, was wrong: it held for K2P over all columns. On positions that co-vary, most published subfamilies are recovered without labels. Full tables: `saq_inputs_v4_crosstabs.txt`; every character with its weight, the consensus states and its frequency in each published subfamily: `saq_inputs_v4_features.tsv`.
 
 Not done: the groups shown as alignments; the 54 unexplained columns; the cause of the over-splitting; a toy with recombination.
+
+### 2.10 Four families, and the groups as alignments
+
+Scripts: `projects/sine-ordination-toy/families/prep_family.py` and `family_inputs_v4.py`; method of 2.9 unchanged. Therioserver, 2026-11-12. Results per family in the same folder: `<name>_v4.json`, `_v4_crosstabs.txt`, `_v4_features.tsv`, `_v4.png`, `_prep.json`.
+
+**Input.** The 100 random copies per subfamily from the Tal repository (`tim/alignments`, `rsi_final_20261102/alignments`; saq as in 2.8). Two *Timema cristinae* families and the six single-unit subfamilies of *Rhinolophus sinicus* that have 100 copies each (the composite subfamilies were left out: they are several units long and do not belong in one frame with single units). Body = the columns spanned by the subfamily consensus in the published alignment. MAFFT 7.526 `--auto` of consensuses + bodies.
+
+**Flank gate, within each set** (method of 2.8): a copy was dropped if it shares both flanks above 60 % with another copy, or if a flank is shorter than 30 bp and cannot be tested. Dropped: *Timema* t6 127 of 500 (2 shared, 125 short), t1 78 of 400 (2 shared, 76 short), bat 1 of 600. The short flanks in *Timema* come from rows where the published alignment places part of the flank inside the consensus span. Not genome-wide in any set.
+
+Each cell with three numbers: share of copies whose 15 nearest copies are mostly their own published subfamily / silhouette of the published labels / HDBSCAN groups on the UMAP picture.
+
+| Family | Copies | Published subfamilies | K2P, CpG masked | Selected positions (substitutions + indels) | Consensus-difference columns selected | Split-half: selected in both halves, of per half | Nested groups, substitutions (ARI) | Nested groups, with indels (ARI) |
+|---|---|---|---|---|---|---|---|---|
+| *Scalopus aquaticus* Tal, s1–s9 | 866 | 9 | 0.64 / 0.01 / 2 | 0.83 / 0.07 / 3 | 80 of 87 | 78–99 of 89–139 | 8 (0.54) | 12 (0.57) |
+| *Timema cristinae* t6-1 … t6-5 | 373 | 5 | 0.91 / 0.18 / 5 | 0.93 / 0.32 / 5 | 178 of 213 | 160–185 of 189–253 | 6 (0.71) | 5 (0.81) |
+| *Timema cristinae* t1_1 … t1-4 | 322 | 4 | 0.71 / 0.15 / 3 | 0.81 / 0.31 / 4 | 30 of 72 | 7–22 of 23–63 | 7 (0.42) | 5 (0.41) |
+| *Rhinolophus sinicus* units r5–r10 | 599 | 6 | 0.92 / 0.20 / 5 | 0.97 / 0.50 / 6 | 89 of 106 | 88–95 of 92–116 | 6 (0.88) | 9 (0.83) |
+
+What the families show:
+
+- **Bat units.** K2P already separates them fairly (5 groups). On selected positions the silhouette rises from 0.20 to 0.50 and the nested procedure (substitutions) returns 6 groups, one per published subfamily: r9 98 of 100, r10 100 of 100, r5 98, r6 82 of 99, r7 97, r8 92. With indels r6, r7 and r8 are each cut in two.
+- ***Timema* t6.** K2P is already good here too. Nested with indels: 5 groups; t6-2, t6-3 and t6-4 each form one group (76 of 77, 55 of 61, 76 of 77); 22 of the 77 t6-1 copies sit with t6-5, the rest form their own group.
+- ***Timema* t1.** The weakest case. t1_1 comes out as three groups of about 30 copies in both variants. t1-2 and t1-4 are not separated from each other. Only 30 of the 72 consensus-difference columns were selected and the split-half agreement is poor (7–22 shared). The set is small (322 copies, 161 per half), so the positions may be real and under-sampled, or not real; this run cannot tell.
+- **saq** as in 2.9.
+- Across the four, the selected-position distance raises the silhouette of the published labels in every family (0.01 → 0.07, 0.18 → 0.32, 0.15 → 0.31, 0.20 → 0.50) and the nearest-copy agreement in every family.
+
+**The groups as alignments.** Rows: the published consensuses, then the copies ordered by nested group. Copy names: `g<group by substitutions>_i<group with indels>|<published label>|<coordinates>`. "Selected columns" shows only the positions that were selected or that separate two groups; "all columns" shows every column covered by at least half the copies. The groups are the procedure's candidates, not subfamily calls.
+
+- *Scalopus aquaticus* Tal, s1–s9: [selected columns (137)](https://toki-bio.github.io/MSA-viewer/?url=https%3A%2F%2Fraw.githubusercontent.com%2FToki-bio%2Fknowlege%2Fmain%2Fprojects%2Fsine-ordination-toy%2Ffamilies%2Fsaq_groups_selected.aln.fa&title=saq%20groups%2C%20selected%20columns) · [all columns (279)](https://toki-bio.github.io/MSA-viewer/?url=https%3A%2F%2Fraw.githubusercontent.com%2FToki-bio%2Fknowlege%2Fmain%2Fprojects%2Fsine-ordination-toy%2Ffamilies%2Fsaq_groups_full.aln.fa&title=saq%20groups%2C%20all%20columns)
+- *Timema cristinae* t6-1 … t6-5: [selected columns (244)](https://toki-bio.github.io/MSA-viewer/?url=https%3A%2F%2Fraw.githubusercontent.com%2FToki-bio%2Fknowlege%2Fmain%2Fprojects%2Fsine-ordination-toy%2Ffamilies%2Ftim_t6_groups_selected.aln.fa&title=tim_t6%20groups%2C%20selected%20columns) · [all columns (427)](https://toki-bio.github.io/MSA-viewer/?url=https%3A%2F%2Fraw.githubusercontent.com%2FToki-bio%2Fknowlege%2Fmain%2Fprojects%2Fsine-ordination-toy%2Ffamilies%2Ftim_t6_groups_full.aln.fa&title=tim_t6%20groups%2C%20all%20columns)
+- *Timema cristinae* t1_1 … t1-4: [selected columns (103)](https://toki-bio.github.io/MSA-viewer/?url=https%3A%2F%2Fraw.githubusercontent.com%2FToki-bio%2Fknowlege%2Fmain%2Fprojects%2Fsine-ordination-toy%2Ffamilies%2Ftim_t1_groups_selected.aln.fa&title=tim_t1%20groups%2C%20selected%20columns) · [all columns (269)](https://toki-bio.github.io/MSA-viewer/?url=https%3A%2F%2Fraw.githubusercontent.com%2FToki-bio%2Fknowlege%2Fmain%2Fprojects%2Fsine-ordination-toy%2Ffamilies%2Ftim_t1_groups_full.aln.fa&title=tim_t1%20groups%2C%20all%20columns)
+- *Rhinolophus sinicus* units r5–r10: [selected columns (102)](https://toki-bio.github.io/MSA-viewer/?url=https%3A%2F%2Fraw.githubusercontent.com%2FToki-bio%2Fknowlege%2Fmain%2Fprojects%2Fsine-ordination-toy%2Ffamilies%2Frsi_units_groups_selected.aln.fa&title=rsi_units%20groups%2C%20selected%20columns) · [all columns (250)](https://toki-bio.github.io/MSA-viewer/?url=https%3A%2F%2Fraw.githubusercontent.com%2FToki-bio%2Fknowlege%2Fmain%2Fprojects%2Fsine-ordination-toy%2Ffamilies%2Frsi_units_groups_full.aln.fa&title=rsi_units%20groups%2C%20all%20columns)
+
+![tim_t6: inputs compared]({{ '/assets/img/sine-ordination/tim_t6_v4.png' | relative_url }})
+
+![tim_t1: inputs compared]({{ '/assets/img/sine-ordination/tim_t1_v4.png' | relative_url }})
+
+![rsi_units: inputs compared]({{ '/assets/img/sine-ordination/rsi_units_v4.png' | relative_url }})
 
 ## 3. Toy pan-SINEome and orthologous-locus visuals
 

@@ -1,0 +1,127 @@
+K2P CpG-masked {"knn_on_D": 0.9088471849865952, "silh_labels_on_D": 0.1813515817584249, "ari_umap_ward": 0.7891491706412106, "ari_tsne_ward": 0.7813778589991625, "hdb_ari": 0.7828306094063604, "hdb_n": 5, "hdb_noise": 0.021447721179624665}
+all characters {"knn_on_D": 0.8927613941018767, "silh_labels_on_D": 0.12371988604429755, "ari_umap_ward": 0.74649267354447, "ari_tsne_ward": 0.7534754749290542, "hdb_ari": 0.763096096062236, "hdb_n": 5, "hdb_noise": 0.045576407506702415}
+selected sub {"knn_on_D": 0.9142091152815014, "silh_labels_on_D": 0.32186937391932574, "ari_umap_ward": 0.7575442682287619, "ari_tsne_ward": 0.7575442682287619, "hdb_ari": 0.7665533743441026, "hdb_n": 5, "hdb_noise": 0.00804289544235925}
+selected sub+indel {"knn_on_D": 0.9302949061662198, "silh_labels_on_D": 0.31806775562027295, "ari_umap_ward": 0.8125372988960711, "ari_tsne_ward": 0.8125372988960711, "hdb_ari": 0.8125372988960711, "hdb_n": 5, "hdb_noise": 0.0}
+consensus-difference columns (NOT label-free) {"knn_on_D": 0.9249329758713136, "silh_labels_on_D": 0.26318242966904526, "ari_umap_ward": 0.7930468479306342, "ari_tsne_ward": 0.7991108871016678, "hdb_ari": 0.7930468479306342, "hdb_n": 5, "hdb_noise": 0.0}
+{
+ "copies": 373,
+ "align_cols": 1523,
+ "subfamilies": [
+  "t6-1",
+  "t6-2",
+  "t6-3",
+  "t6-4",
+  "t6-5"
+ ],
+ "copies_per_subfamily": {
+  "t6-1": 77,
+  "t6-2": 77,
+  "t6-3": 61,
+  "t6-4": 77,
+  "t6-5": 81
+ },
+ "cols_half_covered": 320,
+ "cpg_cols": 26,
+ "saturated_pairs_K2P": 0,
+ "K2P CpG-masked": {
+  "knn_on_D": 0.9088471849865952,
+  "silh_labels_on_D": 0.1813515817584249,
+  "ari_umap_ward": 0.7891491706412106,
+  "ari_tsne_ward": 0.7813778589991625,
+  "hdb_ari": 0.7828306094063604,
+  "hdb_n": 5,
+  "hdb_noise": 0.021447721179624665
+ },
+ "selection sub": {
+  "features": 602,
+  "selected": 128,
+  "selected_indel": 0,
+  "threshold_z2": 42.831393031176034,
+  "selected_on_CpG_cols": 8
+ },
+ "all characters": {
+  "knn_on_D": 0.8927613941018767,
+  "silh_labels_on_D": 0.12371988604429755,
+  "ari_umap_ward": 0.74649267354447,
+  "ari_tsne_ward": 0.7534754749290542,
+  "hdb_ari": 0.763096096062236,
+  "hdb_n": 5,
+  "hdb_noise": 0.045576407506702415
+ },
+ "selected sub": {
+  "knn_on_D": 0.9142091152815014,
+  "silh_labels_on_D": 0.32186937391932574,
+  "ari_umap_ward": 0.7575442682287619,
+  "ari_tsne_ward": 0.7575442682287619,
+  "hdb_ari": 0.7665533743441026,
+  "hdb_n": 5,
+  "hdb_noise": 0.00804289544235925
+ },
+ "selection sub+indel": {
+  "features": 837,
+  "selected": 290,
+  "selected_indel": 159,
+  "threshold_z2": 50.352445190513464,
+  "selected_on_CpG_cols": 16
+ },
+ "selected sub+indel": {
+  "knn_on_D": 0.9302949061662198,
+  "silh_labels_on_D": 0.31806775562027295,
+  "ari_umap_ward": 0.8125372988960711,
+  "ari_tsne_ward": 0.8125372988960711,
+  "hdb_ari": 0.8125372988960711,
+  "hdb_n": 5,
+  "hdb_noise": 0.0
+ },
+ "consensus check (sub+indel)": {
+  "selected_characters": 290,
+  "selected_that_are_a_consensus_difference": 203,
+  "cols_where_consensuses_differ_and_a_character_exists": 213,
+  "of_those_selected": 178,
+  "selected_cols": 243,
+  "selected_cols_where_consensuses_do_not_differ": 65
+ },
+ "consensus-difference columns (NOT label-free)": {
+  "knn_on_D": 0.9249329758713136,
+  "silh_labels_on_D": 0.26318242966904526,
+  "ari_umap_ward": 0.7930468479306342,
+  "ari_tsne_ward": 0.7991108871016678,
+  "hdb_ari": 0.7930468479306342,
+  "hdb_n": 5,
+  "hdb_noise": 0.0
+ },
+ "split-half selection (5 random splits)": [
+  {
+   "a": 220,
+   "b": 239,
+   "both": 185
+  },
+  {
+   "a": 204,
+   "b": 253,
+   "both": 180
+  },
+  {
+   "a": 228,
+   "b": 189,
+   "both": 160
+  },
+  {
+   "a": 235,
+   "b": 220,
+   "both": 180
+  },
+  {
+   "a": 223,
+   "b": 244,
+   "both": 182
+  }
+ ],
+ "reading alignments": {
+  "selected_cols_shown": 244,
+  "full_cols_shown": 427
+ }
+}
+consensus identity {'t6-1~t6-2': [295, 0.834], 't6-1~t6-3': [300, 0.787], 't6-1~t6-4': [275, 0.76], 't6-1~t6-5': [224, 0.875], 't6-2~t6-3': [333, 0.856], 't6-2~t6-4': [279, 0.785], 't6-2~t6-5': [216, 0.833], 't6-3~t6-4': [279, 0.842], 't6-3~t6-5': [219, 0.849], 't6-4~t6-5': [210, 0.824]}
+nested sub {'groups': 6, 'sizes': [76, 57, 54, 93, 61, 32], 'ari_vs_published': 0.708664598702983}
+nested sub+indel {'groups': 5, 'sizes': [56, 104, 76, 56, 81], 'ari_vs_published': 0.8125372988960711}
