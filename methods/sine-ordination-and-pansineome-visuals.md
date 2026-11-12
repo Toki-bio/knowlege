@@ -7,11 +7,28 @@ type: notes
 
 # Beyond PCA for SINEderella output, and visuals for orthologous loci / pan-SINEome
 
-**Status: toy data only.** Everything on this page comes from two simulations, not from real genomes. It shows what the plots look like and which numbers to report. It supports no conclusion about any real SINE family or any real set of loci.
+**Status:** two toy ordination simulations and one real family (*Scalopus aquaticus* Tal SINE, 2.8) for SINE copies; toy data only for presence/absence of loci.
 
 Code, simulated matrix and metrics: [`projects/sine-ordination-toy/`](https://github.com/Toki-bio/knowlege/tree/main/projects/sine-ordination-toy).
 
 Related: [dimensionality reduction for SINE separation](../dim-reduction-for-sine-separation/), [clustering for SINE subfamily discovery](../clustering-for-sine-subfamily-discovery/), [HDBSCAN vs vsearch for SINE grouping](../hdbscan-vs-vsearch-for-sine-grouping/), [TE-insertion anchor graph](../../projects/te-anchor-graph-pansineome/), [sq2 distant orthologous loci](../../projects/sq2-distant-orthologous-loci/).
+
+## Conclusion: how to present dimensionality reduction of SINE copies
+
+Based on the toys (2.6, 2.7) and the saq family (2.8).
+
+1. **Input:** the alignment of the element bodies (no flanks), as a K2P distance with pairwise deletion. Drop columns where fewer than half the copies have a base, and mask CpG columns of the consensus. Do not use one-hot or PCA of one-hot when copies are 5′-truncated: truncated copies are then placed by their missing block (ARI 0.45 against 0.93).
+2. **Picture:** UMAP of that distance (`n_neighbors` 30, `min_dist` 0.3), with t-SNE (perplexity 40) beside it as a check. These two were the only methods that kept the subfamilies apart in the harder toy (ARI 0.93; PCA, PCoA and NMDS 0.26–0.32). PCA is not the main figure. If a PCA is shown, its variance percentage is not a quality measure: in the easy toy, where t-SNE and UMAP recovered the subfamilies almost perfectly (ARI 0.98–0.99), PC1 + PC2 were only 11.9 %.
+3. **Colours:** the workflow's subfamily assignment. Axes without units or percentages, because UMAP and t-SNE distances between groups have no meaning.
+4. **Two numbers printed under the picture**, both measured outside the 2D picture:
+   - the silhouette of the assigned subfamilies on the K2P matrix. About 0.10–0.16 in the toys, where the subfamilies were real and separable; 0.01 for saq;
+   - the number of HDBSCAN clusters found in the UMAP picture without being told the number (`min_cluster_size` 20), compared with the number of assigned subfamilies. 6 of 6 in 13 of 15 toy runs; 2 of 9 for saq.
+5. **How to read it:**
+   - If both numbers agree with the assignment, the subfamilies are distinct at the level of single copies.
+   - If they do not, as for saq, the subfamilies differ at fewer sites than copies differ from each other. The picture cannot show them, and that is the finding. The evidence for those subfamilies is then the alignment of copies against the consensuses.
+   - A picture never assigns copies and never defines a subfamily.
+
+Limits: not tested with recombination between subfamilies, a continuum of copy ages, or very unequal subfamily sizes; one real family so far.
 
 ## In short
 
@@ -222,7 +239,7 @@ Script and results: `projects/sine-ordination-toy/real_saq/` (`saq_ordination.py
 
 **s3 alignment:** the 99 s3 copies in their published order, with the s3, s8 and s7g consensuses as the first rows; each name carries its nearest consensus and its distances to s3 and s8 (`saq_s3_copies_vs_s3_s8_s7g.aln.fa`, columns from the joint MAFFT alignment). [Open in MSA viewer](https://toki-bio.github.io/MSA-viewer/?url=https%3A%2F%2Fraw.githubusercontent.com%2FToki-bio%2Fknowlege%2Fmain%2Fprojects%2Fsine-ordination-toy%2Freal_saq%2Fsaq_s3_copies_vs_s3_s8_s7g.aln.fa&title=saq%20s3%20copies%20vs%20s3%2C%20s8%2C%20s7g%20consensuses).
 
-**Not understood, not decided here:** why 43 s3 copies are closest to s8. The numbers above are facts about these 866 copies; what they mean for the s3 subfamily is for the alignment and the owner. Before any such alignment is shown, these copies need the unique-flank test.
+**Owner's reading of the s3 alignment (2026-11-12):** s3 and s8 split faintly; a signal from s7g is not obvious; the separation is very weak. This explains the low scores above: the ordination did not fail. These subfamilies differ at a few sites, fewer than the differences between any two copies of one subfamily, so no picture of copy distances can draw them apart. For such a family the evidence is the alignment of copies against the consensuses, not a picture.
 
 ## 3. Toy pan-SINEome and orthologous-locus visuals
 
